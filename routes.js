@@ -2,28 +2,31 @@
  * Routes
  * Catches all GET request and puts index.jade that inits React
  */
+var express = require('express');
 var Page = require('./site/model/page');
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('index', { title: 'React+Node Boilerplate' });
+        res.render('index', { title: 'Home' });
     });
 
-    // /* GET saved pages */
-    app.get('/all', function(req, res) {
-        var pages;
-        Page.find(function (err, pages) {
-          if (err) return console.error(err);
-          res.render('pages', { pages: pages } );
-        });
-    });
+    // // /* GET saved pages */
+    // router.get('/all', function(req, res) {
+    //     var pages;
+    //     Page.find(function (err, pages) {
+    //       if (err) return console.error(err);
+    //       res.render('pages', { pages: pages } );
+    //     });
+    // });
 
     /* GET create page form. */
-    app.get('/create', function(req, res) {
+    app.get('/create', function(req, res, next) {
+    	console.log('Logging');
 		res.render('dashboard');
     });
 
-    app.post('/create', function (req, res) {
+    app.post('/store_page', function (req, res, next) {
+    	console.log("store logging");
 		var page = new Page();
 		console.log(req);
 		page.authors = req.body.authors;
@@ -41,8 +44,12 @@ module.exports = function (app) {
 
 		page.save(function (err) {
 			if (err) {
-				res.render('error', {error: err});
+				res.render('dashboard');
+			} else {
+				res.render('index');
 			}
 		});
     });
 };
+
+// module.exports = router;

@@ -1,6 +1,11 @@
 import path from 'path'
 import express from 'express'
 var app = express();
+var bodyParser = require('body-parser');
+
+// POST form data parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 /**
  * Static files

@@ -8,11 +8,11 @@ block content
 		div.row
 			div.col-xs-9.col-xs-offset-1
 				div.account-wall
-					form(class='form-horizontal', action='/create', method='POST')
+					form(class='form-horizontal', action='/store_page', method='POST')
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Authors
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='authors', required, autofocus)
+								input(class='form-control', type='text', name='authors', required, autofocus, value='author')
 						div(class='form-group')
 							div(class='col-xs-offset-3 col-xs-8')
 								input(class='form-control', type='text', name='authors')
@@ -26,7 +26,7 @@ block content
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Main Images
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='mainImages', autofocus)
+								input(class='form-control', type='text', name='mainImages', autofocus, value='img')
 						div(class='form-group')
 							div(class='col-xs-offset-3 col-xs-8')
 								input(class='form-control', type='text', name='mainImages')
@@ -40,7 +40,7 @@ block content
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Side Images
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='sideImages', autofocus)
+								input(class='form-control', type='text', name='sideImages', autofocus, value='side img')
 						div(class='form-group')
 							div(class='col-xs-offset-3 col-xs-8')
 								input(class='form-control', type='text', name='sideImages')
@@ -54,28 +54,28 @@ block content
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Title
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='title', required)
+								input(class='form-control', type='text', name='title', required, value='title')
 
 						br
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Cover photo
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='cover', required)
+								input(class='form-control', type='text', name='cover', required, value='cover')
 
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Cover photo credit
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='coverCaption', required)
+								input(class='form-control', type='text', name='coverCaption', required, value='caption')
 
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Subheading
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='subheading', required)
+								input(class='form-control', type='text', name='subheading', required, value='subhead')
 
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Main Image Credits
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='mainImageCaptions', required)
+								input(class='form-control', type='text', name='mainImageCaptions', required, value='caption')
 						div(class='form-group')
 							div(class='col-xs-offset-3 col-xs-8')
 								input(class='form-control', type='text', name='mainImageCaptions')
@@ -89,7 +89,7 @@ block content
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Side Image Captions
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='sideImageCaptions', required)
+								input(class='form-control', type='text', name='sideImageCaptions', required, value='caption')
 						div(class='form-group')
 							div(class='col-xs-offset-3 col-xs-8')
 								input(class='form-control', type='text', name='sideImageCaptions')
@@ -103,7 +103,7 @@ block content
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Quotes
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='quotes')
+								input(class='form-control', type='text', name='quotes', value='quote')
 						div(class='form-group')
 							div(class='col-xs-offset-3 col-xs-8')
 								input(class='form-control', type='text', name='quotes')
@@ -117,7 +117,7 @@ block content
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Quote Attribute
 							div(class='col-xs-8')
-								input(class='form-control', type='text', name='quoteMakers')
+								input(class='form-control', type='text', name='quoteMakers', value='quoter')
 						div(class='form-group')
 							div(class='col-xs-offset-3 col-xs-8')
 								input(class='form-control', type='text', name='quoteMakers')
