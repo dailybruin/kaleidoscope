@@ -34,13 +34,14 @@ module.exports = function (app) {
 		page.coverPhoto = req.body.cover;
 		page.coverPhotoCaption = req.body.coverCaption;
 		page.subheading = req.body.subheading;
-		page.sideImageCaptions = req.body.sideImageCaptions;
-		page.mainImageCaptions = req.body.mainImageCaptions;
-		page.quotes = req.body.quotes;
-		page.quoteMakers = req.body.quoteMakers;
-		page.paragraphs = req.body.paragraphs;
-		page.sideImages = req.body.sideImages;
-		page.mainImages = req.body.mainImages;
+	
+		page.sideImageCaptions = req.body.sideImageCaptions.split(",");
+		page.mainImageCaptions = req.body.mainImageCaptions.split(",");
+		page.quotes = req.body.quotes.split(",");
+		page.quoteMakers = req.body.quoteMakers.split(",");
+		page.paragraphs = req.body.paragraphs.split("\n");
+		page.sideImages = req.body.sideImages.split(",");
+		page.mainImages = req.body.mainImages.split(",");
 
 		page.save(function (err) {
 			if (err) {
