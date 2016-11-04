@@ -1,15 +1,13 @@
 var mongoose = require('mongoose');
+//var imageObject = require('./imageObject.js');
 
 module.exports = mongoose.model('Page', {
 	authors: Array,
 	sideImages: Array,
 	mainImages: Array,
 	title: String,
-	coverPhoto: String,
-	coverPhotoCaption: String,
+	coverPhoto: {type : mongoose.Schema.ObjectId, ref : 'Image'},
 	subheading: String,
-	mainImageCaptions: Array,
-	sideImageCaptions: Array,
 	quotes: Array,
 	quoteMakers: Array,
 	paragraphs: Array

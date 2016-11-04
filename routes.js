@@ -4,6 +4,7 @@
  */
 var express = require('express');
 var Page = require('./site/model/page');
+var Image = require('./site/model/imageObject');
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
@@ -33,29 +34,47 @@ module.exports = function (app) {
 		page.authors = req.body.authors.split(',');
 
 		page.title = req.body.title;
-		page.coverPhoto = req.body.cover;
-		page.coverPhotoCaption = req.body.coverCaption;
 		page.subheading = req.body.subheading;
-<<<<<<< HEAD
-	
-		page.sideImageCaptions = req.body.sideImageCaptions.split(",");
-		page.mainImageCaptions = req.body.mainImageCaptions.split(",");
 		page.quotes = req.body.quotes.split(",");
 		page.quoteMakers = req.body.quoteMakers.split(",");
 		page.paragraphs = req.body.paragraphs.split("\n");
-		page.sideImages = req.body.sideImages.split(",");
-		page.mainImages = req.body.mainImages.split(",");
-=======
-		page.sideImageCaptions = req.body.sideImageCaptions;
-		page.mainImageCaptions = req.body.mainImageCaptions;
-		page.quotes = req.body.quotes;
-		page.quoteMakers = req.body.quoteMakers;
-		page.paragraphs = req.body.paragraphs;
 
-		//  Split side images with comma
-		page.sideImages = req.body.sideImages.split(',');
-		page.mainImages = req.body.mainImages.split(',');
->>>>>>> 4ac38fbb6bf0d7df41010ea1b2d4cc042abf56d4
+
+		var sideImagesArray = req.body.sideImages.split(",");
+		var sideImageCaptionsArray = req.body.sideImageCaptions.split(",");
+		if (sideImagesArray.length != sideImageCaptionsArray.length)
+			console.log('Length of Side Image is different from length of Side Image Captions');
+		var sideImages = [];
+		for (var i = 0; i < sideImagesArray.length; i++)
+		{
+			var image = new Image();
+			image.url = sideImagesArray[i];
+			image.caption = sideImageCaptionsArray[i];
+			sideImages.push(image);
+		}
+		page.sideImages = sideImages;
+
+		var mainImagesArray = req.body.mainImages.split(",");
+		var mainImageCaptionsArray = req.body.mainImageCaptions.split(",");
+		if (mainImagesArray.length != mainImageCaptionsArray.length)
+			console.log('Length of Main Image is different from length of Main Image Captions');
+		var mainImages = [];
+		for (var i = 0; i < mainImagesArray.length; i++)
+		{
+			var image = new Image();
+			image.url = mainImagesArray[i];
+			image.caption = mainImageCaptionsArray[i];
+			mainImages.push(image);
+		}
+		page.mainImages = mainImages;
+
+		var coverPhoto = req.body.cover;
+		var coverPhotoCaption = req.body.coverCaption;
+		var image = new Image();
+		image.url = coverPhoto;
+		image.caption = coverPhotoCaption;
+		// var coverPhotoArray = [image];
+		page.coverPhoto = image;//coverPhotoArray;
 
 		page.save(function (err) {
 			if (err) {
