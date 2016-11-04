@@ -17,3 +17,6 @@ Otherwise:
 * `mongod --dbpath <path to junk>/junk`
 * `nodemon` or `npm start` - Starts app
 * [optional] `npm run webpack` - Listens to whatever webpack.config.js says and compiles on change
+
+## Notes
+* Sample site UI: http://graphics.dailybruin.com/pacific-ties/
