@@ -15,7 +15,7 @@ module.exports = function (app) {
         var pages;
         Page.find(function (err, pages) {
           if (err) return console.error(err);
-          res.render('all' , { pages: pages } );
+          res.render('all', { pages: pages } );
         });
     });
 
@@ -29,33 +29,18 @@ module.exports = function (app) {
     	console.log("store logging");
 		var page = new Page();
 		console.log(req);
-		//  Split authors with comma
-		page.authors = req.body.authors.split(',');
-
+		page.authors = req.body.authors;
 		page.title = req.body.title;
 		page.coverPhoto = req.body.cover;
 		page.coverPhotoCaption = req.body.coverCaption;
 		page.subheading = req.body.subheading;
-<<<<<<< HEAD
-	
-		page.sideImageCaptions = req.body.sideImageCaptions.split(",");
-		page.mainImageCaptions = req.body.mainImageCaptions.split(",");
-		page.quotes = req.body.quotes.split(",");
-		page.quoteMakers = req.body.quoteMakers.split(",");
-		page.paragraphs = req.body.paragraphs.split("\n");
-		page.sideImages = req.body.sideImages.split(",");
-		page.mainImages = req.body.mainImages.split(",");
-=======
 		page.sideImageCaptions = req.body.sideImageCaptions;
 		page.mainImageCaptions = req.body.mainImageCaptions;
 		page.quotes = req.body.quotes;
 		page.quoteMakers = req.body.quoteMakers;
 		page.paragraphs = req.body.paragraphs;
-
-		//  Split side images with comma
-		page.sideImages = req.body.sideImages.split(',');
-		page.mainImages = req.body.mainImages.split(',');
->>>>>>> 4ac38fbb6bf0d7df41010ea1b2d4cc042abf56d4
+		page.sideImages = req.body.sideImages;
+		page.mainImages = req.body.mainImages;
 
 		page.save(function (err) {
 			if (err) {
