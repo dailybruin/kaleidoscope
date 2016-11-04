@@ -1,8 +1,6 @@
 # flatpage generator
 
 ## Steps to install dev environment:
-=================================
-If on Mac OSX:
 1. brew install node
 2. brew install npm
 3. brew install mongodb
