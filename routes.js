@@ -10,14 +10,14 @@ module.exports = function (app) {
         res.render('index', { title: 'Home' });
     });
 
-    // // /* GET saved pages */
-    // router.get('/all', function(req, res) {
-    //     var pages;
-    //     Page.find(function (err, pages) {
-    //       if (err) return console.error(err);
-    //       res.render('pages', { pages: pages } );
-    //     });
-    // });
+    // /* GET saved pages */
+    app.get('/all', function(req, res) {
+        var pages;
+        Page.find(function (err, pages) {
+          if (err) return console.error(err);
+          res.render('all' , { pages: pages } );
+        });
+    });
 
     /* GET create page form. */
     app.get('/create', function(req, res, next) {
