@@ -30,7 +30,7 @@ module.exports = function (app) {
     	console.log("store logging");
 		var page = new Page();
 		console.log(req);
-		page.authors = req.body.authors;
+		page.authors = req.body.authors.split(',');;
 		page.title = req.body.title;
 		page.subheading = req.body.subheading;
 		page.quotes = req.body.quotes.split(",");
