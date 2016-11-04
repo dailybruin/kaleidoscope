@@ -11,14 +11,14 @@ module.exports = function (app) {
         res.render('index', { title: 'Home' });
     });
 
-    // // /* GET saved pages */
-    // router.get('/all', function(req, res) {
-    //     var pages;
-    //     Page.find(function (err, pages) {
-    //       if (err) return console.error(err);
-    //       res.render('pages', { pages: pages } );
-    //     });
-    // });
+    // /* GET saved pages */
+    app.get('/all', function(req, res) {
+        var pages;
+        Page.find(function (err, pages) {
+          if (err) return console.error(err);
+          res.render('all', { pages: pages } );
+        });
+    });
 
     /* GET create page form. */
     app.get('/create', function(req, res, next) {
@@ -30,9 +30,7 @@ module.exports = function (app) {
     	console.log("store logging");
 		var page = new Page();
 		console.log(req);
-		//  Split authors with comma
-		page.authors = req.body.authors.split(',');
-
+		page.authors = req.body.authors;
 		page.title = req.body.title;
 		page.subheading = req.body.subheading;
 		page.quotes = req.body.quotes.split(",");
