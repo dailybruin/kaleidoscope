@@ -1,6 +1,6 @@
 /**
  * Routes
- * Catches all GET request and puts index.jade that inits React
+ * Catches all GET/POST requests
  */
 var express = require('express');
 var Page = require('./site/model/page');
@@ -11,7 +11,7 @@ module.exports = function (app) {
         res.render('index', { title: 'Home' });
     });
 
-    // /* GET saved pages */
+    /* GET saved pages */
     app.get('/all', function(req, res) {
         var pages;
         Page.find(function (err, pages) {
@@ -22,14 +22,12 @@ module.exports = function (app) {
 
     /* GET create page form. */
     app.get('/create', function(req, res, next) {
-    	console.log('Logging');
 		res.render('dashboard');
     });
 
     app.post('/store_page', function (req, res, next) {
-    	console.log("store logging");
 		var page = new Page();
-		console.log(req);
+		console.log(req.body);
 		page.authors = req.body.authors.split(',');;
 		page.title = req.body.title;
 		page.subheading = req.body.subheading;
@@ -76,6 +74,7 @@ module.exports = function (app) {
 
 		page.save(function (err) {
 			if (err) {
+				console.log(err);
 				res.render('dashboard');
 			} else {
 				res.render('index');
@@ -83,5 +82,3 @@ module.exports = function (app) {
 		});
     });
 };
-
-// module.exports = router;
