@@ -29,7 +29,9 @@ module.exports = function (app) {
     	console.log("store logging");
 		var page = new Page();
 		console.log(req);
-		page.authors = req.body.authors;
+		//  Split authors with comma
+		page.authors = req.body.authors.split(',');
+
 		page.title = req.body.title;
 		page.coverPhoto = req.body.cover;
 		page.coverPhotoCaption = req.body.coverCaption;
@@ -39,8 +41,10 @@ module.exports = function (app) {
 		page.quotes = req.body.quotes;
 		page.quoteMakers = req.body.quoteMakers;
 		page.paragraphs = req.body.paragraphs;
-		page.sideImages = req.body.sideImages;
-		page.mainImages = req.body.mainImages;
+
+		//  Split side images with comma
+		page.sideImages = req.body.sideImages.split(',');
+		page.mainImages = req.body.mainImages.split(',');
 
 		page.save(function (err) {
 			if (err) {
