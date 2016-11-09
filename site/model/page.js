@@ -9,6 +9,5 @@ module.exports = mongoose.model('Page', {
 	coverPhoto: {type : mongoose.Schema.ObjectId, ref : 'Image'},
 	subheading: String,
 	quotes: Array,
-	quoteMakers: Array,
 	paragraphs: Array
 });

@@ -5,6 +5,8 @@
 var express = require('express');
 var Page = require('./site/model/page');
 var Image = require('./site/model/imageObject');
+var Quote = require('./site/model/quoteObject');
+
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
@@ -31,15 +33,33 @@ module.exports = function (app) {
 		page.authors = req.body.authors.split(',');;
 		page.title = req.body.title;
 		page.subheading = req.body.subheading;
-		page.quotes = req.body.quotes.split(",");
-		page.quoteMakers = req.body.quoteMakers.split(",");
+		
 		page.paragraphs = req.body.paragraphs.split("\n");
+
+		
+		//read quotes in to struct
+		var quotesArray = req.body.quotes.split(",");
+		var quoteMakersArray = req.body.quoteMakers.split(",");
+
+		if (quotesArray.length != quoteMakersArray.length)
+			console.log('Length of Quotes is different from length of Quote Makers');
+
+		var quotes = [];
+		for (var i = 0; i < quotesArray.length; i++)
+		{
+			var quoteEntry = new Quote();
+			quoteEntry.quote= quotesArray[i];
+			quoteEntry.quoteMaker = quoteMakersArray[i];
+			quotes.push(quoteEntry);
+		}
+		page.quotes = quotes;
 
 
 		var sideImagesArray = req.body.sideImages.split(",");
 		var sideImageCaptionsArray = req.body.sideImageCaptions.split(",");
 		if (sideImagesArray.length != sideImageCaptionsArray.length)
 			console.log('Length of Side Image is different from length of Side Image Captions');
+		
 		var sideImages = [];
 		for (var i = 0; i < sideImagesArray.length; i++)
 		{
@@ -54,6 +74,7 @@ module.exports = function (app) {
 		var mainImageCaptionsArray = req.body.mainImageCaptions.split(",");
 		if (mainImagesArray.length != mainImageCaptionsArray.length)
 			console.log('Length of Main Image is different from length of Main Image Captions');
+		
 		var mainImages = [];
 		for (var i = 0; i < mainImagesArray.length; i++)
 		{
