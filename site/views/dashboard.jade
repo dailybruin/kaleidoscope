@@ -1,18 +1,13 @@
 extends template
 
-block header 
-	script(src='js/bootstrap.min.js') 
-
 block content
 	h2.text-center Create your flatpage
 	br
 
 	div.dropdown
-	ul.dropdown-menu(role="menu")
-		li(role="presentation")
-			a(href="#", role="menuitem", tabindex="-1") Regular link
-		li.disabled(role="presentation")
-			a(href="#", role="menuitem", tabindex="-1") Disabled link
+		select
+			option(value='op1') op1
+			option(value='op2') op2
 
 	div.container
 		div.row
