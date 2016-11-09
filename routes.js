@@ -34,7 +34,7 @@ module.exports = function (app) {
 		page.title = req.body.title;
 		page.subheading = req.body.subheading;
 		
-		page.paragraphs = req.body.paragraphs.split("\n");
+		page.text = req.body.text.split("\n");
 
 		
 		//read quotes in to struct

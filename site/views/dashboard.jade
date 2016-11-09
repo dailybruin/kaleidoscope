@@ -1,8 +1,18 @@
 extends template
 
+block header 
+	script(src='js/bootstrap.min.js') 
+
 block content
 	h2.text-center Create your flatpage
 	br
+
+	div.dropdown
+	ul.dropdown-menu(role="menu")
+		li(role="presentation")
+			a(href="#", role="menuitem", tabindex="-1") Regular link
+		li.disabled(role="presentation")
+			a(href="#", role="menuitem", tabindex="-1") Disabled link
 
 	div.container
 		div.row
@@ -73,9 +83,9 @@ block content
 						br
 
 						div(class='form-group')
-							label(class='col-xs-3 control-label') Paragraphs
+							label(class='col-xs-3 control-label') Text Section
 							div(class='col-xs-8')
-								textarea(name='paragraphs', cols='90', rows='8')
+								textarea(name='text', cols='90', rows='8')
 						br
 						button(class='btn btn-lg btn-primary btn-block', type='submit') Generate Flatpage
 							span.clearfix
