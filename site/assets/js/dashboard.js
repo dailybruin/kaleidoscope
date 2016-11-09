@@ -1,12 +1,6 @@
 $(document).ready(function() {
 	
-	$(".author").hide();
-	$(".image").hide();
-	$(".title").hide();
-	$(".quote").hide();
-	$(".text").hide();
-	$(".cover").hide();
-
+	$(".author, .image, .title, .quote, .text, .cover").hide();
 
 	$('#attribute').change(function () {
 
@@ -17,56 +11,32 @@ $(document).ready(function() {
 
 			case "author":
 				$(".author").show();
-				$(".image").hide();
-				$(".title").hide();
-				$(".quote").hide();
-				$(".text").hide();
-				$(".cover").hide();
+				$(".image, .title, .quote, .text, .cover").hide();
 				break;
 			case "image":
 				
 				$(".image").show();
-				$(".author").hide();
-				$(".title").hide();
-				$(".quote").hide();
-				$(".text").hide();
-				$(".cover").hide();
+				$(".author, .title, .quote, .text, .cover").hide();
 				break;
 			case "title":
 				
 				$(".title").show();
-				$(".author").hide();
-				$(".image").hide();
-				$(".quote").hide();
-				$(".text").hide();
-				$(".cover").hide();
+				$(".author, .image, .quote, .text, .cover").hide();
 				break;
 			case "quote":
 				
 				$(".quote").show();
-				$(".author").hide();
-				$(".image").hide();
-				$(".title").hide();
-				$(".text").hide();
-				$(".cover").hide();
+				$(".author, .image, .title, .text, .cover").hide();
 				break;
 			case "text section":
 				
 				$(".text").show();
-				$(".author").hide();
-				$(".image").hide();
-				$(".title").hide();
-				$(".quote").hide();
-				$(".cover").hide();
+				$(".author, .image, .title, .quote, .cover").hide();
 				break;
 			case "cover image":
 				
 				$(".cover").show();
-				$(".author").hide();
-				$(".image").hide();
-				$(".title").hide();
-				$(".quote").hide();
-				$(".text").hide();
+				$(".author, .image, .title, .quote, .text").hide();
 				break;
 			default:
 				$(".form").hide();
