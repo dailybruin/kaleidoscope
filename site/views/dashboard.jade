@@ -5,21 +5,53 @@ block content
 	br
 
 	div.dropdown
-		select
-			option(value='op1') op1
-			option(value='op2') op2
+		select#attribute
+			option(value='image') image
+			option(value='title') title
+			option(value='cover_image') cover image
+			option(value='author') author
+			option(value='quote') quote
+			option(value='text_section') text section
+		input(type = 'submit')
+
+	div(class='form')
+		div(class='author')
+			div(class='col-xs-8')
+				input(class='form-control', type='text', name='authors', required, autofocus, value='author')
+		div(class='image')
+			div(class='col-xs-8')
+				input(class='form-control', type='text', name='image', autofocus, value='img')
+				input(class='form-control', type='text', name='credit', required, value='credit')
+				input(class='form-control', type='text', name='caption', required, value='caption')
+		div(class='cover')
+			div(class='col-xs-8')
+				input(class='form-control', type='text', name='cover', required, value='cover')
+				input(class='form-control', type='text', name='coverCredit', required, value='cover credit')
+				input(class='form-control', type='text', name='coverCaption', required, value='cover caption')
+		div(class='title')
+			div(class='col-xs-8')
+				input(class='form-control', type='text', name='title', required, value='title')
+		div(class='text')
+			div(class='col-xs-8')
+				textarea(name='text', cols='90', rows='8')
+		div(class='quote')
+			div(class='col-xs-8')
+				input(class='form-control', type='text', name='quote', required, value='quote')
+				input(class='form-control', type='text', name='quoteMaker', required, value='quote maker')
 
 	div.container
 		div.row
 			div.col-xs-9.col-xs-offset-1
 				div.account-wall
 					form(class='form-horizontal', action='/store_page', method='POST')
+						
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Authors
 							div(class='col-xs-8')
 								input(class='form-control', type='text', name='authors', required, autofocus, value='author1,author2')
 
 						br
+
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Main Images
 							div(class='col-xs-8')
@@ -36,6 +68,7 @@ block content
 								input(class='form-control', type='text', name='title', required, value='title')
 
 						br
+
 						div(class='form-group')
 							label(class='col-xs-3 control-label') Cover photo
 							div(class='col-xs-8')
