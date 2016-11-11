@@ -259,7 +259,7 @@
 	    _createClass(Dashboard, [{
 	        key: "render",
 	        value: function render() {
-	            var components = this.props.componentTypes.map(function (type, i) {
+	            var componentOptions = this.props.componentTypes.map(function (type, i) {
 	                return _react2["default"].createElement(
 	                    "option",
 	                    { value: type.replace(/\s/g, "_") },
@@ -276,7 +276,7 @@
 	                    _react2["default"].createElement(
 	                        "select",
 	                        { value: this.state.selectedComponent, onChange: this.handleDropdownChange },
-	                        components
+	                        componentOptions
 	                    ),
 	                    _react2["default"].createElement("input", { type: "submit" })
 	                )
@@ -286,13 +286,38 @@
 	        key: "handleDropdownChange",
 	        value: function handleDropdownChange(event) {
 	            this.setState({ selectedComponent: event.target.value });
-	            console.log('Dropdown changed: ' + event.target.value);
+	            {
+	                this.showInputForComponentType(event.target.value);
+	            }
 	        }
 	    }, {
 	        key: "handleSubmit",
 	        value: function handleSubmit(event) {
 	            console.log('A name was submitted: ' + this.state.selectedComponent);
 	            event.preventDefault();
+	        }
+	    }, {
+	        key: "showInputForComponentType",
+	        value: function showInputForComponentType(componentType) {
+	            console.log('Dropdown changed: ' + event.target.value);
+	            switch (componentType) {
+	                case 'image':
+	                    return _react2["default"].createElement(
+	                        "div",
+	                        null,
+	                        _react2["default"].createElement("input", { type: "text", name: "image", autofocus: "autofocus", value: "img", "class": "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "credit", required: "required", value: "credit", "class": "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "caption", required: "required", value: "caption", "class": "form-control" })
+	                    );
+	                    break;
+	                default:
+	                    return _react2["default"].createElement(
+	                        "p",
+	                        null,
+	                        "nothing"
+	                    );
+	                    break;
+	            }
 	        }
 	    }]);
 

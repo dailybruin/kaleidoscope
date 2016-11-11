@@ -10,8 +10,9 @@ class Dashboard extends React.Component {
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     render() {
-        var components = this.props.componentTypes.map(function(type, i){
+        var componentOptions = this.props.componentTypes.map(function(type, i){
           return (
             <option value={type.replace(/\s/g , "_")}>{type}</option>
           );
@@ -21,7 +22,7 @@ class Dashboard extends React.Component {
           <div className="Dashboard">
             <form onSubmit={this.handleSubmit}>
                 <select value={this.state.selectedComponent} onChange={this.handleDropdownChange}>
-                    {components}
+                    {componentOptions}
                 </select>
                 <input type='submit'></input>
             </form>
@@ -31,12 +32,30 @@ class Dashboard extends React.Component {
 
     handleDropdownChange(event) {
         this.setState({selectedComponent: event.target.value});
-        console.log('Dropdown changed: ' + event.target.value);
+        {this.showInputForComponentType(event.target.value)}
     }
 
     handleSubmit(event) {
         console.log('A name was submitted: ' + this.state.selectedComponent);
         event.preventDefault();
+    }
+
+    showInputForComponentType(componentType) {
+        console.log('Dropdown changed: ' + event.target.value);
+        switch(componentType) {
+            case 'image':
+                return(
+                    <div>
+                        <input type="text" name="image" autofocus="autofocus" value="img" class="form-control"/>
+                        <input type="text" name="credit" required="required" value="credit" class="form-control"/>
+                        <input type="text" name="caption" required="required" value="caption" class="form-control"/>
+                    </div>
+                );
+                break;
+            default:
+                return(<p>nothing</p>);
+                break;
+        }
     }
 };
 
