@@ -8,7 +8,6 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>App</h1>
 				<Page title="Article 1" author="John Smith" />
 				<hr />
 				<Dashboard componentTypes={['image', 'title', 'cover image', 'author', 'quote', 'text section']} />             

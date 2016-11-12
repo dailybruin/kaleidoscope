@@ -121,11 +121,6 @@
 	            return _react2['default'].createElement(
 	                'div',
 	                null,
-	                _react2['default'].createElement(
-	                    'h1',
-	                    null,
-	                    'App'
-	                ),
 	                _react2['default'].createElement(_commonPage2['default'], { title: 'Article 1', author: 'John Smith' }),
 	                _react2['default'].createElement('hr', null),
 	                _react2['default'].createElement(_Dashboard2['default'], { componentTypes: ['image', 'title', 'cover image', 'author', 'quote', 'text section'] })
@@ -274,6 +269,12 @@
 	                    "form",
 	                    { onSubmit: this.handleSubmit },
 	                    _react2["default"].createElement(
+	                        "div",
+	                        { className: "component-inputs" },
+	                        this.showInputForComponentType(this.state.selectedComponent)
+	                    ),
+	                    _react2["default"].createElement("br", null),
+	                    _react2["default"].createElement(
 	                        "select",
 	                        { value: this.state.selectedComponent, onChange: this.handleDropdownChange },
 	                        componentOptions
@@ -286,9 +287,7 @@
 	        key: "handleDropdownChange",
 	        value: function handleDropdownChange(event) {
 	            this.setState({ selectedComponent: event.target.value });
-	            {
-	                this.showInputForComponentType(event.target.value);
-	            }
+	            // {this.showInputForComponentType(event.target.value)}
 	        }
 	    }, {
 	        key: "handleSubmit",
@@ -299,15 +298,44 @@
 	    }, {
 	        key: "showInputForComponentType",
 	        value: function showInputForComponentType(componentType) {
-	            console.log('Dropdown changed: ' + event.target.value);
+	            console.log('Dropdown changed: ' + componentType);
 	            switch (componentType) {
+	                case 'title':
+	                    return _react2["default"].createElement(
+	                        "div",
+	                        null,
+	                        _react2["default"].createElement("input", { type: "text", name: "title", autofocus: "autofocus", value: "title", className: "form-control" })
+	                    );
+	                    break;
+	                case 'author':
+	                    return _react2["default"].createElement(
+	                        "div",
+	                        null,
+	                        _react2["default"].createElement("input", { type: "text", name: "authors", required: "required", autofocus: "autofocus", value: "author", className: "form-control" })
+	                    );
+	                    break;
 	                case 'image':
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "image", autofocus: "autofocus", value: "img", "class": "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "credit", required: "required", value: "credit", "class": "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "caption", required: "required", value: "caption", "class": "form-control" })
+	                        _react2["default"].createElement("input", { type: "text", name: "image", autofocus: "autofocus", value: "img", className: "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "credit", required: "required", value: "credit", className: "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "caption", required: "required", value: "caption", className: "form-control" })
+	                    );
+	                    break;
+	                case 'quote':
+	                    return _react2["default"].createElement(
+	                        "div",
+	                        null,
+	                        _react2["default"].createElement("input", { type: "text", name: "quote", required: "required", value: "quote", className: "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "quoteMaker", required: "required", value: "quote maker", className: "form-control" })
+	                    );
+	                    break;
+	                case 'text_section':
+	                    return _react2["default"].createElement(
+	                        "div",
+	                        null,
+	                        _react2["default"].createElement("textarea", { name: "text", cols: "90", rows: "8" })
 	                    );
 	                    break;
 	                default:
