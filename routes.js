@@ -7,6 +7,69 @@ var Page = require('./site/model/page');
 var Image = require('./site/model/imageObject');
 var Quote = require('./site/model/quoteObject');
 
+function genImage(Images, ImageCaptions, ImageType)
+{
+	var ImagesArray = Images.split(",");
+	var ImageCaptionsArray = ImageCaptions.split(",");
+	if (ImagesArray.length != ImageCaptionsArray.length)
+	{
+		console.log('Length of Image is different from length of Image Captions, type: ');
+		console.log(ImageType)
+	}
+	
+	var ImageVector = [];
+	for (var i = 0; i < ImagesArray.length; i++)
+	{
+		var image = new Image();
+		image.url = ImagesArray[i];
+		image.caption = ImageCaptionsArray[i];
+		ImageVector.push(image);
+	}
+	return ImageVector;
+}
+
+function genPage(reqBody)
+{
+	var page = new Page();
+	// console.log(reqBody);
+	page.authors = reqBody.authors.split(',');;
+	page.title = reqBody.title;
+	page.subheading = reqBody.subheading;
+	
+	page.text = reqBody.text.split("\n");
+
+	
+	//read quotes in to struct
+	var quotesArray = reqBody.quotes.split(",");
+	var quoteMakersArray = reqBody.quoteMakers.split(",");
+
+	if (quotesArray.length != quoteMakersArray.length)
+		console.log('Length of Quotes is different from length of Quote Makers');
+
+	var quotes = [];
+	for (var i = 0; i < quotesArray.length; i++)
+	{
+		var quoteEntry = new Quote();
+		quoteEntry.quote= quotesArray[i];
+		quoteEntry.quoteMaker = quoteMakersArray[i];
+		quotes.push(quoteEntry);
+	}
+	page.quotes = quotes;
+
+	page.sideImages = genImage(reqBody.sideImages, 
+							   reqBody.sideImageCaptions,
+							   'Side images');
+
+	page.mainImages = genImage(reqBody.mainImages, 
+							   reqBody.mainImageCaptions,
+							   'Main images');
+
+	page.coverPhoto = genImage([reqBody.cover], 
+							   [reqBody.coverCaption],
+							    'Cover image')[0];
+
+	return page;
+}
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
@@ -28,70 +91,7 @@ module.exports = function (app) {
     });
 
     app.post('/store_page', function (req, res, next) {
-		var page = new Page();
-		console.log(req.body);
-		page.authors = req.body.authors.split(',');;
-		page.title = req.body.title;
-		page.subheading = req.body.subheading;
-		
-		page.text = req.body.text.split("\n");
-
-		
-		//read quotes in to struct
-		var quotesArray = req.body.quotes.split(",");
-		var quoteMakersArray = req.body.quoteMakers.split(",");
-
-		if (quotesArray.length != quoteMakersArray.length)
-			console.log('Length of Quotes is different from length of Quote Makers');
-
-		var quotes = [];
-		for (var i = 0; i < quotesArray.length; i++)
-		{
-			var quoteEntry = new Quote();
-			quoteEntry.quote= quotesArray[i];
-			quoteEntry.quoteMaker = quoteMakersArray[i];
-			quotes.push(quoteEntry);
-		}
-		page.quotes = quotes;
-
-
-		var sideImagesArray = req.body.sideImages.split(",");
-		var sideImageCaptionsArray = req.body.sideImageCaptions.split(",");
-		if (sideImagesArray.length != sideImageCaptionsArray.length)
-			console.log('Length of Side Image is different from length of Side Image Captions');
-		
-		var sideImages = [];
-		for (var i = 0; i < sideImagesArray.length; i++)
-		{
-			var image = new Image();
-			image.url = sideImagesArray[i];
-			image.caption = sideImageCaptionsArray[i];
-			sideImages.push(image);
-		}
-		page.sideImages = sideImages;
-
-		var mainImagesArray = req.body.mainImages.split(",");
-		var mainImageCaptionsArray = req.body.mainImageCaptions.split(",");
-		if (mainImagesArray.length != mainImageCaptionsArray.length)
-			console.log('Length of Main Image is different from length of Main Image Captions');
-		
-		var mainImages = [];
-		for (var i = 0; i < mainImagesArray.length; i++)
-		{
-			var image = new Image();
-			image.url = mainImagesArray[i];
-			image.caption = mainImageCaptionsArray[i];
-			mainImages.push(image);
-		}
-		page.mainImages = mainImages;
-
-		var coverPhoto = req.body.cover;
-		var coverPhotoCaption = req.body.coverCaption;
-		var image = new Image();
-		image.url = coverPhoto;
-		image.caption = coverPhotoCaption;
-		// var coverPhotoArray = [image];
-		page.coverPhoto = image;//coverPhotoArray;
+		var page = genPage(req.body);
 
 		page.save(function (err) {
 			if (err) {
