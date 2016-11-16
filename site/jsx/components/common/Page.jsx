@@ -4,7 +4,7 @@ import React from 'react';
 class Page extends React.Component {
     static propTypes = {
         title: React.PropTypes.string.isRequired,
-        author: React.PropTypes.string.isRequired
+        author: React.PropTypes.string.isRequired,
     }
     constructor(props) {
         super(props);
