@@ -211,21 +211,21 @@
 /* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
-	Object.defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _react = __webpack_require__(2);
 
@@ -235,9 +235,9 @@
 	    _inherits(Dashboard, _React$Component);
 
 	    _createClass(Dashboard, null, [{
-	        key: 'propTypes',
+	        key: "propTypes",
 	        value: {
-	            componentTypes: _react2['default'].PropTypes.array.isRequired
+	            componentTypes: _react2["default"].PropTypes.array.isRequired
 	        },
 	        enumerable: true
 	    }]);
@@ -245,173 +245,172 @@
 	    function Dashboard(props) {
 	        _classCallCheck(this, Dashboard);
 
-	        _get(Object.getPrototypeOf(Dashboard.prototype), 'constructor', this).call(this, props);
-	        this.state = { selectedComponent: this.props.componentTypes[0],
-	            type: '',
-	            author: '',
-	            title: '',
-	            subheading: '',
-	            text: '',
-	            quote: '',
-	            quoteMaker: '',
-	            imageUrl: '',
-	            imageCredit: '',
-	            imageCaption: ''
+	        _get(Object.getPrototypeOf(Dashboard.prototype), "constructor", this).call(this, props);
+	        this.state = { data: {
+	                type: this.props.componentTypes[0]
+	            }
 	        };
 	        this.handleDropdownChange = this.handleDropdownChange.bind(this);
 	        this.handleSubmit = this.handleSubmit.bind(this);
 	    }
 
 	    _createClass(Dashboard, [{
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            var componentOptions = this.props.componentTypes.map(function (type, i) {
-	                return _react2['default'].createElement(
-	                    'option',
+	                return _react2["default"].createElement(
+	                    "option",
 	                    { value: type.replace(/\s/g, "_") },
 	                    type
 	                );
 	            });
 
-	            return _react2['default'].createElement(
-	                'div',
-	                { className: 'Dashboard' },
-	                _react2['default'].createElement(
-	                    'form',
-	                    { onSubmit: this.handleSubmit, action: '/store_page', method: 'POST' },
-	                    _react2['default'].createElement(
-	                        'div',
-	                        { className: 'component-inputs' },
-	                        this.showInputForComponentType(this.state.selectedComponent)
+	            return _react2["default"].createElement(
+	                "div",
+	                { className: "Dashboard" },
+	                _react2["default"].createElement(
+	                    "form",
+	                    { onSubmit: this.handleSubmit },
+	                    _react2["default"].createElement(
+	                        "div",
+	                        { className: "component-inputs" },
+	                        this.showInputForComponentType(this.state.data.type)
 	                    ),
-	                    _react2['default'].createElement('br', null),
-	                    _react2['default'].createElement(
-	                        'select',
-	                        { value: this.state.selectedComponent, onChange: this.handleDropdownChange },
+	                    _react2["default"].createElement("br", null),
+	                    _react2["default"].createElement(
+	                        "select",
+	                        { value: this.state.data.type, onChange: this.handleDropdownChange },
 	                        componentOptions
 	                    ),
-	                    _react2['default'].createElement('input', { type: 'submit' })
+	                    _react2["default"].createElement("input", { type: "submit" })
 	                )
 	            );
 	        }
 	    }, {
-	        key: 'handleDropdownChange',
+	        key: "handleDropdownChange",
 	        value: function handleDropdownChange(event) {
-	            this.setState({ selectedComponent: event.target.value });
-	            // {this.showInputForComponentType(event.target.value)}
-	            this.setState({ type: event.target.value });
+	            this.setState({
+	                data: {
+	                    type: event.target.value
+	                }
+	            });
 	        }
 	    }, {
-	        key: 'handleSubmit',
+	        key: "handleSubmit",
 	        value: function handleSubmit(event) {
-	            console.log('A name was submitted: ' + this.state.selectedComponent);
+	            console.log('A name was submitted: ' + this.state.data.type);
 	            event.preventDefault();
 
-	            var contents = $.ajax({
+	            $.ajax({
 	                url: '/store',
 	                dataType: 'json',
-	                // data: this.state.contents;
+	                data: this.state.data,
 	                type: 'POST'
 	            });
 	        }
 	    }, {
-	        key: 'showInputForComponentType',
+	        key: "updateInput",
+	        value: function updateInput(value, event) {
+	            this.state.data[value] = event.target.value;
+	        }
+	    }, {
+	        key: "showInputForComponentType",
 	        value: function showInputForComponentType(componentType) {
 	            console.log('Dropdown changed: ' + componentType);
 	            switch (componentType) {
 	                case 'title':
-	                    return _react2['default'].createElement(
-	                        'div',
+	                    return _react2["default"].createElement(
+	                        "div",
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'Title', type: 'text', name: 'title', value: this.state.title, className: 'form-control' })
+	                        _react2["default"].createElement("input", {
+	                            placeholder: "Title",
+	                            type: "text", name: "title",
+	                            onChange: this.updateInput.bind(this, 'title'),
+	                            className: "form-control"
+	                        })
 	                    );
 	                    break;
 	                case 'author':
-	                    return _react2['default'].createElement(
-	                        'div',
+	                    return _react2["default"].createElement(
+	                        "div",
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'Author', type: 'text', name: 'author', required: 'required', value: this.state.author, className: 'form-control' })
+	                        _react2["default"].createElement("input", { placeholder: "Author", type: "text", name: "author", onChange: this.updateInput.bind(this, 'author'), className: "form-control" })
 	                    );
 	                    break;
 	                case 'image':
-	                    return _react2['default'].createElement(
-	                        'div',
+	                case 'cover_image':
+	                    return _react2["default"].createElement(
+	                        "div",
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'URL', type: 'text', name: 'url', value: this.state.imageUrl, className: 'form-control' }),
-	                        _react2['default'].createElement('input', { placeholder: 'Credit', type: 'text', name: 'credit', value: this.state.imageCredit, className: 'form-control' }),
-	                        _react2['default'].createElement('input', { placeholder: 'Caption', type: 'text', name: 'caption', value: this.state.imageCaption, className: 'form-control' })
+	                        _react2["default"].createElement("input", { placeholder: "URL", type: "text", name: "url", onChange: this.updateInput.bind(this, 'imageUrl'), className: "form-control" }),
+	                        _react2["default"].createElement("input", { placeholder: "Credit", type: "text", name: "credit", onChange: this.updateInput.bind(this, 'credit'), className: "form-control" }),
+	                        _react2["default"].createElement("input", { placeholder: "Caption", type: "text", name: "caption", onChange: this.updateInput.bind(this, 'caption'), className: "form-control" })
 	                    );
 	                    break;
 	                case 'quote':
-	                    return _react2['default'].createElement(
-	                        'div',
+	                    return _react2["default"].createElement(
+	                        "div",
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'Quote', type: 'text', name: 'quote', value: this.state.quote, className: 'form-control' }),
-	                        _react2['default'].createElement('input', { placeholder: 'Quote Maker', type: 'text', name: 'quoteMaker', value: this.state.quoteMaker, className: 'form-control' })
+	                        _react2["default"].createElement("input", { placeholder: "Quote", type: "text", name: "quote", onChange: this.updateInput.bind(this, 'quote'), className: "form-control" }),
+	                        _react2["default"].createElement("input", { placeholder: "Quote Maker", type: "text", name: "quoteMaker", onChange: this.updateInput.bind(this, 'quoteMaker'), className: "form-control" })
 	                    );
 	                    break;
 	                case 'text_section':
-	                    return _react2['default'].createElement(
-	                        'div',
+	                    return _react2["default"].createElement(
+	                        "div",
 	                        null,
-	                        _react2['default'].createElement('textarea', { name: 'text', cols: '90', rows: '8' })
+	                        _react2["default"].createElement("textarea", { name: "text", cols: "90", rows: "8", ref: "dashboardInput" })
 	                    );
 	                    break;
 	                default:
-	                    return _react2['default'].createElement(
-	                        'p',
+	                    return _react2["default"].createElement(
+	                        "p",
 	                        null,
-	                        'nothing'
+	                        "nothing"
 	                    );
 	                    break;
 	            }
 	        }
-	    }, {
-	        key: 'selectFields',
-	        value: function selectFields(type) {
-	            var contents = {};
-	            switch (type) {
-	                case 'title':
-	                    contents['title'] = this.state.title;
-	                    break;
-	                case 'author':
-	                    contents['author'] = this.state.author;
-	                    break;
-	                case 'image':
-	                    contents['url'] = this.state.imageUrl;
-	                    contents['caption'] = this.state.imageCaption;
-	                    contents['credit'] = this.state.imageCredit;
-	                    break;
-	                case 'quote':
-	                    contents['quote'] = this.state.quote;
-	                    contents['quoteMaker'] = this.state.quoteMaker;
-	                    break;
-	                case 'text_section':
-	                    return _react2['default'].createElement(
-	                        'div',
-	                        null,
-	                        _react2['default'].createElement('textarea', { name: 'text', cols: '90', rows: '8' })
-	                    );
-	                    break;
-	                default:
-	                    return _react2['default'].createElement(
-	                        'p',
-	                        null,
-	                        'nothing'
-	                    );
-	                    break;
-	            }
-	            return contents;
-	        }
+
+	        // selectFields(type)
+	        // {
+	        //     var contents = {};
+	        //     switch(type) {
+	        //         case 'title':
+	        //             contents['title'] = this.state.title;
+	        //             break;
+	        //         case 'author':
+	        //             contents['author'] = this.state.author;
+	        //             break;
+	        //         case 'image':
+	        //             contents['url'] = this.state.imageUrl;
+	        //             contents['caption'] = this.state.imageCaption;
+	        //             contents['credit'] = this.state.imageCredit;
+	        //             break;
+	        //         case 'quote':
+	        //             contents['quote'] = this.state.quote;
+	        //             contents['quoteMaker'] = this.state.quoteMaker;
+	        //             break;
+	        //         case 'text_section':
+	        //             return(
+	        //                 <div><textarea name="text" cols="90" rows="8"></textarea></div>
+	        //             );
+	        //             break;
+	        //         default:
+	        //             return(<p>nothing</p>);
+	        //             break;
+	        //     }
+	        //     return contents;
+	        // }
 	    }]);
 
 	    return Dashboard;
-	})(_react2['default'].Component);
+	})(_react2["default"].Component);
 
 	;
 
-	exports['default'] = Dashboard;
-	module.exports = exports['default'];
+	exports["default"] = Dashboard;
+	module.exports = exports["default"];
 
 /***/ }
 /******/ ]);

@@ -84,23 +84,32 @@ module.exports = function (app) {
 
 
     app.post('/store', function(req, res, next) {
-    	console.log("react form was submitted");
+    	console.log(req.body);
     	switch(req){
     		case "title":
     			storeTitle(req);
-    		case "authors":
+    			break;
+    		case "author":
     			storeAuthors(req);
+    			break;
     		case "subheading":
     			storeSubHeading(req);
+    			break;
     		case "quotes":
     			storeQuotes(req);
+    			break;
     		case "text":
     			storeText(req);
-    		case "coverImage":
+    			break;
+    		case "cover_image":
     			storeCoverImage(req);
-    		case "images":
+    			break;
+    		case "image":
     			storeImage(req);
-
+    			break;
+    		case "text_section":
+    			console.log("TODO text section in routes.js");
+    			break;
     	}
     });
 

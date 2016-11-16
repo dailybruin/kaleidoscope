@@ -6,18 +6,10 @@ class Dashboard extends React.Component {
     }
     constructor(props) {
         super(props);
-        this.state = {selectedComponent: this.props.componentTypes[0], 
-            type: '', 
-            author: '', 
-            title: '',
-            subheading: '',
-            text: '',
-            quote: '',
-            quoteMaker: '',
-            imageUrl: '',
-            imageCredit: '',
-            imageCaption: ''
-        };
+        this.state = {  data: {
+                            type: this.props.componentTypes[0]
+                        }
+                     };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -31,12 +23,12 @@ class Dashboard extends React.Component {
 
         return (
           <div className="Dashboard">
-            <form onSubmit={this.handleSubmit} action='/store_page' method='POST'>
+            <form onSubmit={this.handleSubmit}>
                 <div className='component-inputs'>
-                    {this.showInputForComponentType(this.state.selectedComponent)}
+                    {this.showInputForComponentType(this.state.data.type)}
                 </div>
                 <br/>
-                <select value={this.state.selectedComponent} onChange={this.handleDropdownChange}>
+                <select value={this.state.data.type} onChange={this.handleDropdownChange}>
                     {componentOptions}
                 </select>
                 <input type='submit'></input>
@@ -46,23 +38,27 @@ class Dashboard extends React.Component {
     }
 
     handleDropdownChange(event) {
-        this.setState({selectedComponent: event.target.value});
-        // {this.showInputForComponentType(event.target.value)}
-        this.setState({type: event.target.value})
+        this.setState({
+            data: {
+                type: event.target.value
+            }
+        })
     }
 
     handleSubmit(event) {
-        console.log('A name was submitted: ' + this.state.selectedComponent);
+        console.log('A name was submitted: ' + this.state.data.type);
         event.preventDefault();
-        
-        var contents = 
 
         $.ajax({
           url: '/store',
           dataType: 'json',
-          // data: this.state.contents;
+          data: this.state.data,
           type: 'POST'
         });
+    }
+
+    updateInput(value, event) {
+        this.state.data[value] = event.target.value;
     }
 
     showInputForComponentType(componentType) {
@@ -70,34 +66,42 @@ class Dashboard extends React.Component {
         switch(componentType) {
             case 'title':
                 return(
-                    <div><input placeholder="Title" type="text" name="title" value={this.state.title} className="form-control"/></div>
+                    <div>
+                        <input 
+                            placeholder="Title" 
+                            type="text" name="title" 
+                            onChange={this.updateInput.bind(this, 'title')} 
+                            className="form-control"
+                        />
+                    </div>
                 );
                 break;
             case 'author':
                 return(
-                    <div><input placeholder="Author" type="text" name="author" required="required" value={this.state.author} className="form-control"/></div>
+                    <div><input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/></div>
                 );
                 break;
             case 'image':
+            case 'cover_image':
                 return(
                     <div>
-                        <input placeholder="URL" type="text" name="url" value={this.state.imageUrl} className="form-control"/>
-                        <input placeholder="Credit" type="text" name="credit" value={this.state.imageCredit} className="form-control"/>
-                        <input placeholder="Caption" type="text" name="caption" value={this.state.imageCaption} className="form-control"/>
+                        <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
+                        <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'credit')} className="form-control"/>
+                        <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'caption')} className="form-control"/>
                     </div>
                 );
                 break;
             case 'quote':
                 return(
                     <div>
-                        <input placeholder="Quote" type="text" name="quote" value={this.state.quote} className="form-control"/>
-                        <input placeholder="Quote Maker" type="text" name="quoteMaker" value={this.state.quoteMaker} className="form-control"/>
+                        <input placeholder="Quote" type="text" name="quote" onChange={this.updateInput.bind(this, 'quote')} className="form-control"/>
+                        <input placeholder="Quote Maker" type="text" name="quoteMaker" onChange={this.updateInput.bind(this, 'quoteMaker')} className="form-control"/>
                     </div>
                 );
                 break;
             case 'text_section':
                 return(
-                    <div><textarea name="text" cols="90" rows="8"></textarea></div>
+                    <div><textarea name="text" cols="90" rows="8" ref='dashboardInput'></textarea></div>
                 );
                 break;
             default:
@@ -105,36 +109,36 @@ class Dashboard extends React.Component {
                 break;
         }
     }
-    selectFields(type)
-    {
-        var contents = {};
-        switch(type) {
-            case 'title':
-                contents['title'] = this.state.title;
-                break;
-            case 'author':
-                contents['author'] = this.state.author;
-                break;
-            case 'image':
-                contents['url'] = this.state.imageUrl;
-                contents['caption'] = this.state.imageCaption;
-                contents['credit'] = this.state.imageCredit;
-                break;
-            case 'quote':
-                contents['quote'] = this.state.quote;
-                contents['quoteMaker'] = this.state.quoteMaker;
-                break;
-            case 'text_section':
-                return(
-                    <div><textarea name="text" cols="90" rows="8"></textarea></div>
-                );
-                break;
-            default:
-                return(<p>nothing</p>);
-                break;
-        }
-        return contents;
-    }
+    // selectFields(type)
+    // {
+    //     var contents = {};
+    //     switch(type) {
+    //         case 'title':
+    //             contents['title'] = this.state.title;
+    //             break;
+    //         case 'author':
+    //             contents['author'] = this.state.author;
+    //             break;
+    //         case 'image':
+    //             contents['url'] = this.state.imageUrl;
+    //             contents['caption'] = this.state.imageCaption;
+    //             contents['credit'] = this.state.imageCredit;
+    //             break;
+    //         case 'quote':
+    //             contents['quote'] = this.state.quote;
+    //             contents['quoteMaker'] = this.state.quoteMaker;
+    //             break;
+    //         case 'text_section':
+    //             return(
+    //                 <div><textarea name="text" cols="90" rows="8"></textarea></div>
+    //             );
+    //             break;
+    //         default:
+    //             return(<p>nothing</p>);
+    //             break;
+    //     }
+    //     return contents;
+    // }
 };
 
 export default Dashboard;
