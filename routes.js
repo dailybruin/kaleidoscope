@@ -8,6 +8,61 @@ var Image = require('./site/model/imageObject');
 var Quote = require('./site/model/quoteObject');
 var GenPage = new Page();
 
+function storeAuthors(reqBody)
+{
+	GenPage.authors.push(reqBody.authors);
+}
+
+function storeTitle(reqBody)
+{
+	GenPage.title = reqBody.title;
+}
+
+function storeText(reqBody)
+{
+	GenPage.text = reqBody.text.split("\n");
+}
+
+function storeQuotes(reqBody)
+{
+	var quotesArray = reqBody.quotes.split(",");
+	var quoteMakersArray = reqBody.quoteMakers.split(",");
+
+	if (quotesArray.length != quoteMakersArray.length)
+			console.log('Length of Quotes is different from length of Quote Makers');
+	var quotes = [];
+
+	for (var i = 0; i < quotesArray.length; i++)
+	{
+		var quoteEntry = new Quote();
+		quoteEntry.quote= quotesArray[i];
+		quoteEntry.quoteMaker = quoteMakersArray[i];
+		quotes.push(quoteEntry);
+	}
+	GenPage.quotes = quotes
+}
+
+function storeCoverImage(reqBody)
+{
+	GenPage.coverPhoto = genImage([reqBody.cover], 
+							   [reqBody.coverCaption],
+							    'Cover image')[0];
+}
+
+function storeImage(reqBody)
+{
+	var image = new Image();
+	image.url = reqBody.url;
+	image.caption = reqBody.caption;
+	image.credit = reqBody.credit;
+	GenPage.images.push(image);
+}
+
+function storeSubHeading(reqBody)
+{
+	GenPage.subheading = reqBody.subheading;
+}
+
 module.exports = function (app) {
     app.get('/', function (req, res) {
         res.render('index', { title: 'Home' });
@@ -27,60 +82,26 @@ module.exports = function (app) {
 		res.render('dashboard');
     });
 
-    app.post('/store_authors', function(req, res, next)
-    {
-    	GenPage.authors.push(req.body.authors);
-    });
-
-    app.post('/store_title', function(req, res, next)
-    {
-    	GenPage.title = req.body.title;
-    });
-
-    app.post('/store_subheading', function(req, res, next)
-    {
-		GenPage.subheading = req.body.subheading;
-    });
-
-    app.post('/store_text', function(req, res, next)
-    {
-		GenPage.text = req.body.text.split("\n");
-    });
-
-    app.post('/store_quotes', function(req, res, next)
-    {
-		var quoteEntry = new Quote();
-		quoteEntry.quote= quotesArray[i];
-		quoteEntry.quoteMaker = quoteMakersArray[i];
-		GenPage.quotes.push(quoteEntry);
-    });
-
-    app.post('/store_side_images', function(req, res, next)
-    {
-		var image = new Image();
-		image.url = reqBody.sideImages;
-		image.caption = reqBody.sideImageCaptions;
-		GenPage.sideImages.push(image);
-    });
-
-    app.post('/store_main_images', function(req, res, next)
-    {
-		var image = new Image();
-		image.url = reqBody.mainImages;
-		image.caption = reqBody.mainImageCaptions;
-		GenPage.mainImages.push(image);
-    });
-
-    app.post('/store_cover_image', function(req, res, next)
-    {
-		var image = new Image();
-		image.url = reqBody.cover;
-		image.caption = reqBody.coverCaption;
-		GenPage.coverPhoto = image;
-    });
 
     app.post('/store', function(req, res, next) {
     	console.log("react form was submitted");
+    	switch(req){
+    		case "title":
+    			storeTitle(req);
+    		case "authors":
+    			storeAuthors(req);
+    		case "subheading":
+    			storeSubHeading(req);
+    		case "quotes":
+    			storeQuotes(req);
+    		case "text":
+    			storeText(req);
+    		case "coverImage":
+    			storeCoverImage(req);
+    		case "images":
+    			storeImage(req);
+
+    	}
     });
 
     app.post('/store_page', function (req, res, next)
