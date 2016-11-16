@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
     handleSubmit(event) {
         console.log('A name was submitted: ' + this.state.selectedComponent);
         event.preventDefault();
-        
+        console.log(event);
         $.ajax({
           url: '/store',
           dataType: 'json',
