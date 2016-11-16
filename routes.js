@@ -27,6 +27,10 @@ module.exports = function (app) {
 		res.render('dashboard');
     });
 
+    app.post('/store', function(req, res, next) {
+    	console.log("react form was submitted");
+    });
+
     app.post('/store_page', function (req, res, next) {
 		var page = new Page();
 		console.log(req.body);
