@@ -79,6 +79,10 @@ module.exports = function (app) {
 		GenPage.coverPhoto = image;
     });
 
+    app.post('/store', function(req, res, next) {
+    	console.log("react form was submitted");
+    });
+
     app.post('/store_page', function (req, res, next)
     {
 		var page = GenPage;
