@@ -3,8 +3,7 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Page', {
 	authors: Array,
-	sideImages: Array,
-	mainImages: Array,
+	images: Array,
 	title: String,
 	coverPhoto: {type : mongoose.Schema.ObjectId, ref : 'Image'},
 	subheading: String,
