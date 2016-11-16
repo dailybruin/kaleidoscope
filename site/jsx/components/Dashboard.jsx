@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
 
         return (
           <div className="Dashboard">
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} action='/store_page' method='POST'>
                 <div className='component-inputs'>
                     {this.showInputForComponentType(this.state.selectedComponent)}
                 </div>

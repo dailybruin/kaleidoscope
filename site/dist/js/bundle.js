@@ -267,7 +267,7 @@
 	                { className: "Dashboard" },
 	                _react2["default"].createElement(
 	                    "form",
-	                    { onSubmit: this.handleSubmit },
+	                    { onSubmit: this.handleSubmit, action: "/store_page", method: "POST" },
 	                    _react2["default"].createElement(
 	                        "div",
 	                        { className: "component-inputs" },
