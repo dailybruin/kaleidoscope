@@ -10,7 +10,7 @@ class App extends React.Component {
             <div>
 				<Page title="Article 1" author="John Smith" />
 				<hr />
-				<Dashboard componentTypes={['image', 'title', 'cover image', 'author', 'quote', 'text section']} />             
+				<Dashboard componentTypes={['image', 'header', 'subhead', 'quote', 'text section']} />             
             </div>
         )
     }

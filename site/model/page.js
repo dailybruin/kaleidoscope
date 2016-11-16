@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-//var imageObject = require('./imageObject.js');
 
 module.exports = mongoose.model('Page', {
 	authors: Array,
@@ -9,4 +8,7 @@ module.exports = mongoose.model('Page', {
 	subheading: String,
 	quotes: Array,
 	text: Array
+	// TODO page join table to replace above
+	// componentType: String,
+	// componentId: String
 });

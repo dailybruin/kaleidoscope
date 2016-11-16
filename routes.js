@@ -4,8 +4,12 @@
  */
 var express = require('express');
 var Page = require('./site/model/page');
-var Image = require('./site/model/imageObject');
-var Quote = require('./site/model/quoteObject');
+var Image = require('./site/model/image');
+var Quote = require('./site/model/quote');
+var TextSection = require('./site/model/textSection');
+var Header = require('./site/model/header');
+var Subhead = require('./site/model/subhead');
+
 var GenPage = new Page();
 
 function storeAuthors(reqBody)
@@ -85,45 +89,44 @@ module.exports = function (app) {
 
     app.post('/store', function(req, res, next) {
     	console.log(req.body);
-    	switch(req){
-    		case "title":
-    			storeTitle(req);
-    			break;
-    		case "author":
-    			storeAuthors(req);
-    			break;
-    		case "subheading":
+    	switch(req.body.type) {
+    		case "header":
+                var data = new Header();
+                data.text = req.body.title;
+                data.imageUrl = req.body.imageUrl;
+                data.imageCredit = req.body.imageCredit;
+                data.imageCaption = req.body.imageCaption;
+                data.author = req.body.author;
+                data.description = req.body.description;
+
+                data.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Successfully stored ' + req.body.type);
+                    }
+                });
+    		case "subhead":
     			storeSubHeading(req);
     			break;
-    		case "quotes":
+    		case "quote":
     			storeQuotes(req);
     			break;
-    		case "text":
-    			storeText(req);
-    			break;
-    		case "cover_image":
-    			storeCoverImage(req);
+    		case "text_section":
+    			var data = new TextSection();
+    			data.text = req.body.text;
+    			data.save(function (err) {
+    				if (err) {
+    					console.log(err);
+    				} else {
+                        console.log('Successfully stored ' + req.body.type);
+                    }
+    			});
     			break;
     		case "image":
     			storeImage(req);
     			break;
-    		case "text_section":
-    			console.log("TODO text section in routes.js");
-    			break;
     	}
     });
 
-    app.post('/store_page', function (req, res, next)
-    {
-		var page = GenPage;
-
-		page.save(function (err) {
-			if (err) {
-				console.log(err);
-				res.render('dashboard');
-			} else {
-				res.render('index');
-			}
-		});
-    });
 };
