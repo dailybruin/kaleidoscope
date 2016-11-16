@@ -73,7 +73,7 @@ function genPage(reqBody)
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('index', { title: 'Home' });
+        res.render('index', { title: 'Dashboard' });
     });
 
     /* GET saved pages */
@@ -88,6 +88,10 @@ module.exports = function (app) {
     /* GET create page form. */
     app.get('/create', function(req, res, next) {
 		res.render('dashboard');
+    });
+
+    app.post('/store', function(req, res, next) {
+    	console.log("react form was submitted");
     });
 
     app.post('/store_page', function (req, res, next) {
