@@ -310,31 +310,31 @@
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "title", className: "form-control" })
+	                        _react2["default"].createElement("input", { placeholder: "Title", type: "text", name: "title", className: "form-control" })
 	                    );
 	                    break;
 	                case 'author':
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "authors", required: "required", className: "form-control" })
+	                        _react2["default"].createElement("input", { placeholder: "Author", type: "text", name: "author", required: "required", className: "form-control" })
 	                    );
 	                    break;
 	                case 'image':
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "image", className: "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "credit", className: "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "caption", className: "form-control" })
+	                        _react2["default"].createElement("input", { placeholder: "URL", type: "text", name: "url", className: "form-control" }),
+	                        _react2["default"].createElement("input", { placeholder: "Credit", type: "text", name: "credit", className: "form-control" }),
+	                        _react2["default"].createElement("input", { placeholder: "Caption", type: "text", name: "caption", className: "form-control" })
 	                    );
 	                    break;
 	                case 'quote':
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "quote", className: "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "quoteMaker", className: "form-control" })
+	                        _react2["default"].createElement("input", { placeholder: "Quote", type: "text", name: "quote", className: "form-control" }),
+	                        _react2["default"].createElement("input", { placeholder: "Quote Maker", type: "text", name: "quoteMaker", className: "form-control" })
 	                    );
 	                    break;
 	                case 'text_section':

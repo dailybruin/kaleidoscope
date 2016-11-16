@@ -55,28 +55,28 @@ class Dashboard extends React.Component {
         switch(componentType) {
             case 'title':
                 return(
-                    <div><input type="text" name="title" className="form-control"/></div>
+                    <div><input placeholder="Title" type="text" name="title" className="form-control"/></div>
                 );
                 break;
             case 'author':
                 return(
-                    <div><input type="text" name="authors" required="required" className="form-control"/></div>
+                    <div><input placeholder="Author" type="text" name="author" required="required" className="form-control"/></div>
                 );
                 break;
             case 'image':
                 return(
                     <div>
-                        <input type="text" name="image" className="form-control"/>
-                        <input type="text" name="credit" className="form-control"/>
-                        <input type="text" name="caption" className="form-control"/>
+                        <input placeholder="URL" type="text" name="url" className="form-control"/>
+                        <input placeholder="Credit" type="text" name="credit" className="form-control"/>
+                        <input placeholder="Caption" type="text" name="caption" className="form-control"/>
                     </div>
                 );
                 break;
             case 'quote':
                 return(
                     <div>
-                        <input type="text" name="quote" className="form-control"/>
-                        <input type="text" name="quoteMaker" className="form-control"/>
+                        <input placeholder="Quote" type="text" name="quote" className="form-control"/>
+                        <input placeholder="Quote Maker" type="text" name="quoteMaker" className="form-control"/>
                     </div>
                 );
                 break;
