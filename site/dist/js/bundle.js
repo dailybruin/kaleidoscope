@@ -284,8 +284,11 @@
 	        _classCallCheck(this, Dashboard);
 
 	        _get(Object.getPrototypeOf(Dashboard.prototype), 'constructor', this).call(this, props);
-	        this.state = { selectedComponent: this.props.componentTypes[0] };
 	        // add syntatic sugar () => {} to prevent exessive bind calls
+	        this.state = { data: {
+	                type: this.props.componentTypes[0]
+	            }
+	        };
 	        this.handleDropdownChange = this.handleDropdownChange.bind(this);
 	        this.handleSubmit = this.handleSubmit.bind(this);
 	    }
@@ -310,12 +313,12 @@
 	                    _react2['default'].createElement(
 	                        'div',
 	                        { className: 'component-inputs' },
-	                        this.showInputForComponentType(this.state.selectedComponent)
+	                        this.showInputForComponentType(this.state.data.type)
 	                    ),
 	                    _react2['default'].createElement('br', null),
 	                    _react2['default'].createElement(
 	                        'select',
-	                        { value: this.state.selectedComponent, onChange: this.handleDropdownChange },
+	                        { value: this.state.data.type, onChange: this.handleDropdownChange },
 	                        componentOptions
 	                    ),
 	                    _react2['default'].createElement('input', { type: 'submit' })
@@ -325,20 +328,29 @@
 	    }, {
 	        key: 'handleDropdownChange',
 	        value: function handleDropdownChange(event) {
-	            this.setState({ selectedComponent: event.target.value });
-	            // {this.showInputForComponentType(event.target.value)}
+	            this.setState({
+	                data: {
+	                    type: event.target.value
+	                }
+	            });
 	        }
 	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(event) {
-	            console.log('A name was submitted: ' + this.state.selectedComponent);
+	            console.log('A name was submitted: ' + this.state.data.type);
 	            event.preventDefault();
-	            console.log(event);
+
 	            $.ajax({
 	                url: '/store',
 	                dataType: 'json',
+	                data: this.state.data,
 	                type: 'POST'
 	            });
+	        }
+	    }, {
+	        key: 'updateInput',
+	        value: function updateInput(value, event) {
+	            this.state.data[value] = event.target.value;
 	        }
 	    }, {
 	        key: 'showInputForComponentType',
@@ -349,38 +361,44 @@
 	                    return _react2['default'].createElement(
 	                        'div',
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'Title', type: 'text', name: 'title', className: 'form-control' })
+	                        _react2['default'].createElement('input', {
+	                            placeholder: 'Title',
+	                            type: 'text', name: 'title',
+	                            onChange: this.updateInput.bind(this, 'title'),
+	                            className: 'form-control'
+	                        })
 	                    );
 	                    break;
 	                case 'author':
 	                    return _react2['default'].createElement(
 	                        'div',
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'Author', type: 'text', name: 'author', required: 'required', className: 'form-control' })
+	                        _react2['default'].createElement('input', { placeholder: 'Author', type: 'text', name: 'author', onChange: this.updateInput.bind(this, 'author'), className: 'form-control' })
 	                    );
 	                    break;
 	                case 'image':
+	                case 'cover_image':
 	                    return _react2['default'].createElement(
 	                        'div',
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'URL', type: 'text', name: 'url', className: 'form-control' }),
-	                        _react2['default'].createElement('input', { placeholder: 'Credit', type: 'text', name: 'credit', className: 'form-control' }),
-	                        _react2['default'].createElement('input', { placeholder: 'Caption', type: 'text', name: 'caption', className: 'form-control' })
+	                        _react2['default'].createElement('input', { placeholder: 'URL', type: 'text', name: 'url', onChange: this.updateInput.bind(this, 'imageUrl'), className: 'form-control' }),
+	                        _react2['default'].createElement('input', { placeholder: 'Credit', type: 'text', name: 'credit', onChange: this.updateInput.bind(this, 'credit'), className: 'form-control' }),
+	                        _react2['default'].createElement('input', { placeholder: 'Caption', type: 'text', name: 'caption', onChange: this.updateInput.bind(this, 'caption'), className: 'form-control' })
 	                    );
 	                    break;
 	                case 'quote':
 	                    return _react2['default'].createElement(
 	                        'div',
 	                        null,
-	                        _react2['default'].createElement('input', { placeholder: 'Quote', type: 'text', name: 'quote', className: 'form-control' }),
-	                        _react2['default'].createElement('input', { placeholder: 'Quote Maker', type: 'text', name: 'quoteMaker', className: 'form-control' })
+	                        _react2['default'].createElement('input', { placeholder: 'Quote', type: 'text', name: 'quote', onChange: this.updateInput.bind(this, 'quote'), className: 'form-control' }),
+	                        _react2['default'].createElement('input', { placeholder: 'Quote Maker', type: 'text', name: 'quoteMaker', onChange: this.updateInput.bind(this, 'quoteMaker'), className: 'form-control' })
 	                    );
 	                    break;
 	                case 'text_section':
 	                    return _react2['default'].createElement(
 	                        'div',
 	                        null,
-	                        _react2['default'].createElement('textarea', { name: 'text', cols: '90', rows: '8' })
+	                        _react2['default'].createElement('textarea', { name: 'text', cols: '90', rows: '8', ref: 'dashboardInput' })
 	                    );
 	                    break;
 	                default:
@@ -392,6 +410,37 @@
 	                    break;
 	            }
 	        }
+
+	        // selectFields(type)
+	        // {
+	        //     var contents = {};
+	        //     switch(type) {
+	        //         case 'title':
+	        //             contents['title'] = this.state.title;
+	        //             break;
+	        //         case 'author':
+	        //             contents['author'] = this.state.author;
+	        //             break;
+	        //         case 'image':
+	        //             contents['url'] = this.state.imageUrl;
+	        //             contents['caption'] = this.state.imageCaption;
+	        //             contents['credit'] = this.state.imageCredit;
+	        //             break;
+	        //         case 'quote':
+	        //             contents['quote'] = this.state.quote;
+	        //             contents['quoteMaker'] = this.state.quoteMaker;
+	        //             break;
+	        //         case 'text_section':
+	        //             return(
+	        //                 <div><textarea name="text" cols="90" rows="8"></textarea></div>
+	        //             );
+	        //             break;
+	        //         default:
+	        //             return(<p>nothing</p>);
+	        //             break;
+	        //     }
+	        //     return contents;
+	        // }
 	    }]);
 
 	    return Dashboard;
