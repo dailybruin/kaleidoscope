@@ -310,31 +310,31 @@
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "title", autofocus: "autofocus", value: "title", className: "form-control" })
+	                        _react2["default"].createElement("input", { type: "text", name: "title", className: "form-control" })
 	                    );
 	                    break;
 	                case 'author':
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "authors", required: "required", autofocus: "autofocus", value: "author", className: "form-control" })
+	                        _react2["default"].createElement("input", { type: "text", name: "authors", required: "required", className: "form-control" })
 	                    );
 	                    break;
 	                case 'image':
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "image", autofocus: "autofocus", value: "img", className: "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "credit", required: "required", value: "credit", className: "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "caption", required: "required", value: "caption", className: "form-control" })
+	                        _react2["default"].createElement("input", { type: "text", name: "image", className: "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "credit", className: "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "caption", className: "form-control" })
 	                    );
 	                    break;
 	                case 'quote':
 	                    return _react2["default"].createElement(
 	                        "div",
 	                        null,
-	                        _react2["default"].createElement("input", { type: "text", name: "quote", required: "required", value: "quote", className: "form-control" }),
-	                        _react2["default"].createElement("input", { type: "text", name: "quoteMaker", required: "required", value: "quote maker", className: "form-control" })
+	                        _react2["default"].createElement("input", { type: "text", name: "quote", className: "form-control" }),
+	                        _react2["default"].createElement("input", { type: "text", name: "quoteMaker", className: "form-control" })
 	                    );
 	                    break;
 	                case 'text_section':

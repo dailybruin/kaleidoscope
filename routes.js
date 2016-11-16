@@ -73,7 +73,7 @@ function genPage(reqBody)
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('index', { title: 'Home' });
+        res.render('index', { title: 'Dashboard' });
     });
 
     /* GET saved pages */
