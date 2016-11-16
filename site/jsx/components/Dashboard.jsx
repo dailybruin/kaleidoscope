@@ -1,12 +1,25 @@
 import React from 'react';
 
+var Contents = 
+{
+    type = "",
+    author = "",
+    title = "",
+    subheading = "",
+    text = "",
+    quote = "",
+    quoteMaker = "",
+    image = "",
+    imageCaption = ""
+};
+
 class Dashboard extends React.Component {
     static propTypes = {
         componentTypes: React.PropTypes.array.isRequired
     }
     constructor(props) {
         super(props);
-        this.state = {selectedComponent: this.props.componentTypes[0]};
+        this.state = {selectedComponent: this.props.componentTypes[0], contents: Contents};
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -37,6 +50,7 @@ class Dashboard extends React.Component {
     handleDropdownChange(event) {
         this.setState({selectedComponent: event.target.value});
         // {this.showInputForComponentType(event.target.value)}
+        this.setState({contents.type: event.target.value})
     }
 
     handleSubmit(event) {
@@ -46,6 +60,7 @@ class Dashboard extends React.Component {
         $.ajax({
           url: '/store',
           dataType: 'json',
+          data: contentsMap;
           type: 'POST'
         });
     }
@@ -89,6 +104,22 @@ class Dashboard extends React.Component {
                 return(<p>nothing</p>);
                 break;
         }
+    }
+
+    clearContents()
+    {
+        Contents = 
+        {
+            type = "",
+            author = "",
+            title = "",
+            subheading = "",
+            text = "",
+            quote = "",
+            quoteMaker = "",
+            image = "",
+            imageCaption = ""
+        };
     }
 };
 
