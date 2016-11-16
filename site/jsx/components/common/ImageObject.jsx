@@ -8,7 +8,7 @@ class ImageObject extends React.Component {
 		caption: React.PropTypes.string.isRequired
 	}
 
-	render()
+	render(){
 		return (
 			<div>
 				<img src="{ props.url }" /> 
