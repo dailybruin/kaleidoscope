@@ -61,6 +61,25 @@ class Dashboard extends React.Component {
     handleSubmit(event) {
         console.log('A name was submitted: ' + this.state.data.type);
         event.preventDefault();
+        console.log(this.state.data);
+        console.log('state before dispatch');
+        console.log(this.props.store.getState()._dashboard);
+        switch (this.state.data.type) {
+            case "image":
+                const data = this.state.data;
+                console.log("we got an image ");
+                this.props.store.dispatch(addImage(
+                        data.imageUrl,
+                        data.caption,
+                        data.credit,
+                    ));
+                console.log('state after dispatch');
+                const store = this.props.store.getState()._dashboard;
+                console.log(store);
+                break;
+            default:
+                console.log("checkback later");
+        }
 
         $.ajax({
           url: '/store',

@@ -7,7 +7,8 @@ export function  _dashboard(state = initialState, action) {
                 message: action.value
             }
          case 'ADD_IMAGE':
-            console.log('In add iamge dispatch');
+            console.log('In add image dispatch');
+            console.log(action);
             return (Object.assign({}, state, {
                 src: action.src,
                 credit: action.credit,

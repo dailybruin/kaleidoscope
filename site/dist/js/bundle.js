@@ -339,6 +339,21 @@
 	        value: function handleSubmit(event) {
 	            console.log('A name was submitted: ' + this.state.data.type);
 	            event.preventDefault();
+	            console.log(this.state.data);
+	            console.log('state before dispatch');
+	            console.log(this.props.store.getState()._dashboard);
+	            switch (this.state.data.type) {
+	                case "image":
+	                    var data = this.state.data;
+	                    console.log("we got an image ");
+	                    this.props.store.dispatch(addImage(data.imageUrl, data.caption, data.credit));
+	                    console.log('state after dispatch');
+	                    var store = this.props.store.getState()._dashboard;
+	                    console.log(store);
+	                    break;
+	                default:
+	                    console.log("checkback later");
+	            }
 
 	            $.ajax({
 	                url: '/store',
@@ -2802,7 +2817,8 @@
 	                message: action.value
 	            });
 	        case 'ADD_IMAGE':
-	            console.log('In add iamge dispatch');
+	            console.log('In add image dispatch');
+	            console.log(action);
 	            return Object.assign({}, state, {
 	                src: action.src,
 	                credit: action.credit,
