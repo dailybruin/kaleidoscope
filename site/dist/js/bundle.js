@@ -148,7 +148,9 @@
 	                'div',
 	                null,
 	                _react2['default'].createElement('img', { src: test_url }),
-	                _react2['default'].createElement(_commonPage2['default'], { title: 'Article 1',
+	                _react2['default'].createElement(_commonPage2['default'], {
+	                    store: this.props.store,
+	                    title: 'Article 1',
 	                    author: 'John Smith',
 	                    quote: [{ 'quote': 'inspirational BS', 'quoteMaker': 'John Smith' }],
 	                    image: [{ 'url': 'http://dailybruin.com/images/2016/11/web.ae_.heramb.WH_-640x426.jpg', 'credit': 'Wesley Hardin/Daily Bruin', 'caption': 'Second-year biology student Cole Heramb created both the artwork and the music for his album "Red EP." ' }] }),
@@ -198,6 +200,8 @@
 
 	var _QuoteObject2 = _interopRequireDefault(_QuoteObject);
 
+	var _reactRedux = __webpack_require__(6);
+
 	// Super basic component that takes name and age and then prints it
 
 	var Page = (function (_React$Component) {
@@ -219,6 +223,11 @@
 	        _classCallCheck(this, Page);
 
 	        _get(Object.getPrototypeOf(Page.prototype), 'constructor', this).call(this, props);
+	        // if (props.store === null) {
+	        // 	this.setState({success:"nah"});
+	        // }
+	        // else
+	        // 	this.setState({success:"YAS"});
 	    }
 
 	    _createClass(Page, [{
@@ -230,6 +239,7 @@
 	                _react2['default'].createElement(
 	                    'p',
 	                    null,
+	                    _react2['default'].createElement('br', null),
 	                    'Title: ',
 	                    this.props.title,
 	                    _react2['default'].createElement('br', null),
@@ -255,7 +265,19 @@
 
 	;
 
-	exports['default'] = Page;
+	var mapStateToProps = function mapStateToProps(state) {
+	    console.log('called mapStateToProps from Page Component');
+	    console.log(state);
+	    return {
+	        src: "https://img.ifcdn.com/images/14f59b1caa7b63fac65ccc186dcd6f555bb1a11893e9ac273dd09339796efe82_3.jpg",
+	        caption: "N/A",
+	        credit: "None"
+	    };
+	};
+
+	var ConnnectedPage = (0, _reactRedux.connect)(mapStateToProps)(Page);
+
+	exports['default'] = ConnnectedPage;
 	module.exports = exports['default'];
 
 /***/ },
@@ -365,7 +387,7 @@
 	            event.preventDefault();
 	            console.log(this.state.data);
 	            console.log('state before dispatch');
-	            console.log(this.props.store.getState()._dashboard);
+	            console.log(this.props.store.getState());
 	            switch (this.state.data.type) {
 	                case "image":
 	                    var data = this.state.data;
@@ -373,7 +395,7 @@
 	                    this.props.store.dispatch(addImage(data.imageUrl, data.caption, data.credit));
 	                    console.log('state after dispatch');
 	                    var store = this.props.store.getState()._dashboard;
-	                    console.log(store);
+	                    console.log(this.props.store.getState());
 	                    break;
 	                default:
 	                    console.log("checkback later");
@@ -487,11 +509,12 @@
 
 	;
 
-	var mapStateToProps = function mapStateToProps(props) {
+	var mapStateToProps = function mapStateToProps(state) {
+	    console.log('called mapStateToProps');
 	    return {
-	        src: "",
-	        caption: "none",
-	        credit: "N/A"
+	        src: state._dashboard.src,
+	        caption: state._dashboard.caption,
+	        credit: state._dashboard.credit
 	    };
 	};
 
@@ -2819,7 +2842,7 @@
 
 /***/ },
 /* 48 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2830,6 +2853,17 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 	exports._dashboard = _dashboard;
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ImageObject = __webpack_require__(49);
+
+	var _ImageObject2 = _interopRequireDefault(_ImageObject);
+
 	var initialState = {};
 
 	function _dashboard(state, action) {
@@ -2843,6 +2877,11 @@
 	        case 'ADD_IMAGE':
 	            console.log('In add image dispatch');
 	            console.log(action);
+	            var image = _react2['default'].createElement(_ImageObject2['default'], {
+	                url: action.src,
+	                credit: action.credit,
+	                caption: action.caption
+	            });
 	            return Object.assign({}, state, {
 	                src: action.src,
 	                credit: action.credit,

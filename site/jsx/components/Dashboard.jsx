@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
         event.preventDefault();
         console.log(this.state.data);
         console.log('state before dispatch');
-        console.log(this.props.store.getState()._dashboard);
+        console.log(this.props.store.getState());
         switch (this.state.data.type) {
             case "image":
                 const data = this.state.data;
@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
                     ));
                 console.log('state after dispatch');
                 const store = this.props.store.getState()._dashboard;
-                console.log(store);
+                console.log(this.props.store.getState());
                 break;
             default:
                 console.log("checkback later");
@@ -173,11 +173,12 @@ class Dashboard extends React.Component {
     // }
 };
 
-var mapStateToProps = (props) => {
-    return {
-        src:"",
-        caption: "none",
-        credit: "N/A"
+const mapStateToProps = (state) => {
+    console.log('called mapStateToProps');
+        return {
+        src:state._dashboard.src,
+        caption: state._dashboard.caption,
+        credit: state._dashboard.credit,
     }
 }
 
