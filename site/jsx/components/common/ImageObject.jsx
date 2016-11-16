@@ -8,19 +8,20 @@ class ImageObject extends React.Component {
 		caption: React.PropTypes.string.isRequired
 	}
 
+	constructor(props){
+		super(props);
+	}
+
 	render(){
 		return (
 			<div>
-				<img src="{ props.url }" /> 
-				<p>Caption: { props.caption }</p>
-				<p>Credit: { props.credit } </p>
+				<img src={ this.props.url } /> 
+				<p className="img-caption">Caption: { this.props.caption }</p>
+				<p>Credit: { this.props.credit } </p>
 			</div>
 		);
 	}
 
-	constructor(props){
-		super(props);
-	}
 }
 
 export default ImageObject;

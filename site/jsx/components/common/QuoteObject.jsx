@@ -7,17 +7,17 @@ class QuoteObject extends React.Component{
 		quoteMaker: React.PropTypes.string.isRequired
 	}
 
-	render()
-		return (
-			<div>
-				<p>"{ props.quote }"</p>
-				<p>-{ props.quoteMaker }</p>
-			</div>
-		);
-	}
-
 	constructor(props){
 		super(props);
+	}
+
+	render(){
+		return (
+			<div>
+				<p className="quote">"{ this.props.quote }"</p>
+				<p>-{ this.props.quoteMaker }</p>
+			</div>
+		);
 	}
 
 }

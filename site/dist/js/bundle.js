@@ -100,7 +100,7 @@
 
 	var _commonPage2 = _interopRequireDefault(_commonPage);
 
-	var _Dashboard = __webpack_require__(5);
+	var _Dashboard = __webpack_require__(7);
 
 	var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -121,7 +121,10 @@
 	            return _react2['default'].createElement(
 	                'div',
 	                null,
-	                _react2['default'].createElement(_commonPage2['default'], { title: 'Article 1', author: 'John Smith' }),
+	                _react2['default'].createElement(_commonPage2['default'], { title: 'Article 1',
+	                    author: 'John Smith',
+	                    quote: [{ 'quote': 'inspirational BS', 'quoteMaker': 'John Smith' }],
+	                    image: [{ 'url': 'http://dailybruin.com/images/2016/11/web.ae_.heramb.WH_-640x426.jpg', 'credit': 'Wesley Hardin/Daily Bruin', 'caption': 'Second-year biology student Cole Heramb created both the artwork and the music for his album "Red EP." ' }] }),
 	                _react2['default'].createElement('hr', null),
 	                _react2['default'].createElement(_Dashboard2['default'], { componentTypes: ['image', 'title', 'cover image', 'author', 'quote', 'text section'] })
 	            );
@@ -140,10 +143,102 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ImageObject = __webpack_require__(5);
+
+	var _ImageObject2 = _interopRequireDefault(_ImageObject);
+
+	var _QuoteObject = __webpack_require__(6);
+
+	var _QuoteObject2 = _interopRequireDefault(_QuoteObject);
+
+	// Super basic component that takes name and age and then prints it
+
+	var Page = (function (_React$Component) {
+	    _inherits(Page, _React$Component);
+
+	    _createClass(Page, null, [{
+	        key: 'propTypes',
+	        value: {
+	            title: _react2['default'].PropTypes.string.isRequired,
+	            author: _react2['default'].PropTypes.string.isRequired,
+	            image: _react2['default'].PropTypes.array.isRequired,
+	            quote: _react2['default'].PropTypes.array.isRequired,
+	            text: _react2['default'].PropTypes.string
+	        },
+	        enumerable: true
+	    }]);
+
+	    function Page(props) {
+	        _classCallCheck(this, Page);
+
+	        _get(Object.getPrototypeOf(Page.prototype), 'constructor', this).call(this, props);
+	    }
+
+	    _createClass(Page, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2['default'].createElement(
+	                'div',
+	                { className: 'Page' },
+	                _react2['default'].createElement(
+	                    'p',
+	                    null,
+	                    'Title: ',
+	                    this.props.title,
+	                    _react2['default'].createElement('br', null),
+	                    'Author: ',
+	                    this.props.author,
+	                    _react2['default'].createElement('br', null),
+	                    'Quote: ',
+	                    this.props.quote.map(function (qo) {
+	                        return _react2['default'].createElement(_QuoteObject2['default'], { quote: qo['quote'], quoteMaker: qo['quoteMaker'] });
+	                    }),
+	                    _react2['default'].createElement('br', null),
+	                    'Image: ',
+	                    this.props.image.map(function (im) {
+	                        return _react2['default'].createElement(_ImageObject2['default'], { url: im['url'], credit: im['credit'], caption: im['caption'] });
+	                    })
+	                )
+	            );
+	        }
+	    }]);
+
+	    return Page;
+	})(_react2['default'].Component);
+
+	;
+
+	exports['default'] = Page;
+	module.exports = exports['default'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+		value: true
 	});
 
 	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -160,55 +255,128 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	// Super basic component that takes name and age and then prints it
+	var ImageObject = (function (_React$Component) {
+		_inherits(ImageObject, _React$Component);
 
-	var Page = (function (_React$Component) {
-	    _inherits(Page, _React$Component);
+		_createClass(ImageObject, null, [{
+			key: "propTypes",
+			value: {
+				url: _react2["default"].PropTypes.string.isRequired,
+				credit: _react2["default"].PropTypes.string.isRequired,
+				caption: _react2["default"].PropTypes.string.isRequired
+			},
+			enumerable: true
+		}]);
 
-	    _createClass(Page, null, [{
-	        key: "propTypes",
-	        value: {
-	            title: _react2["default"].PropTypes.string.isRequired,
-	            author: _react2["default"].PropTypes.string.isRequired
-	        },
-	        enumerable: true
-	    }]);
+		function ImageObject(props) {
+			_classCallCheck(this, ImageObject);
 
-	    function Page(props) {
-	        _classCallCheck(this, Page);
+			_get(Object.getPrototypeOf(ImageObject.prototype), "constructor", this).call(this, props);
+		}
 
-	        _get(Object.getPrototypeOf(Page.prototype), "constructor", this).call(this, props);
-	    }
+		_createClass(ImageObject, [{
+			key: "render",
+			value: function render() {
+				return _react2["default"].createElement(
+					"div",
+					null,
+					_react2["default"].createElement("img", { src: this.props.url }),
+					_react2["default"].createElement(
+						"p",
+						{ className: "img-caption" },
+						"Caption: ",
+						this.props.caption
+					),
+					_react2["default"].createElement(
+						"p",
+						null,
+						"Credit: ",
+						this.props.credit,
+						" "
+					)
+				);
+			}
+		}]);
 
-	    _createClass(Page, [{
-	        key: "render",
-	        value: function render() {
-	            return _react2["default"].createElement(
-	                "div",
-	                { className: "Page" },
-	                _react2["default"].createElement(
-	                    "p",
-	                    null,
-	                    "Title: ",
-	                    this.props.title,
-	                    _react2["default"].createElement("br", null),
-	                    "Author: ",
-	                    this.props.author
-	                )
-	            );
-	        }
-	    }]);
-
-	    return Page;
+		return ImageObject;
 	})(_react2["default"].Component);
 
-	;
-
-	exports["default"] = Page;
+	exports["default"] = ImageObject;
 	module.exports = exports["default"];
 
 /***/ },
-/* 5 */
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var QuoteObject = (function (_React$Component) {
+		_inherits(QuoteObject, _React$Component);
+
+		_createClass(QuoteObject, null, [{
+			key: "propTypes",
+			value: {
+				quote: _react2["default"].PropTypes.string.isRequired,
+				quoteMaker: _react2["default"].PropTypes.string.isRequired
+			},
+			enumerable: true
+		}]);
+
+		function QuoteObject(props) {
+			_classCallCheck(this, QuoteObject);
+
+			_get(Object.getPrototypeOf(QuoteObject.prototype), "constructor", this).call(this, props);
+		}
+
+		_createClass(QuoteObject, [{
+			key: "render",
+			value: function render() {
+				return _react2["default"].createElement(
+					"div",
+					null,
+					_react2["default"].createElement(
+						"p",
+						{ className: "quote" },
+						"\"",
+						this.props.quote,
+						"\""
+					),
+					_react2["default"].createElement(
+						"p",
+						null,
+						"-",
+						this.props.quoteMaker
+					)
+				);
+			}
+		}]);
+
+		return QuoteObject;
+	})(_react2["default"].Component);
+
+	exports["default"] = QuoteObject;
+	module.exports = exports["default"];
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
