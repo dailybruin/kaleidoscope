@@ -6,70 +6,7 @@ var express = require('express');
 var Page = require('./site/model/page');
 var Image = require('./site/model/imageObject');
 var Quote = require('./site/model/quoteObject');
-
-function genImage(Images, ImageCaptions, ImageType)
-{
-	var ImagesArray = Images.split(",");
-	var ImageCaptionsArray = ImageCaptions.split(",");
-	if (ImagesArray.length != ImageCaptionsArray.length)
-	{
-		console.log('Length of Image is different from length of Image Captions, type: ');
-		console.log(ImageType)
-	}
-	
-	var ImageVector = [];
-	for (var i = 0; i < ImagesArray.length; i++)
-	{
-		var image = new Image();
-		image.url = ImagesArray[i];
-		image.caption = ImageCaptionsArray[i];
-		ImageVector.push(image);
-	}
-	return ImageVector;
-}
-
-function genPage(reqBody)
-{
-	var page = new Page();
-	// console.log(reqBody);
-	page.authors = reqBody.authors.split(',');;
-	page.title = reqBody.title;
-	page.subheading = reqBody.subheading;
-	
-	page.text = reqBody.text.split("\n");
-
-	
-	//read quotes in to struct
-	var quotesArray = reqBody.quotes.split(",");
-	var quoteMakersArray = reqBody.quoteMakers.split(",");
-
-	if (quotesArray.length != quoteMakersArray.length)
-		console.log('Length of Quotes is different from length of Quote Makers');
-
-	var quotes = [];
-	for (var i = 0; i < quotesArray.length; i++)
-	{
-		var quoteEntry = new Quote();
-		quoteEntry.quote= quotesArray[i];
-		quoteEntry.quoteMaker = quoteMakersArray[i];
-		quotes.push(quoteEntry);
-	}
-	page.quotes = quotes;
-
-	page.sideImages = genImage(reqBody.sideImages, 
-							   reqBody.sideImageCaptions,
-							   'Side images');
-
-	page.mainImages = genImage(reqBody.mainImages, 
-							   reqBody.mainImageCaptions,
-							   'Main images');
-
-	page.coverPhoto = genImage([reqBody.cover], 
-							   [reqBody.coverCaption],
-							    'Cover image')[0];
-
-	return page;
-}
+var GenPage = new Page();
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
@@ -79,7 +16,7 @@ module.exports = function (app) {
     /* GET saved pages */
     app.get('/all', function(req, res) {
         var pages;
-        Page.find(function (err, pages) {
+        GenPage.find(function (err, pages) {
           if (err) return console.error(err);
           res.render('all', { pages: pages } );
         });
@@ -90,8 +27,65 @@ module.exports = function (app) {
 		res.render('dashboard');
     });
 
-    app.post('/store_page', function (req, res, next) {
-		var page = genPage(req.body);
+    app.post('/store_authors', function(req, res, next)
+    {
+    	GenPage.authors.push(req.body.authors);
+    });
+
+    app.post('/store_title', function(req, res, next)
+    {
+    	GenPage.title = req.body.title;
+    });
+
+    app.post('/store_subheading', function(req, res, next)
+    {
+		GenPage.subheading = req.body.subheading;
+    });
+
+    app.post('/store_text', function(req, res, next)
+    {
+		GenPage.text = req.body.text.split("\n");
+    });
+
+    app.post('/store_quotes', function(req, res, next)
+    {
+		var quoteEntry = new Quote();
+		quoteEntry.quote= quotesArray[i];
+		quoteEntry.quoteMaker = quoteMakersArray[i];
+		GenPage.quotes.push(quoteEntry);
+    });
+
+    app.post('/store_side_images', function(req, res, next)
+    {
+		var image = new Image();
+		image.url = reqBody.sideImages;
+		image.caption = reqBody.sideImageCaptions;
+		GenPage.sideImages.push(image);
+    });
+
+    app.post('/store_main_images', function(req, res, next)
+    {
+		var image = new Image();
+		image.url = reqBody.mainImages;
+		image.caption = reqBody.mainImageCaptions;
+		GenPage.mainImages.push(image);
+    });
+
+    app.post('/store_cover_image', function(req, res, next)
+    {
+		var image = new Image();
+		image.url = reqBody.cover;
+		image.caption = reqBody.coverCaption;
+		GenPage.coverPhoto = image;
+    });
+
+    app.post('/store', function(req, res, next) {
+    	console.log("react form was submitted");
+    });
+
+    app.post('/store_page', function (req, res, next)
+    {
+		var page = GenPage;
 
 		page.save(function (err) {
 			if (err) {

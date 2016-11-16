@@ -294,6 +294,12 @@
 	        value: function handleSubmit(event) {
 	            console.log('A name was submitted: ' + this.state.selectedComponent);
 	            event.preventDefault();
+
+	            $.ajax({
+	                url: '/store',
+	                dataType: 'json',
+	                type: 'POST'
+	            });
 	        }
 	    }, {
 	        key: "showInputForComponentType",
