@@ -21,7 +21,7 @@ export function  _dashboard(state = [], action) {
                 image
             ];
         case 'ADD_QUOTE':
-            const quote = <Quote quote={action.quote} quoteMaker={action.quoteMaker}/>;
+            const quote = <Quote quoteText={action.quoteText} quoteSource={action.quoteSource}/>;
             return [
                 ...state,
                 quote

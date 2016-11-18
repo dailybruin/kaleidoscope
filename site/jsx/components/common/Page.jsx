@@ -34,19 +34,6 @@ class Page extends React.Component {
                     Title: { this.props.title }
                     <br />
                     Author: { this.props.author }
-
-                    <br />
-                    Quote: { this.props.quote.map(function(qo){
-                            return <Quote quote={qo['quote']} quoteMaker={qo['quoteMaker']} />;
-                        })
-                    }
-
-                    <br />
-                    Image: { this.props.image.map(function(im){
-                            return <Image url={im['url']} credit={im['credit']} caption={im['caption']}/>;
-                        })
-                    }
-
                 </p>
             </div>
         );

@@ -241,17 +241,7 @@
 	                    this.props.title,
 	                    _react2['default'].createElement('br', null),
 	                    'Author: ',
-	                    this.props.author,
-	                    _react2['default'].createElement('br', null),
-	                    'Quote: ',
-	                    this.props.quote.map(function (qo) {
-	                        return _react2['default'].createElement(_Quote2['default'], { quote: qo['quote'], quoteMaker: qo['quoteMaker'] });
-	                    }),
-	                    _react2['default'].createElement('br', null),
-	                    'Image: ',
-	                    this.props.image.map(function (im) {
-	                        return _react2['default'].createElement(_Image2['default'], { url: im['url'], credit: im['credit'], caption: im['caption'] });
-	                    })
+	                    this.props.author
 	                )
 	            );
 	        }
@@ -376,8 +366,8 @@
 		_createClass(Quote, null, [{
 			key: "propTypes",
 			value: {
-				quote: _react2["default"].PropTypes.string.isRequired,
-				quoteMaker: _react2["default"].PropTypes.string.isRequired
+				quoteText: _react2["default"].PropTypes.string.isRequired,
+				quoteSource: _react2["default"].PropTypes.string.isRequired
 			},
 			enumerable: true
 		}]);
@@ -398,14 +388,14 @@
 						"p",
 						{ className: "quote" },
 						"\"",
-						this.props.quote,
+						this.props.quoteText,
 						"\""
 					),
 					_react2["default"].createElement(
 						"p",
 						null,
 						"-",
-						this.props.quoteMaker
+						this.props.quoteSource
 					)
 				);
 			}
@@ -2743,10 +2733,11 @@
 	            var data = this.state.data;
 	            switch (this.state.data.type) {
 	                case "image":
-	                    this.props.dispatch((0, _actions.addImage)(data.imageUrl, data.caption, data.credit));
+
+	                    this.props.dispatch((0, _actions.addImage)(data.imageUrl, data.imageCaption, data.imageCredit));
 	                    break;
 	                case "quote":
-	                    this.props.dispatch((0, _actions.addQuote)(data.quote, data.quoteMaker));
+	                    this.props.dispatch((0, _actions.addQuote)(data.quoteText, data.quoteSource));
 	                    break;
 	                default:
 	                    console.log("checkback later");
@@ -2908,8 +2899,8 @@
 	var addQuote = function addQuote(quote, quoteMaker) {
 	    return {
 	        type: 'ADD_QUOTE',
-	        quote: quote,
-	        quoteMaker: quoteMaker
+	        quoteText: quote,
+	        quoteSource: quoteMaker
 	    };
 	};
 	exports.addQuote = addQuote;
@@ -2987,7 +2978,7 @@
 	            });
 	            return [].concat(_toConsumableArray(state), [image]);
 	        case 'ADD_QUOTE':
-	            var quote = _react2['default'].createElement(_componentsCommonQuote2['default'], { quote: action.quote, quoteMaker: action.quoteMaker });
+	            var quote = _react2['default'].createElement(_componentsCommonQuote2['default'], { quoteText: action.quoteText, quoteSource: action.quoteSource });
 	            return [].concat(_toConsumableArray(state), [quote]);
 	        default:
 	            return state;

@@ -57,14 +57,15 @@ class Dashboard extends React.Component {
         const data = this.state.data;
         switch (this.state.data.type) {
             case "image":
+
                 this.props.dispatch(addImage(
                         data.imageUrl,
-                        data.caption,
-                        data.credit,
+                        data.imageCaption,
+                        data.imageCredit,
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(data.quote, data.quoteMaker));
+                this.props.dispatch(addQuote(data.quoteText, data.quoteSource));
                 break;
             default:
                 console.log("checkback later");

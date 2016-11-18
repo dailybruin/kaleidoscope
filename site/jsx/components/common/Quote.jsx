@@ -3,8 +3,8 @@ import React from 'react';
 class Quote extends React.Component{
 
 	static propTypes = {
-		quote: React.PropTypes.string.isRequired,
-		quoteMaker: React.PropTypes.string.isRequired
+		quoteText: React.PropTypes.string.isRequired,
+		quoteSource: React.PropTypes.string.isRequired
 	}
 
 	constructor(props){
@@ -14,8 +14,8 @@ class Quote extends React.Component{
 	render(){
 		return (
 			<div>
-				<p className="quote">"{ this.props.quote }"</p>
-				<p>-{ this.props.quoteMaker }</p>
+				<p className="quote">"{ this.props.quoteText }"</p>
+				<p>-{ this.props.quoteSource }</p>
 			</div>
 		);
 	}

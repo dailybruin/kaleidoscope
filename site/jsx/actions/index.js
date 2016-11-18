@@ -10,7 +10,7 @@ export const addImage = (src, credit, caption) => {
 export const addQuote = (quote, quoteMaker) => {
 	return {
 		type: 'ADD_QUOTE',
-		quote: quote,
-		quoteMaker: quoteMaker,
+		quoteText: quote,
+		quoteSource: quoteMaker,
 	}
 }
