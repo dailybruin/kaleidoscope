@@ -11,7 +11,6 @@ export function  _dashboard(state = [], action) {
                 message: action.value
             }
         case 'ADD_IMAGE':
-            console.log('In add image dispatch');
             const image = <Image
                                 url={action.src}
                                 credit={action.credit}

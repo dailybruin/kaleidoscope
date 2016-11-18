@@ -2859,6 +2859,7 @@
 
 	;
 
+	// this has no purpose at the moment since dasboard will not change typically
 	var mapStateToProps = function mapStateToProps(state) {
 	    return {
 	        src: state._dashboard.src,
@@ -2968,7 +2969,6 @@
 	                message: action.value
 	            });
 	        case 'ADD_IMAGE':
-	            console.log('In add image dispatch');
 	            var image = _react2['default'].createElement(_componentsCommonImage2['default'], {
 	                url: action.src,
 	                credit: action.credit,

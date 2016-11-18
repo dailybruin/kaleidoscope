@@ -161,6 +161,7 @@ class Dashboard extends React.Component {
     // }
 };
 
+// this has no purpose at the moment since dasboard will not change typically
 const mapStateToProps = (state) => {
         return {
         src:state._dashboard.src,
