@@ -5,8 +5,8 @@ import {Provider } from 'react-redux'
 import { connect} from 'react-redux';
 
 
-const store = createStore()
-
+const store = createStore();
+console.log('what store looks like in app.jsx');
 console.log(store);
 
 // Create app component and put it div#app. This initializes React.
