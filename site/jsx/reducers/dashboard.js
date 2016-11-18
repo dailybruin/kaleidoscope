@@ -1,5 +1,5 @@
 import React from 'react';
-import ImageObject from './ImageObject';
+import ImageObject from '../components/common/ImageObject';
 
 
 export function  _dashboard(state = [], action) {

@@ -1,16 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {addImage} from '../actions';
 
-
-
-var addImage = function (src, credit, caption) {
-    return {
-        type: 'ADD_IMAGE',
-        src: src,
-        credit: credit,
-        caption: caption,
-    }
-}
 
 class Dashboard extends React.Component {
     static propTypes = {

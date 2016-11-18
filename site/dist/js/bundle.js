@@ -63,27 +63,22 @@
 
 	var _componentsApp2 = _interopRequireDefault(_componentsApp);
 
-	var _componentsCommonCreateStore = __webpack_require__(49);
+	// import createStore from './components/common/create-store'
 
-	var _componentsCommonCreateStore2 = _interopRequireDefault(_componentsCommonCreateStore);
+	var _reducersIndex = __webpack_require__(52);
+
+	var _reducersIndex2 = _interopRequireDefault(_reducersIndex);
 
 	var _reactRedux = __webpack_require__(7);
 
-	var store = (0, _componentsCommonCreateStore2['default'])();
-	console.log('what store looks like in app.jsx');
-	console.log(store);
-
-	// Create app component and put it div#app. This initializes React.
-	// React.render(
-	// 		<Provider store={store}>
-	// 		<App store={store}/>, document.getElementById('app')
-	// 		</Provider>
-	// );
+	var store = (0, _reducersIndex2['default'])();
+	// console.log('what store looks like in app.jsx');
+	// console.log(store);
 
 	_react2['default'].render(_react2['default'].createElement(
-			_reactRedux.Provider,
-			{ store: store },
-			_react2['default'].createElement(_componentsApp2['default'], { store: store })
+		_reactRedux.Provider,
+		{ store: store },
+		_react2['default'].createElement(_componentsApp2['default'], { store: store })
 	), document.getElementById('app'));
 
 /***/ },
@@ -2674,14 +2669,7 @@
 
 	var _reactRedux = __webpack_require__(7);
 
-	var addImage = function addImage(src, credit, caption) {
-	    return {
-	        type: 'ADD_IMAGE',
-	        src: src,
-	        credit: credit,
-	        caption: caption
-	    };
-	};
+	var _actions = __webpack_require__(49);
 
 	var Dashboard = (function (_React$Component) {
 	    _inherits(Dashboard, _React$Component);
@@ -2759,7 +2747,7 @@
 	                case "image":
 	                    var data = this.state.data;
 	                    console.log("ABOUT TO DISPATCH");
-	                    this.props.dispatch(addImage(data.imageUrl, data.caption, data.credit));
+	                    this.props.dispatch((0, _actions.addImage)(data.imageUrl, data.caption, data.credit));
 	                    console.log('state after dispatch');
 	                    var store = this.props.store.getState()._dashboard;
 	                    console.log(this.props.store.getState());
@@ -2949,6 +2937,27 @@
 
 /***/ },
 /* 49 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+	    value: true
+	});
+	var addImage = function addImage(src, credit, caption) {
+	    return {
+	        type: 'ADD_IMAGE',
+	        src: src,
+	        credit: credit,
+	        caption: caption
+	    };
+	};
+	exports.addImage = addImage;
+
+/***/ },
+/* 50 */,
+/* 51 */,
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2961,9 +2970,9 @@
 
 	var _redux = __webpack_require__(15);
 
-	var _reducers = __webpack_require__(50);
+	var _dashboard = __webpack_require__(53);
 
-	var reducers = _interopRequireWildcard(_reducers);
+	var reducers = _interopRequireWildcard(_dashboard);
 
 	exports['default'] = function () {
 	    var reducer = (0, _redux.combineReducers)(reducers);
@@ -2975,7 +2984,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 50 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2996,9 +3005,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ImageObject = __webpack_require__(5);
+	var _componentsCommonImageObject = __webpack_require__(5);
 
-	var _ImageObject2 = _interopRequireDefault(_ImageObject);
+	var _componentsCommonImageObject2 = _interopRequireDefault(_componentsCommonImageObject);
 
 	function _dashboard(state, action) {
 	    if (state === undefined) state = [];
@@ -3010,7 +3019,7 @@
 	            });
 	        case 'ADD_IMAGE':
 	            console.log('In add image dispatch');
-	            var image = _react2['default'].createElement(_ImageObject2['default'], {
+	            var image = _react2['default'].createElement(_componentsCommonImageObject2['default'], {
 	                url: action.src,
 	                credit: action.credit,
 	                caption: action.caption
