@@ -219,17 +219,6 @@
 	        _classCallCheck(this, Page);
 
 	        _get(Object.getPrototypeOf(Page.prototype), 'constructor', this).call(this, props);
-	        console.log(this.props);
-	        var check = this.props.store.getState()._dashboard.caption;
-	        if (check === null || check === undefined) {
-	            console.log(this.props.store.getState()._dashboard);
-	            console.log('nah');
-	            this.state = { success: "nah" };
-	        } else {
-	            console.log(this.props.store.getState()._dashboard);
-	            console.log('yah');
-	            this.state = { success: "YAS" };
-	        }
 	    }
 
 	    _createClass(Page, [{
@@ -239,20 +228,21 @@
 	            var src = "";
 	            var credit = "";
 	            var check1 = this.props.store.getState()._dashboard;
+	            console.log('in page render');
+	            console.log(this.props.store.getState());
 	            if (check1.caption !== undefined && check1.caption !== null) {
 	                caption = check1.caption;
 	                credit = check1.credit;
 	                src = check1.src;
 	            }
+
 	            return _react2['default'].createElement(
 	                'div',
 	                { className: 'Page' },
 	                _react2['default'].createElement(
 	                    'p',
 	                    null,
-	                    src,
-	                    caption,
-	                    credit,
+	                    this.props.store.getState()._dashboard,
 	                    _react2['default'].createElement('br', null),
 	                    'Title: ',
 	                    this.props.title,
@@ -281,11 +271,8 @@
 
 	var mapStateToProps = function mapStateToProps(state) {
 	    console.log('called mapStateToProps from Page Component');
-	    console.log(state);
 	    return {
-	        caption: state._dashboard.caption,
-	        credit: state._dashboard.credit,
-	        src: state._dashboard.src
+	        components: state._dashboard
 	    };
 	};
 
@@ -3003,6 +2990,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
 	var _react = __webpack_require__(2);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -3012,7 +3001,7 @@
 	var _ImageObject2 = _interopRequireDefault(_ImageObject);
 
 	function _dashboard(state, action) {
-	    if (state === undefined) state = {};
+	    if (state === undefined) state = [];
 
 	    switch (action.type) {
 	        case 'ADD_NEW_COMPONENT':
@@ -3026,22 +3015,7 @@
 	                credit: action.credit,
 	                caption: action.caption
 	            });
-	            var product = Object.assign({}, state, {
-	                src: action.src,
-	                credit: action.credit,
-	                caption: action.caption
-	            });
-	            console.log('looking at state before modifying');
-	            console.log(state);
-	            console.log('looking at what dispatch returns');
-	            console.log(product);
-	            return product;
-	        // return (Object.assign({}, state, {
-	        //     src: action.src,
-	        //     credit: action.credit,
-	        //     caption: action.caption,
-	        // }));
-
+	            return [].concat(_toConsumableArray(state), [image]);
 	        default:
 	            return state;
 	    }

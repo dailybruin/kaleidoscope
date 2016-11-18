@@ -14,36 +14,24 @@ class Page extends React.Component {
     }
     constructor(props) {
         super(props);
-        console.log(this.props);
-        var check = this.props.store.getState()._dashboard.caption;
-        if (check=== null || check === undefined) {
-        	console.log(this.props.store.getState()._dashboard)
-        	console.log('nah');
-        	this.state={success:"nah"};
-        }
-        else {
-        	console.log(this.props.store.getState()._dashboard)
-        	console.log('yah');
-        	this.state={success:"YAS"};
-        }
-
     }
     render() {
     	let caption = "";
     	let src = "";
     	let credit ="";
     	var check1 = this.props.store.getState()._dashboard;
+    	console.log('in page render');
+    	console.log(this.props.store.getState())
     	if (check1.caption !== undefined && check1.caption !== null){
     		 caption= check1.caption;
     		 credit = check1.credit;
     		 src = check1.src;
     	}
+
         return (
             <div className="Page">
                 <p>
-                	{src}
-                	{caption}
-                	{credit}
+                	{this.props.store.getState()._dashboard}
                 	<br />
                     Title: { this.props.title }
                     <br />
@@ -69,11 +57,8 @@ class Page extends React.Component {
 
 const mapStateToProps = (state) => {
 	console.log('called mapStateToProps from Page Component');
-	console.log(state);
 	return {
-		caption: state._dashboard.caption,
-		credit: state._dashboard.credit,
-		src: state._dashboard.src,
+		components: state._dashboard
 	}
 }
 
