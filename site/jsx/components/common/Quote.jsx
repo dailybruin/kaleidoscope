@@ -1,6 +1,6 @@
 import React from 'react';
 
-class QuoteObject extends React.Component{
+class Quote extends React.Component{
 
 	static propTypes = {
 		quote: React.PropTypes.string.isRequired,
@@ -22,4 +22,4 @@ class QuoteObject extends React.Component{
 
 }
 
-export default QuoteObject;
+export default Quote;

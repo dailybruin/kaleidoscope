@@ -1,5 +1,6 @@
 import React from 'react';
-import ImageObject from '../components/common/ImageObject';
+import Image from '../components/common/Image';
+import Quote from '../components/common/Quote';
 
 
 export function  _dashboard(state = [], action) {
@@ -9,9 +10,9 @@ export function  _dashboard(state = [], action) {
                 ...state,
                 message: action.value
             }
-         case 'ADD_IMAGE':
+        case 'ADD_IMAGE':
             console.log('In add image dispatch');
-            const image = <ImageObject
+            const image = <Image
                                 url={action.src}
                                 credit={action.credit}
                                 caption={action.caption}
@@ -19,6 +20,12 @@ export function  _dashboard(state = [], action) {
             return [
                 ...state,
                 image
+            ];
+        case 'ADD_QUOTE':
+            const quote = <Quote quote={action.quote} quoteMaker={action.quoteMaker}/>;
+            return [
+                ...state,
+                quote
             ];
         default:
             return state;

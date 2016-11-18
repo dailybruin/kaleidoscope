@@ -65,7 +65,7 @@
 
 	// import createStore from './components/common/create-store'
 
-	var _reducersIndex = __webpack_require__(52);
+	var _reducersIndex = __webpack_require__(50);
 
 	var _reducersIndex2 = _interopRequireDefault(_reducersIndex);
 
@@ -183,13 +183,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ImageObject = __webpack_require__(5);
+	var _Image = __webpack_require__(5);
 
-	var _ImageObject2 = _interopRequireDefault(_ImageObject);
+	var _Image2 = _interopRequireDefault(_Image);
 
-	var _QuoteObject = __webpack_require__(6);
+	var _Quote = __webpack_require__(6);
 
-	var _QuoteObject2 = _interopRequireDefault(_QuoteObject);
+	var _Quote2 = _interopRequireDefault(_Quote);
 
 	var _reactRedux = __webpack_require__(7);
 
@@ -245,12 +245,12 @@
 	                    _react2['default'].createElement('br', null),
 	                    'Quote: ',
 	                    this.props.quote.map(function (qo) {
-	                        return _react2['default'].createElement(_QuoteObject2['default'], { quote: qo['quote'], quoteMaker: qo['quoteMaker'] });
+	                        return _react2['default'].createElement(_Quote2['default'], { quote: qo['quote'], quoteMaker: qo['quoteMaker'] });
 	                    }),
 	                    _react2['default'].createElement('br', null),
 	                    'Image: ',
 	                    this.props.image.map(function (im) {
-	                        return _react2['default'].createElement(_ImageObject2['default'], { url: im['url'], credit: im['credit'], caption: im['caption'] });
+	                        return _react2['default'].createElement(_Image2['default'], { url: im['url'], credit: im['credit'], caption: im['caption'] });
 	                    })
 	                )
 	            );
@@ -297,10 +297,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var ImageObject = (function (_React$Component) {
-		_inherits(ImageObject, _React$Component);
+	var Image = (function (_React$Component) {
+		_inherits(Image, _React$Component);
 
-		_createClass(ImageObject, null, [{
+		_createClass(Image, null, [{
 			key: "propTypes",
 			value: {
 				url: _react2["default"].PropTypes.string.isRequired,
@@ -310,13 +310,13 @@
 			enumerable: true
 		}]);
 
-		function ImageObject(props) {
-			_classCallCheck(this, ImageObject);
+		function Image(props) {
+			_classCallCheck(this, Image);
 
-			_get(Object.getPrototypeOf(ImageObject.prototype), "constructor", this).call(this, props);
+			_get(Object.getPrototypeOf(Image.prototype), "constructor", this).call(this, props);
 		}
 
-		_createClass(ImageObject, [{
+		_createClass(Image, [{
 			key: "render",
 			value: function render() {
 				return _react2["default"].createElement(
@@ -340,10 +340,10 @@
 			}
 		}]);
 
-		return ImageObject;
+		return Image;
 	})(_react2["default"].Component);
 
-	exports["default"] = ImageObject;
+	exports["default"] = Image;
 	module.exports = exports["default"];
 
 /***/ },
@@ -370,10 +370,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var QuoteObject = (function (_React$Component) {
-		_inherits(QuoteObject, _React$Component);
+	var Quote = (function (_React$Component) {
+		_inherits(Quote, _React$Component);
 
-		_createClass(QuoteObject, null, [{
+		_createClass(Quote, null, [{
 			key: "propTypes",
 			value: {
 				quote: _react2["default"].PropTypes.string.isRequired,
@@ -382,13 +382,13 @@
 			enumerable: true
 		}]);
 
-		function QuoteObject(props) {
-			_classCallCheck(this, QuoteObject);
+		function Quote(props) {
+			_classCallCheck(this, Quote);
 
-			_get(Object.getPrototypeOf(QuoteObject.prototype), "constructor", this).call(this, props);
+			_get(Object.getPrototypeOf(Quote.prototype), "constructor", this).call(this, props);
 		}
 
-		_createClass(QuoteObject, [{
+		_createClass(Quote, [{
 			key: "render",
 			value: function render() {
 				return _react2["default"].createElement(
@@ -411,10 +411,10 @@
 			}
 		}]);
 
-		return QuoteObject;
+		return Quote;
 	})(_react2["default"].Component);
 
-	exports["default"] = QuoteObject;
+	exports["default"] = Quote;
 	module.exports = exports["default"];
 
 /***/ },
@@ -2737,11 +2737,15 @@
 	        key: 'handleSubmit',
 	        value: function handleSubmit(event) {
 	            event.preventDefault();
+	            console.log(this.state.data.type);
+	            console.log(this.state.data);
+	            var data = this.state.data;
 	            switch (this.state.data.type) {
 	                case "image":
-	                    var data = this.state.data;
 	                    this.props.dispatch((0, _actions.addImage)(data.imageUrl, data.caption, data.credit));
-	                    var store = this.props.store.getState()._dashboard;
+	                    break;
+	                case "quote":
+	                    this.props.dispatch((0, _actions.addQuote)(data.quote, data.quoteMaker));
 	                    break;
 	                default:
 	                    console.log("checkback later");
@@ -2887,12 +2891,19 @@
 	        caption: caption
 	    };
 	};
+
 	exports.addImage = addImage;
+	var addQuote = function addQuote(quote, quoteMaker) {
+	    return {
+	        type: 'ADD_QUOTE',
+	        quote: quote,
+	        quoteMaker: quoteMaker
+	    };
+	};
+	exports.addQuote = addQuote;
 
 /***/ },
-/* 50 */,
-/* 51 */,
-/* 52 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2905,7 +2916,7 @@
 
 	var _redux = __webpack_require__(15);
 
-	var _dashboard = __webpack_require__(53);
+	var _dashboard = __webpack_require__(51);
 
 	var reducers = _interopRequireWildcard(_dashboard);
 
@@ -2919,7 +2930,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 53 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2940,9 +2951,13 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _componentsCommonImageObject = __webpack_require__(5);
+	var _componentsCommonImage = __webpack_require__(5);
 
-	var _componentsCommonImageObject2 = _interopRequireDefault(_componentsCommonImageObject);
+	var _componentsCommonImage2 = _interopRequireDefault(_componentsCommonImage);
+
+	var _componentsCommonQuote = __webpack_require__(6);
+
+	var _componentsCommonQuote2 = _interopRequireDefault(_componentsCommonQuote);
 
 	function _dashboard(state, action) {
 	    if (state === undefined) state = [];
@@ -2954,12 +2969,15 @@
 	            });
 	        case 'ADD_IMAGE':
 	            console.log('In add image dispatch');
-	            var image = _react2['default'].createElement(_componentsCommonImageObject2['default'], {
+	            var image = _react2['default'].createElement(_componentsCommonImage2['default'], {
 	                url: action.src,
 	                credit: action.credit,
 	                caption: action.caption
 	            });
 	            return [].concat(_toConsumableArray(state), [image]);
+	        case 'ADD_QUOTE':
+	            var quote = _react2['default'].createElement(_componentsCommonQuote2['default'], { quote: action.quote, quoteMaker: action.quoteMaker });
+	            return [].concat(_toConsumableArray(state), [quote]);
 	        default:
 	            return state;
 	    }

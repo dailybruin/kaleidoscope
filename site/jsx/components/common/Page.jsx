@@ -1,6 +1,6 @@
 import React from 'react';
-import ImageObject from './ImageObject';
-import QuoteObject from './QuoteObject';
+import Image from './Image';
+import Quote from './Quote';
 import {connect} from 'react-redux';
 
 // Super basic component that takes name and age and then prints it
@@ -37,13 +37,13 @@ class Page extends React.Component {
 
                     <br />
                     Quote: { this.props.quote.map(function(qo){
-                            return <QuoteObject quote={qo['quote']} quoteMaker={qo['quoteMaker']} />;
+                            return <Quote quote={qo['quote']} quoteMaker={qo['quoteMaker']} />;
                         })
                     }
 
                     <br />
                     Image: { this.props.image.map(function(im){
-                            return <ImageObject url={im['url']} credit={im['credit']} caption={im['caption']}/>;
+                            return <Image url={im['url']} credit={im['credit']} caption={im['caption']}/>;
                         })
                     }
 

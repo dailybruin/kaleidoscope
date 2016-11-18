@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addImage} from '../actions';
+import {addImage, addQuote} from '../actions';
 
 
 class Dashboard extends React.Component {
@@ -51,15 +51,19 @@ class Dashboard extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        console.log(this.state.data.type)
+        console.log(this.state.data)
+        const data = this.state.data;
         switch (this.state.data.type) {
             case "image":
-                const data = this.state.data;
                 this.props.dispatch(addImage(
                         data.imageUrl,
                         data.caption,
                         data.credit,
                     ));
-                const store = this.props.store.getState()._dashboard;
+                break;
+            case "quote":
+                this.props.dispatch(addQuote(data.quote, data.quoteMaker));
                 break;
             default:
                 console.log("checkback later");

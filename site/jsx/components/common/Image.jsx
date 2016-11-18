@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ImageObject extends React.Component {
+class Image extends React.Component {
 	
 	static propTypes = {
 		url: React.PropTypes.string.isRequired,
@@ -24,4 +24,4 @@ class ImageObject extends React.Component {
 
 }
 
-export default ImageObject;
+export default Image;
