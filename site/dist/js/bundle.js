@@ -223,8 +223,6 @@
 	            var src = "";
 	            var credit = "";
 	            var check1 = this.props.store.getState()._dashboard;
-	            console.log('in page render');
-	            console.log(this.props.store.getState());
 	            if (check1.caption !== undefined && check1.caption !== null) {
 	                caption = check1.caption;
 	                credit = check1.credit;
@@ -265,7 +263,6 @@
 	;
 
 	var mapStateToProps = function mapStateToProps(state) {
-	    console.log('called mapStateToProps from Page Component');
 	    return {
 	        components: state._dashboard
 	    };
@@ -2740,17 +2737,11 @@
 	        key: 'handleSubmit',
 	        value: function handleSubmit(event) {
 	            event.preventDefault();
-	            console.log(this.state.data);
-	            console.log('state before dispatch');
-	            console.log(this.props.store.getState());
 	            switch (this.state.data.type) {
 	                case "image":
 	                    var data = this.state.data;
-	                    console.log("ABOUT TO DISPATCH");
 	                    this.props.dispatch((0, _actions.addImage)(data.imageUrl, data.caption, data.credit));
-	                    console.log('state after dispatch');
 	                    var store = this.props.store.getState()._dashboard;
-	                    console.log(this.props.store.getState());
 	                    break;
 	                default:
 	                    console.log("checkback later");
@@ -2865,7 +2856,6 @@
 	;
 
 	var mapStateToProps = function mapStateToProps(state) {
-	    console.log('called mapStateToProps from Dashboard');
 	    return {
 	        src: state._dashboard.src,
 	        caption: state._dashboard.caption,
@@ -2878,61 +2868,6 @@
 	exports['default'] = ConnectedDashboard;
 
 	// currently keep track of one thing which is componnent rendering
-
-	// var dashboard_reducer = function(state = [], action) {
-	//     console.log("intialized an empty array for state");
-	//     switch (action.type) {
-	//         case 'ADD_NEW_COMPONENT':
-	//             return {
-	//                 ...state,
-	//                 message: action.value
-	//             }
-	//         default:
-	//             return state;
-	//     }
-	// }
-
-	// var page_reducer = function(state = [], action) {
-	//     switch (action.type){
-	//         default:
-	//             return state;
-	//     }
-	// }
-
-	// var reducer = combineReducers({
-	//     dashboard: dashboard_reducer,
-	//     page: page_reducer,
-	// })
-
-	// let store_0 = createStore(reducer);
-
-	// store_0.dispatch({
-	//     type: 'ADD_NEW_COMPONENT',
-	// })
-
-	// store_0.dispatch({
-	//     type: 'ADD_IMAGE',
-	// })
-
-	// var addImage = function (src, credit, caption) {
-	//     return {
-	//         type: 'ADD_IMAGE',
-	//         src: src,
-	//         credit: credit,
-	//         caption: caption,
-	//     }
-	// }
-
-	// var addNewComponent = function (component) {
-	//     return{
-	//         type: 'ADD_NEW_COMPONENT',
-	//         component: component
-	//     }
-	// }
-	// var test_url = 'https://s-media-cache-ak0.pinimg.com/originals/14/37/10/143710e981aedc43f8091f066c645660.jpg';
-	// var test_credit = 'TEH INTERNET';
-	// var test_caption = 'Can I haz cupcake?';
-	// console.log(store_0.dispatch(addImage(test_url,test_credit,test_caption)));
 	module.exports = exports['default'];
 
 /***/ },

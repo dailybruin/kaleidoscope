@@ -20,8 +20,6 @@ class Page extends React.Component {
     	let src = "";
     	let credit ="";
     	var check1 = this.props.store.getState()._dashboard;
-    	console.log('in page render');
-    	console.log(this.props.store.getState())
     	if (check1.caption !== undefined && check1.caption !== null){
     		 caption= check1.caption;
     		 credit = check1.credit;
@@ -56,7 +54,6 @@ class Page extends React.Component {
 };
 
 const mapStateToProps = (state) => {
-	console.log('called mapStateToProps from Page Component');
 	return {
 		components: state._dashboard
 	}
