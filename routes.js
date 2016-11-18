@@ -4,49 +4,38 @@
  */
 var express = require('express');
 var Page = require('./site/model/page');
-var Image = require('./site/model/imageObject');
-var Quote = require('./site/model/quoteObject');
+var Image = require('./site/model/image');
+var Quote = require('./site/model/quote');
+var TextSection = require('./site/model/textSection');
+var Header = require('./site/model/header');
+var Subhead = require('./site/model/subhead');
 
-function genImage(Images, ImageCaptions, ImageType)
+var GenPage = new Page();
+
+function storeAuthors(reqBody)
 {
-	var ImagesArray = Images.split(",");
-	var ImageCaptionsArray = ImageCaptions.split(",");
-	if (ImagesArray.length != ImageCaptionsArray.length)
-	{
-		console.log('Length of Image is different from length of Image Captions, type: ');
-		console.log(ImageType)
-	}
-	
-	var ImageVector = [];
-	for (var i = 0; i < ImagesArray.length; i++)
-	{
-		var image = new Image();
-		image.url = ImagesArray[i];
-		image.caption = ImageCaptionsArray[i];
-		ImageVector.push(image);
-	}
-	return ImageVector;
+	GenPage.authors.push(reqBody.authors);
 }
 
-function genPage(reqBody)
+function storeTitle(reqBody)
 {
-	var page = new Page();
-	// console.log(reqBody);
-	page.authors = reqBody.authors.split(',');;
-	page.title = reqBody.title;
-	page.subheading = reqBody.subheading;
-	
-	page.text = reqBody.text.split("\n");
+	GenPage.title = reqBody.title;
+}
 
-	
-	//read quotes in to struct
+function storeText(reqBody)
+{
+	GenPage.text = reqBody.text.split("\n");
+}
+
+function storeQuotes(reqBody)
+{
 	var quotesArray = reqBody.quotes.split(",");
 	var quoteMakersArray = reqBody.quoteMakers.split(",");
 
 	if (quotesArray.length != quoteMakersArray.length)
-		console.log('Length of Quotes is different from length of Quote Makers');
-
+			console.log('Length of Quotes is different from length of Quote Makers');
 	var quotes = [];
+
 	for (var i = 0; i < quotesArray.length; i++)
 	{
 		var quoteEntry = new Quote();
@@ -54,32 +43,39 @@ function genPage(reqBody)
 		quoteEntry.quoteMaker = quoteMakersArray[i];
 		quotes.push(quoteEntry);
 	}
-	page.quotes = quotes;
+	GenPage.quotes = quotes
+}
 
-	page.sideImages = genImage(reqBody.sideImages, 
-							   reqBody.sideImageCaptions,
-							   'Side images');
-
-	page.mainImages = genImage(reqBody.mainImages, 
-							   reqBody.mainImageCaptions,
-							   'Main images');
-
-	page.coverPhoto = genImage([reqBody.cover], 
+function storeCoverImage(reqBody)
+{
+	GenPage.coverPhoto = genImage([reqBody.cover], 
 							   [reqBody.coverCaption],
 							    'Cover image')[0];
+}
 
-	return page;
+function storeImage(reqBody)
+{
+	var image = new Image();
+	image.url = reqBody.url;
+	image.caption = reqBody.caption;
+	image.credit = reqBody.credit;
+	GenPage.images.push(image);
+}
+
+function storeSubHeading(reqBody)
+{
+	GenPage.subheading = reqBody.subheading;
 }
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('index', { title: 'Home' });
+        res.render('index', { title: 'Dashboard' });
     });
 
     /* GET saved pages */
     app.get('/all', function(req, res) {
         var pages;
-        Page.find(function (err, pages) {
+        GenPage.find(function (err, pages) {
           if (err) return console.error(err);
           res.render('all', { pages: pages } );
         });
@@ -90,16 +86,47 @@ module.exports = function (app) {
 		res.render('dashboard');
     });
 
-    app.post('/store_page', function (req, res, next) {
-		var page = genPage(req.body);
 
-		page.save(function (err) {
-			if (err) {
-				console.log(err);
-				res.render('dashboard');
-			} else {
-				res.render('index');
-			}
-		});
+    app.post('/store', function(req, res, next) {
+    	console.log(req.body);
+    	switch(req.body.type) {
+    		case "header":
+                var data = new Header();
+                data.text = req.body.title;
+                data.imageUrl = req.body.imageUrl;
+                data.imageCredit = req.body.imageCredit;
+                data.imageCaption = req.body.imageCaption;
+                data.author = req.body.author;
+                data.description = req.body.description;
+
+                data.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Successfully stored ' + req.body.type);
+                    }
+                });
+    		case "subhead":
+    			storeSubHeading(req);
+    			break;
+    		case "quote":
+    			storeQuotes(req);
+    			break;
+    		case "text_section":
+    			var data = new TextSection();
+    			data.text = req.body.text;
+    			data.save(function (err) {
+    				if (err) {
+    					console.log(err);
+    				} else {
+                        console.log('Successfully stored ' + req.body.type);
+                    }
+    			});
+    			break;
+    		case "image":
+    			storeImage(req);
+    			break;
+    	}
     });
+
 };
