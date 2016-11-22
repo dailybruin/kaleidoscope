@@ -12,14 +12,21 @@ class QuoteObject extends React.Component{
 	}
 
 	render(){
-		return (
-			<div>
-				<p className="quote">"{ this.props.quote }"</p>
-				<p>-{ this.props.quoteMaker }</p>
+
+		return(
+			<div className="quote-wrapper" style={quoteStyle}>
+				<p className="quote-content">&ldquo;{ this.props.quote }&rdquo;
+</p>
+				<p className="quote-by">- { this.props.quoteMaker }</p>
 			</div>
 		);
 	}
 
 }
+
+var quoteStyle = {
+	width: '400px',
+	textAlign: 'center'
+};
 
 export default QuoteObject;

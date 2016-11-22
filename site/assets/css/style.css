@@ -1,3 +1,55 @@
-.quote{
-	color: red;
+/*============================================*/
+/*====================PAGE====================*/
+/*============================================*/
+
+.page{
+	
 }
+
+/*==================COVER-TOP================*/
+
+.cover-photo div{
+	position: fixed;
+	z-index: -1;
+	width:100vw;
+	height: 100vh;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.side-photo div{
+	width: 400px;
+	height: 300px;
+}
+
+.title-wrapper{
+	background-color: red;
+	text-align: center;
+}
+
+.title-wrapper h1{
+	text-transform: uppercase;
+}
+
+/*================PAGE-CONTENT================*/
+
+.page-content{
+	margin-top: 100vh;
+}
+
+
+/*====================QUOTE===================*/
+
+.quote-wrapper p{
+	font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+	font-style: italic;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 20px;
+}
+
+.quote-by{
+	font-size: 14px !important;
+	color: #444;
+}
+

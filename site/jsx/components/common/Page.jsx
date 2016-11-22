@@ -6,9 +6,12 @@ import QuoteObject from './QuoteObject';
 class Page extends React.Component {
     static propTypes = {
         title: React.PropTypes.string.isRequired,
-        author: React.PropTypes.string.isRequired,
-        image: React.PropTypes.array.isRequired,
-        quote: React.PropTypes.array.isRequired,
+        authors: React.PropTypes.array.isRequired,
+        coverPhoto: React.PropTypes.array.isRequired,
+        subheading: React.PropTypes.string.isRequired,
+        mainImages: React.PropTypes.array.isRequired,
+        sideImages: React.PropTypes.array.isRequired,
+        quotes: React.PropTypes.array.isRequired,
         text: React.PropTypes.string
     }
     constructor(props) {
@@ -17,24 +20,54 @@ class Page extends React.Component {
     render() {
         return (
             <div className="Page">
-                <p>
-                    Title: { this.props.title }
-                    <br />
-                    Author: { this.props.author }
 
-                    <br />
-                    Quote: { this.props.quote.map(function(qo){
-                            return <QuoteObject quote={qo['quote']} quoteMaker={qo['quoteMaker']} />;
+                <div className="cover-top">
+                    { this.props.coverPhoto.map(function(im){
+                            return (
+                                <div className="cover-photo">
+                                    <ImageObject url={im['url']} credit={im['credit']} caption={im['caption']}/>
+                                </div>
+                                );
                         })
                     }
 
-                    <br />
-                    Image: { this.props.image.map(function(im){
-                            return <ImageObject url={im['url']} credit={im['credit']} caption={im['caption']}/>;
+                    <div className="title-wrapper">
+                        <h1>
+                            { this.props.title }
+                        </h1>
+
+                            <p>
+                            Author: { this.props.authors.map(function(au){
+                                    return {au};
+                                })
+                            }
+                            </p>
+
+                            <p>
+                            Subheading: { this.props.subheading }
+                            </p>
+                    </div>                    
+                    
+
+                </div>
+                <div className="page-content">
+
+                    Quote: { this.props.quotes.map(function(qo){
+                                return <QuoteObject quote={qo['quote']} quoteMaker={qo['quoteMaker']} />;
                         })
                     }
 
-                </p>
+                    { this.props.sideImages.map(function(im){
+                            return (
+                                <div className="side-photo">
+                                    <ImageObject url={im['url']} credit={im['credit']} caption={im['caption']}/>
+                                </div>
+                            );
+                        })
+                    }
+
+                </div>
+                
             </div>
         );
     }
