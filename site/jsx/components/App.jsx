@@ -33,7 +33,7 @@ class App extends React.Component {
                             caption : 'Second-year biology student Cole Heramb created both the artwork and the music for his album "Red EP." '
                         }]}/>
 				<hr />
-				<Dashboard store={this.props.store} componentTypes={['image', 'title', 'cover image', 'author', 'quote', 'text section']} />             
+				<Dashboard store={this.props.store} componentTypes={['image', 'header', 'subhead', 'quote', 'text section']} />             
             </div>
         )
     }
