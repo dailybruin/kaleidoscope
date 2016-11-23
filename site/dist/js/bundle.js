@@ -146,7 +146,7 @@
 	                    quote: [{ 'quote': 'inspirational BS', 'quoteMaker': 'John Smith' }],
 	                    image: [{ 'url': 'http://dailybruin.com/images/2016/11/web.ae_.heramb.WH_-640x426.jpg', 'credit': 'Wesley Hardin/Daily Bruin', 'caption': 'Second-year biology student Cole Heramb created both the artwork and the music for his album "Red EP." ' }] }),
 	                _react2['default'].createElement('hr', null),
-	                _react2['default'].createElement(_Dashboard2['default'], { store: this.props.store, componentTypes: ['image', 'title', 'cover image', 'author', 'quote', 'text section'] })
+	                _react2['default'].createElement(_Dashboard2['default'], { store: this.props.store, componentTypes: ['image', 'header', 'subhead', 'quote', 'text section'] })
 	            );
 	        }
 	    }]);
