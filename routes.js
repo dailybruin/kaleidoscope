@@ -99,11 +99,15 @@ module.exports = function (app) {
                 data.author = req.body.author;
                 data.description = req.body.description;
 
-                data.save(function (err) {
+                data.save(function (err, inserted_obj) {
                     if (err) {
                         console.log(err);
                     } else {
                         console.log('Successfully stored ' + req.body.type);
+                        var component = new Component();
+                        component.component_id = inserted_obj._id;
+                        component.type = "header";
+                        GenPage.components.push(component);
                     }
                 });
     		case "subhead":
