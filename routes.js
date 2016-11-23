@@ -9,6 +9,7 @@ var Quote = require('./site/model/quote');
 var TextSection = require('./site/model/textSection');
 var Header = require('./site/model/header');
 var Subhead = require('./site/model/subhead');
+var Component = require('./site/model/components');
 
 var GenPage = new Page();
 
@@ -67,6 +68,21 @@ function storeSubHeading(reqBody)
 	GenPage.subheading = reqBody.subheading;
 }
 
+function storeObject(data, type)
+{
+    var component = new Component();
+    component.type = type;
+    data.save(function (err, room) {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log('Successfully stored ' + type);
+        }
+        component.component_id = room._id;
+    });
+    GenPage.components.append(component);
+}
+
 module.exports = function (app) {
     app.get('/', function (req, res) {
         res.render('index', { title: 'Dashboard' });
@@ -86,7 +102,8 @@ module.exports = function (app) {
 		res.render('dashboard');
     });
 
-
+    //  components
+    //  
     app.post('/store', function(req, res, next) {
     	console.log(req.body);
     	switch(req.body.type) {
@@ -98,37 +115,31 @@ module.exports = function (app) {
                 data.imageCaption = req.body.imageCaption;
                 data.author = req.body.author;
                 data.description = req.body.description;
+                storeObject(data, req.body.type);
+                break;
 
-                data.save(function (err, inserted_obj) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log('Successfully stored ' + req.body.type);
-                        var component = new Component();
-                        component.component_id = inserted_obj._id;
-                        component.type = "header";
-                        GenPage.components.push(component);
-                    }
-                });
     		case "subhead":
-    			storeSubHeading(req);
+                var subhead = var Subhead();
+                subhead.text = req.body.subheading;
+                storeObject(subhead, req.body.type);
     			break;
     		case "quote":
-    			storeQuotes(req);
+                var quoteEntry = new Quote();
+                quoteEntry.quote= req.body.quotes;
+                quoteEntry.quoteMaker = req.body.quoteMakers;
+                storeObject(quoteEntry, req.body.type);
     			break;
     		case "text_section":
     			var data = new TextSection();
     			data.text = req.body.text;
-    			data.save(function (err) {
-    				if (err) {
-    					console.log(err);
-    				} else {
-                        console.log('Successfully stored ' + req.body.type);
-                    }
-    			});
+                storeObject(data, req.body.type);
     			break;
     		case "image":
-    			storeImage(req);
+                var image = new Image();
+                image.url = req.body.url;
+                image.caption = req.body.caption;
+                image.credit = req.body.credit;
+                storeObject(image, req.body.type);
     			break;
     	}
     });
