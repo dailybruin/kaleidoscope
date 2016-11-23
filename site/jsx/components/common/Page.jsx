@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from './Image';
 import Quote from './Quote';
+import Subhead from './Subhead';
 import {connect} from 'react-redux';
 
 // Super basic component that takes name and age and then prints it

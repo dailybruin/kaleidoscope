@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addImage, addQuote} from '../actions';
+import {addImage, addQuote, addSubhead} from '../actions';
 
 
 class Dashboard extends React.Component {
@@ -66,6 +66,9 @@ class Dashboard extends React.Component {
                 break;
             case "quote":
                 this.props.dispatch(addQuote(data.quoteText, data.quoteSource));
+                break;
+            case "subhead":
+                this.props.dispatch(addSubhead(data.subhead));
                 break;
             default:
                 console.log("checkback later");

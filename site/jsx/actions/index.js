@@ -14,3 +14,10 @@ export const addQuote = (quote, quoteMaker) => {
 		quoteSource: quoteMaker,
 	}
 }
+
+export const addSubhead = (text) => {
+    return {
+        type: 'ADD_SUBHEAD',
+        text: text
+    }
+}
