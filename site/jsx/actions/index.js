@@ -14,3 +14,10 @@ export const addQuote = (quote, quoteMaker) => {
 		quoteSource: quoteMaker,
 	}
 }
+
+export const addText = (text) => {
+    return {
+        type: 'ADD_TEXT',
+        text: text
+    }
+}

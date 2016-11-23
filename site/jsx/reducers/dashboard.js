@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from '../components/common/Image';
 import Quote from '../components/common/Quote';
+import TextSection from '../components/common/TextSection';
 
 
 export function  _dashboard(state = [], action) {
@@ -25,6 +26,12 @@ export function  _dashboard(state = [], action) {
             return [
                 ...state,
                 quote
+            ];
+        case 'ADD_TEXT':
+            const text = <TextSection text={action.text}/>;
+            return [
+                ...state,
+                text
             ];
         default:
             return state;
