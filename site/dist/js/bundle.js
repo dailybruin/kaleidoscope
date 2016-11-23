@@ -195,6 +195,10 @@
 
 	var _Subhead2 = _interopRequireDefault(_Subhead);
 
+	var _TextSection = __webpack_require__(53);
+
+	var _TextSection2 = _interopRequireDefault(_TextSection);
+
 	var _reactRedux = __webpack_require__(7);
 
 	// Super basic component that takes name and age and then prints it
@@ -2737,7 +2741,6 @@
 	            var data = this.state.data;
 	            switch (this.state.data.type) {
 	                case "image":
-
 	                    this.props.dispatch((0, _actions.addImage)(data.imageUrl, data.imageCaption, data.imageCredit));
 	                    break;
 	                case "quote":
@@ -2745,6 +2748,9 @@
 	                    break;
 	                case "subhead":
 	                    this.props.dispatch((0, _actions.addSubhead)(data.subhead));
+	                    break;
+	                case "text_section":
+	                    this.props.dispatch((0, _actions.addText)(data.text));
 	                    break;
 	                default:
 	                    console.log("checkback later");
@@ -2918,7 +2924,15 @@
 	        text: text
 	    };
 	};
+
 	exports.addSubhead = addSubhead;
+	var addText = function addText(text) {
+	    return {
+	        type: 'ADD_TEXT',
+	        text: text
+	    };
+	};
+	exports.addText = addText;
 
 /***/ },
 /* 50 */
@@ -2981,6 +2995,10 @@
 
 	var _componentsCommonSubhead2 = _interopRequireDefault(_componentsCommonSubhead);
 
+	var _componentsCommonTextSection = __webpack_require__(53);
+
+	var _componentsCommonTextSection2 = _interopRequireDefault(_componentsCommonTextSection);
+
 	function _dashboard(state, action) {
 	    if (state === undefined) state = [];
 
@@ -2999,10 +3017,14 @@
 	        case 'ADD_QUOTE':
 	            var quote = _react2['default'].createElement(_componentsCommonQuote2['default'], { quoteText: action.quoteText, quoteSource: action.quoteSource });
 	            return [].concat(_toConsumableArray(state), [quote]);
+
 	        case 'ADD_SUBHEAD':
 	            var subhead = _react2['default'].createElement(_componentsCommonSubhead2['default'], { subheadText: action.text });
 	            return [].concat(_toConsumableArray(state), [subhead]);
 
+	        case 'ADD_TEXT':
+	            var text = _react2['default'].createElement(_componentsCommonTextSection2['default'], { text: action.text });
+	            return [].concat(_toConsumableArray(state), [text]);
 	        default:
 	            return state;
 	    }
@@ -3071,6 +3093,64 @@
 
 	exports["default"] = Subhead;
 	module.exports = exports["default"];
+
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, '__esModule', {
+		value: true
+	});
+
+	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+	var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var TextSection = (function (_React$Component) {
+		_inherits(TextSection, _React$Component);
+
+		_createClass(TextSection, null, [{
+			key: 'propTypes',
+			value: {
+				text: _react2['default'].PropTypes.string.isRequired
+			},
+			enumerable: true
+		}]);
+
+		function TextSection(props) {
+			_classCallCheck(this, TextSection);
+
+			_get(Object.getPrototypeOf(TextSection.prototype), 'constructor', this).call(this, props);
+		}
+
+		_createClass(TextSection, [{
+			key: 'render',
+			value: function render() {
+				return _react2['default'].createElement(
+					'p',
+					null,
+					this.props.text
+				);
+			}
+		}]);
+
+		return TextSection;
+	})(_react2['default'].Component);
+
+	exports['default'] = TextSection;
+	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);

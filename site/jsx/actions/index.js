@@ -21,3 +21,10 @@ export const addSubhead = (text) => {
         text: text
     }
 }
+
+export const addText = (text) => {
+    return {
+        type: 'ADD_TEXT',
+        text: text
+    }
+}

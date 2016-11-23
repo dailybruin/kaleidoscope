@@ -2,6 +2,7 @@ import React from 'react';
 import Image from '../components/common/Image';
 import Quote from '../components/common/Quote';
 import Subhead from '../components/common/Subhead'
+import TextSection from '../components/common/TextSection';
 
 export function  _dashboard(state = [], action) {
     switch (action.type) {
@@ -26,6 +27,7 @@ export function  _dashboard(state = [], action) {
                 ...state,
                 quote
             ];
+
         case 'ADD_SUBHEAD':
             const subhead = <Subhead subheadText={action.text} />;
             return [
@@ -33,6 +35,12 @@ export function  _dashboard(state = [], action) {
                 subhead
             ];
         
+        case 'ADD_TEXT':
+            const text = <TextSection text={action.text}/>;
+            return [
+                ...state,
+                text
+            ];
         default:
             return state;
     }
