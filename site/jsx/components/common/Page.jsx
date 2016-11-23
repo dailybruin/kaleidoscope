@@ -7,9 +7,12 @@ import {connect} from 'react-redux';
 class Page extends React.Component {
     static propTypes = {
         title: React.PropTypes.string.isRequired,
-        author: React.PropTypes.string.isRequired,
-        image: React.PropTypes.array.isRequired,
-        quote: React.PropTypes.array.isRequired,
+        authors: React.PropTypes.array.isRequired,
+        coverPhoto: React.PropTypes.array.isRequired,
+        subheading: React.PropTypes.string.isRequired,
+        mainImages: React.PropTypes.array.isRequired,
+        sideImages: React.PropTypes.array.isRequired,
+        quotes: React.PropTypes.array.isRequired,
         text: React.PropTypes.string
     }
     constructor(props) {
@@ -28,13 +31,53 @@ class Page extends React.Component {
 
         return (
             <div className="Page">
-                <p>
-                	{this.props.store.getState()._dashboard}
-                	<br />
-                    Title: { this.props.title }
-                    <br />
-                    Author: { this.props.author }
-                </p>
+
+                <div className="cover-top">
+                    { this.props.coverPhoto.map(function(im){
+                            return (
+                                <div className="cover-photo">
+                                    <Image url={im['url']} credit={im['credit']} caption={im['caption']}/>
+                                </div>
+                                );
+                        })
+                    }
+
+                    <div className="title-wrapper">
+                        <h1>
+                            { this.props.title }
+                        </h1>
+
+                            <p>
+                            Author: { this.props.authors.map(function(au){
+                                    return {au};
+                                })
+                            }
+                            </p>
+
+                            <p>
+                            Subheading: { this.props.subheading }
+                            </p>
+                    </div>                    
+                    
+
+                </div>
+                <div className="page-content">
+
+                    Quote: { this.props.quotes.map(function(qo){
+                                return <Quote quote={qo['quote']} quoteMaker={qo['quoteMaker']} />;
+                        })
+                    }
+
+                    { this.props.sideImages.map(function(im){
+                            return (
+                                <div className="side-photo">
+                                    <Image url={im['url']} credit={im['credit']} caption={im['caption']}/>
+                                </div>
+                            );
+                        })
+                    }
+
+                </div>                
             </div>
         );
     }
