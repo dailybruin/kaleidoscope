@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addImage, addQuote} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead} from '../actions';
 
 
 class Dashboard extends React.Component {
@@ -55,15 +55,24 @@ class Dashboard extends React.Component {
         console.log(this.state.data)
         const data = this.state.data;
         switch (this.state.data.type) {
+            case "header":
+                this.props.dispatch(addHeader(data.title, data.author, data.coverImageUrl));
+                break;
             case "image":
                 this.props.dispatch(addImage(
                         data.imageUrl,
-                        data.caption,
                         data.credit,
+                        data.caption,
                     ));
                 break;
             case "quote":
                 this.props.dispatch(addQuote(data.quote, data.quoteMaker));
+                break;
+            case "text_section":
+                this.props.dispatch(addText(data.text));
+                break;
+            case "subhead":
+                this.props.dispatch(addSubhead(data.subhead));
                 break;
             default:
                 console.log("checkback later");
@@ -84,25 +93,24 @@ class Dashboard extends React.Component {
     showInputForComponentType(componentType) {
         console.log('Dropdown changed: ' + componentType);
         switch(componentType) {
-            case 'title':
+            case 'header':
                 return(
                     <div>
                         <input 
                             placeholder="Title" 
                             type="text" name="title" 
                             onChange={this.updateInput.bind(this, 'title')} 
-                            className="form-control"
-                        />
+                            className="form-control"/>
+                        <input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/>
+                        <input placeholder="Cover image URL" type="text" name="url" onChange={this.updateInput.bind(this, 'coverImageUrl')} className="form-control"/>
                     </div>
                 );
                 break;
-            case 'author':
+            case 'subhead':
                 return(
-                    <div><input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/></div>
+                    <div><input placeholder="Subhead" type="text" name="subhead" onChange={this.updateInput.bind(this, 'subhead')} className="form-control"/></div>
                 );
-                break;
             case 'image':
-            case 'cover_image':
                 return(
                     <div>
                         <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
@@ -121,7 +129,7 @@ class Dashboard extends React.Component {
                 break;
             case 'text_section':
                 return(
-                    <div><textarea name="text" cols="90" rows="8" ref='dashboardInput'></textarea></div>
+                    <div><textarea name="text" cols="90" rows="8" ref='dashboardInput' onChange={this.updateInput.bind(this, 'text')} className="form-control"></textarea></div>
                 );
                 break;
             default:
