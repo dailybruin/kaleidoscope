@@ -1,6 +1,9 @@
 import React from 'react';
+import Header from './Header';
+import Subhead from './Subhead';
 import Image from './Image';
 import Quote from './Quote';
+import TextSection from './TextSection';
 import {connect} from 'react-redux';
 
 // Super basic component that takes name and age and then prints it
@@ -31,53 +34,9 @@ class Page extends React.Component {
 
         return (
             <div className="Page">
-
-                <div className="cover-top">
-                    { this.props.coverPhoto.map(function(im){
-                            return (
-                                <div className="cover-photo">
-                                    <Image url={im['url']} credit={im['credit']} caption={im['caption']}/>
-                                </div>
-                                );
-                        })
-                    }
-
-                    <div className="title-wrapper">
-                        <h1>
-                            { this.props.title }
-                        </h1>
-
-                            <p>
-                            Author: { this.props.authors.map(function(au){
-                                    return {au};
-                                })
-                            }
-                            </p>
-
-                            <p>
-                            Subheading: { this.props.subheading }
-                            </p>
-                    </div>                    
-                    
-
-                </div>
-                <div className="page-content">
-
-                    Quote: { this.props.quotes.map(function(qo){
-                                return <Quote quote={qo['quote']} quoteMaker={qo['quoteMaker']} />;
-                        })
-                    }
-
-                    { this.props.sideImages.map(function(im){
-                            return (
-                                <div className="side-photo">
-                                    <Image url={im['url']} credit={im['credit']} caption={im['caption']}/>
-                                </div>
-                            );
-                        })
-                    }
-
-                </div>                
+                <p>
+                	{this.props.store.getState()._dashboard}
+                </p>
             </div>
         );
     }
