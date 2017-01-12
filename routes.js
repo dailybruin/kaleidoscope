@@ -9,78 +9,34 @@ var Quote = require('./site/model/quote');
 var TextSection = require('./site/model/textSection');
 var Header = require('./site/model/header');
 var Subhead = require('./site/model/subhead');
-var Component = require('./site/model/components');
+var Component = require('./site/model/component');
 
 var GenPage = new Page();
 
-function storeAuthors(reqBody)
-{
-	GenPage.authors.push(reqBody.authors);
-}
-
-function storeTitle(reqBody)
-{
-	GenPage.title = reqBody.title;
-}
-
-function storeText(reqBody)
-{
-	GenPage.text = reqBody.text.split("\n");
-}
-
-function storeQuotes(reqBody)
-{
-	var quotesArray = reqBody.quotes.split(",");
-	var quoteMakersArray = reqBody.quoteMakers.split(",");
-
-	if (quotesArray.length != quoteMakersArray.length)
-			console.log('Length of Quotes is different from length of Quote Makers');
-	var quotes = [];
-
-	for (var i = 0; i < quotesArray.length; i++)
-	{
-		var quoteEntry = new Quote();
-		quoteEntry.quote= quotesArray[i];
-		quoteEntry.quoteMaker = quoteMakersArray[i];
-		quotes.push(quoteEntry);
-	}
-	GenPage.quotes = quotes
-}
-
-function storeCoverImage(reqBody)
-{
-	GenPage.coverPhoto = genImage([reqBody.cover], 
-							   [reqBody.coverCaption],
-							    'Cover image')[0];
-}
-
-function storeImage(reqBody)
-{
-	var image = new Image();
-	image.url = reqBody.url;
-	image.caption = reqBody.caption;
-	image.credit = reqBody.credit;
-	GenPage.images.push(image);
-}
-
-function storeSubHeading(reqBody)
-{
-	GenPage.subheading = reqBody.subheading;
-}
-
 function storeObject(data, type)
 {
-    var component = new Component();
-    component.type = type;
+    // Save object in their specific table (ie store new header in Header table)
     data.save(function (err, room) {
         if (err) {
             console.log(err);
         } else {
-            console.log('Successfully stored ' + type);
+            console.log('Successfully stored ' + type + ' in ' + type + ' table.');
+
+            // Store in Components table
+            var component = new Component();
+            component.type = type;
+            component.component_id = room._id;
+
+            component.save(function (err, room) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('Successfully stored ' + type + ' in ' + 'components table.');
+                }
+            });
         }
-        component.component_id = room._id;
     });
-    GenPage.components.append(component);
+    // GenPage.components.append(component);
 }
 
 module.exports = function (app) {
@@ -110,23 +66,20 @@ module.exports = function (app) {
     		case "header":
                 var data = new Header();
                 data.text = req.body.title;
-                data.imageUrl = req.body.imageUrl;
-                data.imageCredit = req.body.imageCredit;
-                data.imageCaption = req.body.imageCaption;
+                data.imageUrl = req.body.coverImageUrl;
                 data.author = req.body.author;
-                data.description = req.body.description;
                 storeObject(data, req.body.type);
                 break;
 
     		case "subhead":
-                var subhead = var Subhead();
-                subhead.text = req.body.subheading;
+                var subhead = new Subhead();
+                subhead.text = req.body.subhead;
                 storeObject(subhead, req.body.type);
     			break;
     		case "quote":
                 var quoteEntry = new Quote();
-                quoteEntry.quote= req.body.quotes;
-                quoteEntry.quoteMaker = req.body.quoteMakers;
+                quoteEntry.quoteText = req.body.quoteText;
+                quoteEntry.quoteSource = req.body.quoteSource;
                 storeObject(quoteEntry, req.body.type);
     			break;
     		case "text_section":
@@ -136,7 +89,7 @@ module.exports = function (app) {
     			break;
     		case "image":
                 var image = new Image();
-                image.url = req.body.url;
+                image.url = req.body.imageUrl;
                 image.caption = req.body.caption;
                 image.credit = req.body.credit;
                 storeObject(image, req.body.type);
