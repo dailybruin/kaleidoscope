@@ -20,3 +20,11 @@ Otherwise:
 
 ## Notes
 * Sample site UI: http://graphics.dailybruin.com/pacific-ties/
+
+## MongoDB Commands
+* To start db command shell: `mongo`
+* `use flatpage`
+* To show all currently existing tables: `show tables`
+* To show all of a table's contents: `db.<table_name>.find()`
+* To remove all database content: `db.dropDatabase()`
+* To leave the db shell: `exit`
