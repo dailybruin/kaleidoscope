@@ -16,7 +16,7 @@ Otherwise:
 * make a new db 'junk' folder called junk in the flatpage_generator directory [never check this file into the git repo]
 * `mongod --dbpath <path to junk>/junk`
 * `nodemon` or `npm start` - Starts app
-* [optional] `npm run webpack` - Listens to whatever webpack.config.js says and compiles on change
+* [If working with react.js] `npm run webpack` - Listens to whatever webpack.config.js says and compiles on change
 
 ## Notes
 * Sample site UI: http://graphics.dailybruin.com/pacific-ties/
