@@ -1,9 +1,9 @@
 import React from 'react';
+import Header from './Header';
+import Subhead from './Subhead';
 import Image from './Image';
 import Quote from './Quote';
-import Subhead from './Subhead';
 import TextSection from './TextSection';
-
 import {connect} from 'react-redux';
 
 // Super basic component that takes name and age and then prints it
@@ -33,10 +33,6 @@ class Page extends React.Component {
             <div className="Page">
                 <p>
                 	{this.props.store.getState()._dashboard}
-                	<br />
-                    Title: { this.props.title }
-                    <br />
-                    Author: { this.props.author }
                 </p>
             </div>
         );

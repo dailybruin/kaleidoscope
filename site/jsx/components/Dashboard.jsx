@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addImage, addQuote, addSubhead, addText} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead} from '../actions';
 
 
 class Dashboard extends React.Component {
@@ -56,11 +56,14 @@ class Dashboard extends React.Component {
         console.log(this.state.data)
         const data = this.state.data;
         switch (this.state.data.type) {
+            case "header":
+                this.props.dispatch(addHeader(data.title, data.author, data.coverImageUrl));
+                break;
             case "image":
                 this.props.dispatch(addImage(
                         data.imageUrl,
-                        data.imageCaption,
-                        data.imageCredit,
+                        data.credit,
+                        data.caption,
                     ));
                 break;
             case "quote":
@@ -71,6 +74,12 @@ class Dashboard extends React.Component {
                 break;
             case "text_section":
                 this.props.dispatch(addText(data.text));
+                break;
+            case "text_section":
+                this.props.dispatch(addText(data.text));
+                break;
+            case "subhead":
+                this.props.dispatch(addSubhead(data.subhead));
                 break;
             default:
                 console.log("checkback later");
@@ -98,25 +107,9 @@ class Dashboard extends React.Component {
                             placeholder="Title" 
                             type="text" name="title" 
                             onChange={this.updateInput.bind(this, 'title')} 
-                            className="form-control"
-                        />
-                        <div>
-                            <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
-                            <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'imageCredit')} className="form-control"/>
-                            <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'imageCaption')} className="form-control"/>
-                        </div>
-                        <input 
-                            placeholder="Author" 
-                            type="text" name="author" 
-                            onChange={this.updateInput.bind(this, 'author')} 
-                            className="form-control"
-                        />
-                        <input 
-                            placeholder="Description" 
-                            type="text" name="description" 
-                            onChange={this.updateInput.bind(this, 'description')} 
-                            className="form-control"
-                        />
+                            className="form-control"/>
+                        <input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/>
+                        <input placeholder="Cover image URL" type="text" name="url" onChange={this.updateInput.bind(this, 'coverImageUrl')} className="form-control"/>
                     </div>
                 );
                 break;
@@ -132,13 +125,12 @@ class Dashboard extends React.Component {
                         />
                     </div>
                 );
-                break;
             case 'image':
                 return(
                     <div>
                         <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
-                        <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'imageCredit')} className="form-control"/>
-                        <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'imageCaption')} className="form-control"/>
+                        <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'credit')} className="form-control"/>
+                        <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'caption')} className="form-control"/>
                     </div>
                 );
                 break;

@@ -10,14 +10,14 @@ class App extends React.Component {
     render() {
         return (
             <div>
-				<Page  
-					store={this.props.store} 
-					title="Article 1"
-                    author="John Smith"
-                    quote={ [{'quote': 'inspirational BS', 'quoteMaker':'John Smith'}] }
-                    image={ [{'url' : 'http://dailybruin.com/images/2016/11/web.ae_.heramb.WH_-640x426.jpg', 'credit' : 'Wesley Hardin/Daily Bruin', 'caption' : 'Second-year biology student Cole Heramb created both the artwork and the music for his album "Red EP." '}] }/>
-				<hr />
-				<Dashboard store={this.props.store} componentTypes={['image', 'header', 'subhead', 'quote', 'text section']} />             
+                <Page
+                    store={this.props.store}
+                    title=""
+                    author=""
+                    quote={[]}
+                    image={[]}/>
+                <hr />
+				<Dashboard store={this.props.store} componentTypes={['header', 'subhead', 'image', 'quote', 'text section']} />             
             </div>
         )
     }
