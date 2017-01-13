@@ -11,7 +11,8 @@ class Dashboard extends React.Component {
         super(props);
         // add syntatic sugar () => {} to prevent exessive bind calls 
         this.state = {  data: {
-                            type: this.props.componentTypes[0]
+                            type: this.props.componentTypes[0],
+                            payload: {}
                         }
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -19,6 +20,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
+        //console.log('state payload', this.state.data.payload);
         var componentOptions = this.props.componentTypes.map(function(type, i){
           return (
             <option value={type.replace(/\s/g , "_")}>{type}</option>
@@ -44,7 +46,8 @@ class Dashboard extends React.Component {
     handleDropdownChange(event) {
         this.setState({
             data: {
-                type: event.target.value
+                type: event.target.value,
+                payload: {}
             }
         })
     }
@@ -52,9 +55,10 @@ class Dashboard extends React.Component {
     handleSubmit(event) {
         console.log('A component was submitted: ' + this.state.data.type);
         event.preventDefault();
-        console.log(this.state.data.type)
-        console.log(this.state.data)
-        const data = this.state.data;
+        console.log('data type: ', this.state.data.type)
+        console.log('state.data: ', this.state.data)
+        const data = this.state.data.payload;
+
         switch (this.state.data.type) {
             case "header":
                 this.props.dispatch(addHeader(data.title, data.author, data.coverImageUrl));
@@ -91,10 +95,26 @@ class Dashboard extends React.Component {
           data: this.state.data,
           type: 'POST'
         });
+
+        this.setState({
+            data: {
+                type: this.state.data.type,
+                payload: {}
+            }
+        });
     }
 
     updateInput(value, event) {
-        this.state.data[value] = event.target.value;
+
+        let updatedObj = {};
+        updatedObj[value] = event.target.value;
+
+        this.setState({
+            data:{
+                type: this.state.data.type,
+                payload: Object.assign({}, this.state.data.payload, updatedObj)
+            }
+        })
     }
 
     showInputForComponentType(componentType) {
@@ -107,9 +127,20 @@ class Dashboard extends React.Component {
                             placeholder="Title" 
                             type="text" name="title" 
                             onChange={this.updateInput.bind(this, 'title')} 
-                            className="form-control"/>
-                        <input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/>
-                        <input placeholder="Cover image URL" type="text" name="url" onChange={this.updateInput.bind(this, 'coverImageUrl')} className="form-control"/>
+                            className="form-control"
+                            value={this.state.data.payload.title}/>
+                        <input
+                            placeholder="Author"
+                            type="text" name="author"
+                            onChange={this.updateInput.bind(this, 'author')}
+                            className="form-control"
+                            value={this.state.data.payload.author}/>
+                        <input
+                            placeholder="Cover image URL"
+                            type="text" name="url"
+                            onChange={this.updateInput.bind(this, 'coverImageUrl')}
+                            className="form-control"
+                            value={this.state.data.payload.coverImageUrl}/>
                     </div>
                 );
                 break;
@@ -122,15 +153,28 @@ class Dashboard extends React.Component {
                             name="subhead" 
                             onChange={this.updateInput.bind(this, 'subhead')} 
                             className="form-control"
+                            value={this.state.data.payload.subhead}
                         />
                     </div>
                 );
             case 'image':
                 return(
                     <div>
-                        <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
-                        <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'credit')} className="form-control"/>
-                        <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'caption')} className="form-control"/>
+                        <input 
+                            placeholder="URL" type="text" name="url"
+                            onChange={this.updateInput.bind(this, 'imageUrl')}
+                            className="form-control"
+                            value={this.state.data.payload.imageUrl}/>
+                        <input
+                            placeholder="Credit" type="text" name="credit" 
+                            onChange={this.updateInput.bind(this, 'credit')}
+                            className="form-control"
+                            value={this.state.data.payload.credit}/>
+                        <input
+                            placeholder="Caption" type="text" name="caption"
+                            onChange={this.updateInput.bind(this, 'caption')}
+                            className="form-control"
+                            value={this.state.data.payload.caption}/>
                     </div>
                 );
                 break;
@@ -143,14 +187,14 @@ class Dashboard extends React.Component {
                             name="quote" 
                             onChange={this.updateInput.bind(this, 'quoteText')} 
                             className="form-control"
-                        />
+                            value={this.state.data.payload.quoteText} />
                         <input 
                             placeholder="Quote Maker" 
                             type="text" 
                             name="quoteMaker" 
                             onChange={this.updateInput.bind(this, 'quoteSource')} 
                             className="form-control"
-                        />
+                            value={this.state.data.payload.quoteSource} />
                     </div>
                 );
                 break;
