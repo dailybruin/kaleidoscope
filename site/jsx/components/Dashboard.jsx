@@ -77,9 +77,6 @@ class Dashboard extends React.Component {
             case "text_section":
                 this.props.dispatch(addText(data.text));
                 break;
-            case "text_section":
-                this.props.dispatch(addText(data.text));
-                break;
             case "subhead":
                 this.props.dispatch(addSubhead(data.subhead));
                 break;
