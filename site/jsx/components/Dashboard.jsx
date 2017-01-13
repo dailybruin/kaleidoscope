@@ -16,6 +16,7 @@ class Dashboard extends React.Component {
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleGenPage = this.handleGenPage.bind(this);
     }
 
     render() {
@@ -37,6 +38,7 @@ class Dashboard extends React.Component {
                 </select>
                 <input type='submit'></input>
             </form>
+            <button onClick={this.handleGenPage}>Generate Page</button>
           </div>
         );
     }
@@ -52,8 +54,8 @@ class Dashboard extends React.Component {
     handleSubmit(event) {
         console.log('A component was submitted: ' + this.state.data.type);
         event.preventDefault();
-        console.log(this.state.data.type)
-        console.log(this.state.data)
+        console.log(this.state.data.type);
+        console.log(this.state.data);
         const data = this.state.data;
         switch (this.state.data.type) {
             case "header":
@@ -89,6 +91,16 @@ class Dashboard extends React.Component {
           url: '/store',
           dataType: 'json',
           data: this.state.data,
+          type: 'POST'
+        });
+    }
+
+    handleGenPage(event) {
+        console.log('A page was submitted');
+        event.preventDefault();
+
+        $.ajax({
+          url: '/gen',
           type: 'POST'
         });
     }
