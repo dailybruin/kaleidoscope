@@ -13,7 +13,7 @@ var Component = require('./site/model/component');
 
 var GenPage = null;
 
-function storeObject(data, type)
+function storeObject(data, type, res)
 {
     // Save object in their specific table (ie store new header in Header table)
     data.save(function(err, room) {
@@ -24,8 +24,9 @@ function storeObject(data, type)
 
             // Store in Components table
             var component = new Component();
+            var id = room._id;
             component.type = type;
-            component.component_id = room._id;
+            component.component_id = id;
 
             component.save(function (err, room) {
                 if (err) {
@@ -35,6 +36,9 @@ function storeObject(data, type)
                     
                     //  Add components to the Page
                     GenPage.components.push(component);
+
+                res.contentType('json');
+                res.send({ data: id/*JSON.stringify(id)*/});
                 }
             });
         }
@@ -74,31 +78,31 @@ module.exports = function (app) {
                 data.text = req.body.title;
                 data.imageUrl = req.body.coverImageUrl;
                 data.author = req.body.author;
-                storeObject(data, req.body.type);
+                storeObject(data, req.body.type, res);
                 break;
 
     		case "subhead":
                 var subhead = new Subhead();
                 subhead.text = req.body.subhead;
-                storeObject(subhead, req.body.type);
+                storeObject(subhead, req.body.type, res);
     			break;
     		case "quote":
                 var quoteEntry = new Quote();
                 quoteEntry.quoteText = req.body.quoteText;
                 quoteEntry.quoteSource = req.body.quoteSource;
-                storeObject(quoteEntry, req.body.type);
+                storeObject(quoteEntry, req.body.type, res);
     			break;
     		case "text_section":
     			var data = new TextSection();
     			data.text = req.body.text;
-                storeObject(data, req.body.type);
+                storeObject(data, req.body.type, res);
     			break;
     		case "image":
                 var image = new Image();
                 image.url = req.body.imageUrl;
                 image.caption = req.body.caption;
                 image.credit = req.body.credit;
-                storeObject(image, req.body.type);
+                storeObject(image, req.body.type, res);
     			break;
     	}
     });
