@@ -11,12 +11,12 @@ var Header = require('./site/model/header');
 var Subhead = require('./site/model/subhead');
 var Component = require('./site/model/component');
 
-var GenPage = new Page();
+var GenPage = null;
 
 function storeObject(data, type)
 {
     // Save object in their specific table (ie store new header in Header table)
-    data.save(function (err, room) {
+    data.save(function(err, room) {
         if (err) {
             console.log(err);
         } else {
@@ -32,11 +32,13 @@ function storeObject(data, type)
                     console.log(err);
                 } else {
                     console.log('Successfully stored ' + type + ' in ' + 'components table.');
+                    
+                    //  Add components to the Page
+                    GenPage.components.push(component);
                 }
             });
         }
     });
-    // GenPage.components.append(component);
 }
 
 module.exports = function (app) {
@@ -61,6 +63,10 @@ module.exports = function (app) {
     //  components
     //  
     app.post('/store', function(req, res, next) {
+        if (GenPage == null) {
+            GenPage = new Page();
+        }
+
     	console.log(req.body);
     	switch(req.body.type) {
     		case "header":
@@ -95,6 +101,24 @@ module.exports = function (app) {
                 storeObject(image, req.body.type);
     			break;
     	}
+    });
+
+    app.post('/gen', function(req, res, next) {
+        if (GenPage == null) {
+            console.log('Nothing has been submitted');
+        }
+
+        GenPage.save(function(err, room) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Successfully stored Page in Page table.');
+            }
+        });
+
+        //  TODO: If there's an error, everything will be lost.
+        //        Wanna improve this.
+        GenPage = null;
     });
 
 };
