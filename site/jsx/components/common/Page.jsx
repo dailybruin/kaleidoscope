@@ -28,7 +28,14 @@ class Page extends React.Component {
     		 credit = check1.credit;
     		 src = check1.src;
     	}
+        // if (this.props.store.getState()._dashboard !== undefined){
+        //     console.log("Sizeof dashboard is:");
+        //     console.log(this.props.store.getState()._dashboard[0]);
+        // }
 
+        // for (let i = 0; i< this.props.store.getState()._dashboard.length; i++) {
+        //     console.log(this.props.store.getState()._dashboard[i].database_id);
+        // }
         return (
             <div className="Page">
                 <p>

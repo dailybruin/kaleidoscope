@@ -11,42 +11,43 @@ export function  _dashboard(state = [], action) {
             return {
                 ...state,
                 message: action.value
-            }
+            };
         case 'ADD_HEADER':
             const header = <Header  title={action.title}
                                     author={action.author}
                                     image={action.url}/>;
+            const component_struct = {database_id: action.key, component: header};
             return [
                 ...state,
-                header
-            ];
-         case 'ADD_SUBHEAD':
+                component_struct
+            ]
+         /*case 'ADD_SUBHEAD':
             const subhead = <Subhead text={action.subhead} />;
-            return [
+            return {
                 ...state,
-                subhead
-            ];
+                action.key: subhead;
+            };
         case 'ADD_IMAGE':
             const image = <Image
                                 url={action.src}
                                 credit={action.credit}
                                 caption={action.caption}/>;
-            return [
+            return {
                 ...state,
-                image
-            ];
+                action.key: image
+            };
         case 'ADD_QUOTE':
             const quote = <Quote quoteText={action.quoteText} quoteSource={action.quoteSource}/>;
-            return [
+            return {
                 ...state,
-                quote
-            ];
+                action.key: quote
+            };
         case 'ADD_TEXT':
             const text = <TextSection text={action.text}/>;
-            return [
+            return {
                 ...state,
-                text
-            ];
+                action.key: text,
+            };*/
         default:
             return state;
     }

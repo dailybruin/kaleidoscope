@@ -55,31 +55,33 @@ class Dashboard extends React.Component {
         console.log(this.state.data.type)
         console.log(this.state.data)
         const data = this.state.data;
+        const key = "TESTKEY";
         switch (this.state.data.type) {
             case "header":
-                this.props.dispatch(addHeader(data.title, data.author, data.coverImageUrl));
+                this.props.dispatch(addHeader(data.title, data.author, data.coverImageUrl,key));
                 break;
             case "image":
                 this.props.dispatch(addImage(
                         data.imageUrl,
                         data.credit,
                         data.caption,
+                        key,
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(data.quoteText, data.quoteSource));
+                this.props.dispatch(addQuote(data.quoteText, data.quoteSource,key));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(data.subhead));
+                this.props.dispatch(addSubhead(data.subhead,key));
                 break;
             case "text_section":
-                this.props.dispatch(addText(data.text));
+                this.props.dispatch(addText(data.text,key));
                 break;
             case "text_section":
-                this.props.dispatch(addText(data.text));
+                this.props.dispatch(addText(data.text,key));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(data.subhead));
+                this.props.dispatch(addSubhead(data.subhead,key));
                 break;
             default:
                 console.log("checkback later");
