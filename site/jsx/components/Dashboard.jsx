@@ -16,6 +16,7 @@ class Dashboard extends React.Component {
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleGenPage = this.handleGenPage.bind(this);
     }
 
     render() {
@@ -37,6 +38,7 @@ class Dashboard extends React.Component {
                 </select>
                 <input type='submit'></input>
             </form>
+            <button onClick={this.handleGenPage}>Generate Page</button>
           </div>
         );
     }
@@ -52,8 +54,8 @@ class Dashboard extends React.Component {
     handleSubmit(event) {
         console.log('A component was submitted: ' + this.state.data.type);
         event.preventDefault();
-        console.log(this.state.data.type)
-        console.log(this.state.data)
+        console.log(this.state.data.type);
+        console.log(this.state.data);
         const data = this.state.data;
         const key = "TESTKEY";
         switch (this.state.data.type) {
@@ -77,9 +79,6 @@ class Dashboard extends React.Component {
             case "text_section":
                 this.props.dispatch(addText(data.text,key));
                 break;
-            case "text_section":
-                this.props.dispatch(addText(data.text,key));
-                break;
             case "subhead":
                 this.props.dispatch(addSubhead(data.subhead,key));
                 break;
@@ -91,6 +90,23 @@ class Dashboard extends React.Component {
           url: '/store',
           dataType: 'json',
           data: this.state.data,
+          type: 'POST',
+          success: function(data) {
+            // TODO: make the whole function a callback
+            console.log(data);
+          },
+          error: function() {
+            alert('Error occured');
+          }
+        });
+    }
+
+    handleGenPage(event) {
+        console.log('A page was submitted');
+        event.preventDefault();
+
+        $.ajax({
+          url: '/gen',
           type: 'POST'
         });
     }
