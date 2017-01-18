@@ -88,7 +88,14 @@ class Dashboard extends React.Component {
           url: '/store',
           dataType: 'json',
           data: this.state.data,
-          type: 'POST'
+          type: 'POST',
+          success: function(data) {
+            // TODO: make the whole function a callback
+            console.log(data);
+          },
+          error: function() {
+            alert('Error occured');
+          }
         });
     }
 
