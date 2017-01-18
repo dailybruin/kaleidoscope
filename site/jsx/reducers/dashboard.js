@@ -16,38 +16,42 @@ export function  _dashboard(state = [], action) {
             const header = <Header  title={action.title}
                                     author={action.author}
                                     image={action.url}/>;
-            const component_struct = {database_id: action.key, component: header};
+            const header_struct = {database_id: action.key, component: header};
             return [
                 ...state,
-                component_struct
+                header_struct
             ]
-         /*case 'ADD_SUBHEAD':
+         case 'ADD_SUBHEAD':
             const subhead = <Subhead text={action.subhead} />;
-            return {
+            let subhead_struct = {database_id: action.key, component: subhead};
+            return [
                 ...state,
-                action.key: subhead;
-            };
+                subhead_struct
+            ]
         case 'ADD_IMAGE':
             const image = <Image
                                 url={action.src}
                                 credit={action.credit}
                                 caption={action.caption}/>;
-            return {
+            const image_struct = {database_id: action.key, component: image};
+            return [
                 ...state,
-                action.key: image
-            };
+                image_struct
+            ];
         case 'ADD_QUOTE':
             const quote = <Quote quoteText={action.quoteText} quoteSource={action.quoteSource}/>;
-            return {
+            const quote_struct = {database_id: action.key, component: quote};
+            return [
                 ...state,
-                action.key: quote
-            };
+                quote_struct
+            ];
         case 'ADD_TEXT':
             const text = <TextSection text={action.text}/>;
-            return {
+            const text_struct = {database_id: action.key, component: text};
+            return [
                 ...state,
-                action.key: text,
-            };*/
+                text_struct
+            ];
         default:
             return state;
     }
