@@ -1,4 +1,5 @@
 .DS_Store
+node_modules/
 /junk
 npm-debug.log
 site/dist/js/bundle.js
