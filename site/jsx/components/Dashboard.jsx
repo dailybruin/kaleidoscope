@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
         });
 
         return (
-          <div className="dashboard-container form-group" >
+          <div className="container dashboard-container form-group" >
             <form onSubmit={this.handleSubmit}>
                 <div className="row component-inputs">
                     <div>{this.showInputForComponentType(this.state.data.type)}</div>
