@@ -27,16 +27,24 @@ class Dashboard extends React.Component {
         });
 
         return (
-          <div className="Dashboard">
+          <div className="container dashboard-container form-group" >
             <form onSubmit={this.handleSubmit}>
-                <div className='component-inputs'>
-                    {this.showInputForComponentType(this.state.data.type)}
+                <div className="row component-inputs">
+                    <div>{this.showInputForComponentType(this.state.data.type)}</div>
                 </div>
-                <br/>
-                <select value={this.state.data.type} onChange={this.handleDropdownChange}>
-                    {componentOptions}
-                </select>
-                <input type='submit'></input>
+                <div className="dropdown">
+                    <label for="dropdown">Select component:</label>
+                    <div className="row">
+                        <div className="col-sm-11">
+                            <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
+                                {componentOptions}
+                            </select>
+                        </div>
+                        <div className="col-sm-1">
+                            <input className="btn btn-primary" type='submit'></input>
+                        </div>
+                    </div>
+                </div>
             </form>
             <button onClick={this.handleGenPage}>Generate Page</button>
           </div>
@@ -117,65 +125,98 @@ class Dashboard extends React.Component {
         switch(componentType) {
             case 'header':
                 return(
+
                     <div>
-                        <input
-                            placeholder="Title" 
-                            type="text" name="title" 
-                            onChange={this.updateInput.bind(this, 'title')} 
-                            className="form-control"/>
-                        <input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/>
-                        <input placeholder="Cover image URL" type="text" name="url" onChange={this.updateInput.bind(this, 'coverImageUrl')} className="form-control"/>
+                        <div className="col-md-4">
+                            <label for="title">Title:</label>
+                            <input
+                                placeholder="Title" 
+                                type="text" name="title" 
+                                onChange={this.updateInput.bind(this, 'title')} 
+                                className="form-control"/>
+                        </div>
+                        <div className="col-md-4">    
+                            <label for="author">Author:</label>                   
+                            <input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/>
+                        </div>
+                        <div className="col-md-4">
+                            <label for="url">Cover Image URL:</label>
+                            <input placeholder="Cover image URL" type="text" name="url" onChange={this.updateInput.bind(this, 'coverImageUrl')} className="form-control"/>
+                        </div>
                     </div>
+                    
+
                 );
                 break;
             case 'subhead':
                 return(
                     <div>
-                        <input 
-                            placeholder="Subhead" 
-                            type="text" 
-                            name="subhead" 
-                            onChange={this.updateInput.bind(this, 'subhead')} 
-                            className="form-control"
-                        />
+                        <div className="col-md-4">
+                            <label for="subhead">Subhead:</label>
+                            <input 
+                                placeholder="Subhead" 
+                                type="text" 
+                                name="subhead" 
+                                onChange={this.updateInput.bind(this, 'subhead')} 
+                                className="form-control"
+                            />
+                        </div>
                     </div>
+                   
+
                 );
             case 'image':
                 return(
                     <div>
-                        <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
-                        <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'credit')} className="form-control"/>
-                        <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'caption')} className="form-control"/>
+                        <div className="col-md-4">
+                            <label for="url">URL:</label>
+                            <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
+                        </div>
+                        <div className="col-md-4">
+                            <label for="credit">Credit:</label>
+                            <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'credit')} className="form-control"/>
+                        </div>
+                        <div className="col-md-4">
+                            <label for="caption">Caption:</label>
+                            <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'caption')} className="form-control"/>
+                        </div>
                     </div>
                 );
                 break;
             case 'quote':
                 return(
                     <div>
-                        <input 
-                            placeholder="Quote" 
-                            type="text" 
-                            name="quote" 
-                            onChange={this.updateInput.bind(this, 'quoteText')} 
-                            className="form-control"
-                        />
-                        <input 
-                            placeholder="Quote Maker" 
-                            type="text" 
-                            name="quoteMaker" 
-                            onChange={this.updateInput.bind(this, 'quoteSource')} 
-                            className="form-control"
-                        />
+                        <div className="col-md-4">
+                            <label for="quote">Quote:</label>
+                            <input 
+                                placeholder="Quote" 
+                                type="text" 
+                                name="quote" 
+                                onChange={this.updateInput.bind(this, 'quoteText')} 
+                                className="form-control"
+                            />
+                        </div>
+                        <div className="col-md-4">
+                            <label for="quoteMaker">Quote Maker:</label>
+                            <input 
+                                placeholder="Quote Maker" 
+                                type="text" 
+                                name="quoteMaker" 
+                                onChange={this.updateInput.bind(this, 'quoteSource')} 
+                                className="form-control"
+                            />
+                        </div>
                     </div>
                 );
                 break;
             case 'text_section':
                 return(
-                    <div>
+                    <div className="col-md-12">
+                        <label for="text">Text:</label>
                         <textarea 
                             name="text" 
-                            cols="90" 
                             rows="8"
+                            className="form-control"
                             onChange={this.updateInput.bind(this, 'text')}
                         >
                         </textarea>
