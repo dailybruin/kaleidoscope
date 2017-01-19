@@ -62,7 +62,7 @@ class Dashboard extends React.Component {
           data: this.state.data,
           type: 'POST',
           success: function(database_id) {
-            this.appendPagePreview();
+            this.appendPagePreview(database_id);
           }.bind(this),
           error: function() {
             alert('Error occured');
@@ -70,32 +70,28 @@ class Dashboard extends React.Component {
         });
     }
 
-    appendPagePreview() {
+    appendPagePreview(database_id) {
         const component_params = this.state.data;
-        const key = "TESTKEY";
         switch (component_params.type) {
             case "header":
-                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl,key));
+                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, database_id));
                 break;
             case "image":
                 this.props.dispatch(addImage(
                         component_params.imageUrl,
                         component_params.credit,
                         component_params.caption,
-                        key,
+                        database_id,
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource,key));
+                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, database_id));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(component_params.subhead,key));
+                this.props.dispatch(addSubhead(component_params.subhead,database_id));
                 break;
             case "text_section":
-                this.props.dispatch(addText(component_params.text,key));
-                break;
-            case "subhead":
-                this.props.dispatch(addSubhead(component_params.subhead,key));
+                this.props.dispatch(addText(component_params.text, database_id));
                 break;
             default:
                 console.log("Component category not supported.");
