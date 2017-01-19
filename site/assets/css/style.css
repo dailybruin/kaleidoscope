@@ -1,4 +1,4 @@
-.quote{
+.quote {
 	color: red;
 }
 
@@ -6,6 +6,7 @@
 	padding: 20px;
 }
 
-.Dropdown {
-	display: block;
+.dashboard-container .dropdown {
+	margin: 20px 0 20px 0;
 }
+

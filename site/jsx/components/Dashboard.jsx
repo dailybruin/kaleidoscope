@@ -26,22 +26,24 @@ class Dashboard extends React.Component {
         });
 
         return (
-          <div className="Dashboard" >
-
+          <div className="dashboard-container form-group" >
             <form onSubmit={this.handleSubmit}>
-               
-                <div className='component-inputs'>
-                    {this.showInputForComponentType(this.state.data.type)}
+                <div className="row component-inputs">
+                    <div>{this.showInputForComponentType(this.state.data.type)}</div>
                 </div>
-                <br/>
-               <p>
-                <select value={this.state.data.type} onChange={this.handleDropdownChange}>
-                    {componentOptions}
-                </select>
-                
-                <input type='submit'></input>
-                </p>
-
+                <div className="dropdown">
+                    <label for="dropdown">Select component:</label>
+                    <div className="row">
+                        <div className="col-sm-11">
+                            <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
+                                {componentOptions}
+                            </select>
+                        </div>
+                        <div className="col-sm-1">
+                            <input className="btn btn-primary" type='submit'></input>
+                        </div>
+                    </div>
+                </div>
             </form>
           </div>
         );
@@ -111,19 +113,19 @@ class Dashboard extends React.Component {
 
                     <div>
                         <div className="col-md-4">
-                            <div>Title</div> 
+                            <label for="title">Title:</label>
                             <input
                                 placeholder="Title" 
                                 type="text" name="title" 
                                 onChange={this.updateInput.bind(this, 'title')} 
                                 className="form-control"/>
                         </div>
-                        <div className="col-md-4">
-                            <div>Author</div>                        
+                        <div className="col-md-4">    
+                            <label for="author">Author:</label>                   
                             <input placeholder="Author" type="text" name="author" onChange={this.updateInput.bind(this, 'author')} className="form-control"/>
                         </div>
                         <div className="col-md-4">
-                            <div>Cover Image URL</div>
+                            <label for="url">Cover Image URL:</label>
                             <input placeholder="Cover image URL" type="text" name="url" onChange={this.updateInput.bind(this, 'coverImageUrl')} className="form-control"/>
                         </div>
                     </div>
@@ -135,7 +137,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <div>Subhead</div>
+                            <label for="subhead">Subhead:</label>
                             <input 
                                 placeholder="Subhead" 
                                 type="text" 
@@ -152,15 +154,15 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <div>URL</div>
+                            <label for="url">URL:</label>
                             <input placeholder="URL" type="text" name="url" onChange={this.updateInput.bind(this, 'imageUrl')} className="form-control"/>
                         </div>
                         <div className="col-md-4">
-                            <div>Credit</div>
+                            <label for="credit">Credit:</label>
                             <input placeholder="Credit" type="text" name="credit"  onChange={this.updateInput.bind(this, 'credit')} className="form-control"/>
                         </div>
                         <div className="col-md-4">
-                            <div>Caption</div>
+                            <label for="caption">Caption:</label>
                             <input placeholder="Caption" type="text" name="caption" onChange={this.updateInput.bind(this, 'caption')} className="form-control"/>
                         </div>
                     </div>
@@ -170,7 +172,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <div>Quote</div>
+                            <label for="quote">Quote:</label>
                             <input 
                                 placeholder="Quote" 
                                 type="text" 
@@ -180,7 +182,7 @@ class Dashboard extends React.Component {
                             />
                         </div>
                         <div className="col-md-4">
-                            <div>Quote Maker</div>
+                            <label for="quoteMaker">Quote Maker:</label>
                             <input 
                                 placeholder="Quote Maker" 
                                 type="text" 
@@ -194,17 +196,15 @@ class Dashboard extends React.Component {
                 break;
             case 'text_section':
                 return(
-                    <div>
-                    <div className="col-md-6">
-                        <div>Text</div>
+                    <div className="col-md-12">
+                        <label for="text">Text:</label>
                         <textarea 
                             name="text" 
-                            cols="90" 
                             rows="8"
+                            className="form-control"
                             onChange={this.updateInput.bind(this, 'text')}
                         >
                         </textarea>
-                    </div>
                     </div>
                 );
                 break;
