@@ -53,50 +53,49 @@ class Dashboard extends React.Component {
 
     handleSubmit(event) {
         console.log('A component was submitted: ' + this.state.data.type);
-        event.preventDefault();
-        console.log(this.state.data.type);
         console.log(this.state.data);
-        const data = this.state.data;
-        switch (this.state.data.type) {
-            case "header":
-                this.props.dispatch(addHeader(data.title, data.author, data.coverImageUrl));
-                break;
-            case "image":
-                this.props.dispatch(addImage(
-                        data.imageUrl,
-                        data.credit,
-                        data.caption,
-                    ));
-                break;
-            case "quote":
-                this.props.dispatch(addQuote(data.quoteText, data.quoteSource));
-                break;
-            case "subhead":
-                this.props.dispatch(addSubhead(data.subhead));
-                break;
-            case "text_section":
-                this.props.dispatch(addText(data.text));
-                break;
-            case "subhead":
-                this.props.dispatch(addSubhead(data.subhead));
-                break;
-            default:
-                console.log("checkback later");
-        }
+        event.preventDefault();
 
         $.ajax({
           url: '/store',
           dataType: 'json',
           data: this.state.data,
           type: 'POST',
-          success: function(data) {
-            // TODO: make the whole function a callback
-            console.log(data);
-          },
+          success: function(database_id) {
+            this.appendPagePreview(database_id);
+          }.bind(this),
           error: function() {
             alert('Error occured');
-          }
+          }.bind(this)
         });
+    }
+
+    appendPagePreview(database_id) {
+        const component_params = this.state.data;
+        switch (component_params.type) {
+            case "header":
+                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, database_id));
+                break;
+            case "image":
+                this.props.dispatch(addImage(
+                        component_params.imageUrl,
+                        component_params.credit,
+                        component_params.caption,
+                        database_id,
+                    ));
+                break;
+            case "quote":
+                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, database_id));
+                break;
+            case "subhead":
+                this.props.dispatch(addSubhead(component_params.subhead,database_id));
+                break;
+            case "text_section":
+                this.props.dispatch(addText(component_params.text, database_id));
+                break;
+            default:
+                console.log("Component category not supported.");
+        }
     }
 
     handleGenPage(event) {
