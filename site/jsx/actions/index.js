@@ -1,39 +1,44 @@
-export const addHeader = (title, author, coverImageUrl) => {
+export const addHeader = (title, author, coverImageUrl, key) => {
     return{
         type: 'ADD_HEADER',
         title: title,
         author: author,
-        url: coverImageUrl
+        url: coverImageUrl,
+        key: key
     }
 }
 
-export const addSubhead = (text) => {
+export const addSubhead = (text, key) => {
     return{
         type: 'ADD_SUBHEAD',
-        subhead: text
+        subhead: text,
+        key: key
     }
 }
 
-export const addImage = (src, credit, caption) => {
+export const addImage = (src, credit, caption,key) => {
     return {
         type: 'ADD_IMAGE',
         src: src,
         credit: credit,
         caption: caption,
+        key: key
     }
 }
 
-export const addQuote = (quote, quoteMaker) => {
+export const addQuote = (quote, quoteMaker,key) => {
 	return {
 		type: 'ADD_QUOTE',
 		quoteText: quote,
 		quoteSource: quoteMaker,
+        key: key
 	}
 }
 
-export const addText = (text) => {
+export const addText = (text,key) => {
     return {
         type: 'ADD_TEXT',
-        text: text
+        text: text,
+        key: key
     }
 }

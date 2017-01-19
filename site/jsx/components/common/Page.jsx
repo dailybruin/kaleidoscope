@@ -19,21 +19,17 @@ class Page extends React.Component {
         super(props);
     }
     render() {
-    	let caption = "";
-    	let src = "";
-    	let credit ="";
-    	var check1 = this.props.store.getState()._dashboard;
-    	if (check1.caption !== undefined && check1.caption !== null){
-    		 caption= check1.caption;
-    		 credit = check1.credit;
-    		 src = check1.src;
-    	}
+        // Show only the component. Don't show database_id that is saved in the store
+        let redux_store = this.props.store.getState()._dashboard;
+        var num_components = redux_store.length;
+        var components = [];
+        for (var i = 0; i < num_components; i++) {
+            components.push(redux_store[i].component);
+        }
 
         return (
             <div className="Page">
-                <p>
-                	{this.props.store.getState()._dashboard}
-                </p>
+                <div>{components}</div>
             </div>
         );
     }
