@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        //console.log('state payload', this.state.data.payload);
+        console.log('state payload', this.state.data.payload);
         var componentOptions = this.props.componentTypes.map(function(type, i){
           return (
             <option value={type.replace(/\s/g , "_")}>{type}</option>
@@ -82,13 +82,6 @@ class Dashboard extends React.Component {
           }.bind(this)
         });
 
-        //clears input fields after submit
-        this.setState({
-            data:{
-                type: this.state.data.type,
-                payload: {}
-            }
-        });
     }
 
     appendPagePreview(database_id) {
@@ -118,6 +111,13 @@ class Dashboard extends React.Component {
             default:
                 console.log("Component category not supported.");
         }
+
+        this.setState({
+            data:{
+                type: this.state.data.type,
+                payload: {}
+            }
+        });
     }
 
     handleGenPage(event) {
@@ -151,8 +151,10 @@ class Dashboard extends React.Component {
     }
 
     showInputForComponentType(componentType) {
-
+        console.log('state payload', this.state.data.payload);
         console.log('Dropdown changed: ' + componentType);
+
+        console.log('param text: ', this.state.data.payload)
         switch(componentType) {
             case 'header':
                 return(
