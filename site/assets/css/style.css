@@ -1,4 +1,11 @@
+/* DASHBOARD STYLES */
+
 .dashboard-container .dropdown {
 	margin: 20px 0 20px 0;
 }
 
+/* PAGE PREVIEW STYLES */
+
+.page-container .header .title {
+	color: black;
+}
