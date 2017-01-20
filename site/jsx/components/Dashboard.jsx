@@ -22,7 +22,6 @@ class Dashboard extends React.Component {
     }
 
     render() {
-        console.log('state payload', this.state.data.payload);
         var componentOptions = this.props.componentTypes.map(function(type, i){
           return (
             <option value={type.replace(/\s/g , "_")}>{type}</option>
