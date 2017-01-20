@@ -3,13 +3,10 @@ extends template
 block content
 	div.all-pages
 		each page in pages
-			div.page-block.col-md-3.lead
-				p
-					| Title: 
-					=page.title
-				p
-					| Authors: 
-					=page.authors
+			div.col-md-3
+				each component in page.components
+						p
+							=component.type
 
-				a(class='btn btn-default update-btn' href='/update/' + page.id) Update
+			a(class='btn btn-default update-btn' href='/update/' + page.id) Update
 			

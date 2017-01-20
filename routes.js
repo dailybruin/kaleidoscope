@@ -38,7 +38,7 @@ function storeObject(data, type, res)
                     GenPage.components.push(component);
 
                 res.contentType('json');
-                res.send({ data: id/*JSON.stringify(id)*/});
+                res.send({ data: id});
                 }
             });
         }
@@ -53,7 +53,7 @@ module.exports = function (app) {
     /* GET saved pages */
     app.get('/all', function(req, res) {
         var pages;
-        GenPage.find(function (err, pages) {
+        Page.find(function (err, pages) {
           if (err) return console.error(err);
           res.render('all', { pages: pages } );
         });
