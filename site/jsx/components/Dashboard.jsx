@@ -151,10 +151,8 @@ class Dashboard extends React.Component {
     }
 
     showInputForComponentType(componentType) {
-        console.log('state payload', this.state.data.payload);
         console.log('Dropdown changed: ' + componentType);
 
-        console.log('param text: ', this.state.data.payload)
         switch(componentType) {
             case 'header':
                 return(
