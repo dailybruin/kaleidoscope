@@ -3,3 +3,4 @@
 npm-debug.log
 site/dist/js/bundle.js
 site/dist/js/index.html
+site/assets/stylesheets/*.css
