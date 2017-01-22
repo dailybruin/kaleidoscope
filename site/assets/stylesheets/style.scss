@@ -1,11 +1,28 @@
 /* DASHBOARD STYLES */
 
-.dashboard-container .dropdown {
-	margin: 20px 0 20px 0;
+.dashboard-container {
+	.dropdown {
+		margin: 20px 0 20px 0;
+	}
 }
 
 /* PAGE PREVIEW STYLES */
 
-.page-container .header .title {
-	color: black;
+.page-container {
+	.header {
+		.headerDetails {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		.title {
+			color: black;
+		}
+		.coverImage {
+			background-position: cover;
+			min-height: 700px;
+			width: 100%;
+		}
+	}
 }
