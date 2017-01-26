@@ -13,7 +13,7 @@ class TextSection extends React.Component {
 	render(){
 		var text = this.props.text;
 		return (
-			<div>
+			<div class="text">
 				{text.split("\n").map(i => {
 					return <p>{i}</p>;
 				})}

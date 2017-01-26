@@ -11,6 +11,9 @@
 .page-container {
 	.header {
 		.headerDetails {
+			background-color: rgba(160,160,160, 0.2) ;
+			padding: 30px;
+			border-radius: 2em;	
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -25,4 +28,13 @@
 			width: 100%;
 		}
 	}
+	.text{
+		font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+	}
+	/*.linebreak {
+	    padding: 5px;
+	    border-top: 2px solid rgb(0,0,0);
+	    margin-top: 40px;
+	    margin-bottom: 40px;
+	}*/
 }
