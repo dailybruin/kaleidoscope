@@ -19,7 +19,8 @@ app.use(
    sassMiddleware({
        src: __dirname + '/site/assets/stylesheets', 
        dest: __dirname + '/site/assets/stylesheets',
-       debug: true,       
+       force: true,
+       debug: true       
    })
 ), 
 // The static middleware must come after the sass middleware
