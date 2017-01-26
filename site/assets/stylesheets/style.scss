@@ -27,9 +27,15 @@
 			min-height: 700px;
 			width: 100%;
 		}
+		hr { 
+			height: 5px;
+			color: black;
+		}
 	}
 	.text{
 		font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+		margin: 0 30% 0 30%;
+		font-size: 1.3em;
 	}
 	/*.linebreak {
 	    padding: 5px;

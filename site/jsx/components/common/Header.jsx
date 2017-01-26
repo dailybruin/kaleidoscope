@@ -17,6 +17,7 @@ class Header extends React.Component{
 			<div className="header">
 				<div className="headerDetails">
 					<h1 className="title">{ this.props.title }</h1>
+					<hr/>
 					<h3 className="author">By { this.props.author }</h3>
 				</div>
 				<div className="coverImage" style={{backgroundImage:'url(' + this.props.image + ')'}}></div>
