@@ -12,6 +12,9 @@
 	font-family: Verdana;
 	.header {
 		.headerDetails {
+			background-color: rgba(160,160,160, 0.2) ;
+			padding: 30px;
+			border-radius: 2em;	
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -25,6 +28,15 @@
 			min-height: 700px;
 			width: 100%;
 		}
+		hr { 
+			height: 5px;
+			color: black;
+		}
+	}
+	.text{
+		font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+		margin: 0 30% 0 30%;
+		font-size: 1.3em;
 	}
 	.subhead {
 		color: DodgerBlue;
