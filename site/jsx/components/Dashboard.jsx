@@ -98,7 +98,7 @@ class Dashboard extends React.Component {
             default:
                 console.log("Component category not supported.");
         }
-        var Data = {"object": component_params, "type": this.state.data.type};
+        var Data = {"component_data": component_params, "component_type": this.state.data.type};
         this.state.componentsTable.push(Data);
 
         this.setState({
