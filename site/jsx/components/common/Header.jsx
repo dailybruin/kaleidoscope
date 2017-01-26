@@ -15,9 +15,11 @@ class Header extends React.Component{
 	render(){
 		return(
 			<div className="header">
-				<h1 className="title">{ this.props.title }</h1>
-				<h3 className="author">By { this.props.author }</h3>
-				<img className="image" src={ this.props.image }/>
+				<div className="headerDetails">
+					<h1 className="title">{ this.props.title }</h1>
+					<h3 className="author">By { this.props.author }</h3>
+				</div>
+				<div className="coverImage" style={{backgroundImage:'url(' + this.props.image + ')'}}></div>
 			</div>
 		);
 	}

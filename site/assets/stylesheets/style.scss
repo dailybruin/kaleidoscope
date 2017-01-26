@@ -1,11 +1,61 @@
 /* DASHBOARD STYLES */
 
-.dashboard-container .dropdown {
-	margin: 20px 0 20px 0;
+.dashboard-container {
+	.dropdown {
+		margin: 20px 0 20px 0;
+	}
 }
 
 /* PAGE PREVIEW STYLES */
 
-.page-container .header .title {
-	color: black;
+.page-container {
+	font-family: Verdana;
+	.header {
+		.headerDetails {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		.title {
+			color: black;
+		}
+		.coverImage {
+			background-position: cover;
+			min-height: 700px;
+			width: 100%;
+		}
+	}
+	.subhead {
+		color: DodgerBlue;
+		font-weight: bolder;
+	}
+	.quote {
+		font-size: 1.5em;
+		font-weight: 600;
+		font-style: oblique;
+	}
+	.quoteSource {
+		font-size: 0.9em;
+		font-weight: 400;
+		color: grey;
+		letter-spacing: 0.5px;
+	}
+	.image {
+		max-width: 100%;
+		height: auto;
+		width: auto\9;
+	}
+	.img-caption {
+		margin: 0;
+		padding-top: 10px;
+		padding-bottom: 1px;
+		text-align: center;
+		vertical-align: middle;
+	}
+	.img-credit {
+		text-align: center;
+		vertical-align: middle;
+	}
+
 }
