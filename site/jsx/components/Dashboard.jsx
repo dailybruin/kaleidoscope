@@ -14,7 +14,8 @@ class Dashboard extends React.Component {
         this.state = {  data: {
                             type: this.props.componentTypes[0],
                             payload: {}
-                        }
+                        },
+                        componentsTable: []
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -67,20 +68,7 @@ class Dashboard extends React.Component {
         console.log('A component was submitted: ' + this.state.data.type);
         console.log(this.state.data);
         event.preventDefault();
-
-        $.ajax({
-          url: '/store',
-          dataType: 'json',
-          data: this.state.data,
-          type: 'POST',
-          success: function(database_id) {
-            this.appendPagePreview(database_id);
-          }.bind(this),
-          error: function() {
-            alert('Error occured');
-          }.bind(this)
-        });
-
+        this.appendPagePreview('arbitrary id');
     }
 
     appendPagePreview(database_id) {
@@ -110,6 +98,8 @@ class Dashboard extends React.Component {
             default:
                 console.log("Component category not supported.");
         }
+        var Data = {"object": component_params, "type": this.state.data.type};
+        this.state.componentsTable.push(Data);
 
         this.setState({
             data:{
@@ -122,17 +112,24 @@ class Dashboard extends React.Component {
     handleGenPage(event) {
         console.log('A page was submitted');
         event.preventDefault();
-
         $.ajax({
           url: '/gen',
+          type: 'POST',
+          data: {"data": JSON.stringify(this.state.componentsTable)},
           type: 'POST'
+          // success: function(database_id) {
+          // }.bind(this),
+          // error: function() {
+          //   alert('Error occured');
+          // }.bind(this)
         });
 
         this.setState({
             data: {
                 type: this.state.data.type,
                 payload: {}
-            }
+            },
+            componentsTable: []
         });
     }
 

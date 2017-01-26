@@ -13,9 +13,8 @@ var Component = require('./site/model/component');
 
 var GenPage = null;
 
-function storeObject(data, type, res)
+function storeObject(data, type, savePage)
 {
-    // Save object in their specific table (ie store new header in Header table)
     data.save(function(err, room) {
         if (err) {
             console.log(err);
@@ -37,12 +36,66 @@ function storeObject(data, type, res)
                     //  Add components to the Page
                     GenPage.components.push(component);
 
-                res.contentType('json');
-                res.send({ data: id/*JSON.stringify(id)*/});
+                    if (savePage)  //  last component
+                    {
+                        GenPage.save(function(err, room) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log('Successfully stored Page in Page table.');
+                            }
+                        });
+                    }
+
+                    // res.contentType('json');
+                    // res.send({ data: 'randomid'/*JSON.stringify(id)*/});
                 }
             });
         }
     });
+}
+
+function storeToDB(componentsTable)
+{
+    if (GenPage == null) {
+        GenPage = new Page();
+    }
+
+    for (var i = 0; i < componentsTable.length; i++)
+    {
+        var object = componentsTable[i].object;
+        var type = componentsTable[i].type;
+        var data = null;
+        switch(type) {
+            case "header":
+                data = new Header();
+                data.text = object.title;
+                data.imageUrl = object.coverImageUrl;
+                data.author = object.author;
+                break;
+
+            case "subhead":
+                data = new Subhead();
+                data.text = object.subhead;
+                break;
+            case "quote":
+                data = new Quote();
+                data.quoteText = object.quoteText;
+                data.quoteSource = object.quoteSource;
+                break;
+            case "text_section":
+                data = new TextSection();
+                data.text = object.text;
+                break;
+            case "image":
+                data = new Image();
+                data.url = object.imageUrl;
+                data.caption = object.caption;
+                data.credit = object.credit;
+                break;
+        }
+        storeObject(data, type, i == componentsTable.length - 1);
+    }
 }
 
 module.exports = function (app) {
@@ -64,65 +117,11 @@ module.exports = function (app) {
 		res.render('dashboard');
     });
 
-    //  components
-    //  
-    app.post('/store', function(req, res, next) {
-        if (GenPage == null) {
-            GenPage = new Page();
-        }
-
-    	console.log(req.body);
-    	switch(req.body.type) {
-    		case "header":
-                var data = new Header();
-                data.text = req.body.title;
-                data.imageUrl = req.body.coverImageUrl;
-                data.author = req.body.author;
-                storeObject(data, req.body.type, res);
-                break;
-
-    		case "subhead":
-                var subhead = new Subhead();
-                subhead.text = req.body.subhead;
-                storeObject(subhead, req.body.type, res);
-    			break;
-    		case "quote":
-                var quoteEntry = new Quote();
-                quoteEntry.quoteText = req.body.quoteText;
-                quoteEntry.quoteSource = req.body.quoteSource;
-                storeObject(quoteEntry, req.body.type, res);
-    			break;
-    		case "text_section":
-    			var data = new TextSection();
-    			data.text = req.body.text;
-                storeObject(data, req.body.type, res);
-    			break;
-    		case "image":
-                var image = new Image();
-                image.url = req.body.imageUrl;
-                image.caption = req.body.caption;
-                image.credit = req.body.credit;
-                storeObject(image, req.body.type, res);
-    			break;
-    	}
-    });
-
     app.post('/gen', function(req, res, next) {
         if (GenPage == null) {
             console.log('Nothing has been submitted');
         }
-
-        GenPage.save(function(err, room) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Successfully stored Page in Page table.');
-            }
-        });
-
-        //  TODO: If there's an error, everything will be lost.
-        //        Wanna improve this.
-        GenPage = null;
+        storeToDB(JSON.parse(req.body.data));
     });
 
 };
