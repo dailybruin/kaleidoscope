@@ -9,6 +9,7 @@
 /* PAGE PREVIEW STYLES */
 
 .page-container {
+	font-family: Verdana;
 	.header {
 		.headerDetails {
 			background-color: rgba(160,160,160, 0.2) ;
@@ -37,10 +38,36 @@
 		margin: 0 30% 0 30%;
 		font-size: 1.3em;
 	}
-	/*.linebreak {
-	    padding: 5px;
-	    border-top: 2px solid rgb(0,0,0);
-	    margin-top: 40px;
-	    margin-bottom: 40px;
-	}*/
+	.subhead {
+		color: DodgerBlue;
+		font-weight: bolder;
+	}
+	.quote {
+		font-size: 1.5em;
+		font-weight: 600;
+		font-style: oblique;
+	}
+	.quoteSource {
+		font-size: 0.9em;
+		font-weight: 400;
+		color: grey;
+		letter-spacing: 0.5px;
+	}
+	.image {
+		max-width: 100%;
+		height: auto;
+		width: auto\9;
+	}
+	.img-caption {
+		margin: 0;
+		padding-top: 10px;
+		padding-bottom: 1px;
+		text-align: center;
+		vertical-align: middle;
+	}
+	.img-credit {
+		text-align: center;
+		vertical-align: middle;
+	}
+
 }
