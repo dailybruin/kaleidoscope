@@ -9,6 +9,7 @@
 /* PAGE PREVIEW STYLES */
 
 .page-container {
+	font-family: Verdana;
 	.header {
 		.headerDetails {
 			position: absolute;
@@ -27,7 +28,7 @@
 	}
 	.subhead {
 		color: DodgerBlue;
-		font-weight: 400;
+		font-weight: bolder;
 	}
 	.quote {
 		font-size: 1.5em;
@@ -41,7 +42,15 @@
 		letter-spacing: 0.5px;
 	}
 	.img-caption {
+		margin: 0;
 		padding-top: 10px;
+		padding-bottom: 1px;
+		text-align: center;
+		vertical-align: middle;
+	}
+	.img-credit {
+		text-align: center;
+		vertical-align: middle;
 	}
 
 }
