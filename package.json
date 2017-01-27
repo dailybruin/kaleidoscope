@@ -18,6 +18,8 @@
     "express": "^4.13.3",
     "jade": "^1.11.0",
     "mongoose": "^4.7.7",
+    "node-sass": "^4.3.0",
+    "node-sass-middleware": "^0.11.0",
     "path": "^0.12.7",
     "react": "^15.4.1",
     "react-redux": "^4.4.6",

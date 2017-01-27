@@ -4,46 +4,8 @@
  */
 var express = require('express');
 var Page = require('./site/model/page');
-var Image = require('./site/model/image');
-var Quote = require('./site/model/quote');
-var TextSection = require('./site/model/textSection');
-var Header = require('./site/model/header');
-var Subhead = require('./site/model/subhead');
-var Component = require('./site/model/component');
 
 var GenPage = null;
-
-function storeObject(data, type, res)
-{
-    // Save object in their specific table (ie store new header in Header table)
-    data.save(function(err, room) {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log('Successfully stored ' + type + ' in ' + type + ' table.');
-
-            // Store in Components table
-            var component = new Component();
-            var id = room._id;
-            component.type = type;
-            component.component_id = id;
-
-            component.save(function (err, room) {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('Successfully stored ' + type + ' in ' + 'components table.');
-                    
-                    //  Add components to the Page
-                    GenPage.components.push(component);
-
-                res.contentType('json');
-                res.send({ data: id});
-                }
-            });
-        }
-    });
-}
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
@@ -64,65 +26,23 @@ module.exports = function (app) {
 		res.render('dashboard');
     });
 
-    //  components
-    //  
-    app.post('/store', function(req, res, next) {
+    app.post('/gen', function(req, res, next) {
         if (GenPage == null) {
             GenPage = new Page();
         }
 
-    	console.log(req.body);
-    	switch(req.body.type) {
-    		case "header":
-                var data = new Header();
-                data.text = req.body.title;
-                data.imageUrl = req.body.coverImageUrl;
-                data.author = req.body.author;
-                storeObject(data, req.body.type, res);
-                break;
+        var data = JSON.parse(req.body.data);
 
-    		case "subhead":
-                var subhead = new Subhead();
-                subhead.text = req.body.subhead;
-                storeObject(subhead, req.body.type, res);
-    			break;
-    		case "quote":
-                var quoteEntry = new Quote();
-                quoteEntry.quoteText = req.body.quoteText;
-                quoteEntry.quoteSource = req.body.quoteSource;
-                storeObject(quoteEntry, req.body.type, res);
-    			break;
-    		case "text_section":
-    			var data = new TextSection();
-    			data.text = req.body.text;
-                storeObject(data, req.body.type, res);
-    			break;
-    		case "image":
-                var image = new Image();
-                image.url = req.body.imageUrl;
-                image.caption = req.body.caption;
-                image.credit = req.body.credit;
-                storeObject(image, req.body.type, res);
-    			break;
-    	}
-    });
-
-    app.post('/gen', function(req, res, next) {
-        if (GenPage == null) {
-            console.log('Nothing has been submitted');
-        }
-
+        GenPage.components = data;
         GenPage.save(function(err, room) {
             if (err) {
                 console.log(err);
             } else {
                 console.log('Successfully stored Page in Page table.');
+                console.log('DATA SAVED IN MONGODB:');
+                console.log(data);
             }
         });
-
-        //  TODO: If there's an error, everything will be lost.
-        //        Wanna improve this.
-        GenPage = null;
     });
 
 };

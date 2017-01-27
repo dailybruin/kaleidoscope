@@ -14,10 +14,13 @@ class Header extends React.Component{
 
 	render(){
 		return(
-			<div>
-				<h1 className="header">{ this.props.title }</h1>
-				<h3 className="header">By { this.props.author }</h3>
-				<img src={ this.props.image }/>
+			<div className="header">
+				<div className="headerDetails">
+					<h1 className="title">{ this.props.title }</h1>
+					<hr/>
+					<h3 className="author">By { this.props.author }</h3>
+				</div>
+				<div className="coverImage" style={{backgroundImage:'url(' + this.props.image + ')'}}></div>
 			</div>
 		);
 	}

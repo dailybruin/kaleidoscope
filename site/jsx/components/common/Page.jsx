@@ -28,8 +28,8 @@ class Page extends React.Component {
         }
 
         return (
-            <div className="Page">
-                <div>{components}</div>
+            <div className="page-container">
+                {components}
             </div>
         );
     }
