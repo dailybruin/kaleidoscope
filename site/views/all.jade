@@ -1,12 +1,25 @@
 extends template
 
 block content
-	div.all-pages
+	div.grid.all_pages
 		each page in pages
-			div.col-md-3
-				each component in page.components
-						p
-							=component.type
+			//- Extract data
+			- var title, author, coverImageUrl = null;
+			- var datetime = page._id.getTimestamp()
+			- datetime = (datetime.getMonth() + 1) + '/' + datetime.getDate() + '/' + datetime.getFullYear()
+			each o in page.components
+				if o.component_type == "header"
+					- title = o.component_data["title"]
+					- author = o.component_data["author"]
+					- coverImageUrl = o.component_data["coverImageUrl"]
+					break
 
-			a(class='btn btn-default update-btn' href='/update/' + page.id) Update
+			//- Display data
+			div.col-md-3.col-sm-6.page
+				p.title Title: #{title}
+				p.author Author: #{author}
+				span.datetime Date Created: #{datetime}
+				div
+					img(src=coverImageUrl, class="coverImage")
+				a(class='btn btn-default' href='/update?pageID=' + page._id) Update
 			

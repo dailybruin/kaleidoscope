@@ -9,7 +9,7 @@ var GenPage = null;
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('index', { title: 'Dashboard' });
+        res.render('index', { title: 'New Page', components: [] });
     });
 
     /* GET saved pages */
@@ -22,8 +22,11 @@ module.exports = function (app) {
     });
 
     /* GET create page form. */
-    app.get('/create', function(req, res, next) {
-		res.render('dashboard');
+    app.get('/update', function(req, res, next) {
+        Page.findOne({'_id': req.query.pageID}, function(err, page) {
+            // console.log(page.components);
+            res.render('index', { title: 'Editting Page', components: page.components } );
+        });
     });
 
     app.post('/gen', function(req, res, next) {

@@ -6,7 +6,8 @@ import {addHeader, addImage, addQuote, addText, addSubhead} from '../actions';
 class Dashboard extends React.Component {
     
     static propTypes = {
-        componentTypes: React.PropTypes.array.isRequired
+        componentTypes: React.PropTypes.array.isRequired,
+        preloaded_components: React.PropTypes.array.isRequired
     }
     constructor(props) {
         super(props);
@@ -20,6 +21,16 @@ class Dashboard extends React.Component {
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleGenPage = this.handleGenPage.bind(this);
+
+        // Load all preloaded components
+        for (var i = 0; i < this.props.preloaded_components.length; i++) {
+            // console.log(this.props.preloaded_components[i]);
+            var formatted_component_data = {
+                'type': this.props.preloaded_components[i].component_type,
+                'payload': this.props.preloaded_components[i].component_data
+            }
+            this.appendPagePreview('arbitrary id', formatted_component_data);
+        }
     }
 
     render() {
@@ -68,36 +79,37 @@ class Dashboard extends React.Component {
         console.log('A component was submitted: ' + this.state.data.type);
         console.log(this.state.data);
         event.preventDefault();
-        this.appendPagePreview('arbitrary id');
+        this.appendPagePreview('arbitrary id', this.state.data);
     }
 
-    appendPagePreview(database_id) {
-        
-        const component_params = this.state.data.payload;
-        switch (this.state.data.type) {
+    appendPagePreview(store_id, data) {
+        console.log(data);
+        const component_params = data.payload;
+        switch (data.type) {
             case "header":
-                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, database_id));
+                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, store_id));
                 break;
             case "image":
                 this.props.dispatch(addImage(
                         component_params.imageUrl,
                         component_params.credit,
                         component_params.caption,
-                        database_id,
+                        store_id,
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, database_id));
+                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(component_params.subhead,database_id));
+                this.props.dispatch(addSubhead(component_params.subhead,store_id));
                 break;
             case "text_section":
-                this.props.dispatch(addText(component_params.text, database_id));
+                this.props.dispatch(addText(component_params.text, store_id));
                 break;
             default:
                 console.log("Component category not supported.");
         }
+
         var Data = {"component_data": component_params, "component_type": this.state.data.type};
         this.state.componentsTable.push(Data);
 

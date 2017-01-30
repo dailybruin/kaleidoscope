@@ -13,7 +13,7 @@ class Page extends React.Component {
         author: React.PropTypes.string.isRequired,
         image: React.PropTypes.array.isRequired,
         quote: React.PropTypes.array.isRequired,
-        text: React.PropTypes.string
+        text: React.PropTypes.string,
     }
     constructor(props) {
         super(props);
