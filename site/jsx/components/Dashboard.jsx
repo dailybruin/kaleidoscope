@@ -7,7 +7,8 @@ class Dashboard extends React.Component {
     
     static propTypes = {
         componentTypes: React.PropTypes.array.isRequired,
-        preloaded_components: React.PropTypes.array.isRequired
+        preloaded_components: React.PropTypes.array.isRequired,
+        database_id: React.PropTypes.string.isRequired
     }
     constructor(props) {
         super(props);
@@ -127,7 +128,10 @@ class Dashboard extends React.Component {
         $.ajax({
           url: '/gen',
           type: 'POST',
-          data: {"data": JSON.stringify(this.state.componentsTable)},
+          data: {
+            "data": JSON.stringify(this.state.componentsTable), 
+            "current_id": JSON.stringify(this.props.database_id)
+          },
           type: 'POST'
           // success: function(database_id) {
           // }.bind(this),

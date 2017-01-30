@@ -9,7 +9,7 @@ var GenPage = null;
 
 module.exports = function (app) {
     app.get('/', function (req, res) {
-        res.render('index', { title: 'New Page', components: [] });
+        res.render('index', { title: 'New Page', components: [], database_id: "" });
     });
 
     /* GET saved pages */
@@ -25,7 +25,7 @@ module.exports = function (app) {
     app.get('/update', function(req, res, next) {
         Page.findOne({'_id': req.query.pageID}, function(err, page) {
             // console.log(page.components);
-            res.render('index', { title: 'Editting Page', components: page.components } );
+            res.render('index', { title: 'Editting Page', components: page.components, database_id: req.query.pageID } );
         });
     });
 
@@ -35,8 +35,10 @@ module.exports = function (app) {
         }
 
         var data = JSON.parse(req.body.data);
+        var current_id =JSON.parse(req.body.current_id);
 
         GenPage.components = data;
+
         GenPage.save(function(err, room) {
             if (err) {
                 console.log(err);
@@ -44,6 +46,7 @@ module.exports = function (app) {
                 console.log('Successfully stored Page in Page table.');
                 console.log('DATA SAVED IN MONGODB:');
                 console.log(data);
+                GenPage = null;
             }
         });
     });

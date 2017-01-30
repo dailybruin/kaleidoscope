@@ -13,7 +13,7 @@ class App extends React.Component {
             <div>
                 <Page store={this.props.store} />
                 <hr />
-				<Dashboard store={this.props.store} preloaded_components={this.props.preloaded_components} componentTypes={['header', 'subhead', 'image', 'quote', 'text section']} />             
+				<Dashboard store={this.props.store} preloaded_components={this.props.preloaded_components} componentTypes={['header', 'subhead', 'image', 'quote', 'text section']} database_id={this.props.database_id}/>             
             </div>
         )
     }
