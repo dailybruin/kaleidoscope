@@ -15,11 +15,13 @@ block content
 					break
 
 			//- Display data
-			div.col-md-3.col-sm-6.page
+			div.col-md-4.col-sm-6.page
 				p.title Title: #{title}
 				p.author Author: #{author}
 				span.datetime Date Created: #{datetime}
 				div
 					img(src=coverImageUrl, class="coverImage")
 				a(class='btn btn-default' href='/update?pageID=' + page._id) Update
+				form(method='POST', action='/page/#{page._id}?_method=DELETE')
+					button(type='submit') Delete
 			

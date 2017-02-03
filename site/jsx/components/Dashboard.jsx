@@ -81,6 +81,7 @@ class Dashboard extends React.Component {
         console.log(this.state.data);
         event.preventDefault();
         this.appendPagePreview('arbitrary id', this.state.data);
+        console.log('Current components table: ' + this.state.componentsTable);
     }
 
     appendPagePreview(store_id, data) {

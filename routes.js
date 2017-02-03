@@ -39,16 +39,63 @@ module.exports = function (app) {
 
         GenPage.components = data;
 
-        GenPage.save(function(err, room) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Successfully stored Page in Page table.');
-                console.log('DATA SAVED IN MONGODB:');
-                console.log(data);
-                GenPage = null;
-            }
-        });
+        // Save a new page
+        if (current_id == '') {
+            GenPage.save(function(err, room) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('Successfully stored Page in Page table.');
+                    console.log(data);
+                    GenPage = null;
+                }
+            });
+        }
+        // Update currently existing page with current_id
+        else {
+            Page.update(
+                { '_id' : current_id }, 
+                { $set: { 'components': data } },
+                function (err, result) {
+                    if (err) 
+                        console.log(err);
+
+                    console.log('Successfully updated Page in Page table.');
+                    console.log(result);
+                    GenPage = null;
+                })
+        }
+
+    });
+
+    app.post('/page/:id', function (req, res, next) {
+        console.log('deleting ' + req.params.id);
+        Page.findById(req.params.id)
+            .exec(function(err, entries) {
+               // changed `if (err || !doc)` to `if (err || !entries)`
+                if (err || !entries) {
+                    res.statusCode = 404;
+                    res.send("There was an error deleting this page.");
+                } else {
+                    entries.remove(function(err) {
+                        if (err) {
+                            res.statusCode = 403;
+                            res.send(err);
+                        } 
+                        else {
+                            // Redirect back to /all
+                            var pages;
+                            Page.find(function (err, pages) {
+                                if (err) 
+                                    console.log(err);
+
+                                res.render('all', { pages: pages } );
+                                // res.send({redirect: '/all'});
+                            });
+                        }
+                    });
+                }
+            });
     });
 
 };
