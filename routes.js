@@ -4,6 +4,7 @@
  */
 var express = require('express');
 var Page = require('./site/model/page');
+var mongodb = require('mongodb');
 
 var GenPage = null;
 
@@ -70,32 +71,22 @@ module.exports = function (app) {
 
     app.post('/page/:id', function (req, res, next) {
         console.log('deleting ' + req.params.id);
-        Page.findById(req.params.id)
-            .exec(function(err, entries) {
-               // changed `if (err || !doc)` to `if (err || !entries)`
-                if (err || !entries) {
-                    res.statusCode = 404;
-                    res.send("There was an error deleting this page.");
-                } else {
-                    entries.remove(function(err) {
-                        if (err) {
-                            res.statusCode = 403;
-                            res.send(err);
-                        } 
-                        else {
-                            // Redirect back to /all
-                            var pages;
-                            Page.find(function (err, pages) {
-                                if (err) 
-                                    console.log(err);
-
-                                res.render('all', { pages: pages } );
-                                // res.send({redirect: '/all'});
-                            });
-                        }
-                    });
-                }
-            });
+        Page.remove({_id: new mongodb.ObjectID(req.params.id)}, function(err, results) {
+            if (err){
+                console.log("failed");
+            } else {
+                console.log("success");
+                var pages;
+                Page.find(function (err, pages) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        res.redirect('/all');
+                        res.render('all', { pages: pages });
+                    }
+                });
+            }
+        });
     });
 
 };
