@@ -41,27 +41,31 @@ class Dashboard extends React.Component {
           );
         });
 
+        var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
+
         return (
-          <div className="container dashboard-container form-group" >
-            <form onSubmit={this.handleSubmit}>
-                <div className="row component-inputs">
-                    <div>{this.showInputForComponentType(this.state.data.type)}</div>
-                </div>
-                <div className="dropdown">
-                    <label for="dropdown">Select component:</label>
-                    <div className="row">
-                        <div className="col-sm-11">
-                            <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
-                                {componentOptions}
-                            </select>
-                        </div>
-                        <div className="col-sm-1">
-                            <input className="btn btn-primary" type='submit'></input>
+          <div className="dashboard-container" >
+            <div className="container form-group">
+                <form onSubmit={this.handleSubmit}>
+                    <div className="row component-inputs">
+                        <div>{this.showInputForComponentType(this.state.data.type)}</div>
+                    </div>
+                    <div className="dropdown">
+                        <label for="dropdown">Select component:</label>
+                        <div className="row">
+                            <div className="col-sm-11">
+                                <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
+                                    {componentOptions}
+                                </select>
+                            </div>
+                            <div className="col-sm-1">
+                                <input className="btn btn-primary" type='submit'></input>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
-            <button onClick={this.handleGenPage}>Generate Page</button>
+                </form>
+                <button onClick={this.handleGenPage} className="btn btn-block btn-primary">{buttonText}</button>
+              </div>
           </div>
         );
     }
@@ -274,7 +278,7 @@ class Dashboard extends React.Component {
                         <label for="text">Text:</label>
                         <textarea 
                             name="text" 
-                            rows="8"
+                            rows="3"
                             className="form-control"
                             onChange={this.updateInput.bind(this, 'text')}>
                         </textarea>

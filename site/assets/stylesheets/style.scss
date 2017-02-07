@@ -1,6 +1,12 @@
 /* DASHBOARD STYLES */
 
 .dashboard-container {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 10px 10px;
+	background-color: white;
+	border-top: 1px solid lightgrey;
 	.dropdown {
 		margin: 20px 0 20px 0;
 	}
@@ -10,6 +16,8 @@
 
 .page-container {
 	font-family: Verdana;
+	height: 400px;
+	overflow-y: scroll;
 	.header {
 		.headerDetails {
 			background-color: rgba(160,160,160, 0.2) ;
