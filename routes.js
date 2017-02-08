@@ -67,6 +67,21 @@ module.exports = function (app) {
                 })
         }
 
+        Page.find(function (err, pages) {
+            
+            if (err) {
+                console.log(err);
+                return;
+            } else {
+                console.log("generate should go to all");
+                res.redirect('/all');
+                res.render('all', { pages: pages }); 
+                return;
+                 
+            }
+        });
+        
+
     });
 
     app.post('/page/:id', function (req, res, next) {
