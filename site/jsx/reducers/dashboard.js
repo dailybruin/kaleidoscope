@@ -64,8 +64,8 @@ export function _header(state=[], action) {
             const og_title = '<meta property="og:title"' + action.og_title + '/>';
             const og_image = '<meta property="og:image"' + action.og_image + '/>';
             const og_description = '<meta property="og:og_description"' + action.og_description + '/>';
-            const meta_tags = title + og_title + og_image + og_description;
-
+            const favicon = '<link rel = "icon" type="image/png" href="http://dailybruin.com/img/favicons/favicon-32x32.png" sizes="32x32">';
+            const meta_tags = title + og_title + og_image + og_description + favicon;
             return [
                 ...state,
                 meta_tags
