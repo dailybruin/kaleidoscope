@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead} from '../actions';
 
-
 class Dashboard extends React.Component {
     
     static propTypes = {
@@ -42,7 +41,6 @@ class Dashboard extends React.Component {
         });
 
         var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
-
         return (
           <div className="dashboard-container" >
             <div className="container form-group">
@@ -129,6 +127,14 @@ class Dashboard extends React.Component {
 
     handleGenPage(event) {
         console.log('A page was submitted');
+        let redux_store = this.props.store.getState()._dashboard;
+        var num_components = redux_store.length;
+        var components = [];
+        for (var i = 0; i < num_components; i++) {
+            console.log(React.renderToStaticMarkup(redux_store[i].component))
+            // components.push(redux_store[i].component);
+        }
+
         event.preventDefault();
         $.ajax({
           url: '/gen',
