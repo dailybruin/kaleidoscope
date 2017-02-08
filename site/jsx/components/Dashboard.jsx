@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead} from '../actions';
+var FileSaver = require('file-saver');
+
+
 
 class Dashboard extends React.Component {
     
@@ -127,14 +130,18 @@ class Dashboard extends React.Component {
 
     handleGenPage(event) {
         console.log('A page was submitted');
+        /*
+            Use React.renderToStaticMarkup to convert each react component into HTML
+            Collect all HTML pieces and then save them to a file using FileSaver.js
+        */ 
         let redux_store = this.props.store.getState()._dashboard;
         var num_components = redux_store.length;
-        var components = [];
+        let content = "";
         for (var i = 0; i < num_components; i++) {
-            console.log(React.renderToStaticMarkup(redux_store[i].component))
-            // components.push(redux_store[i].component);
+            content = content + React.renderToStaticMarkup(redux_store[i].component)
         }
-
+        var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+        FileSaver.saveAs(blob, "index.html");
         event.preventDefault();
         $.ajax({
           url: '/gen',
