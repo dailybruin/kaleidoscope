@@ -56,3 +56,22 @@ export function  _dashboard(state = [], action) {
             return state;
     }
 }
+
+export function _header(state=[], action) {
+    switch (action.type) {
+        case 'NEW_HEADER':
+            const title = "<title>" + action.title + "</title>";
+            const og_title = '<meta property="og:title"' + action.og_title + '/>';
+            const og_image = '<meta property="og:image"' + action.og_image + '/>';
+            const og_description = '<meta property="og:og_description"' + action.og_description + '/>';
+            const meta_tags = title + og_title + og_image + og_description;
+
+            return [
+                ...state,
+                meta_tags
+            ];
+        default:
+            console.log("Not supposed to be here");
+            return state;
+    }
+}

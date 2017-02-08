@@ -1,7 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addHeader, addImage, addQuote, addText, addSubhead} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags} from '../actions';
+import Helmet from "react-helmet";
+import ReactDOMServer from 'react-dom/server';
+import DocumentMeta from 'react-document-meta';
 var FileSaver = require('file-saver');
+
 
 
 
@@ -42,7 +46,60 @@ class Dashboard extends React.Component {
             <option value={type.replace(/\s/g , "_")}>{type}</option>
           );
         });
+        // let test_head = <Helmet 
+        //                     title="Test Title"
+        //                     meta={[{name: "description", content: "Testing Helmet"}]}/>;
+        // const test_helmet = <Helmet title="My Title"/>
+        // console.log(Helmet.peek());
+        // console.log(React.renderToString(<Helmet title="My Title"/>));
+        // let head = Helmet.rewind();
+        let test_head =
+        <Helmet
+            htmlAttributes={{lang: "en", amp: undefined}} // amp takes no value
+            title="My Title"
+            titleTemplate="MySite.com - %s"
+            defaultTitle="My Default Title"
+            titleAttributes={{itemprop: "name", lang: "en"}}
+            base={{target: "_blank", href: "http://mysite.com/"}}
+            meta={[
+                {name: "description", content: "Helmet application"},
+                {property: "og:type", content: "article"}
+            ]}
+            link={[
+                {rel: "canonical", href: "http://mysite.com/example"},
+                {rel: "apple-touch-icon", href: "http://mysite.com/img/apple-touch-icon-57x57.png"},
+                {rel: "apple-touch-icon", sizes: "72x72", href: "http://mysite.com/img/apple-touch-icon-72x72.png"}
+            ]}
+            script={[
+                {src: "http://include.com/pathtojs.js", type: "text/javascript"},
+                {type: "application/ld+json", innerHTML: `{ "@context": "http://schema.org" }`}
+            ]}
+            noscript={[
+                {innerHTML: `<link rel="stylesheet" type="text/css" href="foo.css" />`}
+            ]}
+            style={[
+              {type: "text/css", cssText: "body {background-color: blue;} p {font-size: 12px;}"}
+            ]}
+            onChangeClientState={(newState) => console.log(newState)}
+        />;
+        const head = <Helmet title ="My Title"/>
+        const meta = {
+          title: 'Some Meta Title',
+          description: 'I am a description, and I can create multiple tags',
+          canonical: 'http://example.com/path/to/page',
+          meta: {
+            charset: 'utf-8',
+            name: {
+              keywords: 'react,meta,document,html,tags'
+            }
+          }
+        };
+        var test_meta = <DocumentMeta {...meta}/>;
+        // const meta_test_1 = DocumentMeta.renderAsHTML();
+        console.log(React.renderToStaticMarkup(<DocumentMeta {...meta}/>));
 
+        // console.log(test_head.toComponent());
+         // console.log(React.renderToString(head));
         var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
         return (
           <div className="dashboard-container" >
@@ -95,6 +152,7 @@ class Dashboard extends React.Component {
         switch (data.type) {
             case "header":
                 this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, store_id));
+                this.props.dispatch(addMetatags(component_params.title, component_params.coverImageUrl));
                 break;
             case "image":
                 this.props.dispatch(addImage(
@@ -135,8 +193,14 @@ class Dashboard extends React.Component {
             Collect all HTML pieces and then save them to a file using FileSaver.js
         */ 
         let redux_store = this.props.store.getState()._dashboard;
-        var num_components = redux_store.length;
+        let redux_header = this.props.store.getState()._header;
         let content = "";
+        if (redux_header.length > 0) {
+            content = "<head>" + redux_header[0] + "</head>";
+        }
+        console.log(redux_header);
+        var num_components = redux_store.length;
+
         for (var i = 0; i < num_components; i++) {
             content = content + React.renderToStaticMarkup(redux_store[i].component)
         }

@@ -42,3 +42,14 @@ export const addText = (text,key) => {
         key: key
     }
 }
+
+export const addMetatags = (title, og_image) => {
+    return {
+        type: 'NEW_HEADER',
+        title: title,
+        og_title: title,
+        og_image: og_image,
+        og_description: "",
+
+    }
+}
