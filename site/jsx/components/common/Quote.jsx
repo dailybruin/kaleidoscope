@@ -13,7 +13,7 @@ class Quote extends React.Component{
 
 	render(){
 		return (
-			<div>
+			<div className="center-block">
 				<p className="quote">"{ this.props.quoteText }"</p>
 				<p className="quoteSource">- { this.props.quoteSource }</p>
 			</div>

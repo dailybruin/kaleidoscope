@@ -33,6 +33,8 @@
 			color: black;
 		}
 		.coverImage {
+			padding: 0;
+
 			background-position: cover;
 			min-height: 700px;
 			width: 100%;
@@ -79,8 +81,12 @@
 
 }
 
+/* GLOBAL STYLES */
+.center-block {
+	padding: 0 10% 0 10%;
+}
 
-
+/* /all STYLES */
 .all_pages {
 	.coverImage {
 		margin: 10px;

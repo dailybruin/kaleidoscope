@@ -14,7 +14,7 @@ class Image extends React.Component {
 
 	render(){
 		return (
-			<div>
+			<div className="center-block">
 				<img className="image" src={ this.props.url } /> 
 				<p className="img-caption">Caption: { this.props.caption }</p>
 				<p className="img-credit">Credit: { this.props.credit } </p>
