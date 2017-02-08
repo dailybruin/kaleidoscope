@@ -24,9 +24,9 @@ block content
 						span.datetime.card-text.text-muted Created #{datetime}
 					
 						div.row
-							div.col-sm-4
+							div.col-sm-6
 								a(class='btn btn-primary' href='/update?pageID=' + page._id) Update
-							div.col-sm-4
+							div.col-sm-6
 								form(method='POST', action='/page/#{page._id}?_method=DELETE')
 									button(class='btn btn-default' type='submit') Delete
 							

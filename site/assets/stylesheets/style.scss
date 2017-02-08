@@ -80,17 +80,14 @@
 
 
 
-.all_pages {;
+.all_pages {
 	font-family: Verdana;
-	padding: 0;
+	margin: 20px 20px;
 	.coverImage {
 		margin: 15px 0 0 15px;
-		width: 220px;
-		height: auto;
+		width: 85%;
+		height: 100px;
 	}
-	/*.card{
-		padding: 0 15px 10px 15px;
-	}*/
 	.row{
 		padding-top: 10px;
 	}
