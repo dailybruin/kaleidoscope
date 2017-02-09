@@ -1,10 +1,11 @@
 extends template
 
 block content
-	div.grid.all_pages
+	div.row.all_pages
 		each page in pages
 			//- Extract data
-			- var title, author, coverImageUrl = null;
+			- var title, author = 'N/A';
+			- var coverImageUrl = 'http://placehold.it/200x250';
 			- var datetime = page._id.getTimestamp()
 			- datetime = (datetime.getMonth() + 1) + '/' + datetime.getDate() + '/' + datetime.getFullYear()
 			each o in page.components
@@ -15,18 +16,19 @@ block content
 					break
 
 			//- Display data
-			div.col-md-3.col-sm-6.page
+			div.col-lg-3.col-md-6.col-sm-12.page
 				div.card
-					img(src=coverImageUrl, class="coverImage card-img-top")
+					div.coverImage-container
+						img(src=coverImageUrl, class="coverImage card-img-top")
 					div.card-block
 						p.title.card-text Title: #{title}
 						p.author.card-text Author: #{author}
 						span.datetime.card-text.text-muted Created #{datetime}
 					
 						div.row
-							div.col-sm-6
-								a(class='btn btn-primary' href='/update?pageID=' + page._id) Update
-							div.col-sm-6
-								form(method='POST', action='/page/#{page._id}?_method=DELETE')
-									button(class='btn btn-default' type='submit') Delete
+							//- div.col-sm-6
+							a(class='col-sm-12 col-md-6 btn btn-info' href='/update?pageID=' + page._id) Update
+							//- div.col-sm-6
+							form(method='POST', action='/page/#{page._id}?_method=DELETE')
+								button(class='col-sm-12 col-md-6 btn btn-danger' type='submit') Delete
 							

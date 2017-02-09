@@ -81,14 +81,21 @@
 
 
 .all_pages {
-	font-family: Verdana;
-	margin: 20px 20px;
-	.coverImage {
-		margin: 15px 0 0 15px;
-		width: 85%;
-		height: 100px;
+	// margin: 20px 20px;
+	.coverImage-container {
+		width: 90%;
+		min-height: 250px;
+		max-height: 250px;
+		overflow: hidden;
+
+		.coverImage {
+			margin: 15px 0 0 15px;
+			width: 90%;
+			// display:block;
+			// margin:auto;
+		}
 	}
-	.row{
+	.row {
 		padding-top: 10px;
 	}
 }
