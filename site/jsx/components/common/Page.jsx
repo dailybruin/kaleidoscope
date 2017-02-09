@@ -9,11 +9,11 @@ import {connect} from 'react-redux';
 // Super basic component that takes name and age and then prints it
 class Page extends React.Component {
     static propTypes = {
-        title: React.PropTypes.string.isRequired,
-        author: React.PropTypes.string.isRequired,
-        image: React.PropTypes.array.isRequired,
-        quote: React.PropTypes.array.isRequired,
-        text: React.PropTypes.string,
+        // title: React.PropTypes.string.isRequired,
+        // author: React.PropTypes.string.isRequired,
+        // image: React.PropTypes.array.isRequired,
+        // quote: React.PropTypes.array.isRequired,
+        // text: React.PropTypes.string,
     }
     constructor(props) {
         super(props);
