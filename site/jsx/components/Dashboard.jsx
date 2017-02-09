@@ -103,6 +103,7 @@ class Dashboard extends React.Component {
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
         const button = <button onClick={()=>this.handleEdit(store_id)}>Edit</button>;
+        // add delete button here
         switch (data.type) {
             case "header":
                 this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, store_id, button));
