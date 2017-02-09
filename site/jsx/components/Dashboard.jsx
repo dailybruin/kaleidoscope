@@ -22,11 +22,15 @@ class Dashboard extends React.Component {
                             type: this.props.componentTypes[0],
                             payload: {}
                         },
-                        componentsTable: []
+                        componentsTable: [],
+                        edit_component_id: "",
+
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleGenPage = this.handleGenPage.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+        this.showInputForComponentType = this.showInputForComponentType.bind(this);
 
         // Load all preloaded components
         for (var i = 0; i < this.props.preloaded_components.length; i++) {
@@ -46,12 +50,16 @@ class Dashboard extends React.Component {
           );
         });
         var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
+
+        console.log("IN RENDER");
+        console.log(this.state.data.type);
+
         return (
           <div className="dashboard-container" >
             <div className="container form-group">
                 <form onSubmit={this.handleSubmit}>
                     <div className="row component-inputs">
-                        <div>{this.showInputForComponentType(this.state.data.type)}</div>
+                        <div>{this.showInputForComponentType()}</div>
                     </div>
                     <div className="dropdown">
                         <label for="dropdown">Select component:</label>
@@ -75,6 +83,7 @@ class Dashboard extends React.Component {
 
     handleDropdownChange(event) {
         //updates type from dropdown & clears input fields after submit
+        console.log("called from handleDropdownChange");
         this.setState({
             data: {
                 type: event.target.value,
@@ -84,19 +93,23 @@ class Dashboard extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log('A component was submitted: ' + this.state.data.type);
-        console.log(this.state.data);
+        // console.log('A component was submitted: ' + this.state.data.type);
+        // console.log(this.state.data);
+        if (this.state.edit_component_id !== "") {
+            
+        }
         event.preventDefault();
         this.appendPagePreview('arbitrary id', this.state.data);
-        console.log('Current components table: ' + this.state.componentsTable);
+        // console.log('Current components table: ' + this.state.componentsTable);
     }
 
     appendPagePreview(store_id, data) {
         console.log(data);
         const component_params = data.payload;
+        const button = <button onClick={()=>this.handleEdit(store_id)}>Edit</button>;
         switch (data.type) {
             case "header":
-                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, store_id));
+                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, store_id, button));
                 this.props.dispatch(addMetatags(component_params.title, component_params.coverImageUrl));
                 break;
             case "image":
@@ -129,6 +142,37 @@ class Dashboard extends React.Component {
                 payload: {}
             }
         });
+    }
+
+    handleEdit(id) {
+        console.log('Yay you clicked edit!');
+        let redux_store = this.props.store.getState()._dashboard;
+        for (var i = 0; i< redux_store.length; i++) {
+            console.log(redux_store[i].database_id)
+            if (id === redux_store[i].database_id) {
+                console.log('Found the component we want to edit');
+                let matching_props = redux_store[i].component.props;
+                switch (redux_store[i].type) {
+                    case "header":
+                        this.setState({
+                            data:{
+                                type: "header",
+                                payload: {
+                                    title: matching_props.title,
+                                    author: matching_props.author,
+                                    coverImageUrl: matching_props.image,
+                                },
+                                edit_component_id: redux_store[i].database_id,
+                            }
+                        });
+                        console.log(this.state);
+                        this.showInputForComponentType("header");
+                        break;
+                }
+                break;
+            }
+        }
+        // set the state of the thing 
     }
 
     handleGenPage(event) {
@@ -190,9 +234,7 @@ class Dashboard extends React.Component {
     }
 
     showInputForComponentType(componentType) {
-        console.log('Dropdown changed: ' + componentType);
-
-        switch(componentType) {
+        switch(this.state.data.type) {
             case 'header':
                 return(
                     <div>

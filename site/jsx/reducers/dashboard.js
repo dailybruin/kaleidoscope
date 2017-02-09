@@ -16,7 +16,15 @@ export function  _dashboard(state = [], action) {
             const header = <Header  title={action.title}
                                     author={action.author}
                                     image={action.url}/>;
-            const header_struct = {database_id: action.key, component: header};
+            const header_struct = {database_id: action.key, component: header, button: action.button, type:'header'};
+            for (var i = 0; i< state.length; i++) {
+                if (state[i].database_id !== undefined && state[i].database_id === action.key) {
+                    state.splice(i,1,header_struct);
+                    return [
+                        ... state,
+                    ]
+                }
+            }
             return [
                 ...state,
                 header_struct
@@ -60,6 +68,7 @@ export function  _dashboard(state = [], action) {
 export function _header(state=[], action) {
     switch (action.type) {
         case 'NEW_HEADER':
+            console.log('In New HEADER')
             const title = "<title>" + action.title + "</title>";
             const og_title = '<meta property="og:title"' + action.og_title + '/>';
             const og_image = '<meta property="og:image"' + action.og_image + '/>';
@@ -74,7 +83,7 @@ export function _header(state=[], action) {
                 meta_tags
             ];
         default:
-            console.log("Not supposed to be here");
+            // console.log("Not supposed to be here");
             return state;
     }
 }

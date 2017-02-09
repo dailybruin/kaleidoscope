@@ -1,10 +1,12 @@
-export const addHeader = (title, author, coverImageUrl, key) => {
+export const addHeader = (title, author, coverImageUrl, key,button, edit=false) => {
     return{
         type: 'ADD_HEADER',
         title: title,
         author: author,
         url: coverImageUrl,
-        key: key
+        key: key,
+        button: button,
+        edit: edit,
     }
 }
 
@@ -53,3 +55,5 @@ export const addMetatags = (title, og_image) => {
 
     }
 }
+
+// export const updateComponent = ()
