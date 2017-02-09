@@ -123,13 +123,13 @@ class Dashboard extends React.Component {
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id));
+                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button));
                 break;
             case "subhead":
                 this.props.dispatch(addSubhead(component_params.subhead,store_id,button));
                 break;
             case "text_section":
-                this.props.dispatch(addText(component_params.text, store_id));
+                this.props.dispatch(addText(component_params.text, store_id,button));
                 break;
             default:
                 console.log("Component category not supported.");
@@ -191,6 +191,31 @@ class Dashboard extends React.Component {
 
                             }
                         })
+                        break;
+                    case "quote":
+                        console.log('found quote')
+                        this.setState({
+                            data: {
+                                type: "quote",
+                                payload: {
+                                    quoteText: matching_props.quoteText,
+                                    quoteSource: matching_props.quoteSource,
+                                },
+                                edit_component_id: id,
+                            }
+                        })
+                        break;
+                    case "text":
+                        this.setState({
+                            data: {
+                                type: "text",
+                                payload: {
+                                    text: matching_props.text,
+                                },
+                                edit_component_id: id,
+                            }
+                        });
+                        break;
                 }
                 break;
             }
@@ -336,6 +361,7 @@ class Dashboard extends React.Component {
                     </div>
                 );
             case 'quote':
+
                 return(
                     <div>
                         <div className="col-md-4">

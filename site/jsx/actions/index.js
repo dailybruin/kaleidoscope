@@ -30,12 +30,13 @@ export const addImage = (src, credit, caption,key, button) => {
     }
 }
 
-export const addQuote = (quote, quoteMaker,key) => {
+export const addQuote = (quote, quoteMaker,key,button) => {
 	return {
 		type: 'ADD_QUOTE',
 		quoteText: quote,
 		quoteSource: quoteMaker,
-        key: key
+        key: key,
+        button: button, 
 	}
 }
 

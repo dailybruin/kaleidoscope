@@ -79,7 +79,20 @@ export function  _dashboard(state = [], action) {
             ];
         case 'ADD_QUOTE':
             const quote = <Quote quoteText={action.quoteText} quoteSource={action.quoteSource}/>;
-            const quote_struct = {database_id: action.key, component: quote};
+            const quote_struct = {
+                database_id: action.key, 
+                component: quote,
+                button: action.button,
+                type: 'quote'
+            };
+            for (var i = 0; i< state.length; i++) {
+                if (state[i].database_id !== undefined && state[i].database_id === action.key) {
+                    state.splice(i,1,quote_struct);
+                    return [
+                        ... state,
+                    ]
+                }
+            }
             return [
                 ...state,
                 quote_struct
