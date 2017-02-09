@@ -18,13 +18,15 @@ export const addSubhead = (text, key, button) => {
     }
 }
 
-export const addImage = (src, credit, caption,key) => {
+export const addImage = (src, credit, caption,key, button) => {
     return {
         type: 'ADD_IMAGE',
         src: src,
         credit: credit,
         caption: caption,
-        key: key
+        key: key,
+        button: button,
+
     }
 }
 

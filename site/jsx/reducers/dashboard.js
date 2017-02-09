@@ -16,7 +16,12 @@ export function  _dashboard(state = [], action) {
             const header = <Header  title={action.title}
                                     author={action.author}
                                     image={action.url}/>;
-            const header_struct = {database_id: action.key, component: header, button: action.button, type:'header'};
+            const header_struct = {
+                database_id: action.key, 
+                component: header, 
+                button: action.button, 
+                type:'header'
+            };
             for (var i = 0; i< state.length; i++) {
                 if (state[i].database_id !== undefined && state[i].database_id === action.key) {
                     state.splice(i,1,header_struct);
@@ -31,7 +36,12 @@ export function  _dashboard(state = [], action) {
             ]
          case 'ADD_SUBHEAD':
             const subhead = <Subhead text={action.subhead} />;
-            let subhead_struct = {database_id: action.key, component: subhead,button: action.button, type:'subhead'};
+            let subhead_struct = {
+                database_id: action.key, 
+                component: subhead,
+                button: action.button, 
+                type:'subhead'
+            };
             for (var i = 0; i< state.length; i++) {
                 if (state[i].database_id !== undefined && state[i].database_id === action.key) {
                     state.splice(i,1,subhead_struct);
@@ -49,7 +59,20 @@ export function  _dashboard(state = [], action) {
                                 url={action.src}
                                 credit={action.credit}
                                 caption={action.caption}/>;
-            const image_struct = {database_id: action.key, component: image};
+            const image_struct = {
+                database_id: action.key, 
+                component: image, 
+                button: action.button, 
+                type: 'image'
+            };
+            for (var i = 0; i< state.length; i++) {
+                if (state[i].database_id !== undefined && state[i].database_id === action.key) {
+                    state.splice(i,1,image_struct);
+                    return [
+                        ... state,
+                    ]
+                }
+            }
             return [
                 ...state,
                 image_struct

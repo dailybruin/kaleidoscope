@@ -119,6 +119,7 @@ class Dashboard extends React.Component {
                         component_params.credit,
                         component_params.caption,
                         store_id,
+                        button,
                     ));
                 break;
             case "quote":
@@ -151,6 +152,7 @@ class Dashboard extends React.Component {
             if (id === redux_store[i].database_id) {
                 console.log('Found the component we want to edit');
                 let matching_props = redux_store[i].component.props;
+
                 switch (redux_store[i].type) {
                     case "header":
                         this.setState({
@@ -161,7 +163,7 @@ class Dashboard extends React.Component {
                                     author: matching_props.author,
                                     coverImageUrl: matching_props.image,
                                 },
-                                edit_component_id: redux_store[i].database_id,
+                                edit_component_id: id,
                             }
                         });
                         break;
@@ -171,14 +173,24 @@ class Dashboard extends React.Component {
                                 type: "subhead",
                                 payload: {
                                     subhead: matching_props.text,
-                                }
+                                },
+                                edit_component_id: id,
                             }
                         })
                         break;
-                    // case "image":
-                    //     this.setState({
+                    case "image":
+                        this.setState({
+                            data: {
+                                type: "image",
+                                payload: {
+                                    imageUrl: matching_props.url,
+                                    caption: matching_props.caption,
+                                    credit: matching_props.credit,
+                                },
+                                edit_component_id: id,
 
-                    //     })
+                            }
+                        })
                 }
                 break;
             }
