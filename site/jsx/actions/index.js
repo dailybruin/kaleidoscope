@@ -1,4 +1,4 @@
-export const addHeader = (title, author, coverImageUrl, key,button, edit=false) => {
+export const addHeader = (title, author, coverImageUrl, key,button) => {
     return{
         type: 'ADD_HEADER',
         title: title,
@@ -6,15 +6,15 @@ export const addHeader = (title, author, coverImageUrl, key,button, edit=false) 
         url: coverImageUrl,
         key: key,
         button: button,
-        edit: edit,
     }
 }
 
-export const addSubhead = (text, key) => {
+export const addSubhead = (text, key, button) => {
     return{
         type: 'ADD_SUBHEAD',
         subhead: text,
-        key: key
+        key: key,
+        button: button,
     }
 }
 

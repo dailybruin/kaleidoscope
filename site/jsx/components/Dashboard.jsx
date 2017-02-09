@@ -124,7 +124,7 @@ class Dashboard extends React.Component {
                 this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(component_params.subhead,store_id));
+                this.props.dispatch(addSubhead(component_params.subhead,store_id,button));
                 break;
             case "text_section":
                 this.props.dispatch(addText(component_params.text, store_id));
@@ -145,10 +145,8 @@ class Dashboard extends React.Component {
     }
 
     handleEdit(id) {
-        console.log('Yay you clicked edit!');
         let redux_store = this.props.store.getState()._dashboard;
         for (var i = 0; i< redux_store.length; i++) {
-            console.log(redux_store[i].database_id)
             if (id === redux_store[i].database_id) {
                 console.log('Found the component we want to edit');
                 let matching_props = redux_store[i].component.props;
@@ -165,9 +163,16 @@ class Dashboard extends React.Component {
                                 edit_component_id: redux_store[i].database_id,
                             }
                         });
-                        console.log(this.state);
-                        this.showInputForComponentType("header");
                         break;
+                    case "subhead":
+                        this.setState({
+                            data:{
+                                type: "subhead",
+                                payload: {
+                                    subhead: matching_props.text,
+                                }
+                            }
+                        })
                 }
                 break;
             }

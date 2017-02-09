@@ -31,7 +31,15 @@ export function  _dashboard(state = [], action) {
             ]
          case 'ADD_SUBHEAD':
             const subhead = <Subhead text={action.subhead} />;
-            let subhead_struct = {database_id: action.key, component: subhead};
+            let subhead_struct = {database_id: action.key, component: subhead,button: action.button, type:'subhead'};
+            for (var i = 0; i< state.length; i++) {
+                if (state[i].database_id !== undefined && state[i].database_id === action.key) {
+                    state.splice(i,1,subhead_struct);
+                    return [
+                        ... state,
+                    ]
+                }
+            }
             return [
                 ...state,
                 subhead_struct
