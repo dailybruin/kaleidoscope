@@ -81,9 +81,14 @@
 
 
 .all_pages {
+	font-family: Verdana;
+	margin: 20px 20px;
 	.coverImage {
-		margin: 10px;
-		width: 220px;
-		height: auto;
+		margin: 15px 0 0 15px;
+		width: 85%;
+		height: 100px;
+	}
+	.row{
+		padding-top: 10px;
 	}
 }

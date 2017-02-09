@@ -15,13 +15,18 @@ block content
 					break
 
 			//- Display data
-			div.col-md-4.col-sm-6.page
-				p.title Title: #{title}
-				p.author Author: #{author}
-				span.datetime Date Created: #{datetime}
-				div
-					img(src=coverImageUrl, class="coverImage")
-				a(class='btn btn-default' href='/update?pageID=' + page._id) Update
-				form(method='POST', action='/page/#{page._id}?_method=DELETE')
-					button(type='submit') Delete
-			
+			div.col-md-3.col-sm-6.page
+				div.card
+					img(src=coverImageUrl, class="coverImage card-img-top")
+					div.card-block
+						p.title.card-text Title: #{title}
+						p.author.card-text Author: #{author}
+						span.datetime.card-text.text-muted Created #{datetime}
+					
+						div.row
+							div.col-sm-6
+								a(class='btn btn-primary' href='/update?pageID=' + page._id) Update
+							div.col-sm-6
+								form(method='POST', action='/page/#{page._id}?_method=DELETE')
+									button(class='btn btn-default' type='submit') Delete
+							
