@@ -1,8 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags} from '../actions';
-import ReactDOMServer from 'react-dom/server';
-import DocumentMeta from 'react-document-meta';
 var FileSaver = require('file-saver');
 
 
