@@ -94,7 +94,7 @@ class Dashboard extends React.Component {
         // console.log('A component was submitted: ' + this.state.data.type);
         // console.log(this.state.data);
         if (this.state.edit_component_id !== "") {
-            
+
         }
         event.preventDefault();
         this.appendPagePreview('arbitrary id', this.state.data);
@@ -189,7 +189,8 @@ class Dashboard extends React.Component {
         var num_components = redux_store.length;
 
         for (var i = 0; i < num_components; i++) {
-            content = content + React.renderToStaticMarkup(redux_store[i].component)
+            if (redux_store[i].database_id !== undefined)
+                content = content + React.renderToStaticMarkup(redux_store[i].component)
         }
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         FileSaver.saveAs(blob, "index.html");
