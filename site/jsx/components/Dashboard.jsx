@@ -49,9 +49,6 @@ class Dashboard extends React.Component {
         });
         var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
 
-        console.log("IN RENDER");
-        console.log(this.state.data.type);
-
         return (
           <div className="dashboard-container" >
             <div className="container form-group">
@@ -81,7 +78,6 @@ class Dashboard extends React.Component {
 
     handleDropdownChange(event) {
         //updates type from dropdown & clears input fields after submit
-        console.log("called from handleDropdownChange");
         this.setState({
             data: {
                 type: event.target.value,
@@ -105,7 +101,6 @@ class Dashboard extends React.Component {
     }
 
     appendPagePreview(store_id, data) {
-        console.log(data);
         const component_params = data.payload;
         const button = <button onClick={()=>this.handleEdit(store_id)}>Edit</button>;
         switch (data.type) {
@@ -150,7 +145,6 @@ class Dashboard extends React.Component {
         let redux_store = this.props.store.getState()._dashboard;
         for (var i = 0; i< redux_store.length; i++) {
             if (id === redux_store[i].database_id) {
-                console.log('Found the component we want to edit');
                 let matching_props = redux_store[i].component.props;
 
                 switch (redux_store[i].type) {
@@ -193,7 +187,6 @@ class Dashboard extends React.Component {
                         })
                         break;
                     case "quote":
-                        console.log('found quote')
                         this.setState({
                             data: {
                                 type: "quote",
@@ -208,7 +201,7 @@ class Dashboard extends React.Component {
                     case "text":
                         this.setState({
                             data: {
-                                type: "text",
+                                type: "text_section",
                                 payload: {
                                     text: matching_props.text,
                                 },
@@ -220,11 +213,9 @@ class Dashboard extends React.Component {
                 break;
             }
         }
-        // set the state of the thing 
     }
 
     handleGenPage(event) {
-        console.log('A page was submitted');
         /*
             Use React.renderToStaticMarkup to convert each react component into HTML
             Collect all HTML pieces and then save them to a file using FileSaver.js
@@ -235,7 +226,6 @@ class Dashboard extends React.Component {
         if (redux_header.length > 0) {
             content = "<head>" + redux_header[0] + "</head>";
         }
-        console.log(redux_header);
         var num_components = redux_store.length;
 
         for (var i = 0; i < num_components; i++) {
@@ -395,6 +385,7 @@ class Dashboard extends React.Component {
                             rows="3"
                             className="form-control"
                             onChange={this.updateInput.bind(this, 'text')}>
+                        {this.state.data.payload.text}
                         </textarea>
                     </div>
                 );

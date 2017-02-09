@@ -99,7 +99,20 @@ export function  _dashboard(state = [], action) {
             ];
         case 'ADD_TEXT':
             const text = <TextSection text={action.text}/>;
-            const text_struct = {database_id: action.key, component: text};
+            const text_struct = {
+                database_id: action.key, 
+                component: text,
+                button: action.button,
+                type: 'text',
+            };
+            for (var i = 0; i< state.length; i++) {
+                if (state[i].database_id !== undefined && state[i].database_id === action.key) {
+                    state.splice(i,1,text_struct);
+                    return [
+                        ... state,
+                    ]
+                }
+            }
             return [
                 ...state,
                 text_struct

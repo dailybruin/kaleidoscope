@@ -40,11 +40,12 @@ export const addQuote = (quote, quoteMaker,key,button) => {
 	}
 }
 
-export const addText = (text,key) => {
+export const addText = (text,key, button) => {
     return {
         type: 'ADD_TEXT',
         text: text,
-        key: key
+        key: key,
+        button: button,
     }
 }
 
