@@ -60,4 +60,11 @@ export const addMetatags = (title, og_image) => {
     }
 }
 
+export const deleteComponent = (id) => {
+    return {
+        type: 'DELETE_COMPONENT',
+        database_id:id,
+    }
+}
+
 // export const updateComponent = ()

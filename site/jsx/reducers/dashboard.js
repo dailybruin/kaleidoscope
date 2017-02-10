@@ -117,6 +117,18 @@ export function  _dashboard(state = [], action) {
                 ...state,
                 text_struct
             ];
+        case 'DELETE_COMPONENT':
+            for (var i = 0; i<state.length; i++) {
+                if (state[i].database_id !== undefined && state[i].database_id === action.database_id) {
+                    state.splice(i,1);
+                    return [
+                    ...state
+                    ]
+                }
+            }
+            return [
+                ...state
+            ];
         default:
             return state;
     }

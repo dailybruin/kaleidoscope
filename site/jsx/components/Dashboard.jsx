@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent} from '../actions';
 var FileSaver = require('file-saver');
 
 
@@ -103,9 +103,23 @@ class Dashboard extends React.Component {
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
         const button = <button onClick={()=>this.handleEdit(store_id)}>Edit</button>;
+        const delete_button = <button onClick={()=> this.props.dispatch(deleteComponent(store_id))}>Delete</button>;
+        const button_group = (
+                <div>
+                    {button}
+                    {delete_button}
+                </div>
+            );
+        // add delete button here
         switch (data.type) {
             case "header":
-                this.props.dispatch(addHeader(component_params.title, component_params.author, component_params.coverImageUrl, store_id, button));
+                this.props.dispatch(addHeader(
+                    component_params.title, 
+                    component_params.author, 
+                    component_params.coverImageUrl, 
+                    store_id, 
+                    button_group
+                    ));
                 this.props.dispatch(addMetatags(component_params.title, component_params.coverImageUrl));
                 break;
             case "image":
@@ -114,17 +128,17 @@ class Dashboard extends React.Component {
                         component_params.credit,
                         component_params.caption,
                         store_id,
-                        button,
+                        button_group,
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button));
+                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button_group));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(component_params.subhead,store_id,button));
+                this.props.dispatch(addSubhead(component_params.subhead,store_id,button_group));
                 break;
             case "text_section":
-                this.props.dispatch(addText(component_params.text, store_id,button));
+                this.props.dispatch(addText(component_params.text, store_id,button_group));
                 break;
             default:
                 console.log("Component category not supported.");
