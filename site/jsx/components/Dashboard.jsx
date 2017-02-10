@@ -30,6 +30,7 @@ class Dashboard extends React.Component {
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
 
         // Load all preloaded components
+        console.log(this.props.preloaded_components);
         for (var i = 0; i < this.props.preloaded_components.length; i++) {
             var formatted_component_data = {
                 'type': this.props.preloaded_components[i].component_type,
@@ -122,15 +123,15 @@ class Dashboard extends React.Component {
                 this.props.dispatch(addHeader(
                     component_params.title, 
                     component_params.author, 
-                    component_params.coverImageUrl, 
+                    component_params.image, 
                     store_id, 
                     button_group
                     ));
-                this.props.dispatch(addMetatags(component_params.title, component_params.coverImageUrl));
+                this.props.dispatch(addMetatags(component_params.title, component_params.image));
                 break;
             case "image":
                 this.props.dispatch(addImage(
-                        component_params.imageUrl,
+                        component_params.url,
                         component_params.credit,
                         component_params.caption,
                         store_id,
@@ -141,7 +142,7 @@ class Dashboard extends React.Component {
                 this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button_group));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(component_params.subhead,store_id,button_group));
+                this.props.dispatch(addSubhead(component_params.text,store_id,button_group));
                 break;
             case "text_section":
                 this.props.dispatch(addText(component_params.text, store_id,button_group));
@@ -176,7 +177,7 @@ class Dashboard extends React.Component {
                                 payload: {
                                     title: matching_props.title,
                                     author: matching_props.author,
-                                    coverImageUrl: matching_props.image,
+                                    image: matching_props.image,
                                 }
                             },
                             edit_component_id: id,
@@ -187,7 +188,7 @@ class Dashboard extends React.Component {
                             data:{
                                 type: "subhead",
                                 payload: {
-                                    subhead: matching_props.text,
+                                    text: matching_props.text,
                                 }
                             },
                             edit_component_id: id,
@@ -198,7 +199,7 @@ class Dashboard extends React.Component {
                             data: {
                                 type: "image",
                                 payload: {
-                                    imageUrl: matching_props.url,
+                                    url: matching_props.url,
                                     caption: matching_props.caption,
                                     credit: matching_props.credit,
                                 }
@@ -218,7 +219,7 @@ class Dashboard extends React.Component {
                             edit_component_id: id,
                         })
                         break;
-                    case "text":
+                    case "text_section":
                         this.setState({
                             data: {
                                 type: "text_section",
@@ -260,11 +261,12 @@ class Dashboard extends React.Component {
         var submitted_components = [];
         for (var i = 0; i < num_components; i++) {
             if (redux_store[i].database_id !== undefined) {
-                console.log(redux_store[i]);
                 var data = {"component_data": redux_store[i].component.props, "component_type": redux_store[i].type};
                 submitted_components.push(data);
             }
         }
+
+        console.log(submitted_components);
 
         // Save to database
         $.ajax({
@@ -327,9 +329,9 @@ class Dashboard extends React.Component {
                             <input
                                 placeholder="Cover image URL"
                                 type="text" name="url"
-                                onChange={this.updateInput.bind(this, 'coverImageUrl')}
+                                onChange={this.updateInput.bind(this, 'image')}
                                 className="form-control"
-                                value={this.state.data.payload.coverImageUrl}/>
+                                value={this.state.data.payload.image}/>
                         </div>
                     </div>
                 );
@@ -342,9 +344,9 @@ class Dashboard extends React.Component {
                                 placeholder="Subhead" 
                                 type="text" 
                                 name="subhead" 
-                                onChange={this.updateInput.bind(this, 'subhead')} 
+                                onChange={this.updateInput.bind(this, 'text')} 
                                 className="form-control"
-                                value={this.state.data.payload.subhead} />
+                                value={this.state.data.payload.text} />
                         </div>
                     </div>
                 );
@@ -355,9 +357,9 @@ class Dashboard extends React.Component {
                             <label for="url">URL:</label>
                             <input 
                                 placeholder="URL" type="text" name="url"
-                                onChange={this.updateInput.bind(this, 'imageUrl')}
+                                onChange={this.updateInput.bind(this, 'url')}
                                 className="form-control"
-                                value={this.state.data.payload.imageUrl}/>
+                                value={this.state.data.payload.url}/>
                         </div>
                         <div className="col-md-4">
                             <label for="credit">Credit:</label>

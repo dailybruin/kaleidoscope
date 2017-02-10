@@ -25,7 +25,6 @@ class Page extends React.Component {
         var components = [];
         for (var i = 0; i < num_components; i++) {
             components.push(redux_store[i].component);
-            console.log(redux_store[i].component.props)
             if (redux_store[i].button !== undefined)
                 components.push(redux_store[i].button);
         }

@@ -103,7 +103,7 @@ export function  _dashboard(state = [], action) {
                 database_id: action.key, 
                 component: text,
                 button: action.button,
-                type: 'text',
+                type: 'text_section',
             };
             for (var i = 0; i< state.length; i++) {
                 if (state[i].database_id !== undefined && state[i].database_id === action.key) {
