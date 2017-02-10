@@ -3,9 +3,6 @@ import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent} from '../actions';
 var FileSaver = require('file-saver');
 
-
-
-
 class Dashboard extends React.Component {
     
     static propTypes = {
@@ -18,10 +15,12 @@ class Dashboard extends React.Component {
         // add syntatic sugar () => {} to prevent exessive bind calls 
         this.state = {  data: {
                             type: this.props.componentTypes[0],
-                            payload: {}
+                            payload: {},
+                            
                         },
                         componentsTable: [],
                         edit_component_id: "",
+                        
 
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
@@ -32,12 +31,12 @@ class Dashboard extends React.Component {
 
         // Load all preloaded components
         for (var i = 0; i < this.props.preloaded_components.length; i++) {
-            // console.log(this.props.preloaded_components[i]);
             var formatted_component_data = {
                 'type': this.props.preloaded_components[i].component_type,
                 'payload': this.props.preloaded_components[i].component_data
             }
-            this.appendPagePreview('arbitrary id', formatted_component_data);
+
+            this.appendPagePreview(this.randomIdentifier(), formatted_component_data);
         }
     }
 
@@ -88,16 +87,23 @@ class Dashboard extends React.Component {
 
     handleSubmit(event) {
         // console.log('A component was submitted: ' + this.state.data.type);
-        // console.log(this.state.data);
+        // console.log(this.state);
+
+        event.preventDefault();
         if (this.state.edit_component_id !== "") {
             this.appendPagePreview(this.state.edit_component_id, this.state.data);
             this.setState({
                 edit_component_id: ""
             });
+            return;
         }
-        event.preventDefault();
-        this.appendPagePreview('arbitrary id', this.state.data);
-        // console.log('Current components table: ' + this.state.componentsTable);
+
+        var identifier = this.randomIdentifier();
+        this.appendPagePreview(identifier, this.state.data);
+    }
+
+    randomIdentifier() {
+        return Math.random().toString(36).substring(7);
     }
 
     appendPagePreview(store_id, data) {
@@ -157,6 +163,7 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
+
         for (var i = 0; i< redux_store.length; i++) {
             if (id === redux_store[i].database_id) {
                 let matching_props = redux_store[i].component.props;
@@ -170,9 +177,9 @@ class Dashboard extends React.Component {
                                     title: matching_props.title,
                                     author: matching_props.author,
                                     coverImageUrl: matching_props.image,
-                                },
-                                edit_component_id: id,
-                            }
+                                }
+                            },
+                            edit_component_id: id,
                         });
                         break;
                     case "subhead":
@@ -181,9 +188,9 @@ class Dashboard extends React.Component {
                                 type: "subhead",
                                 payload: {
                                     subhead: matching_props.text,
-                                },
-                                edit_component_id: id,
-                            }
+                                }
+                            },
+                            edit_component_id: id,
                         })
                         break;
                     case "image":
@@ -194,10 +201,9 @@ class Dashboard extends React.Component {
                                     imageUrl: matching_props.url,
                                     caption: matching_props.caption,
                                     credit: matching_props.credit,
-                                },
-                                edit_component_id: id,
-
-                            }
+                                }
+                            },
+                            edit_component_id: id,
                         })
                         break;
                     case "quote":
@@ -207,9 +213,9 @@ class Dashboard extends React.Component {
                                 payload: {
                                     quoteText: matching_props.quoteText,
                                     quoteSource: matching_props.quoteSource,
-                                },
-                                edit_component_id: id,
-                            }
+                                }
+                            },
+                            edit_component_id: id,
                         })
                         break;
                     case "text":
@@ -218,9 +224,9 @@ class Dashboard extends React.Component {
                                 type: "text_section",
                                 payload: {
                                     text: matching_props.text,
-                                },
-                                edit_component_id: id,
-                            }
+                                }
+                            },
+                            edit_component_id: id,
                         });
                         break;
                 }
@@ -230,10 +236,11 @@ class Dashboard extends React.Component {
     }
 
     handleGenPage(event) {
-        /*
-            Use React.renderToStaticMarkup to convert each react component into HTML
-            Collect all HTML pieces and then save them to a file using FileSaver.js
-        */ 
+        event.preventDefault();
+
+        // Use React.renderToStaticMarkup to convert each react component into HTML
+        // Collect all HTML pieces and then save them to a file using FileSaver.js
+     
         let redux_store = this.props.store.getState()._dashboard;
         let redux_header = this.props.store.getState()._header;
         let content = "";
@@ -248,20 +255,26 @@ class Dashboard extends React.Component {
         }
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         FileSaver.saveAs(blob, "index.html");
-        event.preventDefault();
+
+        console.log("***********");
+        var submitted_components = [];
+        for (var i = 0; i < num_components; i++) {
+            if (redux_store[i].database_id !== undefined) {
+                console.log(redux_store[i]);
+                var data = {"component_data": redux_store[i].component.props, "component_type": redux_store[i].type};
+                submitted_components.push(data);
+            }
+        }
+
+        // Save to database
         $.ajax({
           url: '/gen',
           type: 'POST',
           data: {
-            "data": JSON.stringify(this.state.componentsTable), 
+            "data": JSON.stringify(submitted_components), 
             "current_id": JSON.stringify(this.props.database_id)
           },
           type: 'POST'
-          // success: function(database_id) {
-          // }.bind(this),
-          // error: function() {
-          //   alert('Error occured');
-          // }.bind(this)
         });
 
         this.setState({
