@@ -21,7 +21,6 @@
 	.header {
 		color: #fff;
 		position: relative;
-
 		.headerDetails {
 			padding: 30px;
 		    position: absolute;
@@ -41,6 +40,7 @@
 		.coverImage {
 			background-size: cover;
 			background-repeat: no-repeat;
+			padding: 0;
 			min-height: 700px;
 			width: 100%;
 		}
@@ -75,26 +75,28 @@
 		letter-spacing: 0.5px;
 	}
 	.image {
-		max-width: 100%;
-		height: auto;
-		width: auto\9;
+		.img-block {
+			position: relative;
+			height: 400px;
+			background-repeat: no-repeat;
+			background-size: cover;
+			.img-credit {
+				background-color: rgba(255,255,255,0.5);
+				vertical-align: middle;
+			}
+		}
+		.img-caption {
+			vertical-align: middle;
+		}
 	}
-	.img-caption {
-		margin: 0;
-		padding-top: 10px;
-		padding-bottom: 1px;
-		text-align: center;
-		vertical-align: middle;
-	}
-	.img-credit {
-		text-align: center;
-		vertical-align: middle;
-	}
-
 }
 
+/* GLOBAL STYLES */
+.center-block {
+	padding: 0 10% 0 10%;
+}
 
-
+/* /all STYLES */
 .all_pages {
 	.coverImage {
 		margin: 10px;
