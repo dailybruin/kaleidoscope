@@ -5,5 +5,3 @@ site/dist/js/bundle.js
 site/dist/js/index.html
 site/assets/stylesheets/*.css
 node_modules/
-
-
