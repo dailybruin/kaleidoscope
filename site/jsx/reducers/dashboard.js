@@ -139,9 +139,9 @@ export function _header(state=[], action) {
         case 'NEW_HEADER':
             console.log('In New HEADER')
             const title = "<title>" + action.title + "</title>";
-            const og_title = '<meta property="og:title"' + action.og_title + '/>';
-            const og_image = '<meta property="og:image"' + action.og_image + '/>';
-            const og_description = '<meta property="og:og_description"' + action.og_description + '/>';
+            const og_title = '<meta property="og:title" content="' + action.og_title + '"/>';
+            const og_image = '<meta property="og:image" content="' + action.og_image + '"/>';
+            const og_description = '<meta property="og:description" content="' + action.og_description + '"/>';
             const favicon = '<link rel = "icon" type="image/png" href="http://dailybruin.com/img/favicons/favicon-32x32.png" sizes="32x32">';
             const bootstrap = '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">'
             const css = '<link rel="stylesheet" type="text/css" href="style.css">';
