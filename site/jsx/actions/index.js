@@ -1,44 +1,63 @@
-export const addHeader = (title, author, coverImageUrl, key) => {
+export const addHeader = (title, author, coverImageUrl, key,button) => {
     return{
         type: 'ADD_HEADER',
         title: title,
         author: author,
         url: coverImageUrl,
-        key: key
+        key: key,
+        button: button,
     }
 }
 
-export const addSubhead = (text, key) => {
+export const addSubhead = (text, key, button) => {
     return{
         type: 'ADD_SUBHEAD',
         subhead: text,
-        key: key
+        key: key,
+        button: button,
     }
 }
 
-export const addImage = (src, credit, caption,key) => {
+export const addImage = (src, credit, caption,key, button) => {
     return {
         type: 'ADD_IMAGE',
         src: src,
         credit: credit,
         caption: caption,
-        key: key
+        key: key,
+        button: button,
+
     }
 }
 
-export const addQuote = (quote, quoteMaker,key) => {
+export const addQuote = (quote, quoteMaker,key,button) => {
 	return {
 		type: 'ADD_QUOTE',
 		quoteText: quote,
 		quoteSource: quoteMaker,
-        key: key
+        key: key,
+        button: button, 
 	}
 }
 
-export const addText = (text,key) => {
+export const addText = (text,key, button) => {
     return {
         type: 'ADD_TEXT',
         text: text,
-        key: key
+        key: key,
+        button: button,
     }
 }
+
+export const addMetatags = (title, og_image) => {
+    return {
+        type: 'NEW_HEADER',
+        title: title,
+        og_title: title,
+        og_image: og_image,
+        og_description: "",
+
+    }
+}
+
+// export const updateComponent = ()
