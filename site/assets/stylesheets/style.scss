@@ -76,6 +76,15 @@
 		vertical-align: middle;
 	}
 
+	.dragHandle {
+		height: 50px;
+		width: 50px;
+		background-color: black;
+
+		&:hover {
+			cursor: point;
+		}
+	}
 }
 
 

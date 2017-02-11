@@ -4,6 +4,7 @@ import Image from '../components/common/Image';
 import Quote from '../components/common/Quote';
 import Subhead from '../components/common/Subhead'
 import TextSection from '../components/common/TextSection';
+import DashboardItem from '../components/common/DashboardItem';
 
 export function  _dashboard(state = [], action) {
     switch (action.type) {
@@ -73,9 +74,15 @@ export function  _dashboard(state = [], action) {
                     ]
                 }
             }
+            let dbi = <DashboardItem
+                        component={image}
+                        database_id={action.key}
+                        type='image'
+                        button={action.button}
+                    />;
             return [
                 ...state,
-                image_struct
+                dbi
             ];
         case 'ADD_QUOTE':
             const quote = <Quote quoteText={action.quoteText} quoteSource={action.quoteSource}/>;
