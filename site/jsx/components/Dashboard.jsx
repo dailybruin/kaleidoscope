@@ -57,7 +57,7 @@ class Dashboard extends React.Component {
                         <div>{this.showInputForComponentType()}</div>
                     </div>
                     <div className="dropdown">
-                        <label for="dropdown">Select component:</label>
+                        <label htmlFor="dropdown">Select component:</label>
                         <div className="row">
                             <div className="col-sm-11">
                                 <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
@@ -307,7 +307,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="title">Title:</label>
+                            <label htmlFor="title">Title:</label>
                             <input
                                 placeholder="Title" 
                                 type="text" name="title" 
@@ -316,7 +316,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.title}/>
                         </div>
                         <div className="col-md-4">    
-                            <label for="author">Author:</label>                   
+                            <label htmlFor="author">Author:</label>                   
                             <input
                                 placeholder="Author"
                                 type="text" name="author"
@@ -325,7 +325,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.author}/>
                         </div>
                         <div className="col-md-4">
-                            <label for="url">Cover Image URL:</label>
+                            <label htmlFor="url">Cover Image URL:</label>
                             <input
                                 placeholder="Cover image URL"
                                 type="text" name="url"
@@ -339,7 +339,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="subhead">Subhead:</label>
+                            <label htmlFor="subhead">Subhead:</label>
                             <input 
                                 placeholder="Subhead" 
                                 type="text" 
@@ -354,7 +354,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="url">URL:</label>
+                            <label htmlFor="url">URL:</label>
                             <input 
                                 placeholder="URL" type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'url')}
@@ -362,7 +362,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.url}/>
                         </div>
                         <div className="col-md-4">
-                            <label for="credit">Credit:</label>
+                            <label htmlFor="credit">Credit:</label>
                             <input
                                 placeholder="Credit" type="text" name="credit" 
                                 onChange={this.updateInput.bind(this, 'credit')}
@@ -370,7 +370,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.credit}/>
                         </div>
                         <div className="col-md-4">
-                            <label for="caption">Caption:</label>
+                            <label htmlFor="caption">Caption:</label>
                             <input
                                 placeholder="Caption" type="text" name="caption"
                                 onChange={this.updateInput.bind(this, 'caption')}
@@ -384,7 +384,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="quote">Quote:</label>
+                            <label htmlFor="quote">Quote:</label>
                             <input 
                                 placeholder="Quote" 
                                 type="text" 
@@ -394,7 +394,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.quoteText} />
                         </div>
                         <div className="col-md-4">
-                            <label for="quoteMaker">Quote Maker:</label>
+                            <label htmlFor="quoteMaker">Quote Maker:</label>
                             <input 
                                 placeholder="Quote Maker" 
                                 type="text" 
@@ -408,7 +408,7 @@ class Dashboard extends React.Component {
             case 'text_section':
                 return(
                     <div className="col-md-12">
-                        <label for="text">Text:</label>
+                        <label htmlFor="text">Text:</label>
                         <textarea 
                             name="text" 
                             rows="3"

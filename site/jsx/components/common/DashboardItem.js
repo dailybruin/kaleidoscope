@@ -24,15 +24,15 @@ export default class DashboardItem extends React.Component {
 	  return 200;;
 	}
 	render() {
-		const {item, itemSelected, dragHandle} = this.props;
-		const component_props = item._store.props;
-		const {value} = this.state;
-		const scale = itemSelected * 0.05 + 1;
-		const shadow = itemSelected * 15 + 1;
-		const dragged = itemSelected !== 0;
-		console.log("checking out props of DashboardItem");
-		// console.log(component_props._store.props);
-		console.log("*********");
+		// const {item, itemSelected, dragHandle} = this.props;
+		// const component_props = item._store.props;
+		// const {value} = this.state;
+		// const scale = itemSelected * 0.05 + 1;
+		// const shadow = itemSelected * 15 + 1;
+		// const dragged = itemSelected !== 0;
+		// console.log("checking out props of DashboardItem");
+		// // console.log(component_props._store.props);
+		// console.log("*********");
 		// return (
 		// 		<div 
 		// 			className={cx('item', {dragged})}
@@ -49,8 +49,8 @@ export default class DashboardItem extends React.Component {
 		// 	);
 		return (
 			<div>
-				{component_props.component}
-				{component_props.button}
+				{this.props.component}
+				{this.props.button}
 			</div>
 		);
 	}

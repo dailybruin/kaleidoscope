@@ -1,4 +1,5 @@
-import React from 'react';
+// import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Header from './Header';
 import Subhead from './Subhead';
 import Image from './Image';
@@ -7,8 +8,8 @@ import TextSection from './TextSection';
 import DraggableList from 'react-draggable-list';
 import DashboardItem from './DashboardItem'
 import {connect} from 'react-redux';
-// import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-import SortableComponent from './SortableComponent';
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+// import SortableComponent from './SortableComponent';
 
 
 // const SortableItem = SortableElement(({value}) => 
@@ -18,26 +19,26 @@ import SortableComponent from './SortableComponent';
 //         </div>)
 //     );
 
-// const SortableItem = SortableElement(({value}) => {
-//     console.log('In sortable item')
-//     console.log(value); 
-//     return (<div>{value}</div>);
-// });
-// const SortableList = SortableContainer(({items}) => {
-//     console.log('666666666')
-//     console.log(items);
-//     return (
-//             <div>
-//                 {items.map((value, index) => {
-//                     console.log('checking value')
-//                     console.log(index)
-//                     console.log(value._store.props.component);
-//                     return (<SortableItem key={`item-${index}`} index={index} value={index} />)
-//                     }
-//                     )}
-//             </div>
-//         );
-//     });
+const SortableItem = SortableElement(({value}) => {
+    console.log('In sortable item')
+    console.log(value); 
+    return (<div>{value}</div>);
+});
+const SortableList = SortableContainer(({items}) => {
+    console.log('666666666')
+    console.log(items);
+    return (
+            <div>
+                {items.map((value, index) => {
+                    console.log('checking value')
+                    console.log(index)
+                    console.log(value.props);
+                    return (<SortableItem key={`item-${index}`} index={index} value={value} />)
+                    }
+                    )}
+            </div>
+        );
+    });
 // const SortableItem = SortableElement(({value}) => <li>{value}</li>);
 
 // const SortableList = SortableContainer(({items}) => {
@@ -107,14 +108,14 @@ class Page extends React.Component {
                     <p>nothing</p>
                 )
         }
-        // return (
-        //     <div className="page-container">
-        //         <SortableList items={dashboard} onSortEnd={this.onSortEnd}/>
-        //     </div>
-        // );
         return (
-                <SortableComponent/>
-            );
+            <div className="page-container">
+                <SortableList items={dashboard} onSortEnd={this.onSortEnd}/>
+            </div>
+        );
+        // return (
+        //         <SortableComponent/>
+        //     );
     }
 };
 

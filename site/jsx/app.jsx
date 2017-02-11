@@ -4,6 +4,7 @@ import createStore from './reducers/index'
 import { Provider } from 'react-redux'
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
+import SortableComponent from './components/common/SortableComponent'
 // import {render} from 'react-dom'
 
 const store = createStore();
@@ -20,9 +21,12 @@ ReactDOM.render(
 	</Provider>, document.getElementById('app')
 );
 
+// ReactDOM.render(<SortableComponent/>, document.getElementById('app'))
+
 // ReactDOM.render(
 // 	<Provider store={store}>
 // 		<App store={store} preloaded_components={components} database_id={database_id}/>
 // 	</Provider>, mountNode
 // );
+
 
