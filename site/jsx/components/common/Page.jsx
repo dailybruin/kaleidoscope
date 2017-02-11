@@ -9,15 +9,8 @@ import DraggableList from 'react-draggable-list';
 import DashboardItem from './DashboardItem'
 import {connect} from 'react-redux';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
+import {updateComponentList} from '../../actions';
 // import SortableComponent from './SortableComponent';
-
-
-// const SortableItem = SortableElement(({value}) => 
-//         (<div>
-//             {value.component}
-//             {value.button}
-//         </div>)
-//     );
 
 const SortableItem = SortableElement(({value}) => {
     console.log('In sortable item')
@@ -39,45 +32,34 @@ const SortableList = SortableContainer(({items}) => {
             </div>
         );
     });
-// const SortableItem = SortableElement(({value}) => <li>{value}</li>);
 
-// const SortableList = SortableContainer(({items}) => {
-//     return (
-//         <ul>
-//             {items.map((value, index) =>
-//                 <SortableItem key={`item-${index}`} index={index} value={index} />
-//             )}
-//         </ul>
-//     );
-// });
-// Super basic component that takes name and age and then prints it
 class Page extends React.Component {
     static propTypes = {
-        // title: React.PropTypes.string.isRequired,
-        // author: React.PropTypes.string.isRequired,
-        // image: React.PropTypes.array.isRequired,
-        // quote: React.PropTypes.array.isRequired,
-        // text: React.PropTypes.string,
     }
     constructor(props) {
         super(props);
         // let drag_list = []
         this.state = {list: []};
+        this.onSortEnd = this.onSortEnd.bind(this);
     }
-    _onListChange(newList: Array<Object>) {
-      this.setState({list: newList});
-    }
+    // _onSortEnd(newList: Array<Object>) {
+    //   this.propss.dispatch(updateComponentList(newList));
+    // }
 
     onSortEnd = ({oldIndex, newIndex}) => {
-        arrayMove(this.props.store.getState()._dashboard, oldIndex, newIndex);
+        // let new_array = arrayMove(this.props.store.getState)
+        console.log('PROPER SORTEND')
+        let new_array = arrayMove(this.props.store.getState()._dashboard, oldIndex, newIndex);
+        console.log(new_array);
+        this.props.dispatch(updateComponentList(new_array));
     }
     render() {
         // Show only the component. Don't show database_id that is saved in the store
         let redux_store = this.props.store.getState()._dashboard;
         var num_components = redux_store.length;
-        // var components = [];
+        var components = [];
         for (var i = 0; i < num_components; i++) {
-            // components.push(redux_store[i].component);
+  
             // if (redux_store[i].button !== undefined)
             //     components.push(redux_store[i].button);
             // console.log(redux_store[i])
@@ -90,6 +72,9 @@ class Page extends React.Component {
             //     );
 
         }
+        // this.setState({
+        //     list: components,
+        // })
 
         console.log(this.state);
 
@@ -105,7 +90,7 @@ class Page extends React.Component {
         console.log(dashboard);
         if (dashboard.length === 0) {
             return (
-                    <p>nothing</p>
+                    <p>nothing yet add something :)</p>
                 )
         }
         return (
@@ -113,9 +98,6 @@ class Page extends React.Component {
                 <SortableList items={dashboard} onSortEnd={this.onSortEnd}/>
             </div>
         );
-        // return (
-        //         <SortableComponent/>
-        //     );
     }
 };
 

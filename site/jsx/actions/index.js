@@ -67,4 +67,11 @@ export const deleteComponent = (id) => {
     }
 }
 
+export const updateComponentList = (new_list) => {
+    return {
+        type: 'UPDATE_COMPONENT_LIST',
+        new_list: new_list,
+    }
+}
+
 // export const updateComponent = ()

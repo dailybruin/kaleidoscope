@@ -136,6 +136,14 @@ export function  _dashboard(state = [], action) {
             return [
                 ...state
             ];
+        case 'UPDATE_COMPONENT_LIST':
+            console.log('88888888888')
+            console.log('Looking at original List');
+
+            console.log([...state])
+            console.log('Looking at new list');
+            console.log(action.new_list);
+            return action.new_list;
         default:
             return state;
     }
