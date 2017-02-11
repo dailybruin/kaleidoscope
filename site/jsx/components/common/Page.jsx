@@ -95,7 +95,7 @@ class Page extends React.Component {
         }
         return (
             <div className="page-container">
-                <SortableList items={dashboard} onSortEnd={this.onSortEnd}/>
+                <SortableList items={dashboard} onSortEnd={this.onSortEnd} pressDelay={150}/>
             </div>
         );
     }

@@ -60,26 +60,22 @@ export function  _dashboard(state = [], action) {
                                 url={action.src}
                                 credit={action.credit}
                                 caption={action.caption}/>;
-            const image_struct = {
-                database_id: action.key, 
-                component: image, 
-                button: action.button, 
-                type: 'image'
-            };
-            for (var i = 0; i< state.length; i++) {
-                if (state[i].database_id !== undefined && state[i].database_id === action.key) {
-                    state.splice(i,1,image_struct);
-                    return [
-                        ... state,
-                    ]
-                }
-            }
+            console.log('MAKING DBI CHECKING DASHBOARD STATE')
+            console.log(state)
             let dbi = <DashboardItem
                         component={image}
                         database_id={action.key}
                         type='image'
                         button={action.button}
                     />;
+            for (var i = 0; i< state.length; i++) {
+                if (state[i].props.database_id !== undefined && state[i].props.database_id  === action.key) {
+                    state.splice(i,1,dbi);
+                    return [
+                        ... state,
+                    ]
+                }
+            }
             return [
                 ...state,
                 dbi

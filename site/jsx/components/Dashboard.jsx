@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent} from '../actions';
 var FileSaver = require('file-saver');
+import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server'
 
 class Dashboard extends React.Component {
     
@@ -164,12 +166,15 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
-
+        console.log('EDIT');
         for (var i = 0; i< redux_store.length; i++) {
-            if (id === redux_store[i].database_id) {
-                let matching_props = redux_store[i].component.props;
+            let item_props = redux_store[i].props;
+            console.log(redux_store[i]);
+            if (id === item_props.database_id) {
+                console.log('MATCH FOUND')
+                // let matching_props = redux_store[i].component.props;
 
-                switch (redux_store[i].type) {
+                switch (item_props.type) {
                     case "header":
                         this.setState({
                             data:{
@@ -195,13 +200,14 @@ class Dashboard extends React.Component {
                         })
                         break;
                     case "image":
+                        console.log('FOUND IMAGE')
                         this.setState({
                             data: {
                                 type: "image",
                                 payload: {
-                                    url: matching_props.url,
-                                    caption: matching_props.caption,
-                                    credit: matching_props.credit,
+                                    url: item_props.url,
+                                    caption: item_props.caption,
+                                    credit: item_props.credit,
                                 }
                             },
                             edit_component_id: id,
@@ -251,8 +257,8 @@ class Dashboard extends React.Component {
         var num_components = redux_store.length;
 
         for (var i = 0; i < num_components; i++) {
-            if (redux_store[i].database_id !== undefined)
-                content = content + React.renderToStaticMarkup(redux_store[i].component)
+            if (redux_store[i].props.database_id !== undefined)
+                content = content + ReactDOMServer.renderToStaticMarkup(redux_store[i].props.component)
         }
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         FileSaver.saveAs(blob, "index.html");
