@@ -267,13 +267,9 @@ class Dashboard extends React.Component {
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         FileSaver.saveAs(blob, "index.html");
 
-        console.log("***********");
         var submitted_components = [];
         for (var i = 0; i < num_components; i++) {
-            console.log('9999999')
-            console.log(redux_store[i])
             if (redux_store[i].props.database_id !== undefined) {
-                console.log('not invalid component')
                 var data = {"component_data": redux_store[i].props.component.props, "component_type": redux_store[i].props.type};
                 submitted_components.push(data);
             }
