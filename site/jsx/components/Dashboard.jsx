@@ -20,10 +20,7 @@ class Dashboard extends React.Component {
                             payload: {},
                             
                         },
-                        componentsTable: [],
-                        edit_component_id: "",
-                        
-
+                        edit_component_id: ""
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -155,9 +152,6 @@ class Dashboard extends React.Component {
                 console.log("Component category not supported.");
         }
 
-        var Data = {"component_data": component_params, "component_type": this.state.data.type};
-        this.state.componentsTable.push(Data);
-
         this.setState({
             data:{
                 type: this.state.data.type,
@@ -168,14 +162,10 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
-        console.log('EDIT');
         for (var i = 0; i< redux_store.length; i++) {
             let item_props = redux_store[i].props;
-            console.log(redux_store[i]);
+            // console.log(redux_store[i]);
             if (id === item_props.database_id) {
-                console.log('MATCH FOUND')
-                // let item_props = redux_store[i].component.props;
-
                 switch (item_props.type) {
                     case "header":
                         this.setState({
@@ -202,7 +192,6 @@ class Dashboard extends React.Component {
                         })
                         break;
                     case "image":
-                        console.log('FOUND IMAGE')
                         this.setState({
                             data: {
                                 type: item_props.type,
@@ -213,9 +202,7 @@ class Dashboard extends React.Component {
                                 }
                             },
                             edit_component_id: id,
-                        })
-                        console.log('checking payload');
-                        console.log(item_props.component.props)
+                        });
                         break;
                     case "quote":
                         this.setState({
@@ -289,8 +276,7 @@ class Dashboard extends React.Component {
             data: {
                 type: this.state.data.type,
                 payload: {}
-            },
-            componentsTable: []
+            }
         });
     }
 
