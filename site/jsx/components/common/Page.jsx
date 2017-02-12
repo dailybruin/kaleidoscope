@@ -31,8 +31,6 @@ class Page extends React.Component {
     }
     constructor(props) {
         super(props);
-        // let drag_list = []
-        this.state = {list: []};
         this.onSortEnd = this.onSortEnd.bind(this);
     }
 
