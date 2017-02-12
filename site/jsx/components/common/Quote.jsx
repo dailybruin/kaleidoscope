@@ -15,9 +15,7 @@ class Quote extends React.Component{
 		// let test_head =
 
 		return (
-			<div>
-
-
+			<div className="center-block">
 				<p className="quote">"{ this.props.quoteText }"</p>
 				<p className="quoteSource">- { this.props.quoteSource }</p>
 			</div>

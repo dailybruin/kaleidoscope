@@ -12,7 +12,7 @@ class Subhead extends React.Component{
 
 	render(){
 		return (
-			<div>
+			<div className="center-block">
 				<p className="subhead">{ this.props.text }</p>
 			</div>
 		);
