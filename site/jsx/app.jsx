@@ -13,7 +13,7 @@ var mountNode = document.getElementById("react-main-mount");
 
 var components = JSON.parse($('#app meta').attr('components'));
 var database_id = JSON.parse($('#app meta').attr('database_id'));
-console.log('database_id ' + database_id);
+
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -21,12 +21,6 @@ ReactDOM.render(
 	</Provider>, document.getElementById('app')
 );
 
-// ReactDOM.render(<SortableComponent/>, document.getElementById('app'))
 
-// ReactDOM.render(
-// 	<Provider store={store}>
-// 		<App store={store} preloaded_components={components} database_id={database_id}/>
-// 	</Provider>, mountNode
-// );
 
 
