@@ -258,26 +258,23 @@ class Dashboard extends React.Component {
         if (redux_header.length > 0) {
             content = "<head>" + redux_header[0] + "</head>";
         }
+
         var num_components = redux_store.length;
-
-        for (var i = 0; i < num_components; i++) {
-            if (redux_store[i].props.database_id !== undefined)
-                content = content + ReactDOMServer.renderToStaticMarkup(redux_store[i].props.component)
-        }
-        var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-        FileSaver.saveAs(blob, "index.html");
-
         var submitted_components = [];
+
         for (var i = 0; i < num_components; i++) {
             if (redux_store[i].props.database_id !== undefined) {
+                content = content + ReactDOMServer.renderToStaticMarkup(redux_store[i].props.component)
+
+                // Array for db insertion
                 var data = {"component_data": redux_store[i].props.component.props, "component_type": redux_store[i].props.type};
                 submitted_components.push(data);
             }
         }
+        var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+        FileSaver.saveAs(blob, "index.html");
 
-        console.log(submitted_components);
-
-        // Save to database
+        // Save to database from submitted_components
         $.ajax({
           url: '/gen',
           type: 'POST',
