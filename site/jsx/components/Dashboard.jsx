@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent} from '../actions';
 var FileSaver = require('file-saver');
+import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server'
 
 class Dashboard extends React.Component {
     
@@ -18,10 +20,7 @@ class Dashboard extends React.Component {
                             payload: {},
                             
                         },
-                        componentsTable: [],
-                        edit_component_id: "",
-                        
-
+                        edit_component_id: ""
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,7 +56,7 @@ class Dashboard extends React.Component {
                         <div>{this.showInputForComponentType()}</div>
                     </div>
                     <div className="dropdown">
-                        <label for="dropdown">Select component:</label>
+                        <label htmlFor="dropdown">Select component:</label>
                         <div className="row">
                             <div className="col-sm-11">
                                 <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
@@ -125,9 +124,10 @@ class Dashboard extends React.Component {
                     component_params.author, 
                     component_params.image, 
                     store_id, 
-                    button_group
+                    button_group,
+                    'header',
                     ));
-                this.props.dispatch(addMetatags(component_params.title, component_params.image));
+                this.props.dispatch(addMetatags(component_params.title, component_params.image, 'header'));
                 break;
             case "image":
                 this.props.dispatch(addImage(
@@ -136,23 +136,21 @@ class Dashboard extends React.Component {
                         component_params.caption,
                         store_id,
                         button_group,
+                        'image',
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button_group));
+                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button_group,'quote'));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(component_params.text,store_id,button_group));
+                this.props.dispatch(addSubhead(component_params.text,store_id,button_group,'subhead'));
                 break;
             case "text_section":
-                this.props.dispatch(addText(component_params.text, store_id,button_group));
+                this.props.dispatch(addText(component_params.text, store_id,button_group,'text_section'));
                 break;
             default:
                 console.log("Component category not supported.");
         }
-
-        var Data = {"component_data": component_params, "component_type": this.state.data.type};
-        this.state.componentsTable.push(Data);
 
         this.setState({
             data:{
@@ -164,20 +162,19 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
-
         for (var i = 0; i< redux_store.length; i++) {
-            if (id === redux_store[i].database_id) {
-                let matching_props = redux_store[i].component.props;
-
-                switch (redux_store[i].type) {
+            let item_props = redux_store[i].props;
+            // console.log(redux_store[i]);
+            if (id === item_props.database_id) {
+                switch (item_props.type) {
                     case "header":
                         this.setState({
                             data:{
-                                type: "header",
+                                type: item_props.type,
                                 payload: {
-                                    title: matching_props.title,
-                                    author: matching_props.author,
-                                    image: matching_props.image,
+                                    title: item_props.title,
+                                    author: item_props.author,
+                                    image: item_props.image,
                                 }
                             },
                             edit_component_id: id,
@@ -186,9 +183,9 @@ class Dashboard extends React.Component {
                     case "subhead":
                         this.setState({
                             data:{
-                                type: "subhead",
+                                type: item_props.type,
                                 payload: {
-                                    text: matching_props.text,
+                                    text: item_props.text,
                                 }
                             },
                             edit_component_id: id,
@@ -197,23 +194,23 @@ class Dashboard extends React.Component {
                     case "image":
                         this.setState({
                             data: {
-                                type: "image",
+                                type: item_props.type,
                                 payload: {
-                                    url: matching_props.url,
-                                    caption: matching_props.caption,
-                                    credit: matching_props.credit,
+                                    url:item_props.url,
+                                    caption: item_props.caption,
+                                    credit: item_props.credit,
                                 }
                             },
                             edit_component_id: id,
-                        })
+                        });
                         break;
                     case "quote":
                         this.setState({
                             data: {
                                 type: "quote",
                                 payload: {
-                                    quoteText: matching_props.quoteText,
-                                    quoteSource: matching_props.quoteSource,
+                                    quoteText: item_props.quoteText,
+                                    quoteSource: item_props.quoteSource,
                                 }
                             },
                             edit_component_id: id,
@@ -224,7 +221,7 @@ class Dashboard extends React.Component {
                             data: {
                                 type: "text_section",
                                 payload: {
-                                    text: matching_props.text,
+                                    text: item_props.text,
                                 }
                             },
                             edit_component_id: id,
@@ -248,27 +245,23 @@ class Dashboard extends React.Component {
         if (redux_header.length > 0) {
             content = "<head>" + redux_header[0] + "</head>";
         }
+
         var num_components = redux_store.length;
+        var submitted_components = [];
 
         for (var i = 0; i < num_components; i++) {
-            if (redux_store[i].database_id !== undefined)
-                content = content + React.renderToStaticMarkup(redux_store[i].component)
+            if (redux_store[i].props.database_id !== undefined) {
+                content = content + ReactDOMServer.renderToStaticMarkup(redux_store[i].props.component)
+
+                // Array for db insertion
+                var data = {"component_data": redux_store[i].props.component.props, "component_type": redux_store[i].props.type};
+                submitted_components.push(data);
+            }
         }
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         FileSaver.saveAs(blob, "index.html");
 
-        console.log("***********");
-        var submitted_components = [];
-        for (var i = 0; i < num_components; i++) {
-            if (redux_store[i].database_id !== undefined) {
-                var data = {"component_data": redux_store[i].component.props, "component_type": redux_store[i].type};
-                submitted_components.push(data);
-            }
-        }
-
-        console.log(submitted_components);
-
-        // Save to database
+        // Save to database from submitted_components
         $.ajax({
           url: '/gen',
           type: 'POST',
@@ -283,8 +276,7 @@ class Dashboard extends React.Component {
             data: {
                 type: this.state.data.type,
                 payload: {}
-            },
-            componentsTable: []
+            }
         });
     }
 
@@ -307,7 +299,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="title">Title:</label>
+                            <label htmlFor="title">Title:</label>
                             <input
                                 placeholder="Title" 
                                 type="text" name="title" 
@@ -316,7 +308,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.title}/>
                         </div>
                         <div className="col-md-4">    
-                            <label for="author">Author:</label>                   
+                            <label htmlFor="author">Author:</label>                   
                             <input
                                 placeholder="Author"
                                 type="text" name="author"
@@ -325,7 +317,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.author}/>
                         </div>
                         <div className="col-md-4">
-                            <label for="url">Cover Image URL:</label>
+                            <label htmlFor="url">Cover Image URL:</label>
                             <input
                                 placeholder="Cover image URL"
                                 type="text" name="url"
@@ -339,7 +331,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="subhead">Subhead:</label>
+                            <label htmlFor="subhead">Subhead:</label>
                             <input 
                                 placeholder="Subhead" 
                                 type="text" 
@@ -354,7 +346,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="url">URL:</label>
+                            <label htmlFor="url">URL:</label>
                             <input 
                                 placeholder="URL" type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'url')}
@@ -362,7 +354,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.url}/>
                         </div>
                         <div className="col-md-4">
-                            <label for="credit">Credit:</label>
+                            <label htmlFor="credit">Credit:</label>
                             <input
                                 placeholder="Credit" type="text" name="credit" 
                                 onChange={this.updateInput.bind(this, 'credit')}
@@ -370,7 +362,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.credit}/>
                         </div>
                         <div className="col-md-4">
-                            <label for="caption">Caption:</label>
+                            <label htmlFor="caption">Caption:</label>
                             <input
                                 placeholder="Caption" type="text" name="caption"
                                 onChange={this.updateInput.bind(this, 'caption')}
@@ -384,7 +376,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="col-md-4">
-                            <label for="quote">Quote:</label>
+                            <label htmlFor="quote">Quote:</label>
                             <input 
                                 placeholder="Quote" 
                                 type="text" 
@@ -394,7 +386,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.quoteText} />
                         </div>
                         <div className="col-md-4">
-                            <label for="quoteMaker">Quote Maker:</label>
+                            <label htmlFor="quoteMaker">Quote Maker:</label>
                             <input 
                                 placeholder="Quote Maker" 
                                 type="text" 
@@ -408,7 +400,7 @@ class Dashboard extends React.Component {
             case 'text_section':
                 return(
                     <div className="col-md-12">
-                        <label for="text">Text:</label>
+                        <label htmlFor="text">Text:</label>
                         <textarea 
                             name="text" 
                             rows="3"
