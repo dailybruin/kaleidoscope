@@ -1,4 +1,4 @@
-export const addHeader = (title, author, coverImageUrl, key,button) => {
+export const addHeader = (title, author, coverImageUrl, key,button,comp_type) => {
     return{
         type: 'ADD_HEADER',
         title: title,
@@ -6,19 +6,22 @@ export const addHeader = (title, author, coverImageUrl, key,button) => {
         url: coverImageUrl,
         key: key,
         button: button,
+        comp_type: comp_type,
     }
 }
 
-export const addSubhead = (text, key, button) => {
+export const addSubhead = (text, key, button, comp_type) => {
     return{
         type: 'ADD_SUBHEAD',
         subhead: text,
         key: key,
         button: button,
+        comp_type: comp_type,
+
     }
 }
 
-export const addImage = (src, credit, caption,key, button) => {
+export const addImage = (src, credit, caption,key, button,comp_type) => {
     return {
         type: 'ADD_IMAGE',
         src: src,
@@ -26,26 +29,31 @@ export const addImage = (src, credit, caption,key, button) => {
         caption: caption,
         key: key,
         button: button,
-
+        comp_type:comp_type,
     }
 }
 
-export const addQuote = (quote, quoteMaker,key,button) => {
+export const addQuote = (quote, quoteMaker,key,button,comp_type) => {
+        console.log('In action giver right now')
+        console.log(key)
 	return {
 		type: 'ADD_QUOTE',
 		quoteText: quote,
 		quoteSource: quoteMaker,
         key: key,
-        button: button, 
+        button: button,
+        comp_type: comp_type,
 	}
 }
 
-export const addText = (text,key, button) => {
+export const addText = (text,key, button,comp_type) => {
+
     return {
         type: 'ADD_TEXT',
         text: text,
         key: key,
         button: button,
+        comp_type: comp_type,
     }
 }
 

@@ -127,9 +127,10 @@ class Dashboard extends React.Component {
                     component_params.author, 
                     component_params.image, 
                     store_id, 
-                    button_group
+                    button_group,
+                    'header',
                     ));
-                this.props.dispatch(addMetatags(component_params.title, component_params.image));
+                this.props.dispatch(addMetatags(component_params.title, component_params.image, 'header'));
                 break;
             case "image":
                 this.props.dispatch(addImage(
@@ -138,16 +139,17 @@ class Dashboard extends React.Component {
                         component_params.caption,
                         store_id,
                         button_group,
+                        'image',
                     ));
                 break;
             case "quote":
-                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button_group));
+                this.props.dispatch(addQuote(component_params.quoteText, component_params.quoteSource, store_id,button_group,'quote'));
                 break;
             case "subhead":
-                this.props.dispatch(addSubhead(component_params.text,store_id,button_group));
+                this.props.dispatch(addSubhead(component_params.text,store_id,button_group,'subhead'));
                 break;
             case "text_section":
-                this.props.dispatch(addText(component_params.text, store_id,button_group));
+                this.props.dispatch(addText(component_params.text, store_id,button_group,'text_section'));
                 break;
             default:
                 console.log("Component category not supported.");
@@ -172,17 +174,17 @@ class Dashboard extends React.Component {
             console.log(redux_store[i]);
             if (id === item_props.database_id) {
                 console.log('MATCH FOUND')
-                // let matching_props = redux_store[i].component.props;
+                // let item_props = redux_store[i].component.props;
 
                 switch (item_props.type) {
                     case "header":
                         this.setState({
                             data:{
-                                type: "header",
+                                type: item_props.type,
                                 payload: {
-                                    title: matching_props.title,
-                                    author: matching_props.author,
-                                    image: matching_props.image,
+                                    title: item_props.title,
+                                    author: item_props.author,
+                                    image: item_props.image,
                                 }
                             },
                             edit_component_id: id,
@@ -191,9 +193,9 @@ class Dashboard extends React.Component {
                     case "subhead":
                         this.setState({
                             data:{
-                                type: "subhead",
+                                type: item_props.type,
                                 payload: {
-                                    text: matching_props.text,
+                                    text: item_props.text,
                                 }
                             },
                             edit_component_id: id,
@@ -203,23 +205,25 @@ class Dashboard extends React.Component {
                         console.log('FOUND IMAGE')
                         this.setState({
                             data: {
-                                type: "image",
+                                type: item_props.type,
                                 payload: {
-                                    url: item_props.url,
+                                    url:item_props.url,
                                     caption: item_props.caption,
                                     credit: item_props.credit,
                                 }
                             },
                             edit_component_id: id,
                         })
+                        console.log('checking payload');
+                        console.log(item_props.component.props)
                         break;
                     case "quote":
                         this.setState({
                             data: {
                                 type: "quote",
                                 payload: {
-                                    quoteText: matching_props.quoteText,
-                                    quoteSource: matching_props.quoteSource,
+                                    quoteText: item_props.quoteText,
+                                    quoteSource: item_props.quoteSource,
                                 }
                             },
                             edit_component_id: id,
@@ -230,7 +234,7 @@ class Dashboard extends React.Component {
                             data: {
                                 type: "text_section",
                                 payload: {
-                                    text: matching_props.text,
+                                    text: item_props.text,
                                 }
                             },
                             edit_component_id: id,
