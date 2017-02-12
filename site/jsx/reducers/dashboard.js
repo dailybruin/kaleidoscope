@@ -83,7 +83,7 @@ export function  _dashboard(state = [], action) {
             return updateState(state,action.key,compound_text);
         case 'DELETE_COMPONENT':
             for (var i = 0; i<state.length; i++) {
-                if (state[i].database_id !== undefined && state[i].database_id === action.database_id) {
+                if (state[i].props.database_id === action.database_id) {
                     state.splice(i,1);
                     return [
                     ...state
@@ -94,12 +94,6 @@ export function  _dashboard(state = [], action) {
                 ...state
             ];
         case 'UPDATE_COMPONENT_LIST':
-            console.log('88888888888')
-            console.log('Looking at original List');
-
-            console.log([...state])
-            console.log('Looking at new list');
-            console.log(action.new_list);
             return action.new_list;
         default:
             return state;
