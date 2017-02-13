@@ -10,10 +10,9 @@ class App extends React.Component {
     render() {
     	console.log('preloaded components from App.jsx' + this.props.preloaded_components);
         return (
-            <div>
-                <Page store={this.props.store} />
-                <hr />
-				<Dashboard store={this.props.store} preloaded_components={this.props.preloaded_components} componentTypes={['header', 'subhead', 'image', 'quote', 'text section']} database_id={this.props.database_id}/>             
+            <div className="app-container">
+				<Dashboard store={this.props.store} preloaded_components={this.props.preloaded_components} componentTypes={['header', 'subhead', 'image', 'quote', 'text section']} database_id={this.props.database_id}/>
+				<Page store={this.props.store} />             
             </div>
         )
     }

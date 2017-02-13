@@ -17,6 +17,8 @@ class Page extends React.Component {
     }
     constructor(props) {
         super(props);
+
+        this.deactivateDashboard = this.deactivateDashboard.bind(this);
     }
     render() {
         // Show only the component. Don't show database_id that is saved in the store
@@ -28,10 +30,15 @@ class Page extends React.Component {
         }
 
         return (
-            <div className="page-container">
+            <div className="page-container" onClick={this.deactivateDashboard}>
                 {components}
             </div>
         );
+    }
+
+    deactivateDashboard(){
+        let app = document.querySelector('.app-container');
+        app.classList.add('preview');
     }
 };
 

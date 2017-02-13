@@ -22,6 +22,7 @@ class Dashboard extends React.Component {
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleGenPage = this.handleGenPage.bind(this);
+        this.activateDashboard = this.activateDashboard.bind(this);
 
         // Load all preloaded components
         for (var i = 0; i < this.props.preloaded_components.length; i++) {
@@ -44,29 +45,32 @@ class Dashboard extends React.Component {
         var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
 
         return (
-          <div className="dashboard-container" >
-            <div className="container form-group">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="row component-inputs">
-                        <div>{this.showInputForComponentType(this.state.data.type)}</div>
-                    </div>
-                    <div className="dropdown">
-                        <label for="dropdown">Select component:</label>
-                        <div className="row">
-                            <div className="col-sm-11">
-                                <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
-                                    {componentOptions}
-                                </select>
-                            </div>
-                            <div className="col-sm-1">
-                                <input className="btn btn-primary" type='submit'></input>
+            <div className="dashboard-container" >
+                <div className="dashboard-main">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="dropdown">
+                            {/*<label for="dropdown">Select component:</label>*/}
+                            <div>
+                                <div>
+                                    <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
+                                        {componentOptions}
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-                <button onClick={this.handleGenPage} className="btn btn-block btn-primary">{buttonText}</button>
-              </div>
-          </div>
+                        <div className="component-inputs">
+                            <div>{this.showInputForComponentType(this.state.data.type)}</div>
+                        </div>
+                        <div>
+                            <input className="btn btn-primary btn-submit" type='submit'></input>
+                        </div>
+                    </form>
+                </div>
+                <div className="dashboard-sub" onClick={this.activateDashboard}>
+                    <button>EDIT</button>
+                </div>
+                <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">{buttonText}</button>
+            </div>
         );
     }
 
@@ -174,7 +178,7 @@ class Dashboard extends React.Component {
             case 'header':
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="title">Title:</label>
                             <input
                                 placeholder="Title" 
@@ -183,7 +187,7 @@ class Dashboard extends React.Component {
                                 className="form-control"
                                 value={this.state.data.payload.title}/>
                         </div>
-                        <div className="col-md-4">    
+                        <div className="component-input">    
                             <label for="author">Author:</label>                   
                             <input
                                 placeholder="Author"
@@ -192,7 +196,7 @@ class Dashboard extends React.Component {
                                 className="form-control"
                                 value={this.state.data.payload.author}/>
                         </div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="url">Cover Image URL:</label>
                             <input
                                 placeholder="Cover image URL"
@@ -206,7 +210,7 @@ class Dashboard extends React.Component {
             case 'subhead':
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="subhead">Subhead:</label>
                             <input 
                                 placeholder="Subhead" 
@@ -221,7 +225,7 @@ class Dashboard extends React.Component {
             case 'image':
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="url">URL:</label>
                             <input 
                                 placeholder="URL" type="text" name="url"
@@ -229,7 +233,7 @@ class Dashboard extends React.Component {
                                 className="form-control"
                                 value={this.state.data.payload.imageUrl}/>
                         </div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="credit">Credit:</label>
                             <input
                                 placeholder="Credit" type="text" name="credit" 
@@ -237,7 +241,7 @@ class Dashboard extends React.Component {
                                 className="form-control"
                                 value={this.state.data.payload.credit}/>
                         </div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="caption">Caption:</label>
                             <input
                                 placeholder="Caption" type="text" name="caption"
@@ -250,7 +254,7 @@ class Dashboard extends React.Component {
             case 'quote':
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="quote">Quote:</label>
                             <input 
                                 placeholder="Quote" 
@@ -260,7 +264,7 @@ class Dashboard extends React.Component {
                                 className="form-control"
                                 value={this.state.data.payload.quoteText} />
                         </div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label for="quoteMaker">Quote Maker:</label>
                             <input 
                                 placeholder="Quote Maker" 
@@ -274,7 +278,7 @@ class Dashboard extends React.Component {
                 );
             case 'text_section':
                 return(
-                    <div className="col-md-12">
+                    <div className="component-input text">
                         <label for="text">Text:</label>
                         <textarea 
                             name="text" 
@@ -287,6 +291,11 @@ class Dashboard extends React.Component {
             default:
                 return(<p>nothing</p>);
         }
+    }
+
+    activateDashboard(){
+        let app = document.querySelector('.app-container');
+        app.classList.remove('preview');
     }
 
 }
