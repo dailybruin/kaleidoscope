@@ -4,4 +4,5 @@ npm-debug.log
 site/dist/js/bundle.js
 site/dist/js/index.html
 site/assets/stylesheets/*.css
-node_modules
+node_modules/
+site/jsx/.DS_Store

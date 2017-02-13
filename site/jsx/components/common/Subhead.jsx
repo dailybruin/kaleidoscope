@@ -3,7 +3,7 @@ import React from 'react';
 class Subhead extends React.Component{
 
 	static propTypes = {
-		subheadText: React.PropTypes.string.isRequired
+		text: React.PropTypes.string.isRequired
 	}
 
 	constructor(props){

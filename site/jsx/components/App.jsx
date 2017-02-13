@@ -1,7 +1,7 @@
-import React from 'react';
+// import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Page from './common/Page';
 import Dashboard from './Dashboard';
-
 import { Provider } from 'react-redux';
 
 // Creates a App components that works as the base of the app.
