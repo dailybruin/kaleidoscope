@@ -105,10 +105,10 @@
 	font-family: Verdana;
 	position: relative;
     float: right;
-
     width: 100%;
 
-    
+    -webkit-transition: all 1s ease;
+    		transition: all 1s ease;
 
     .sortable-element{
     	height: auto;
@@ -232,9 +232,6 @@
 		width: -webkit-calc(100% - 300px);
 	    width:    -moz-calc(100% - 300px);
 	    width: 	   	   calc(100% - 300px);
-
-	    -webkit-transition: all 1s ease;
-    			transition: all 1s ease;
 
 		.sortable-element{
 			position: relative;
