@@ -25,7 +25,7 @@ class Dashboard extends React.Component {
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleGenPage = this.handleGenPage.bind(this);
-        this.activateDashboard = this.activateDashboard.bind(this);
+        this.toggleDashboard = this.toggleDashboard.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
 
@@ -67,11 +67,12 @@ class Dashboard extends React.Component {
                             <div>{this.showInputForComponentType(this.state.data.type)}</div>
                         </div>
                         <div>
-                            <input className="btn btn-primary btn-submit" type='submit'></input>
+                            <div className="btn btn-primary btn-down preview" onClick={this.toggleDashboard}>Preview</div>
+                            <input className="btn btn-primary" type='submit'></input>
                         </div>
                     </form>
                 </div>
-                <div className="dashboard-sub" onClick={this.activateDashboard}>
+                <div className="dashboard-sub" onClick={this.toggleDashboard}>
                     <button>EDIT</button>
                 </div>
                 <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">{buttonText}</button>
@@ -112,10 +113,10 @@ class Dashboard extends React.Component {
 
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
-        const button = <button onClick={()=>this.handleEdit(store_id)}>Edit</button>;
+        const button = <button onClick={()=>this.handleEdit(store_id)}>Drag</button>;
         const delete_button = <button onClick={()=> this.props.dispatch(deleteComponent(store_id))}>Delete</button>;
         const button_group = (
-                <div>
+                <div className="button-group">
                     {button}
                     {delete_button}
                 </div>
@@ -419,9 +420,9 @@ class Dashboard extends React.Component {
         }
     }
 
-    activateDashboard(){
+    toggleDashboard(){
         let app = document.querySelector('.app-container');
-        app.classList.remove('preview');
+        app.classList.toggle('editing');
     }
 
 }
