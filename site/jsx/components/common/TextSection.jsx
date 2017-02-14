@@ -10,12 +10,16 @@ class TextSection extends React.Component {
 		super(props);
 	}
 
-	render(){
+	render() {
 		var text = this.props.text;
+		// TODO Check for inline quote markup
+		text = text.replace(/\[(.*?)\] \((.*?)\)/g, '<a href="$2">$1</a>');
+		console.log(text);
+
 		return (
 			<div className="center-block text">
-				{text.split("\n").map(i => {
-					return <p>{i}</p>;
+				{text.split("\n").map(paragraph => {
+					return <p>{paragraph}</p>;
 				})}
 			</div>
 		);
