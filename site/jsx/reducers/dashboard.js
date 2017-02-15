@@ -117,6 +117,8 @@ export function _header(state=[], action) {
                 ...state,
                 meta_tags
             ];
+        case 'RESET_HEADER':
+            return [];
         default:
             // console.log("Not supposed to be here");
             return state;
