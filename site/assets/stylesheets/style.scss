@@ -95,7 +95,7 @@
 		z-index: 100;
 	    right: 0;
 	    top: 0;
-	    margin: 20px;
+	    margin: 10px;
 	}
 }
 
@@ -125,15 +125,15 @@ $container_margin: 10%;
 		.component-action-btn-group {
 			visibility: hidden;
 			position: absolute;
-			left: 5px;
-			top: 5px;
+			left: 10px;
+			top: 10px;
 		}
 	}
 
 	.header {
 		color: #fff;
 		position: relative;
-		
+		margin-bottom: 50px;
 		.headerDetails {
 			padding: 30px;
 		    position: absolute;
@@ -143,8 +143,8 @@ $container_margin: 10%;
 		    min-height: 200px;
 		    min-width: 400px;
 
-		    -webkit-transform: translate(-50%, -110%);
-		    		transform: translate(-50%, -110%);
+		    -webkit-transform: translate(-50%, -130%);
+		    		transform: translate(-50%, -130%);
 		}
 		.title {
 			font-size: 48px;
@@ -162,7 +162,7 @@ $container_margin: 10%;
 		    }
 		}
 		.author {
-			font-size: 20px;
+			font-size: 16px;
 			font-family: $subhead_font_family;
 		}
 		.coverImage {
@@ -193,17 +193,42 @@ $container_margin: 10%;
 		font-weight: bolder;
 		font-family: $subhead_font_family;
 	}
-	.quote {
-		font-size: 1.5em;
-		font-weight: 600;
-		font-style: oblique;
+	.quote-block{
+		overflow: auto;
+		padding: 50px;
+		.quote-content{
+			float: left;
+			width: 100%;
+			.quote-text{
+				font-size: 1.5em;
+				font-weight: 600;
+				font-style: oblique;
+			}
+			.quote-source {
+				font-size: 0.9em;
+				font-weight: 400;
+				color: grey;
+				letter-spacing: 0.5px;
+			}
+		}
+		.quote{
+			float: left;
+			font-family: 'Helvetica';
+			font-size: 200px;
+			color: #000;
+		}
+		.quote-left{
+			line-height: 200px;
+			height: 100px;
+			overflow: hidden;
+			margin-left: -5px;
+		}
+		.quote-right{
+			float: left;
+			margin-top: -100px;
+		}
 	}
-	.quoteSource {
-		font-size: 0.9em;
-		font-weight: 400;
-		color: grey;
-		letter-spacing: 0.5px;
-	}
+	
 	.image {
 		.img-block {
 			position: relative;

@@ -391,7 +391,7 @@ class Dashboard extends React.Component {
                                 value={this.state.data.payload.quoteText} />
                         </div>
                         <div className="component-input">
-                            <label htmlFor="quoteMaker">Quote Maker:</label>
+                            <label htmlFor="quoteMaker">Quote Source:</label>
                             <input 
                                 placeholder="Quote Maker" 
                                 type="text" 
