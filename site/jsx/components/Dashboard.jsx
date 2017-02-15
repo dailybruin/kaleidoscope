@@ -210,7 +210,7 @@ class Dashboard extends React.Component {
 
         var num_components = redux_store.length;
         var submitted_components = [];
-
+        content = content + "<body>"
         for (var i = 0; i < num_components; i++) {
             if (redux_store[i].props.database_id !== undefined) {
                 content = content + ReactDOMServer.renderToStaticMarkup(redux_store[i].props.component)
@@ -220,6 +220,7 @@ class Dashboard extends React.Component {
                 submitted_components.push(data);
             }
         }
+        content = content + "</body>";
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         FileSaver.saveAs(blob, "index.html");
 
