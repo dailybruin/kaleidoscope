@@ -241,8 +241,6 @@ class Dashboard extends React.Component {
     updateInput(value, event) {
 
         let updatedObj = {};
-        console.log('IN updateINput')
-        console.log(value)
         updatedObj[value] = event.target.value;
 
         this.setState({
@@ -254,6 +252,7 @@ class Dashboard extends React.Component {
     }
 
     showInputForComponentType(componentType) {
+        const payload = this.state.data.payload;
         switch(this.state.data.type) {
             case 'header':
                 return(
@@ -266,7 +265,7 @@ class Dashboard extends React.Component {
                                 onChange={this.updateInput.bind(this,'title')} 
                                 ref={(input) => this.input}
                                 className="form-control"
-                                value={this.state.data.payload.title}/>
+                                value={payload.title === undefined ? "" : payload.title}/>
                         </div>
                         <div className="col-md-4">    
                             <label htmlFor="author">Author:</label>                   
@@ -275,7 +274,7 @@ class Dashboard extends React.Component {
                                 type="text" name="author"
                                 onChange={this.updateInput.bind(this, 'author')}
                                 className="form-control"
-                                value={this.state.data.payload.author}/>
+                                value={payload.author === undefined ? "" : payload.author}/>
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="url">Cover Image URL:</label>
@@ -284,7 +283,7 @@ class Dashboard extends React.Component {
                                 type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'image')}
                                 className="form-control"
-                                value={this.state.data.payload.image}/>
+                                value={payload.image === undefined ? "" : payload.image}/>
                         </div>
                     </div>
                 );
@@ -299,7 +298,7 @@ class Dashboard extends React.Component {
                                 name="subhead" 
                                 onChange={this.updateInput.bind(this, 'text')} 
                                 className="form-control"
-                                value={this.state.data.payload.text} />
+                                value={payload.text === undefined ? "" : payload.text} />
                         </div>
                     </div>
                 );
@@ -312,7 +311,7 @@ class Dashboard extends React.Component {
                                 placeholder="URL" type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'url')}
                                 className="form-control"
-                                value={this.state.data.payload.url}/>
+                                value={payload.url === undefined ? "" : payload.url}/>
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="credit">Credit:</label>
@@ -320,7 +319,7 @@ class Dashboard extends React.Component {
                                 placeholder="Credit" type="text" name="credit" 
                                 onChange={this.updateInput.bind(this, 'credit')}
                                 className="form-control"
-                                value={this.state.data.payload.credit}/>
+                                value={payload.credit === undefined ? "" : payload.credit}/>
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="caption">Caption:</label>
@@ -328,7 +327,7 @@ class Dashboard extends React.Component {
                                 placeholder="Caption" type="text" name="caption"
                                 onChange={this.updateInput.bind(this, 'caption')}
                                 className="form-control"
-                                value={this.state.data.payload.caption}/>
+                                value={payload.caption === undefined ? "" : payload.caption}/>
                         </div>
                     </div>
                 );
@@ -344,7 +343,7 @@ class Dashboard extends React.Component {
                                 name="quote" 
                                 onChange={this.updateInput.bind(this, 'quoteText')} 
                                 className="form-control"
-                                value={this.state.data.payload.quoteText} />
+                                value={payload.quoteText === undefined ? "" : payload.quoteText} />
                         </div>
                         <div className="col-md-4">
                             <label htmlFor="quoteMaker">Quote Maker:</label>
@@ -354,7 +353,7 @@ class Dashboard extends React.Component {
                                 name="quoteMaker" 
                                 onChange={this.updateInput.bind(this, 'quoteSource')} 
                                 className="form-control"
-                                value={this.state.data.payload.quoteSource} />
+                                value={payload.quoteSource === undefined ? "" : payload.quoteSource} />
                         </div>
                     </div>
                 );
@@ -366,8 +365,8 @@ class Dashboard extends React.Component {
                             name="text" 
                             rows="3"
                             className="form-control"
-                            onChange={this.updateInput.bind(this, 'text')}>
-                        {this.state.data.payload.text}
+                            onChange={this.updateInput.bind(this, 'text')}
+                            value={payload.text === undefined ? "" : payload.text}>
                         </textarea>
                     </div>
                 );
