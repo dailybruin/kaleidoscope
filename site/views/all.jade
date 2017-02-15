@@ -4,7 +4,9 @@ block content
 	div.grid.all_pages
 		each page in pages
 			//- Extract data
-			- var title, author, coverImageUrl = null;
+			- var title = null;
+			- var author = null;
+			- var coverImageUrl = null;
 			- var datetime = page._id.getTimestamp()
 			- datetime = (datetime.getMonth() + 1) + '/' + datetime.getDate() + '/' + datetime.getFullYear()
 			each o in page.components
@@ -15,18 +17,18 @@ block content
 					break
 
 			//- Display data
-			div.col-md-3.col-sm-6.page
-				div.card
+			div.col-md-3.page
+				div.panel.panel-default
 					img(src=coverImageUrl, class="coverImage card-img-top")
-					div.card-block
+					div.panel-body
 						p.title.card-text Title: #{title}
 						p.author.card-text Author: #{author}
 						span.datetime.card-text.text-muted Created #{datetime}
 					
-						div.row
-							div.col-sm-6
-								a(class='btn btn-primary' href='/update?pageID=' + page._id) Update
-							div.col-sm-6
-								form(method='POST', action='/page/#{page._id}?_method=DELETE')
-									button(class='btn btn-default' type='submit') Delete
-							
+					div.panel-footer.clearfix
+						div.col-sm-6
+							a(class='btn btn-primary' href='/update?pageID=' + page._id) Update
+						div.col-sm-6
+							form(method='POST', action='/page/#{page._id}?_method=DELETE')
+								button(class='btn btn-default' type='submit') Delete
+						
