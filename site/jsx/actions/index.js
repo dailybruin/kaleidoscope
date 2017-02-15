@@ -57,13 +57,14 @@ export const addText = (text,key, button,comp_type) => {
     }
 }
 
-export const addMetatags = (title, og_image) => {
+export const addMetatags = (title, og_image, key) => {
     return {
         type: 'NEW_HEADER',
         title: title,
         og_title: title,
         og_image: og_image,
         og_description: "",
+        key: key,
 
     }
 }
@@ -82,9 +83,10 @@ export const updateComponentList = (new_list) => {
     }
 }
 
-export const resetHeader = () => {
+export const resetHeader = (key) => {
     return {
         type: 'RESET_HEADER',
+        key: key,
     }
 }
 

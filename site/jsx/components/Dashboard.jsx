@@ -125,7 +125,7 @@ class Dashboard extends React.Component {
     }
     handleDelete (store_id) {
         this.props.dispatch(deleteComponent(store_id));
-        this.props.dispatch(resetHeader());
+        this.props.dispatch(resetHeader(store_id));
     }
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
@@ -148,7 +148,7 @@ class Dashboard extends React.Component {
                     button_group,
                     'header',
                     ));
-                this.props.dispatch(addMetatags(component_params.title, component_params.image, 'header'));
+                this.props.dispatch(addMetatags(component_params.title, component_params.image, store_id));
                 break;
             case "image":
                 this.props.dispatch(addImage(
@@ -210,7 +210,7 @@ class Dashboard extends React.Component {
         let redux_header = this.props.store.getState()._header;
         let content = "";
         if (redux_header.length > 0) {
-            content = "<head>" + redux_header[0] + "</head>";
+            content = "<head>" + redux_header[0].tags + "</head>";
         }
 
         var num_components = redux_store.length;
