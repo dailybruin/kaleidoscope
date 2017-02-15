@@ -27,6 +27,7 @@ class Dashboard extends React.Component {
         this.handleGenPage = this.handleGenPage.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
+        // this.updateInput = this.updateInput.bind(this);
 
         // Load all preloaded components
         console.log(this.props.preloaded_components);
@@ -91,15 +92,26 @@ class Dashboard extends React.Component {
 
         event.preventDefault();
         if (this.state.edit_component_id !== "") {
+            console.log('Match Found')
             this.appendPagePreview(this.state.edit_component_id, this.state.data);
             this.setState({
-                edit_component_id: ""
+                edit_component_id: "",
+                data: {
+                    type: this.state.data.type,
+                    payload: {},
+                }
             });
             return;
         }
 
         var identifier = this.randomIdentifier();
         this.appendPagePreview(identifier, this.state.data);
+        this.setState({
+            data: {
+                type: this.state.data.type,
+                payload: {},
+            }
+        })
     }
 
     randomIdentifier() {
@@ -162,72 +174,18 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
+        console.log(id)
         for (var i = 0; i< redux_store.length; i++) {
             let item_props = redux_store[i].props;
-            // console.log(redux_store[i]);
             if (id === item_props.database_id) {
-                switch (item_props.type) {
-                    case "header":
-                        this.setState({
-                            data:{
-                                type: item_props.type,
-                                payload: {
-                                    title: item_props.title,
-                                    author: item_props.author,
-                                    image: item_props.image,
-                                }
-                            },
-                            edit_component_id: id,
-                        });
-                        break;
-                    case "subhead":
-                        this.setState({
-                            data:{
-                                type: item_props.type,
-                                payload: {
-                                    text: item_props.text,
-                                }
-                            },
-                            edit_component_id: id,
-                        })
-                        break;
-                    case "image":
-                        this.setState({
-                            data: {
-                                type: item_props.type,
-                                payload: {
-                                    url:item_props.url,
-                                    caption: item_props.caption,
-                                    credit: item_props.credit,
-                                }
-                            },
-                            edit_component_id: id,
-                        });
-                        break;
-                    case "quote":
-                        this.setState({
-                            data: {
-                                type: "quote",
-                                payload: {
-                                    quoteText: item_props.quoteText,
-                                    quoteSource: item_props.quoteSource,
-                                }
-                            },
-                            edit_component_id: id,
-                        })
-                        break;
-                    case "text_section":
-                        this.setState({
-                            data: {
-                                type: "text_section",
-                                payload: {
-                                    text: item_props.text,
-                                }
-                            },
-                            edit_component_id: id,
-                        });
-                        break;
-                }
+                this.setState({
+                    data: {
+                        type: item_props.type,
+                        payload: item_props.component.props,
+
+                    },
+                    edit_component_id: id,
+                })
                 break;
             }
         }
@@ -283,6 +241,8 @@ class Dashboard extends React.Component {
     updateInput(value, event) {
 
         let updatedObj = {};
+        console.log('IN updateINput')
+        console.log(value)
         updatedObj[value] = event.target.value;
 
         this.setState({
@@ -303,7 +263,8 @@ class Dashboard extends React.Component {
                             <input
                                 placeholder="Title" 
                                 type="text" name="title" 
-                                onChange={this.updateInput.bind(this, 'title')} 
+                                onChange={this.updateInput.bind(this,'title')} 
+                                ref={(input) => this.input}
                                 className="form-control"
                                 value={this.state.data.payload.title}/>
                         </div>
