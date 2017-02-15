@@ -82,4 +82,10 @@ export const updateComponentList = (new_list) => {
     }
 }
 
+export const resetHeader = () => {
+    return {
+        type: 'RESET_HEADER',
+    }
+}
+
 // export const updateComponent = ()

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader} from '../actions';
 var FileSaver = require('file-saver');
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server'
@@ -26,6 +26,7 @@ class Dashboard extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleGenPage = this.handleGenPage.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
         // this.updateInput = this.updateInput.bind(this);
 
@@ -117,11 +118,14 @@ class Dashboard extends React.Component {
     randomIdentifier() {
         return Math.random().toString(36).substring(7);
     }
-
+    handleDelete (store_id) {
+        this.props.dispatch(deleteComponent(store_id));
+        this.props.dispatch(resetHeader());
+    }
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
         const edit_button = <button className="btn btn-success" onClick={()=>this.handleEdit(store_id)}><span className="glyphicon glyphicon-edit"></span></button>;
-        const delete_button = <button className="btn btn-success" onClick={()=> this.props.dispatch(deleteComponent(store_id))}><span className="glyphicon glyphicon-trash"></span></button>;
+        const delete_button = <button className="btn btn-success" onClick={()=> this.handleDelete(store_id)}><span className="glyphicon glyphicon-trash"></span></button>;
         const button_group = (
             <div className="btn-group btn-group-md component-action-btn-group" role="group">
                 {edit_button}
