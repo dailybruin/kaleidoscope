@@ -4,9 +4,9 @@ block content
 	div.grid.all_pages
 		each page in pages
 			//- Extract data
-			- var title = null;
-			- var author = null;
-			- var coverImageUrl = null;
+			- var title = 'N/A';
+			- var author = 'N/A';
+			- var coverImageUrl = 'http://placehold.it/400x275';
 			- var datetime = page._id.getTimestamp()
 			- datetime = (datetime.getMonth() + 1) + '/' + datetime.getDate() + '/' + datetime.getFullYear()
 			each o in page.components
@@ -17,9 +17,10 @@ block content
 					break
 
 			//- Display data
-			div.col-md-3.page
+			div.col-sm-6.col-md-3.page
 				div.panel.panel-default
-					img(src=coverImageUrl, class="coverImage card-img-top")
+					div.cover-image-container
+						img(src=coverImageUrl, class="coverImage card-img-top")
 					div.panel-body
 						p.title.card-text Title: #{title}
 						p.author.card-text Author: #{author}

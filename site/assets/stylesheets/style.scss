@@ -129,9 +129,9 @@ $container_margin: 10%;
 	font-family: Verdana;
 	margin: 20px 20px;
 	.coverImage {
-		margin: 15px 0 0 15px;
-		width: 85%;
-		height: 100px;
+		width: 100%;
+		max-height: 275px;
+		overflow: hidden;
 	}
 	.row{
 		padding-top: 10px;
