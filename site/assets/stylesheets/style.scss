@@ -101,9 +101,15 @@
 
 /* Main Page*/
 
+$header_font_family: Verdana;
+$subhead_font_family: Verdana;
+$body_text_font_family: Arial, sans-serif;
+$container_margin: 10%;
+
 .page-container {
 	font-family: Verdana;
 	position: relative;
+
     float: right;
     width: 100%;
 
@@ -113,13 +119,16 @@
     .sortable-element{
     	height: auto;
     	overflow: visible;
-
-    	.button-group{
-			visibility: hidden;
-		}
     }
-
-
+	.component-container {
+		position: relative;
+		.component-action-btn-group {
+			visibility: hidden;
+			position: absolute;
+			left: 5px;
+			top: 5px;
+		}
+	}
 
 	.header {
 		color: #fff;
@@ -139,15 +148,29 @@
 		}
 		.title {
 			font-size: 48px;
+			font-family: $header_font_family;
+		}
+
+		@media all and (max-width: 550px) {
+		    .headerDetails {
+				left: 60%;
+				right: 30%;
+				min-width: 500px;
+		    }
+		    .title {
+		    	font-size: 36px;
+		    }
 		}
 		.author {
-			font-size: 14px;
+			font-size: 20px;
+			font-family: $subhead_font_family;
 		}
 		.coverImage {
+			background: no-repeat center center fixed; 
 			background-size: cover;
-			background-repeat: no-repeat;
 			padding: 0;
-			min-height: 700px;
+			height: 700px;
+			min-height: 500px;
 			width: 100%;
 		}
 		.dark-gradient{
@@ -163,11 +186,12 @@
 		}
 	}
 	.text {
-		font-family: "Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+		font-family: $body_text_font_family;
 	}
 	.subhead {
-		color: DodgerBlue;
+		font-size: 32px;
 		font-weight: bolder;
+		font-family: $subhead_font_family;
 	}
 	.quote {
 		font-size: 1.5em;
@@ -239,10 +263,8 @@
 	    	overflow: hidden;
 	    	border-bottom: 1px solid #ddd;
 
-	    	.button-group{
+	    	.component-action-btn-group{
 	    		visibility: visible;
-	    		position: absolute;
-	    		top: 0;
 	    	}
 		}
 		
@@ -251,7 +273,7 @@
 
 /* ==================GLOBAL STYLES================*/
 .center-block {
-	padding: 0 10% 0 10%;
+	padding: 0 $container_margin 0 $container_margin;
 }
 
 /* /all STYLES */

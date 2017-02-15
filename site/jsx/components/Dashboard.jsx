@@ -113,13 +113,13 @@ class Dashboard extends React.Component {
 
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
-        const button = <button onClick={()=>this.handleEdit(store_id)}>Drag</button>;
-        const delete_button = <button onClick={()=> this.props.dispatch(deleteComponent(store_id))}>Delete</button>;
+        const edit_button = <button className="btn btn-success" onClick={()=>this.handleEdit(store_id)}><span className="glyphicon glyphicon-edit"></span></button>;
+        const delete_button = <button className="btn btn-success" onClick={()=> this.props.dispatch(deleteComponent(store_id))}><span className="glyphicon glyphicon-trash"></span></button>;
         const button_group = (
-                <div className="button-group">
-                    {button}
-                    {delete_button}
-                </div>
+            <div className="btn-group btn-group-md component-action-btn-group" role="group">
+                {edit_button}
+                {delete_button}
+            </div>
             );
         // add delete button here
         switch (data.type) {

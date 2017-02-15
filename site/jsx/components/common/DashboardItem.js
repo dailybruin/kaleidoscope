@@ -19,7 +19,7 @@ export default class DashboardItem extends React.Component {
 	
 	render() {
 		return (
-			<div>
+			<div className="component-container">
 				{this.props.component}
 				{this.props.button}
 			</div>
