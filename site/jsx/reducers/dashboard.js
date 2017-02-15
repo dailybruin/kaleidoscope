@@ -112,13 +112,28 @@ export function _header(state=[], action) {
             const bootstrap = '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">'
             const css = '<link rel="stylesheet" type="text/css" href="style.css">';
             const meta_tags = title + og_title + og_image + og_description + favicon + bootstrap + css;
-
+            const metatag_struct = {
+                database_id: action.key,
+                tags: meta_tags,
+            }
             return [
                 ...state,
-                meta_tags
+                metatag_struct,
             ];
         case 'RESET_HEADER':
-            return [];
+            if (state.length === 1)
+                return [];
+            for (var i = 0; i< state.length; i++) {
+                if (state[i].database_id === action.key) {
+                    state.splice(i,1);
+                    return [
+                        ...state
+                    ];
+                }
+            }
+            return [
+                ...state,
+            ];
         default:
             // console.log("Not supposed to be here");
             return state;
