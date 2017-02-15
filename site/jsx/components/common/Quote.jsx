@@ -13,11 +13,16 @@ class Quote extends React.Component{
 
 	render(){
 		// let test_head =
-
 		return (
 			<div className="center-block">
-				<p className="quote">"{ this.props.quoteText }"</p>
-				<p className="quoteSource">- { this.props.quoteSource }</p>
+				<div className="quote-block">
+					<p className="quote quote-left">&ldquo;</p>
+					<div className="quote-content">
+						<p className="quote-text">{ this.props.quoteText }</p>
+						<p className="quote-source">- { this.props.quoteSource }</p>
+					</div>
+					{/*<p className="quote quote-right">&rdquo;</p>*/}
+				</div>
 			</div>
 		);
 	}

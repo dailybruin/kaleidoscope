@@ -13,7 +13,7 @@ import {updateComponentList} from '../../actions';
 // import SortableComponent from './SortableComponent';
 
 const SortableItem = SortableElement(({value}) => {
-    return (<div>{value}</div>);
+    return (<div className="sortable-element">{value}</div>);
 });
 const SortableList = SortableContainer(({items}) => {
     return (
@@ -31,6 +31,8 @@ class Page extends React.Component {
     }
     constructor(props) {
         super(props);
+
+       // this.deactivateDashboard = this.deactivateDashboard.bind(this);
         this.onSortEnd = this.onSortEnd.bind(this);
     }
 
@@ -47,6 +49,11 @@ class Page extends React.Component {
             </div>
         );
     }
+
+ /*   deactivateDashboard(){
+        let app = document.querySelector('.app-container');
+        app.classList.add('preview');
+    }*/
 };
 
 const mapStateToProps = (state) => {

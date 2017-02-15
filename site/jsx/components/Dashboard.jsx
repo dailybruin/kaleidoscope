@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader} from '../actions';
 var FileSaver = require('file-saver');
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server'
@@ -25,8 +25,11 @@ class Dashboard extends React.Component {
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleGenPage = this.handleGenPage.bind(this);
+        this.toggleDashboard = this.toggleDashboard.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
+        // this.updateInput = this.updateInput.bind(this);
 
         // Load all preloaded components
         console.log(this.props.preloaded_components);
@@ -49,29 +52,33 @@ class Dashboard extends React.Component {
         var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
 
         return (
-          <div className="dashboard-container" >
-            <div className="container form-group">
-                <form onSubmit={this.handleSubmit}>
-                    <div className="row component-inputs">
-                        <div>{this.showInputForComponentType()}</div>
-                    </div>
-                    <div className="dropdown">
-                        <label htmlFor="dropdown">Select component:</label>
-                        <div className="row">
-                            <div className="col-sm-11">
-                                <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
-                                    {componentOptions}
-                                </select>
-                            </div>
-                            <div className="col-sm-1">
-                                <input className="btn btn-primary" type='submit'></input>
+            <div className="dashboard-container" >
+                <div className="dashboard-main">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="dropdown">
+                            {/*<label htmlFor="dropdown">Select component:</label>*/}
+                            <div>
+                                <div>
+                                    <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
+                                        {componentOptions}
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-                <button onClick={this.handleGenPage} className="btn btn-block btn-primary">{buttonText}</button>
-              </div>
-          </div>
+                        <div className="component-inputs">
+                            <div>{this.showInputForComponentType(this.state.data.type)}</div>
+                        </div>
+                        <div>
+                            <div className="btn btn-primary btn-down preview" onClick={this.toggleDashboard}>Preview</div>
+                            <input className="btn btn-primary" type='submit'></input>
+                        </div>
+                    </form>
+                </div>
+                <div className="dashboard-sub" onClick={this.toggleDashboard}>
+                    <button>EDIT</button>
+                </div>
+                <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">{buttonText}</button>
+            </div>
         );
     }
 
@@ -91,25 +98,39 @@ class Dashboard extends React.Component {
 
         event.preventDefault();
         if (this.state.edit_component_id !== "") {
+            console.log('Match Found')
             this.appendPagePreview(this.state.edit_component_id, this.state.data);
             this.setState({
-                edit_component_id: ""
+                edit_component_id: "",
+                data: {
+                    type: this.state.data.type,
+                    payload: {},
+                }
             });
             return;
         }
 
         var identifier = this.randomIdentifier();
         this.appendPagePreview(identifier, this.state.data);
+        this.setState({
+            data: {
+                type: this.state.data.type,
+                payload: {},
+            }
+        })
     }
 
     randomIdentifier() {
         return Math.random().toString(36).substring(7);
     }
-
+    handleDelete (store_id) {
+        this.props.dispatch(deleteComponent(store_id));
+        this.props.dispatch(resetHeader());
+    }
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
         const edit_button = <button className="btn btn-success" onClick={()=>this.handleEdit(store_id)}><span className="glyphicon glyphicon-edit"></span></button>;
-        const delete_button = <button className="btn btn-success" onClick={()=> this.props.dispatch(deleteComponent(store_id))}><span className="glyphicon glyphicon-trash"></span></button>;
+        const delete_button = <button className="btn btn-success" onClick={()=> this.handleDelete(store_id)}><span className="glyphicon glyphicon-trash"></span></button>;
         const button_group = (
             <div className="btn-group btn-group-md component-action-btn-group" role="group">
                 {edit_button}
@@ -162,72 +183,18 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
+        console.log(id)
         for (var i = 0; i< redux_store.length; i++) {
             let item_props = redux_store[i].props;
-            // console.log(redux_store[i]);
             if (id === item_props.database_id) {
-                switch (item_props.type) {
-                    case "header":
-                        this.setState({
-                            data:{
-                                type: item_props.type,
-                                payload: {
-                                    title: item_props.title,
-                                    author: item_props.author,
-                                    image: item_props.image,
-                                }
-                            },
-                            edit_component_id: id,
-                        });
-                        break;
-                    case "subhead":
-                        this.setState({
-                            data:{
-                                type: item_props.type,
-                                payload: {
-                                    text: item_props.text,
-                                }
-                            },
-                            edit_component_id: id,
-                        })
-                        break;
-                    case "image":
-                        this.setState({
-                            data: {
-                                type: item_props.type,
-                                payload: {
-                                    url:item_props.url,
-                                    caption: item_props.caption,
-                                    credit: item_props.credit,
-                                }
-                            },
-                            edit_component_id: id,
-                        });
-                        break;
-                    case "quote":
-                        this.setState({
-                            data: {
-                                type: "quote",
-                                payload: {
-                                    quoteText: item_props.quoteText,
-                                    quoteSource: item_props.quoteSource,
-                                }
-                            },
-                            edit_component_id: id,
-                        })
-                        break;
-                    case "text_section":
-                        this.setState({
-                            data: {
-                                type: "text_section",
-                                payload: {
-                                    text: item_props.text,
-                                }
-                            },
-                            edit_component_id: id,
-                        });
-                        break;
-                }
+                this.setState({
+                    data: {
+                        type: item_props.type,
+                        payload: item_props.component.props,
+
+                    },
+                    edit_component_id: id,
+                })
                 break;
             }
         }
@@ -248,7 +215,7 @@ class Dashboard extends React.Component {
 
         var num_components = redux_store.length;
         var submitted_components = [];
-
+        content = content + "<body>"
         for (var i = 0; i < num_components; i++) {
             if (redux_store[i].props.database_id !== undefined) {
                 content = content + ReactDOMServer.renderToStaticMarkup(redux_store[i].props.component)
@@ -258,6 +225,7 @@ class Dashboard extends React.Component {
                 submitted_components.push(data);
             }
         }
+        content = content + "</body>";
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         FileSaver.saveAs(blob, "index.html");
 
@@ -294,43 +262,45 @@ class Dashboard extends React.Component {
     }
 
     showInputForComponentType(componentType) {
+        const payload = this.state.data.payload;
         switch(this.state.data.type) {
             case 'header':
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label htmlFor="title">Title:</label>
                             <input
                                 placeholder="Title" 
                                 type="text" name="title" 
-                                onChange={this.updateInput.bind(this, 'title')} 
+                                onChange={this.updateInput.bind(this,'title')} 
+                                ref={(input) => this.input}
                                 className="form-control"
-                                value={this.state.data.payload.title}/>
+                                value={payload.title === undefined ? "" : payload.title}/>
                         </div>
-                        <div className="col-md-4">    
+                        <div className="component-input">    
                             <label htmlFor="author">Author:</label>                   
                             <input
                                 placeholder="Author"
                                 type="text" name="author"
                                 onChange={this.updateInput.bind(this, 'author')}
                                 className="form-control"
-                                value={this.state.data.payload.author}/>
+                                value={payload.author === undefined ? "" : payload.author}/>
                         </div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label htmlFor="url">Cover Image URL:</label>
                             <input
                                 placeholder="Cover image URL"
                                 type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'image')}
                                 className="form-control"
-                                value={this.state.data.payload.image}/>
+                                value={payload.image === undefined ? "" : payload.image}/>
                         </div>
                     </div>
                 );
             case 'subhead':
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label htmlFor="subhead">Subhead:</label>
                             <input 
                                 placeholder="Subhead" 
@@ -338,36 +308,36 @@ class Dashboard extends React.Component {
                                 name="subhead" 
                                 onChange={this.updateInput.bind(this, 'text')} 
                                 className="form-control"
-                                value={this.state.data.payload.text} />
+                                value={payload.text === undefined ? "" : payload.text} />
                         </div>
                     </div>
                 );
             case 'image':
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label htmlFor="url">URL:</label>
                             <input 
                                 placeholder="URL" type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'url')}
                                 className="form-control"
-                                value={this.state.data.payload.url}/>
+                                value={payload.url === undefined ? "" : payload.url}/>
                         </div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label htmlFor="credit">Credit:</label>
                             <input
                                 placeholder="Credit" type="text" name="credit" 
                                 onChange={this.updateInput.bind(this, 'credit')}
                                 className="form-control"
-                                value={this.state.data.payload.credit}/>
+                                value={payload.credit === undefined ? "" : payload.credit}/>
                         </div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label htmlFor="caption">Caption:</label>
                             <input
                                 placeholder="Caption" type="text" name="caption"
                                 onChange={this.updateInput.bind(this, 'caption')}
                                 className="form-control"
-                                value={this.state.data.payload.caption}/>
+                                value={payload.caption === undefined ? "" : payload.caption}/>
                         </div>
                     </div>
                 );
@@ -375,7 +345,7 @@ class Dashboard extends React.Component {
 
                 return(
                     <div>
-                        <div className="col-md-4">
+                        <div className="component-input">
                             <label htmlFor="quote">Quote:</label>
                             <input 
                                 placeholder="Quote" 
@@ -383,36 +353,41 @@ class Dashboard extends React.Component {
                                 name="quote" 
                                 onChange={this.updateInput.bind(this, 'quoteText')} 
                                 className="form-control"
-                                value={this.state.data.payload.quoteText} />
+                                value={payload.quoteText === undefined ? "" : payload.quoteText} />
                         </div>
-                        <div className="col-md-4">
-                            <label htmlFor="quoteMaker">Quote Maker:</label>
+                        <div className="component-input">
+                            <label htmlFor="quoteMaker">Quote Source:</label>
                             <input 
                                 placeholder="Quote Maker" 
                                 type="text" 
                                 name="quoteMaker" 
                                 onChange={this.updateInput.bind(this, 'quoteSource')} 
                                 className="form-control"
-                                value={this.state.data.payload.quoteSource} />
+                                value={payload.quoteSource === undefined ? "" : payload.quoteSource} />
                         </div>
                     </div>
                 );
             case 'text_section':
                 return(
-                    <div className="col-md-12">
+                    <div className="component-input text">
                         <label htmlFor="text">Text:</label>
                         <textarea 
                             name="text" 
                             rows="3"
                             className="form-control"
-                            onChange={this.updateInput.bind(this, 'text')}>
-                        {this.state.data.payload.text}
+                            onChange={this.updateInput.bind(this, 'text')}
+                            value={payload.text === undefined ? "" : payload.text}>
                         </textarea>
                     </div>
                 );
             default:
                 return(<p>nothing</p>);
         }
+    }
+
+    toggleDashboard(){
+        let app = document.querySelector('.app-container');
+        app.classList.toggle('editing');
     }
 
 }

@@ -48,7 +48,7 @@ module.exports = function (app) {
                 } else {
                     console.log('Successfully stored Page in Page table.');
                     console.log(data);
-                    GenPage = null;
+                    GenPage = null;        
                 }
             });
         }
@@ -64,24 +64,8 @@ module.exports = function (app) {
                     console.log('Successfully updated Page in Page table.');
                     console.log(result);
                     GenPage = null;
-                })
+                });
         }
-
-        Page.find(function (err, pages) {
-            
-            if (err) {
-                console.log(err);
-                return;
-            } else {
-                console.log("generate should go to all");
-                res.redirect('/all');
-                res.render('all', { pages: pages }); 
-                return;
-                 
-            }
-        });
-        
-
     });
 
     app.post('/page/:id', function (req, res, next) {
