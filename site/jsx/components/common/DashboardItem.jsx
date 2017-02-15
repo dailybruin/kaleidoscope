@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames'
 
-export default class DashboardItem extends React.Component {
+class DashboardItem extends React.Component {
 	static propTypes = {
 		component: React.PropTypes.element.isRequired,
 		type: React.PropTypes.string.isRequired,
@@ -27,3 +27,5 @@ export default class DashboardItem extends React.Component {
 	}
 
 }
+
+export default DashboardItem;
