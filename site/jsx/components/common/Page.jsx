@@ -45,7 +45,7 @@ class Page extends React.Component {
         const dashboard = this.props.store.getState()._dashboard;
         return (
             <div className="page-container">
-                <SortableList items={dashboard} onSortEnd={this.onSortEnd} pressDelay={150}/>
+                <SortableList items={dashboard} onSortEnd={this.onSortEnd} pressDelay={150} helperClass="sortable-inner"/>
             </div>
         );
     }
