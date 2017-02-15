@@ -95,7 +95,7 @@
 		z-index: 100;
 	    right: 0;
 	    top: 0;
-	    margin: 10px;
+	    margin: 20px;
 	}
 }
 
@@ -118,133 +118,150 @@ $container_margin: 10%;
 
     .sortable-element{
     	height: auto;
-    	overflow: visible;
     }
 	.component-container {
 		position: relative;
 		.component-action-btn-group {
 			visibility: hidden;
 			position: absolute;
-			left: 10px;
-			top: 10px;
-		}
-	}
-
-	.header {
-		color: #fff;
-		position: relative;
-		margin-bottom: 50px;
-		.headerDetails {
-			padding: 30px;
-		    position: absolute;
-		    z-index: 2;
-		    top: 100%;
-		    left: 40%;
-		    min-height: 200px;
-		    min-width: 400px;
-
-		    -webkit-transform: translate(-50%, -130%);
-		    		transform: translate(-50%, -130%);
-		}
-		.title {
-			font-size: 48px;
-			font-family: $header_font_family;
-		}
-
-		@media all and (max-width: 550px) {
-		    .headerDetails {
-				left: 60%;
-				right: 30%;
-				min-width: 500px;
-		    }
-		    .title {
-		    	font-size: 36px;
-		    }
-		}
-		.author {
-			font-size: 16px;
-			font-family: $subhead_font_family;
-		}
-		.coverImage {
-			background: no-repeat center center fixed; 
-			background-size: cover;
-			padding: 0;
-			height: 700px;
-			min-height: 500px;
-			width: 100%;
-		}
-		.dark-gradient{
-			height: 300px;
-			width: 100%;
-			position: absolute;
-			z-index: 1;
-			bottom: 0;
-			background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)); 
-    		background: -o-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)); 
-    		background: -moz-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
-    		background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
-		}
-	}
-	.text {
-		font-family: $body_text_font_family;
-	}
-	.subhead {
-		font-size: 32px;
-		font-weight: bolder;
-		font-family: $subhead_font_family;
-	}
-	.quote-block{
-		overflow: auto;
-		padding: 50px;
-		.quote-content{
-			float: left;
-			width: 100%;
-			.quote-text{
-				font-size: 1.5em;
-				font-weight: 600;
-				font-style: oblique;
-			}
-			.quote-source {
-				font-size: 0.9em;
-				font-weight: 400;
-				color: grey;
-				letter-spacing: 0.5px;
-			}
-		}
-		.quote{
-			float: left;
-			font-family: 'Helvetica';
-			font-size: 200px;
-			color: #000;
-		}
-		.quote-left{
-			line-height: 200px;
-			height: 100px;
-			overflow: hidden;
-			margin-left: -5px;
-		}
-		.quote-right{
-			float: left;
-			margin-top: -100px;
-		}
-	}
-	
-	.image {
-		.img-block {
-			position: relative;
-			height: 400px;
-			background-repeat: no-repeat;
-			background-size: cover;
-			.img-credit {
-				background-color: rgba(255,255,255,0.5);
-				vertical-align: middle;
-			}
-		}
-		.img-caption {
-			vertical-align: middle;
+			left: 5px;
+			top: 5px;
 		}
 	}
 }
+
+
+// COMPONENT STYLES
+.header {
+	color: #fff;
+	position: relative;
+	
+	.headerDetails {
+		padding: 30px;
+	    position: absolute;
+	    z-index: 2;
+	    top: 100%;
+	    left: 40%;
+	    min-height: 200px;
+	    min-width: 400px;
+
+	    -webkit-transform: translate(-50%, -110%);
+	    		transform: translate(-50%, -110%);
+	}
+	.title {
+		font-size: 48px;
+		font-family: $header_font_family;
+	}
+
+	@media all and (max-width: 550px) {
+	    .headerDetails {
+			left: 60%;
+			right: 30%;
+			min-width: 500px;
+	    }
+	    .title {
+	    	font-size: 36px;
+	    }
+	}
+	.author {
+		font-size: 20px;
+		font-family: $subhead_font_family;
+	}
+	.coverImage {
+		background: no-repeat center center fixed; 
+		background-size: cover;
+		padding: 0;
+		height: 700px;
+		min-height: 500px;
+		width: 100%;
+	}
+	.dark-gradient{
+		height: 300px;
+		width: 100%;
+		position: absolute;
+		z-index: 1;
+		bottom: 0;
+		background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)); 
+		background: -o-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)); 
+		background: -moz-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
+		background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
+	}
+}
+.text {
+	font-family: $body_text_font_family;
+}
+.subhead {
+	font-size: 32px;
+	font-weight: bolder;
+	font-family: $subhead_font_family;
+}
+.quote-block{
+	overflow: auto;
+	padding: 50px;
+	.quote-content{
+		float: left;
+		width: 100%;
+		.quote-text{
+			font-size: 1.5em;
+			font-weight: 600;
+			font-style: oblique;
+		}
+		.quote-source {
+			font-size: 0.9em;
+			font-weight: 400;
+			color: grey;
+			letter-spacing: 0.5px;
+		}
+	}
+	.quote{
+		float: left;
+		font-family: 'Helvetica';
+		font-size: 200px;
+		color: #000;
+	}
+	.quote-left{
+		line-height: 200px;
+		height: 100px;
+		overflow: hidden;
+		margin-left: -5px;
+	}
+	.quote-right{
+		float: left;
+		margin-top: -100px;
+	}
+}
+.quoteSource {
+	font-size: 0.9em;
+	font-weight: 400;
+	color: grey;
+	letter-spacing: 0.5px;
+}
+.image {
+	.img-block {
+		position: relative;
+		height: 400px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		.img-credit {
+			background-color: rgba(255,255,255,0.5);
+			vertical-align: middle;
+		}
+	}
+	.img-caption {
+		vertical-align: middle;
+	}
+}
+
+.sortable-element{
+	position: relative;
+	max-height: 350px;
+	overflow: hidden;
+
+	.component-action-btn-group{
+		visibility: visible;
+	}
+}
+// END COMPONENT STYLES
 
 /*==========DASHBOARD / PAGE WHEN EDITING=========*/
 
@@ -284,7 +301,7 @@ $container_margin: 10%;
 
 		.sortable-element{
 			position: relative;
-	    	height: 100px;
+	    	max-height: 350px;
 	    	overflow: hidden;
 	    	border-bottom: 1px solid #ddd;
 
@@ -306,9 +323,9 @@ $container_margin: 10%;
 	font-family: Verdana;
 	margin: 20px 20px;
 	.coverImage {
-		width: 100%;
-		max-height: 275px;
-		overflow: hidden;
+		margin: 15px 0 0 15px;
+		width: 85%;
+		height: 100px;
 	}
 	.row{
 		padding-top: 10px;
