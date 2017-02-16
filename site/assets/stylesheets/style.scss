@@ -252,11 +252,12 @@ $container_margin: 10%;
 	}
 }
 
-.sortable-element{
+.sortable-inner{
 	position: relative;
-
+	max-height: 350px;
+	overflow: hidden;
 	.component-action-btn-group{
-		visibility: visible;
+		visibility: hidden;
 	}
 }
 // END COMPONENT STYLES
