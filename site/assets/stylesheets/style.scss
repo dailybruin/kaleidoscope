@@ -135,7 +135,7 @@ $container_margin: 10%;
 .header {
 	color: #fff;
 	position: relative;
-	
+	margin-bottom: 40px;
 	.headerDetails {
 		padding: 30px;
 	    position: absolute;
@@ -240,9 +240,11 @@ $container_margin: 10%;
 	padding-top: 30px !important;
 	.img-block {
 		position: relative;
-		height: 400px;
+		/*height: 400px;
 		background-repeat: no-repeat;
-		background-size: cover;
+		background-size: cover;*/
+		min-width: 100%;
+    	height: auto;
 	}
 	.img-credit {
 		color: grey;
