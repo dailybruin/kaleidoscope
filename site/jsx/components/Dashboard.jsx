@@ -4,6 +4,7 @@ import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteCo
 var FileSaver = require('file-saver');
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server'
+import Checkbox from './Checkbox';
 
 class Dashboard extends React.Component {
     
@@ -20,7 +21,8 @@ class Dashboard extends React.Component {
                             payload: {},
                             
                         },
-                        edit_component_id: ""
+                        edit_component_id: "",
+                        download_file: false
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,6 +31,7 @@ class Dashboard extends React.Component {
         this.handleEdit = this.handleEdit.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
+        this.toggleCheckbox = this.toggleCheckbox.bind(this);
         // this.updateInput = this.updateInput.bind(this);
 
         // Load all preloaded components
@@ -71,6 +74,9 @@ class Dashboard extends React.Component {
                         <div>
                             <div className="btn btn-primary btn-down preview" onClick={this.toggleDashboard}>Preview</div>
                             <input className="btn btn-primary" type='submit'></input>
+                        </div>
+                        <div>
+                            <Checkbox label={"Download index file"} handleCheckboxChange={this.toggleCheckbox}/>
                         </div>
                     </form>
                 </div>
@@ -227,7 +233,8 @@ class Dashboard extends React.Component {
         }
         content = content + "</body>";
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-        FileSaver.saveAs(blob, "index.html");
+        if (this.state.download_file)
+            FileSaver.saveAs(blob, "index.html");
 
         // Save to database from submitted_components
         $.ajax({
@@ -388,6 +395,13 @@ class Dashboard extends React.Component {
     toggleDashboard(){
         let app = document.querySelector('.app-container');
         app.classList.toggle('editing');
+    }
+
+    toggleCheckbox(event) {
+        var prevVal = this.state.download_file;
+        this.setState({
+            download_file: !prevVal
+        });
     }
 
 }
