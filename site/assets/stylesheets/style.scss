@@ -215,19 +215,19 @@ $container_margin: 10%;
 	}
 	.quote{
 		float: left;
-		font-family: 'Helvetica';
-		font-size: 200px;
+		font-family: 'Times';
+		font-size: 150px;
 		color: #000;
-	}
-	.quote-left{
+		overflow: hidden;
 		line-height: 200px;
 		height: 100px;
-		overflow: hidden;
+	}
+	.quote-left{
 		margin-left: -5px;
 	}
 	.quote-right{
-		float: left;
-		margin-top: -100px;
+		float: right;
+		margin-top: -50px;
 	}
 }
 .quoteSource {

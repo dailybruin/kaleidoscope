@@ -21,7 +21,7 @@ class Quote extends React.Component{
 						<p className="quote-text">{ this.props.quoteText }</p>
 						<p className="quote-source">- { this.props.quoteSource }</p>
 					</div>
-					{/*<p className="quote quote-right">&rdquo;</p>*/}
+					<p className="quote quote-right">&rdquo;</p>
 				</div>
 			</div>
 		);
