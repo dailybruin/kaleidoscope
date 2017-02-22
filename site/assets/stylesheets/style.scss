@@ -197,7 +197,7 @@ $container_margin: 10%;
 }
 .quote-block{
 	overflow: auto;
-	padding: 50px;
+	padding: 0px 30px;
 	.quote-content{
 		float: left;
 		width: 100%;
@@ -242,12 +242,19 @@ $container_margin: 10%;
 		height: 400px;
 		background-repeat: no-repeat;
 		background-size: cover;
-		.img-credit {
-			background-color: rgba(255,255,255,0.5);
-			vertical-align: middle;
+		margin-top: 30px;
+	}
+	.img-credit {
+		color: grey;
+		background-color: rgba(255,255,255,0.5);
+		vertical-align: middle;
+		font-size: 10px;
+		span {
+			padding-right: 5px;
 		}
 	}
 	.img-caption {
+		padding-top: 10px;
 		vertical-align: middle;
 	}
 }
