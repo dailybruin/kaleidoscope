@@ -237,12 +237,12 @@ $container_margin: 10%;
 	letter-spacing: 0.5px;
 }
 .image {
+	padding-top: 30px !important;
 	.img-block {
 		position: relative;
 		height: 400px;
 		background-repeat: no-repeat;
 		background-size: cover;
-		margin-top: 30px;
 	}
 	.img-credit {
 		color: grey;
