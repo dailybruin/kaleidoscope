@@ -26,6 +26,27 @@ app.use(
 // The static middleware must come after the sass middleware
 app.use(express.static( path.join( __dirname, 'site' ) ) );
 
+// node-sass json importer
+var jsonImporter = require('node-sass-json-importer');
+ 
+// Example 1 
+sass.render({
+  file: 'site/assets/stylesheets/style.scss',
+  importer: jsonImporter
+}, function(err, result) { 
+  console.log("error in node-sass-json-importer");
+  console.log(err);
+  console.log(result);
+});
+ 
+// Example 2 
+// var result = sass.renderSync({
+//   data: scss_content
+//   importer: [jsonImporter, someOtherImporter]
+//   [, options..]
+// });
+
+
 // DB Setup
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/flatpage');

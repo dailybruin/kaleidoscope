@@ -1,3 +1,5 @@
+// import jsonImporter from 'node-sass-json-importer';
+
 module.exports = {
   entry: ['./site/jsx/app.jsx'],
   output: {

@@ -29,6 +29,7 @@
     "react-redux": "^4.4.6",
     "react-sortable-hoc": "^0.4.12",
     "redux": "^3.6.0",
-    "webpack": "^1.12.2"
+    "webpack": "^1.12.2",
+    "node-sass-json-importer": "^3.0.1"
   }
 }

@@ -1,5 +1,9 @@
 /* ============NORMAL PAGE STYLES DURING PREVIEW =================*/
-
+@import '../shared.json';
+canvas {
+    height: $height;
+    width: $width;
+}
 /* Dashboard */
 
 .dashboard-container {
