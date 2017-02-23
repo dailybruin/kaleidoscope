@@ -12,8 +12,6 @@ block content
 			each o in page.components
 				if o.component_type == "header"
 					- title = o.component_data["title"]
-					if title.length > 50
-						- title = title.substr(0, 50) + '...'
 					- author = o.component_data["author"]
 					- coverImageUrl = o.component_data["image"]
 					break

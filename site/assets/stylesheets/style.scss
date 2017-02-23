@@ -42,23 +42,15 @@
 		}
 
 		.btn-down{
-			/*position: absolute;*/
+			position: absolute;
 	    	bottom: 0;
 	    	margin-bottom: 20px;
-	    	margin-top: 10px;
 	    	width: 100px;
 		}
 
 		.btn-down.preview{
-			position: absolute;
-			bottom: -10px;
-			left: 20px;
-			font-size: 24px;
-			width: 250px;
-		}
-
-		.submit{
-			width: 100%;
+			font-size: 48px;
+			width: 200px;
 		}
     }
 
@@ -101,9 +93,9 @@
 	.btn-generate{
 		position: fixed;
 		z-index: 100;
-	    right: 10px;
-	    bottom: 10px;
-	    font-size: 24px;
+	    right: 0;
+	    top: 0;
+	    margin: 20px;
 	}
 }
 
@@ -336,8 +328,5 @@ $container_margin: 10%;
 	}
 	.row{
 		padding-top: 10px;
-	}
-	.panel-body{
-		height: 130px;
 	}
 }

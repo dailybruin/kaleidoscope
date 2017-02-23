@@ -68,9 +68,9 @@ class Dashboard extends React.Component {
                         <div className="component-inputs">
                             <div>{this.showInputForComponentType(this.state.data.type)}</div>
                         </div>
-                        <div className="buttons">
-                            <input className="btn btn-primary submit" type='submit'></input> 
-                            <button className="btn btn-primary btn-down preview" onClick={this.toggleDashboard}>Preview >></button>
+                        <div>
+                            <div className="btn btn-primary btn-down preview" onClick={this.toggleDashboard}>Preview</div>
+                            <input className="btn btn-primary" type='submit'></input>
                         </div>
                     </form>
                 </div>
@@ -78,7 +78,6 @@ class Dashboard extends React.Component {
                     <button>EDIT</button>
                 </div>
                 <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">{buttonText}</button>
-
             </div>
         );
     }
