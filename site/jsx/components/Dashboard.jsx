@@ -253,6 +253,8 @@ class Dashboard extends React.Component {
                 payload: {}
             }
         });
+
+        window.location.reload(true);
     }
 
     updateInput(value, event) {
