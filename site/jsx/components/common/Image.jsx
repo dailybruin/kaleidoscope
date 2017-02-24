@@ -15,10 +15,11 @@ class Image extends React.Component {
 	render(){
 		return (
 			<div className="center-block image">
-				<div className="img-block" style={{backgroundImage:'url(' + this.props.url + ')'}}>
-				</div>
+				{/*<div className="img-block" style={{backgroundImage:'url(' + this.props.url + ')'}}>
+				</div>*/}
+				<img className="img-block" src={this.props.url} />
 				<p className="img-caption">{ this.props.caption }</p>
-				<p className="img-credit">Photo by { this.props.credit } </p>
+				<p className="img-credit"><span className="glyphicon glyphicon-camera"></span>{ this.props.credit } </p>
 				<hr />
 			</div>
 		);
