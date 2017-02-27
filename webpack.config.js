@@ -10,8 +10,15 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel?stage=0'
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sassport"]
       }
     ]
+  },
+  Sassport: {
+    indentedSyntax: true
   },
   externals: {
     "react": "React"

@@ -1,5 +1,19 @@
 /* ============NORMAL PAGE STYLES DURING PREVIEW =================*/
 
+$colors: require('site/assets/stylesheets/var'); 
+
+h1 {
+	color: map-get($colors, primary);
+	border-color: map-get($colors, third);
+	font-size: map-get($colors, size);
+
+	&:hover {
+		// Sassport uses inferred Sass values, not strings!
+		color: lighten(map-get($colors, primary), 10%);
+		width: 100%;
+	}
+}
+
 /* Dashboard */
 
 .dashboard-container {
@@ -11,7 +25,7 @@
 	-webkit-transition: all 1s ease;
 			transition: all 1s ease;
 
-    .dashboard-main{
+    .dashboard-main {
   		position: fixed;
   		z-index: 100;
     	top: 0;
@@ -27,34 +41,34 @@
 	    -webkit-transition: all 1s ease;
 	    		transition: all 1s ease;
 
-    	.component-inputs{
+    	.component-inputs {
 			margin: 30px 0px;
 
-			.component-input{
+			.component-input {
 				margin: 10px 0px;
 			}
 		}
 
-		.text{
-			textarea{
+		.text {
+			textarea {
 				height: 300px;
 			}
 		}
 
-		.btn-down{
+		.btn-down {
 			position: absolute;
 	    	bottom: 0;
 	    	margin-bottom: 20px;
 	    	width: 100px;
 		}
 
-		.btn-down.preview{
+		.btn-down.preview {
 			font-size: 48px;
 			width: 200px;
 		}
     }
 
-    .dashboard-sub{
+    .dashboard-sub {
     	position: fixed;
 	    top: 0%;
 	    z-index: 99;
@@ -63,7 +77,7 @@
 	    -webkit-transition: all 0.5s ease;
 				transition: all 0.5s ease;
 
-		button{
+		button {
 			font-size: 24px;
 			color: #fff;
 	    	margin: 0;
@@ -81,16 +95,16 @@
 		}
     }
 
-    .dashboard-sub:hover{
+    .dashboard-sub:hover {
 		cursor: pointer;
 		
-		button{
+		button {
 			-webkit-transform: translateX(0);
 					transform: translateX(0);
 		}
 	}
 
-	.btn-generate{
+	.btn-generate {
 		position: fixed;
 		z-index: 100;
 	    right: 0;
@@ -116,7 +130,7 @@ $container_margin: 10%;
     -webkit-transition: all 1s ease;
     		transition: all 1s ease;
 
-    .sortable-element{
+    .sortable-element {
     	height: auto;
     }
 	.component-container {
@@ -175,7 +189,7 @@ $container_margin: 10%;
 		min-height: 500px;
 		width: 100%;
 	}
-	.dark-gradient{
+	.dark-gradient {
 		height: 300px;
 		width: 100%;
 		position: absolute;
@@ -195,13 +209,13 @@ $container_margin: 10%;
 	font-weight: bolder;
 	font-family: $subhead_font_family;
 }
-.quote-block{
+.quote-block {
 	overflow: auto;
 	padding: 50px;
-	.quote-content{
+	.quote-content {
 		float: left;
 		width: 100%;
-		.quote-text{
+		.quote-text {
 			font-size: 1.5em;
 			font-weight: 600;
 			font-style: oblique;
@@ -213,19 +227,19 @@ $container_margin: 10%;
 			letter-spacing: 0.5px;
 		}
 	}
-	.quote{
+	.quote {
 		float: left;
 		font-family: 'Helvetica';
 		font-size: 200px;
 		color: #000;
 	}
-	.quote-left{
+	.quote-left {
 		line-height: 200px;
 		height: 100px;
 		overflow: hidden;
 		margin-left: -5px;
 	}
-	.quote-right{
+	.quote-right {
 		float: left;
 		margin-top: -100px;
 	}
@@ -252,11 +266,11 @@ $container_margin: 10%;
 	}
 }
 
-.sortable-inner{
+.sortable-inner {
 	position: relative;
 	max-height: 350px;
 	overflow: hidden;
-	.component-action-btn-group{
+	.component-action-btn-group {
 		visibility: hidden;
 	}
 }
@@ -264,16 +278,16 @@ $container_margin: 10%;
 
 /*==========DASHBOARD / PAGE WHEN EDITING=========*/
 
-.app-container.editing{
-	.dashboard-container{
+.app-container.editing {
+	.dashboard-container {
 		width: 300px;
-		.dashboard-main{
+		.dashboard-main {
 			-webkit-transform: translateX(0);
 					transform: translateX(0);
 		}
 
-		.dashboard-sub{
-			button{
+		.dashboard-sub {
+			button {
 				font-size: 24px;
 				color: #fff;
 	    		margin: 0;
@@ -292,23 +306,22 @@ $container_margin: 10%;
 	    }
 	}
 	
-	.page-container{
+	.page-container {
 		
 		width: -webkit-calc(100% - 300px);
 	    width:    -moz-calc(100% - 300px);
 	    width: 	   	   calc(100% - 300px);
 
-		.sortable-element{
+		.sortable-element {
 			position: relative;
 	    	max-height: 350px;
 	    	overflow: hidden;
 	    	border-bottom: 1px solid #ddd;
 
-	    	.component-action-btn-group{
+	    	.component-action-btn-group {
 	    		visibility: visible;
 	    	}
 		}
-		
 	}
 }
 
@@ -326,7 +339,7 @@ $container_margin: 10%;
 		width: 85%;
 		height: 100px;
 	}
-	.row{
+	.row {
 		padding-top: 10px;
 	}
 }
