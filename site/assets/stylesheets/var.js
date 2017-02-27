@@ -1,6 +1,1 @@
-module.exports = {
-  primary: '#C0FF33',
-  secondary: '#B4D455',
-  third: 'red',
-  size: '15px'
-};
+module.exports={"subhead_color":"black","secondary":"#B4D455","third":"red","size":"15px"}

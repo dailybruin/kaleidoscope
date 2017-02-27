@@ -5,7 +5,8 @@
 var express = require('express');
 var Page = require('./site/model/page');
 var mongodb = require('mongodb');
-
+var fs = require('fs');
+var v = require('./site/assets/stylesheets/var.js');
 var GenPage = null;
 
 module.exports = function (app) {
@@ -27,6 +28,23 @@ module.exports = function (app) {
         Page.findOne({'_id': req.query.pageID}, function(err, page) {
             // console.log(page.components);
             res.render('index', { title: 'Editting Page', components: page.components, database_id: req.query.pageID } );
+        });
+    });
+
+    app.post('/styles', function(req, res, next) {
+        var key = req.body.key;
+        var value = req.body.value;
+        v[key] = value;
+
+        fs.writeFile('site/assets/stylesheets/var.js', "module.exports=" + JSON.stringify(v), function (err) {
+            if (err) return console.log(err);
+            console.log("written: module.exports=" + JSON.stringify(v));
+
+            fs.readFile('site/assets/stylesheets/style.css', function(err, data) {
+                if (err) console.log(err);
+                var css = data.toString();
+                return css;
+            });
         });
     });
 

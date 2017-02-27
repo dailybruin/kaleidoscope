@@ -2,17 +2,17 @@
 
 $colors: require('site/assets/stylesheets/var'); 
 
-h1 {
-	color: map-get($colors, primary);
-	border-color: map-get($colors, third);
-	font-size: map-get($colors, size);
+// h1 {
+// 	color: map-get($colors, primary);
+// 	border-color: map-get($colors, third);
+// 	font-size: map-get($colors, size);
 
-	&:hover {
-		// Sassport uses inferred Sass values, not strings!
-		color: lighten(map-get($colors, primary), 10%);
-		width: 100%;
-	}
-}
+// 	&:hover {
+// 		// Sassport uses inferred Sass values, not strings!
+// 		color: lighten(map-get($colors, primary), 10%);
+// 		width: 100%;
+// 	}
+// }
 
 /* Dashboard */
 
@@ -208,6 +208,7 @@ $container_margin: 10%;
 	font-size: 32px;
 	font-weight: bolder;
 	font-family: $subhead_font_family;
+	color: map-get($colors, subhead_color);
 }
 .quote-block {
 	overflow: auto;

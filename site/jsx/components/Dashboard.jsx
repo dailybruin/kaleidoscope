@@ -3,8 +3,9 @@ import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader} from '../actions';
 var FileSaver = require('file-saver');
 import ReactDOM from 'react-dom';
-import ReactDOMServer from 'react-dom/server'
+import ReactDOMServer from 'react-dom/server';
 import Checkbox from './Checkbox';
+import Var from '../../assets/stylesheets/var';
 
 class Dashboard extends React.Component {
     
@@ -103,6 +104,21 @@ class Dashboard extends React.Component {
         // console.log(this.state);
 
         event.preventDefault();
+
+        // if custom color styling was changed, update css and inject updated css to page preview
+        if (this.state.data.payload.color) {
+            $.ajax({
+              url: '/styles',
+              type: 'POST',
+              data: {
+                key: this.state.data.type + '_color',
+                value: this.state.data.payload.color
+              },
+            }).done(function(data) {
+                console.log(data);
+            });
+        }
+
         if (this.state.edit_component_id !== "") {
             console.log('Match Found')
             this.appendPagePreview(this.state.edit_component_id, this.state.data);
@@ -189,7 +205,6 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
-        console.log(id)
         for (var i = 0; i< redux_store.length; i++) {
             let item_props = redux_store[i].props;
             if (id === item_props.database_id) {
@@ -318,6 +333,14 @@ class Dashboard extends React.Component {
                                 onChange={this.updateInput.bind(this, 'text')} 
                                 className="form-control"
                                 value={payload.text === undefined ? "" : payload.text} />
+                            <label htmlFor="color">Text Color:</label>
+                            <input 
+                                placeholder="Subhead Color" 
+                                type="text" 
+                                name="color" 
+                                onChange={this.updateInput.bind(this, 'color')} 
+                                className="form-control"
+                                value={payload.color === undefined ? "black" : payload.color} />
                         </div>
                     </div>
                 );
