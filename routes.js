@@ -32,17 +32,26 @@ module.exports = function (app) {
     });
 
     app.post('/styles', function(req, res, next) {
-        var key = req.body.key;
-        var value = req.body.value;
-        v[key] = value;
+        var styles = JSON.parse(req.body.styles);
+        console.log(styles);
+        var type = JSON.parse(req.body.type);
+        console.log(type);
+        for (var key in styles) {
+            var value = styles[key];
+            v[type + '_' + key] = value;
+        }
 
         fs.writeFile('site/assets/stylesheets/var.js', "module.exports=" + JSON.stringify(v), function (err) {
-            if (err) return console.log(err);
+            if (err) {
+                return console.log(err);
+            }
+            console.log("written to file");
             console.log("written: module.exports=" + JSON.stringify(v));
 
             fs.readFile('site/assets/stylesheets/style.css', function(err, data) {
                 if (err) console.log(err);
                 var css = data.toString();
+                console.log("css returned");
                 return css;
             });
         });

@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
         this.state = {  data: {
                             type: this.props.componentTypes[0],
                             payload: {},
-                            
+                            styles: {}
                         },
                         edit_component_id: "",
                         download_file: false
@@ -40,7 +40,8 @@ class Dashboard extends React.Component {
         for (var i = 0; i < this.props.preloaded_components.length; i++) {
             var formatted_component_data = {
                 'type': this.props.preloaded_components[i].component_type,
-                'payload': this.props.preloaded_components[i].component_data
+                'payload': this.props.preloaded_components[i].component_data,
+                'styles': this.props.preloaded_components[i].component_styles
             }
 
             this.appendPagePreview(this.randomIdentifier(), formatted_component_data);
@@ -94,7 +95,8 @@ class Dashboard extends React.Component {
         this.setState({
             data: {
                 type: event.target.value,
-                payload: {}
+                payload: {},
+                styles: {}
             }
         });
     }
@@ -106,16 +108,21 @@ class Dashboard extends React.Component {
         event.preventDefault();
 
         // if custom color styling was changed, update css and inject updated css to page preview
-        if (this.state.data.payload.color) {
+        if (Object.keys(this.state.data.styles).length) {
             $.ajax({
-              url: '/styles',
-              type: 'POST',
-              data: {
-                key: this.state.data.type + '_color',
-                value: this.state.data.payload.color
-              },
-            }).done(function(data) {
-                console.log(data);
+                url: '/styles',
+                type: 'POST',
+                dataType: 'text',
+                data: {
+                    "styles": JSON.stringify(this.state.data.styles),
+                    "type": JSON.stringify(this.state.data.type)
+                },
+                success: function(result) {
+                    console.log("completed: " + result);
+                },
+                error: function(err) {
+                    console.log(err);
+                }
             });
         }
 
@@ -127,6 +134,7 @@ class Dashboard extends React.Component {
                 data: {
                     type: this.state.data.type,
                     payload: {},
+                    styles: {}
                 }
             });
             return;
@@ -138,6 +146,7 @@ class Dashboard extends React.Component {
             data: {
                 type: this.state.data.type,
                 payload: {},
+                styles: {}
             }
         })
     }
@@ -198,7 +207,8 @@ class Dashboard extends React.Component {
         this.setState({
             data:{
                 type: this.state.data.type,
-                payload: {}
+                payload: {},
+                styles: {}
             }
         });
     }
@@ -211,8 +221,7 @@ class Dashboard extends React.Component {
                 this.setState({
                     data: {
                         type: item_props.type,
-                        payload: item_props.component.props,
-
+                        payload: item_props.component.props
                     },
                     edit_component_id: id,
                 })
@@ -258,35 +267,48 @@ class Dashboard extends React.Component {
           data: {
             "data": JSON.stringify(submitted_components), 
             "current_id": JSON.stringify(this.props.database_id)
-          },
-          type: 'POST'
+          }
         });
 
         this.setState({
             data: {
                 type: this.state.data.type,
-                payload: {}
+                payload: {},
+                styles: {}
             }
         });
 
         window.location.reload(true);
     }
 
-    updateInput(value, event) {
+    updateInput(value, value_type, event) {
 
         let updatedObj = {};
         updatedObj[value] = event.target.value;
+        if (value_type == "content") {
+            this.setState({
+                data:{
+                    type: this.state.data.type,
+                    payload: Object.assign({}, this.state.data.payload, updatedObj),
+                    styles: this.state.data.styles
+                }
+            });
+        }
+        else if (value_type == "style") {
+            this.setState({
+                data:{
+                    type: this.state.data.type,
+                    payload: this.state.data.payload,
+                    styles: Object.assign({}, this.state.data.styles, updatedObj)
+                }
+            });
+        }
 
-        this.setState({
-            data:{
-                type: this.state.data.type,
-                payload: Object.assign({}, this.state.data.payload, updatedObj)
-            }
-        });
     }
 
     showInputForComponentType(componentType) {
         const payload = this.state.data.payload;
+        const styles = this.state.data.styles;
         switch(this.state.data.type) {
             case 'header':
                 return(
@@ -296,7 +318,7 @@ class Dashboard extends React.Component {
                             <input
                                 placeholder="Title" 
                                 type="text" name="title" 
-                                onChange={this.updateInput.bind(this,'title')} 
+                                onChange={this.updateInput.bind(this,'title', 'content')} 
                                 ref={(input) => this.input}
                                 className="form-control"
                                 value={payload.title === undefined ? "" : payload.title}/>
@@ -306,7 +328,7 @@ class Dashboard extends React.Component {
                             <input
                                 placeholder="Author"
                                 type="text" name="author"
-                                onChange={this.updateInput.bind(this, 'author')}
+                                onChange={this.updateInput.bind(this, 'author', 'content')}
                                 className="form-control"
                                 value={payload.author === undefined ? "" : payload.author}/>
                         </div>
@@ -315,7 +337,7 @@ class Dashboard extends React.Component {
                             <input
                                 placeholder="Cover image URL"
                                 type="text" name="url"
-                                onChange={this.updateInput.bind(this, 'image')}
+                                onChange={this.updateInput.bind(this, 'image', 'content')}
                                 className="form-control"
                                 value={payload.image === undefined ? "" : payload.image}/>
                         </div>
@@ -330,17 +352,17 @@ class Dashboard extends React.Component {
                                 placeholder="Subhead" 
                                 type="text" 
                                 name="subhead" 
-                                onChange={this.updateInput.bind(this, 'text')} 
+                                onChange={this.updateInput.bind(this, 'text', 'content')} 
                                 className="form-control"
                                 value={payload.text === undefined ? "" : payload.text} />
                             <label htmlFor="color">Text Color:</label>
                             <input 
-                                placeholder="Subhead Color" 
+                                placeholder="default: black" 
                                 type="text" 
                                 name="color" 
-                                onChange={this.updateInput.bind(this, 'color')} 
+                                onChange={this.updateInput.bind(this, 'color', 'style')} 
                                 className="form-control"
-                                value={payload.color === undefined ? "black" : payload.color} />
+                                value={styles.color === undefined ? "" : styles.color} />
                         </div>
                     </div>
                 );
@@ -351,7 +373,7 @@ class Dashboard extends React.Component {
                             <label htmlFor="url">URL:</label>
                             <input 
                                 placeholder="URL" type="text" name="url"
-                                onChange={this.updateInput.bind(this, 'url')}
+                                onChange={this.updateInput.bind(this, 'url', 'content')}
                                 className="form-control"
                                 value={payload.url === undefined ? "" : payload.url}/>
                         </div>
@@ -359,7 +381,7 @@ class Dashboard extends React.Component {
                             <label htmlFor="credit">Credit:</label>
                             <input
                                 placeholder="Credit" type="text" name="credit" 
-                                onChange={this.updateInput.bind(this, 'credit')}
+                                onChange={this.updateInput.bind(this, 'credit', 'content')}
                                 className="form-control"
                                 value={payload.credit === undefined ? "" : payload.credit}/>
                         </div>
@@ -367,7 +389,7 @@ class Dashboard extends React.Component {
                             <label htmlFor="caption">Caption:</label>
                             <input
                                 placeholder="Caption" type="text" name="caption"
-                                onChange={this.updateInput.bind(this, 'caption')}
+                                onChange={this.updateInput.bind(this, 'caption', 'content')}
                                 className="form-control"
                                 value={payload.caption === undefined ? "" : payload.caption}/>
                         </div>
@@ -383,7 +405,7 @@ class Dashboard extends React.Component {
                                 placeholder="Quote" 
                                 type="text" 
                                 name="quote" 
-                                onChange={this.updateInput.bind(this, 'quoteText')} 
+                                onChange={this.updateInput.bind(this, 'quoteText', 'content')} 
                                 className="form-control"
                                 value={payload.quoteText === undefined ? "" : payload.quoteText} />
                         </div>
@@ -393,7 +415,7 @@ class Dashboard extends React.Component {
                                 placeholder="Quote Maker" 
                                 type="text" 
                                 name="quoteMaker" 
-                                onChange={this.updateInput.bind(this, 'quoteSource')} 
+                                onChange={this.updateInput.bind(this, 'quoteSource', 'content')} 
                                 className="form-control"
                                 value={payload.quoteSource === undefined ? "" : payload.quoteSource} />
                         </div>
@@ -407,7 +429,7 @@ class Dashboard extends React.Component {
                             name="text" 
                             rows="3"
                             className="form-control"
-                            onChange={this.updateInput.bind(this, 'text')}
+                            onChange={this.updateInput.bind(this, 'text', 'content')}
                             value={payload.text === undefined ? "" : payload.text}>
                         </textarea>
                     </div>
