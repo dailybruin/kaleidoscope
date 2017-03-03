@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader,updateStyles} from '../actions';
 var FileSaver = require('file-saver');
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
         this.toggleCheckbox = this.toggleCheckbox.bind(this);
-        // this.updateInput = this.updateInput.bind(this);
+        this.updateStyles = this.updateStyles.bind(this);
 
         // Load all preloaded components
         console.log(this.props.preloaded_components);
@@ -109,21 +109,7 @@ class Dashboard extends React.Component {
 
         // if custom color styling was changed, update css and inject updated css to page preview
         if (Object.keys(this.state.data.styles).length) {
-            $.ajax({
-                url: '/styles',
-                type: 'POST',
-                dataType: 'text',
-                data: {
-                    "styles": JSON.stringify(this.state.data.styles),
-                    "type": JSON.stringify(this.state.data.type)
-                },
-                success: function(result) {
-                    console.log("completed: " + result);
-                },
-                error: function(err) {
-                    console.log(err);
-                }
-            });
+            this.updateStyles();
         }
 
         if (this.state.edit_component_id !== "") {
@@ -149,6 +135,26 @@ class Dashboard extends React.Component {
                 styles: {}
             }
         })
+    }
+
+    updateStyles() {
+        const props = this.props;
+        $.ajax({
+            url: '/styles',
+            type: 'POST',
+            dataType: 'text',
+            data: {
+                "styles": JSON.stringify(this.state.data.styles),
+                "type": JSON.stringify(this.state.data.type)
+            },
+            success: function(updated_css) {
+                console.log("new css obtained by dashboard: " + updated_css);
+                props.dispatch(updateStyles(updated_css));
+            },
+            error: function(err) {
+                console.log("Error updating css in /styles endpoint: " + err);
+            }
+        });
     }
 
     randomIdentifier() {
@@ -456,9 +462,9 @@ class Dashboard extends React.Component {
 // this has no purpose at the moment since dasboard will not change typically
 const mapStateToProps = (state) => {
         return {
-            src:state._dashboard.src,
-            caption: state._dashboard.caption,
-            credit: state._dashboard.credit,
+            // src:state._dashboard.src,
+            // caption: state._dashboard.caption,
+            // credit: state._dashboard.credit,
         };
 };
 

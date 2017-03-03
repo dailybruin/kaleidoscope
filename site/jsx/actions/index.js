@@ -69,6 +69,13 @@ export const addMetatags = (title, og_image, key) => {
     }
 }
 
+export const updateStyles = (css) => {
+    return {
+        type: 'UPDATE_STYLES',
+        css: css
+    }
+}
+
 export const deleteComponent = (id) => {
     return {
         type: 'DELETE_COMPONENT',

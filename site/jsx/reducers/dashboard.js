@@ -100,6 +100,17 @@ export function  _dashboard(state = [], action) {
     }
 }
 
+export function _styles(state=[], action) {
+    switch (action.type) {
+        case 'UPDATE_STYLES':
+            console.log('In UPDATE_STYLES');
+            const css = action.css;
+            return css;
+        default:
+            return state;
+    }
+}
+
 export function _header(state=[], action) {
     switch (action.type) {
         case 'NEW_HEADER':

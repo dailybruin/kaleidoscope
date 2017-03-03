@@ -35,7 +35,7 @@ class Page extends React.Component {
        // this.deactivateDashboard = this.deactivateDashboard.bind(this);
         this.onSortEnd = this.onSortEnd.bind(this);
     }
-
+w
     onSortEnd = ({oldIndex, newIndex}) => {
         let new_array = arrayMove(this.props.store.getState()._dashboard, oldIndex, newIndex);
         this.props.dispatch(updateComponentList(new_array));
@@ -43,9 +43,13 @@ class Page extends React.Component {
 
     render() {
         const dashboard = this.props.store.getState()._dashboard;
+        const css = this.props.store.getState()._styles;
+        console.log("In Page.jsx " + css);
+
         return (
             <div className="page-container">
                 <SortableList items={dashboard} onSortEnd={this.onSortEnd} pressDelay={150} helperClass="sortable-inner"/>
+                <style>{css}</style>
             </div>
         );
     }
