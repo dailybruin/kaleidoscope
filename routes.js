@@ -7,6 +7,7 @@ var Page = require('./site/model/page');
 var mongodb = require('mongodb');
 var fs = require('fs');
 var v = require('./site/assets/stylesheets/var.js');
+var chokidar = require('chokidar');
 var GenPage = null;
 
 module.exports = function (app) {
@@ -31,6 +32,29 @@ module.exports = function (app) {
         });
     });
 
+    // Initialize watcher.
+    var css_filePath = 'site/assets/stylesheets/style.css';
+    var watcher = chokidar.watch(css_filePath, {
+      ignored: /(^|[\/\\])\../,
+      persistent: true
+    });
+
+    watcher.on('change', (path, stats) => {
+        console.log(`File ${path} changed`);
+        fs.readFile(css_filePath, function(err, data) {
+            if (err) console.log(err);
+            var css = data.toString();
+            console.log(css);
+            // Un-watch some files.
+            // watcher.unwatch(css_filePath);
+
+            // Stop watching.
+            // watcher.close();
+
+            // res.end(css);
+        });
+    });
+
     app.post('/styles', function(req, res, next) {
         console.log("entered server /styles");
 
@@ -47,12 +71,13 @@ module.exports = function (app) {
             }
 
             console.log("written to css file: module.exports=" + JSON.stringify(v));
-
-            fs.readFile('site/assets/stylesheets/style.css', function(err, data) {
+            // problem that it reads the css file right away before its done 
+            // updating from sassport
+            fs.readFile(css_filePath, function(err, data) {
                 if (err) console.log(err);
                 var css = data.toString();
                 // console.log(css);
-                res.end(JSON.stringify(css));
+                res.end(css);
             });
         });
     });

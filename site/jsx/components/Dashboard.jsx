@@ -152,7 +152,8 @@ class Dashboard extends React.Component {
                 props.dispatch(updateStyles(updated_css));
             },
             error: function(err) {
-                console.log("Error updating css in /styles endpoint: " + err);
+                console.log("Error updating css in /styles endpoint:");
+                console.log(err);
             }
         });
     }
