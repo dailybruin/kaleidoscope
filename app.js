@@ -1,20 +1,16 @@
 import path from 'path'
 import express from 'express'
-var app 	   = express();
-var bodyParser = require('body-parser'),
-	sass       = require('node-sass'),
-	sassMiddleware = require('node-sass-middleware');
+var app = express();
+var bodyParser = require('body-parser');
+var sass = require('node-sass');
+var sassMiddleware = require('node-sass-middleware');
 	
 
-// POST form data parser
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-// Static files
+// Static files config setup
 app.set('view engine', 'jade');
 app.set('views', './public/views');
-// adding the sass middleware
+
+// Sass middleware for compiling to css
 app.use(
    sassMiddleware({
        src: __dirname + '/public/assets/stylesheets', 
@@ -23,19 +19,22 @@ app.use(
        debug: true       
    })
 ), 
-// The static middleware must come after the sass middleware
+// [this line must come after sassMiddleware]
 app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 // DB Setup
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/flatpage');
 
-// Routes
-require("./routes")(app);
+// POST request form data parser used in routes.js
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-/**
- * Start server
- */
+// Routes/endpoint initialization
+var routes = require("./routes");
+routes(app);
+
+// Start the server on port 3000
 var server = app.listen(3000, function () {
     var host = server.address().address;
     var port = server.address().port;
