@@ -1,16 +1,14 @@
-// import React from 'react';
 import React, { Component, PropTypes } from 'react';
-import Header from './Header';
-import Subhead from './Subhead';
-import Image from './Image';
-import Quote from './Quote';
-import TextSection from './TextSection';
-import DraggableList from 'react-draggable-list';
-import DashboardItem from './DashboardItem'
 import {connect} from 'react-redux';
+import Header from './common/Header';
+import Subhead from './common/Subhead';
+import Image from './common/Image';
+import Quote from './common/Quote';
+import TextSection from './common/TextSection';
+import DashboardItem from './common/DashboardItem'
+import DraggableList from 'react-draggable-list';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
-import {updateComponentList} from '../../actions';
-// import SortableComponent from './SortableComponent';
+import {updateComponentList} from '../redux/actions';
 
 const SortableItem = SortableElement(({value}) => {
     return (<div className="sortable-element">{value}</div>);

@@ -3,7 +3,7 @@
  * Catches all GET/POST requests
  */
 var express = require('express');
-var Page = require('./site/model/page');
+var Page = require('./public/model/page');
 var mongodb = require('mongodb');
 
 var GenPage = null;

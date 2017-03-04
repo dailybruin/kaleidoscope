@@ -1,7 +1,7 @@
 module.exports = {
-  entry: ['./site/jsx/app.jsx'],
+  entry: ['./public/components/root.jsx'],
   output: {
-    path: './site/dist/js',
+    path: './public/dist/js',
     filename: 'bundle.js'
   },
   module: {

@@ -13,18 +13,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Static files
 app.set('view engine', 'jade');
-app.set('views', './site/views');
+app.set('views', './public/views');
 // adding the sass middleware
 app.use(
    sassMiddleware({
-       src: __dirname + '/site/assets/stylesheets', 
-       dest: __dirname + '/site/assets/stylesheets',
+       src: __dirname + '/public/assets/stylesheets', 
+       dest: __dirname + '/public/assets/stylesheets',
        force: true,
        debug: true       
    })
 ), 
 // The static middleware must come after the sass middleware
-app.use(express.static( path.join( __dirname, 'site' ) ) );
+app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 // DB Setup
 var mongoose = require('mongoose');

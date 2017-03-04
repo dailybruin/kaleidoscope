@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader} from '../actions';
+import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader} from '../redux/actions';
 var FileSaver = require('file-saver');
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server'
-import Checkbox from './Checkbox';
+import Checkbox from './common/Checkbox';
 
 class Dashboard extends React.Component {
     

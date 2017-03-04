@@ -1,10 +1,10 @@
 import React from 'react';
-import App from './components/App'
-import createStore from './reducers/index'
+import App from './App'
+import createStore from '../redux/reducers/index'
 import { Provider } from 'react-redux'
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
-import SortableComponent from './components/common/SortableComponent'
+import SortableComponent from './common/SortableComponent'
 // import {render} from 'react-dom'
 
 const store = createStore();

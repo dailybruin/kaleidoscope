@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '../components/common/Header';
-import Image from '../components/common/Image';
-import Quote from '../components/common/Quote';
-import Subhead from '../components/common/Subhead'
-import TextSection from '../components/common/TextSection';
-import DashboardItem from '../components/common/DashboardItem';
+import Header from'../../components/common/Header';
+import Image from'../../components/common/Image';
+import Quote from '../../components/common/Quote';
+import Subhead from '../../components/common/Subhead';
+import TextSection from '../../components/common/TextSection';
+import DashboardItem from '../../components/common/DashboardItem';
 
 function updateState (state, id, component) {
     for (var i =0; i< state.length; i++) {

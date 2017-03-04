@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-class Checkbox extends Component {
+class Checkbox extends React.Component {
   state = {
     isChecked: false,
   }
