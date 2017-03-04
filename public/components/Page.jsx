@@ -1,10 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
-import Header from './common/Header';
-import Subhead from './common/Subhead';
-import Image from './common/Image';
-import Quote from './common/Quote';
-import TextSection from './common/TextSection';
 import DashboardItem from './common/DashboardItem'
 import DraggableList from 'react-draggable-list';
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
@@ -13,24 +8,24 @@ import {updateComponentList} from '../redux/actions';
 const SortableItem = SortableElement(({value}) => {
     return (<div className="sortable-element">{value}</div>);
 });
+
 const SortableList = SortableContainer(({items}) => {
     return (
-            <div>
-                {items.map((value, index) => {
-                    return (<SortableItem key={`item-${index}`} index={index} value={value} />)
-                    }
-                )}
-            </div>
-        );
-    });
+        <div>
+            {items.map((value, index) => {
+                return (<SortableItem key={`item-${index}`} index={index} value={value} />)
+                }
+            )}
+        </div>
+    );
+});
 
 class Page extends React.Component {
     static propTypes = {
+
     }
     constructor(props) {
         super(props);
-
-       // this.deactivateDashboard = this.deactivateDashboard.bind(this);
         this.onSortEnd = this.onSortEnd.bind(this);
     }
 
@@ -47,11 +42,6 @@ class Page extends React.Component {
             </div>
         );
     }
-
- /*   deactivateDashboard(){
-        let app = document.querySelector('.app-container');
-        app.classList.add('preview');
-    }*/
 };
 
 const mapStateToProps = (state) => {
