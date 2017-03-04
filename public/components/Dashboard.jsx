@@ -1,13 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addHeader, addImage, addQuote, addText, addSubhead, addMetatags,deleteComponent,resetHeader} from '../redux/actions';
-var FileSaver = require('file-saver');
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server'
 import Checkbox from './common/Checkbox';
+var FileSaver = require('file-saver');
 
 class Dashboard extends React.Component {
-    
     static propTypes = {
         componentTypes: React.PropTypes.array.isRequired,
         preloaded_components: React.PropTypes.array.isRequired,
@@ -19,7 +18,6 @@ class Dashboard extends React.Component {
         this.state = {  data: {
                             type: this.props.componentTypes[0],
                             payload: {},
-                            
                         },
                         edit_component_id: "",
                         download_file: false
@@ -32,10 +30,9 @@ class Dashboard extends React.Component {
         this.handleDelete = this.handleDelete.bind(this);
         this.showInputForComponentType = this.showInputForComponentType.bind(this);
         this.toggleCheckbox = this.toggleCheckbox.bind(this);
-        // this.updateInput = this.updateInput.bind(this);
 
         // Load all preloaded components
-        console.log(this.props.preloaded_components);
+        // console.log(this.props.preloaded_components);
         for (var i = 0; i < this.props.preloaded_components.length; i++) {
             var formatted_component_data = {
                 'type': this.props.preloaded_components[i].component_type,
@@ -46,27 +43,25 @@ class Dashboard extends React.Component {
         }
     }
 
+
+
     render() {
+        // Set option values to componentTypes where spaces are replaced by '_'
         var componentOptions = this.props.componentTypes.map(function(type, i){
           return (
             <option value={type.replace(/\s/g , "_")}>{type}</option>
           );
         });
-        var buttonText = this.props.database_id == '' ? 'Generate Page' : 'Update Page';
 
         return (
-            <div className="dashboard-container" >
+            <div className="dashboard-container">
+                {/* BEGIN dashboard form */}
                 <div className="dashboard-main">
                     <form onSubmit={this.handleSubmit}>
                         <div className="dropdown">
-                            {/*<label htmlFor="dropdown">Select component:</label>*/}
-                            <div>
-                                <div>
-                                    <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
-                                        {componentOptions}
-                                    </select>
-                                </div>
-                            </div>
+                            <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
+                                {componentOptions}
+                            </select>
                         </div>
                         <div className="component-inputs">
                             <div>{this.showInputForComponentType(this.state.data.type)}</div>
@@ -80,10 +75,12 @@ class Dashboard extends React.Component {
                         </div>
                     </form>
                 </div>
+                {/* END dashboard form */}
                 <div className="dashboard-sub" onClick={this.toggleDashboard}>
                     <button>EDIT</button>
                 </div>
-                <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">{buttonText}</button>
+                {/* Generate button */}
+                <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">Save</button>
             </div>
         );
     }
@@ -189,7 +186,6 @@ class Dashboard extends React.Component {
 
     handleEdit(id) {
         let redux_store = this.props.store.getState()._dashboard;
-        console.log(id)
         for (var i = 0; i< redux_store.length; i++) {
             let item_props = redux_store[i].props;
             if (id === item_props.database_id) {
@@ -206,12 +202,9 @@ class Dashboard extends React.Component {
         }
     }
 
-    handleGenPage(event) {
-        event.preventDefault();
-
+    formHTMLPage() {
         // Use React.renderToStaticMarkup to convert each react component into HTML
         // Collect all HTML pieces and then save them to a file using FileSaver.js
-     
         let redux_store = this.props.store.getState()._dashboard;
         let redux_header = this.props.store.getState()._header;
         let content = "";
@@ -236,6 +229,14 @@ class Dashboard extends React.Component {
         if (this.state.download_file)
             FileSaver.saveAs(blob, "index.html");
 
+        return submitted_components;
+    }
+
+    handleGenPage(event) {
+        event.preventDefault();
+
+        let submitted_components = this.formHTMLPage();
+
         // Save to database from submitted_components
         $.ajax({
           url: '/gen',
@@ -254,11 +255,11 @@ class Dashboard extends React.Component {
             }
         });
 
+        // Client-side reload of page because cannot reload after returning from ajax call
         window.location.reload(true);
     }
 
     updateInput(value, event) {
-
         let updatedObj = {};
         updatedObj[value] = event.target.value;
 
@@ -351,7 +352,6 @@ class Dashboard extends React.Component {
                     </div>
                 );
             case 'quote':
-
                 return(
                     <div>
                         <div className="component-input">
@@ -410,11 +410,9 @@ class Dashboard extends React.Component {
 
 // this has no purpose at the moment since dasboard will not change typically
 const mapStateToProps = (state) => {
-        return {
-            src:state._dashboard.src,
-            caption: state._dashboard.caption,
-            credit: state._dashboard.credit,
-        };
+    return {
+        src: state._dashboard.src
+    };
 };
 
 var ConnectedDashboard = connect(mapStateToProps)(Dashboard);
