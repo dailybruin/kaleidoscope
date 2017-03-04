@@ -135,7 +135,7 @@ $container_margin: 10%;
 .header {
 	color: #fff;
 	position: relative;
-	
+	margin-bottom: 40px;
 	.headerDetails {
 		padding: 30px;
 	    position: absolute;
@@ -197,7 +197,7 @@ $container_margin: 10%;
 }
 .quote-block{
 	overflow: auto;
-	padding: 50px;
+	padding: 0px 30px;
 	.quote-content{
 		float: left;
 		width: 100%;
@@ -215,19 +215,19 @@ $container_margin: 10%;
 	}
 	.quote{
 		float: left;
-		font-family: 'Helvetica';
-		font-size: 200px;
+		font-family: 'Times';
+		font-size: 150px;
 		color: #000;
-	}
-	.quote-left{
+		overflow: hidden;
 		line-height: 200px;
 		height: 100px;
-		overflow: hidden;
+	}
+	.quote-left{
 		margin-left: -5px;
 	}
 	.quote-right{
-		float: left;
-		margin-top: -100px;
+		float: right;
+		margin-top: -50px;
 	}
 }
 .quoteSource {
@@ -237,17 +237,26 @@ $container_margin: 10%;
 	letter-spacing: 0.5px;
 }
 .image {
+	padding-top: 30px !important;
 	.img-block {
 		position: relative;
-		height: 400px;
+		/*height: 400px;
 		background-repeat: no-repeat;
-		background-size: cover;
-		.img-credit {
-			background-color: rgba(255,255,255,0.5);
-			vertical-align: middle;
+		background-size: cover;*/
+		min-width: 100%;
+    	height: auto;
+	}
+	.img-credit {
+		color: grey;
+		background-color: rgba(255,255,255,0.5);
+		vertical-align: middle;
+		font-size: 10px;
+		span {
+			padding-right: 5px;
 		}
 	}
 	.img-caption {
+		padding-top: 10px;
 		vertical-align: middle;
 	}
 }
