@@ -21,7 +21,7 @@ export default class SortableComponent extends Component {
     }
 
     state = {
-        items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']
+        items: []
     }
     onSortEnd = ({oldIndex, newIndex}) => {
         this.setState({

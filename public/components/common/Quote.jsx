@@ -12,7 +12,6 @@ class Quote extends React.Component{
 	}
 
 	render(){
-		// let test_head =
 		return (
 			<div className="center-block">
 				<div className="quote-block">
