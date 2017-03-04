@@ -1,8 +1,7 @@
-.DS_Store
+**/.DS_Store
 /junk
 npm-debug.log
-site/dist/js/bundle.js
-site/dist/js/index.html
-site/assets/stylesheets/*.css
+public/dist/js/bundle.js
+public/dist/js/index.html
+public/assets/stylesheets/*.css
 node_modules/
-site/jsx/.DS_Store

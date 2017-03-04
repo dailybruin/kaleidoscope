@@ -2716,7 +2716,7 @@
 				return _react2["default"].createElement(
 					"div",
 					{ className: "center-block image" },
-					_react2["default"].createElement("div", { className: "img-block", style: { backgroundImage: 'url(' + this.props.url + ')' } }),
+					_react2["default"].createElement("img", { className: "img-block", src: this.props.url }),
 					_react2["default"].createElement(
 						"p",
 						{ className: "img-caption" },
@@ -2725,7 +2725,7 @@
 					_react2["default"].createElement(
 						"p",
 						{ className: "img-credit" },
-						"Photo by ",
+						_react2["default"].createElement("span", { className: "glyphicon glyphicon-camera" }),
 						this.props.credit,
 						" "
 					),
@@ -2739,6 +2739,8 @@
 
 	exports["default"] = Image;
 	module.exports = exports["default"];
+	/*<div className="img-block" style={{backgroundImage:'url(' + this.props.url + ')'}}>
+	</div>*/
 
 /***/ },
 /* 49 */
@@ -2811,6 +2813,11 @@
 								"- ",
 								this.props.quoteSource
 							)
+						),
+						_react2["default"].createElement(
+							"p",
+							{ className: "quote quote-right" },
+							"”"
 						)
 					)
 				);
@@ -2822,7 +2829,6 @@
 
 	exports["default"] = Quote;
 	module.exports = exports["default"];
-	/*<p className="quote quote-right">&rdquo;</p>*/
 
 /***/ },
 /* 50 */
