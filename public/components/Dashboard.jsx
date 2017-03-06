@@ -224,7 +224,9 @@ class Dashboard extends React.Component {
                 submitted_components.push(data);
             }
         }
-        content = content + "</body>";
+        const jquery = '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>';
+        const bootstrap_js = '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+        content = content + jquery + bootstrap_js + "</body>";
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         if (this.state.download_file)
             FileSaver.saveAs(blob, "index.html");
@@ -256,7 +258,8 @@ class Dashboard extends React.Component {
         });
 
         // Client-side reload of page because cannot reload after returning from ajax call
-        window.location.reload(true);
+        // window.location.reload(true);
+        window.location = "/";
     }
 
     updateInput(value, event) {

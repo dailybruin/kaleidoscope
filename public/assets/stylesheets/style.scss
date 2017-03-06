@@ -4,6 +4,7 @@
 /* ==================GLOBAL STYLES================*/
 .center-block {
 	padding: 0 $container_margin 0 $container_margin;
+	margin: 10px 0;
 }
 
 /* /all STYLES */
@@ -15,7 +16,7 @@
 		width: 85%;
 		height: 100px;
 	}
-	.row{
+	.row {
 		padding-top: 10px;
 	}
 }

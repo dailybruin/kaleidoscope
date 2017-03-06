@@ -1,23 +1,30 @@
-/* Main Page*/
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Inconsolata|Martel|PT+Sans|Roboto');
 
-$header_font_family: Verdana;
-$subhead_font_family: Verdana;
-$body_text_font_family: Arial, sans-serif;
+$header_font_family: 'Droid Sans', sans-serif;
+$header_gradient_opacity: 0.8;
+$header_title_color: #fff;
+
+$subhead_font_family: 'PT Sans', sans-serif;
+$subhead_font_size: 2em;
+$body_text_font_family: 'Roboto', sans-serif; 
+$body_text_font_size: 16px;
 $container_margin: 10%;
+$image_credit_font_family: 'Inconsolata', sans-serif;
+$image_caption_font_size: 14px;
+$quote_text_font_family: 'Martel', serif;
+$quote_source_font_family: 'PT Sans', sans-serif;
 
 .page-container {
-	font-family: Verdana;
 	position: relative;
-
     float: right;
     width: 100%;
-
     -webkit-transition: all 1s ease;
     		transition: all 1s ease;
 
-    .sortable-element{
-    	height: auto;
+    .sortable-element {
+    	margin-bottom: 20px;
     }
+
 	.component-container {
 		position: relative;
 		.component-action-btn-group {
@@ -29,43 +36,35 @@ $container_margin: 10%;
 	}
 }
 
+.sortable-inner {
+	position: relative;
+	max-height: 350px;
+	overflow: hidden;
+	.component-action-btn-group {
+		visibility: hidden;
+	}
+}
+
 
 // COMPONENT STYLES
 .header {
-	color: #fff;
+	color: $header_title_color;
 	position: relative;
-	margin-bottom: 40px;
 	.headerDetails {
+		font-family: $header_font_family;
 		padding: 30px;
+		padding-right: 100px;
 	    position: absolute;
 	    z-index: 2;
-	    top: 100%;
-	    left: 40%;
-	    min-height: 200px;
-	    min-width: 400px;
+	    bottom: 0;
 
-	    -webkit-transform: translate(-50%, -110%);
-	    		transform: translate(-50%, -110%);
-	}
-	.title {
-		font-size: 48px;
-		font-family: $header_font_family;
-	}
-
-	@media all and (max-width: 550px) {
-	    .headerDetails {
-			left: 60%;
-			right: 30%;
-			min-width: 500px;
-	    }
 	    .title {
-	    	font-size: 36px;
+	    	margin: 10px 0;
+	    }
+	    .author {
 	    }
 	}
-	.author {
-		font-size: 20px;
-		font-family: $subhead_font_family;
-	}
+
 	.coverImage {
 		background: no-repeat center center fixed; 
 		background-size: cover;
@@ -74,98 +73,93 @@ $container_margin: 10%;
 		min-height: 500px;
 		width: 100%;
 	}
+
 	.dark-gradient{
 		height: 300px;
 		width: 100%;
 		position: absolute;
 		z-index: 1;
 		bottom: 0;
-		background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)); 
-		background: -o-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)); 
-		background: -moz-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
-		background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
+		background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,$header_gradient_opacity)); 
+		background: -o-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,$header_gradient_opacity)); 
+		background: -moz-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,$header_gradient_opacity));
+		background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,$header_gradient_opacity));
 	}
 }
+
 .text {
 	font-family: $body_text_font_family;
+	font-size: $body_text_font_size;
+	line-height: 1.6em;
 }
+
 .subhead {
-	font-size: 32px;
+	font-size: $subhead_font_size;
 	font-weight: bolder;
 	font-family: $subhead_font_family;
 }
-.quote-block{
-	overflow: auto;
-	padding: 0px 30px;
-	.quote-content{
-		float: left;
+
+.quote-block {
+	// padding: 0px 30px;
+	margin-bottom: 80px;
+
+	.quote-content {
 		width: 100%;
-		.quote-text{
+		padding: 0 10px 0 10px;
+
+		.quote-text {
 			font-size: 1.5em;
 			font-weight: 600;
-			font-style: oblique;
+			font-family: $quote_text_font_family;
 		}
 		.quote-source {
-			font-size: 0.9em;
 			font-weight: 400;
 			color: grey;
 			letter-spacing: 0.5px;
+			font-family: $quote_source_font_family;
+			font-size: 1.1em;
 		}
 	}
-	.quote{
-		float: left;
-		font-family: 'Times';
-		font-size: 150px;
-		color: #000;
-		overflow: hidden;
-		line-height: 200px;
-		height: 100px;
+	.quote {
+		font-family: 'Georgia';
+		font-size: 100px;
+		line-height: 100px;
+		height: 50px;
 	}
-	.quote-left{
-		margin-left: -5px;
+	.quote-left {
 	}
-	.quote-right{
+	.quote-right {
 		float: right;
-		margin-top: -50px;
+		margin-top: -15px;
 	}
 }
-.quoteSource {
-	font-size: 0.9em;
-	font-weight: 400;
-	color: grey;
-	letter-spacing: 0.5px;
-}
+
 .image {
-	padding-top: 30px !important;
 	.img-block {
-		position: relative;
-		/*height: 400px;
-		background-repeat: no-repeat;
-		background-size: cover;*/
-		min-width: 100%;
+		width: 100%;
     	height: auto;
 	}
+	.img-credit-block {
+		position: relative;
+	}
 	.img-credit {
-		color: grey;
-		background-color: rgba(255,255,255,0.5);
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding: 5px;
+		color: black;
+		background-color: rgba(255,255,255,0.65);
 		vertical-align: middle;
-		font-size: 10px;
+		font-size: 1em;
+		font-family: $image_credit_font_family;
+		text-transform: uppercase;
 		span {
 			padding-right: 5px;
 		}
 	}
 	.img-caption {
 		padding-top: 10px;
+		font-size: $image_caption_font_size;
 		vertical-align: middle;
 	}
 }
-
-.sortable-inner{
-	position: relative;
-	max-height: 350px;
-	overflow: hidden;
-	.component-action-btn-group{
-		visibility: hidden;
-	}
-}
-// END COMPONENT STYLES

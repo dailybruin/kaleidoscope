@@ -109,9 +109,11 @@ export function _header(state=[], action) {
             const og_image = '<meta property="og:image" content="' + action.og_image + '"/>';
             const og_description = '<meta property="og:description" content="' + action.og_description + '"/>';
             const favicon = '<link rel = "icon" type="image/png" href="http://dailybruin.com/img/favicons/favicon-32x32.png" sizes="32x32">';
-            const bootstrap = '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">'
+            const bootstrap_css = '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">'
             const css = '<link rel="stylesheet" type="text/css" href="style.css">';
-            const meta_tags = title + og_title + og_image + og_description + favicon + bootstrap + css;
+            const ie = '<meta http-equiv="x-ua-compatible" content="ie=edge">';
+            const viewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+            const meta_tags = title + og_title + og_image + og_description + favicon + bootstrap_css + css + ie + viewport;
             const metatag_struct = {
                 database_id: action.key,
                 tags: meta_tags,

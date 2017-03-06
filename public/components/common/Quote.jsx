@@ -11,14 +11,15 @@ class Quote extends React.Component{
 		super(props);
 	}
 
-	render(){
+	render() {
+		let quoteSource = this.props.quoteSource !== undefined ? '- ' + this.props.quoteSource : '';
 		return (
 			<div className="center-block">
 				<div className="quote-block">
 					<p className="quote quote-left">&ldquo;</p>
 					<div className="quote-content">
 						<p className="quote-text">{ this.props.quoteText }</p>
-						<p className="quote-source">- { this.props.quoteSource }</p>
+						<p className="quote-source">{quoteSource}</p>
 					</div>
 					<p className="quote quote-right">&rdquo;</p>
 				</div>
