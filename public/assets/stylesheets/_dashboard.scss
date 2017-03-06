@@ -1,58 +1,57 @@
-/* Dashboard */
+$dashboard_width: 300px;
 
+/* Fixed dashboard styles */
 .dashboard-container {
 	position: relative;
-	width: 0px;
-	height: 100vh;
-	float: left;
 
-	-webkit-transition: all 1s ease;
-			transition: all 1s ease;
+	-webkit-transition: all 0.5s ease;
+			transition: all 0.5s ease;
 
-    .dashboard-main{
+	.dashboard-header {
+		width: $dashboard_width;
+		background-color: lightblue;
+		padding: 5px 10px;
+	}
+
+    .dashboard-main {
   		position: fixed;
   		z-index: 100;
-    	top: 0;
 	    background: #fff;
-	    width: 300px;
+	    width: $dashboard_width;
 	    height: 100%;
-	    padding: 20px;
+
 	    border-right: 1px solid #ddd;
 
 	    -webkit-transform: translateX(-100%);
 				transform: translateX(-100%);
 
-	    -webkit-transition: all 1s ease;
-	    		transition: all 1s ease;
+	    -webkit-transition: all 0.5s ease;
+	    		transition: all 0.5s ease;
 
-    	.component-inputs{
-			margin: 30px 0px;
+	    .dashboard-input-group {
+	    	padding: 20px;
 
-			.component-input{
-				margin: 10px 0px;
+	    	.component-inputs {
+				margin: 30px 0px;
+
+				.component-input {
+					margin: 10px 0px;
+				}
 			}
-		}
 
-		.text{
-			textarea{
-				height: 300px;
+			.text {
+				textarea {
+					height: 100px;
+				}
 			}
-		}
+	    }
 
-		.btn-down{
-			position: absolute;
-	    	bottom: 0;
-	    	margin-bottom: 20px;
-	    	width: 100px;
-		}
-
-		.btn-down.preview{
-			font-size: 48px;
-			width: 200px;
+		.submit-component-btn {
+			float: right;
 		}
     }
 
-    .dashboard-sub{
+    .dashboard-sub {
     	position: fixed;
 	    top: 0%;
 	    z-index: 99;
@@ -61,7 +60,7 @@
 	    -webkit-transition: all 0.5s ease;
 				transition: all 0.5s ease;
 
-		button{
+		button {
 			font-size: 24px;
 			color: #fff;
 	    	margin: 0;
@@ -79,68 +78,52 @@
 		}
     }
 
-    .dashboard-sub:hover{
+    .dashboard-sub:hover {
 		cursor: pointer;
 		
-		button{
+		button {
 			-webkit-transform: translateX(0);
 					transform: translateX(0);
 		}
 	}
 
-	.btn-generate{
-		position: fixed;
-		z-index: 100;
-	    right: 0;
-	    top: 0;
-	    margin: 20px;
+	.btn-generate-group {
+		position: absolute;
+		bottom: 15px;
+		left: 15px;
 	}
 }
 
 /*==========DASHBOARD / PAGE WHEN EDITING=========*/
 
-.app-container.editing{
-	.dashboard-container{
-		width: 300px;
-		.dashboard-main{
+.app-container.editing {
+	.dashboard-container {
+		width: $dashboard_width;
+		.dashboard-main {
 			-webkit-transform: translateX(0);
 					transform: translateX(0);
 		}
-
-		.dashboard-sub{
-			button{
-				font-size: 24px;
-				color: #fff;
-	    		margin: 0;
-	    		letter-spacing: 3px;
-	    		background: #000;
-	    		border: none;
-	    		padding: 10px;
-	    		padding-left: 20px;
-
-	    		-webkit-transition: translateX(-10px);
-	    				transform: translateX(-10px);
-
-	    		-webkit-transition: transform 0.5s ease;
-						transition: transform 0.5s ease;
-			}
-	    }
+		.dashboard-sub {
+			margin-left: $dashboard_width;
+		}
 	}
 	
-	.page-container{
-		
+	.page-container {
 		width: -webkit-calc(100% - 300px);
 	    width:    -moz-calc(100% - 300px);
 	    width: 	   	   calc(100% - 300px);
 
-		.sortable-element{
+		.sortable-element {
 			position: relative;
 	    	max-height: 350px;
 	    	overflow: hidden;
 	    	border-bottom: 1px solid #ddd;
 
-	    	.component-action-btn-group{
-	    		visibility: visible;
+	    	.component-action-btn-group {
+	    		display: block;
+	    		position: absolute;
+	    		right: 5px;
+	    		top: 0;
 	    	}
 		}
 		

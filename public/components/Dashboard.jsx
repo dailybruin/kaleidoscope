@@ -57,30 +57,35 @@ class Dashboard extends React.Component {
             <div className="dashboard-container">
                 {/* BEGIN dashboard form */}
                 <div className="dashboard-main">
-                    <form onSubmit={this.handleSubmit}>
+                    {/* BEGIN dashboard nav */}
+                    <div className="dashboard-header">
+                        <h2>NAV</h2>
+                    </div>
+                    {/* END dashboard nav */}
+
+                    <div className="dashboard-input-group">
                         <div className="dropdown">
                             <select value={this.state.data.type} onChange={this.handleDropdownChange} className="form-control">
                                 {componentOptions}
                             </select>
                         </div>
                         <div className="component-inputs">
-                            <div>{this.showInputForComponentType(this.state.data.type)}</div>
+                            {this.showInputForComponentType(this.state.data.type)}
                         </div>
-                        <div>
-                            <div className="btn btn-primary btn-down preview" onClick={this.toggleDashboard}>Preview</div>
-                            <input className="btn btn-primary" type='submit'></input>
-                        </div>
-                        <div>
-                            <Checkbox label={"Download index file"} handleCheckboxChange={this.toggleCheckbox}/>
-                        </div>
-                    </form>
+
+                        {/* Submit component button */}
+                        <div className="btn btn-primary submit-component-btn" onClick={this.handleSubmit}>Submit</div>
+                    </div>
+                    {/* Generate button */}
+                    <div className="btn-generate-group">
+                        <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">Save</button>
+                        <Checkbox label={"Download index file"} handleCheckboxChange={this.toggleCheckbox}/>
+                    </div>
                 </div>
                 {/* END dashboard form */}
                 <div className="dashboard-sub" onClick={this.toggleDashboard}>
-                    <button>EDIT</button>
+                    <button><span className="glyphicon glyphicon-pencil"></span></button>
                 </div>
-                {/* Generate button */}
-                <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">Save</button>
             </div>
         );
     }

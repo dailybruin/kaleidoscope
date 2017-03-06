@@ -6,11 +6,15 @@ $header_title_color: #fff;
 
 $subhead_font_family: 'PT Sans', sans-serif;
 $subhead_font_size: 2em;
+
 $body_text_font_family: 'Roboto', sans-serif; 
 $body_text_font_size: 16px;
+
 $container_margin: 10%;
+
 $image_credit_font_family: 'Inconsolata', sans-serif;
 $image_caption_font_size: 14px;
+
 $quote_text_font_family: 'Martel', serif;
 $quote_source_font_family: 'PT Sans', sans-serif;
 
@@ -18,8 +22,8 @@ $quote_source_font_family: 'PT Sans', sans-serif;
 	position: relative;
     float: right;
     width: 100%;
-    -webkit-transition: all 1s ease;
-    		transition: all 1s ease;
+    -webkit-transition: all 0.5s ease;
+    		transition: all 0.5s ease;
 
     .sortable-element {
     	margin-bottom: 20px;
@@ -28,10 +32,7 @@ $quote_source_font_family: 'PT Sans', sans-serif;
 	.component-container {
 		position: relative;
 		.component-action-btn-group {
-			visibility: hidden;
-			position: absolute;
-			left: 5px;
-			top: 5px;
+			display: none;
 		}
 	}
 }
@@ -41,7 +42,7 @@ $quote_source_font_family: 'PT Sans', sans-serif;
 	max-height: 350px;
 	overflow: hidden;
 	.component-action-btn-group {
-		visibility: hidden;
+		display: none;
 	}
 }
 
