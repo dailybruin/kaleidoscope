@@ -19,6 +19,7 @@
 1. `npm run mongo`
 2. `nodemon` [note: if nodemon not installed, run `npm start`]
 3. `npm run webpack`
+4. `npm install`
 
 ### How to Use the MongoDB Shell
 * To start database command shell: `mongo`
