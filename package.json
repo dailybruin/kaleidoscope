@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node .",
     "webpack": "webpack -w",
+    "mongo": "./mongo.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
