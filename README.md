@@ -16,10 +16,10 @@
 4. Install nodemon: `npm install -g nodemon`
 	
 ### Starting the dev environment
-1. `npm run mongo`
-2. `nodemon` [note: if nodemon not installed, run `npm start`]
-3. `npm run webpack`
-4. `npm install`
+1. `npm install`
+2. `npm run mongo`
+3. `nodemon` [note: if nodemon not installed, run `npm start`]
+4. `npm run webpack`
 
 ### How to Use the MongoDB Shell
 * To start database command shell: `mongo`
