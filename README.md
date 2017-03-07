@@ -28,3 +28,24 @@
 * To show all stored pages: `db.pages.find()`
 * To clear all database content: `db.dropDatabase()`
 * To leave the db shell: `quit()`
+
+### Current Features
+* inserting, editting, and deleting components
+* drag-style reordering of components
+* downloadable HTML file of responsive flatpage
+* `TextSection` allows inline links with markdown in textarea
+	* ie: `[Daily Bruin] (www.dailybruin.com)`
+* collapsible dashboard for edit vs. preview mode
+* `/all` shows all stored pages
+* updating previously saved pages
+
+#### Future Features
+* color picker to allow user selected colors + extra user-defined styling customization
+	* suggested to use:
+		1. [Sassport](https://github.com/davidkpiano/sassport)
+		2. [`react-inline`](https://github.com/martinandert/react-inline)
+		3. [`node-sass-json-importer`](https://www.npmjs.com/package/node-sass-json-importer)
+* dashboard input validation
+* more component options:
+	* photo gallery
+	* left/right text-aligned images
