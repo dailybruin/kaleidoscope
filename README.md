@@ -1,5 +1,13 @@
 # flatpage generator
 
+## Contents:
+1. [Steps to install dev environment](https://github.com/daily-bruin/flatpage_generator#steps-to-install-dev-environment)
+2. [Starting the dev environment](https://github.com/daily-bruin/flatpage_generator#starting-the-dev-environment)
+3. :octocat: [IMPLEMENTATION GUIDE](https://github.com/daily-bruin/flatpage_generator/blob/master/public/README.md) :octocat: 
+4. [How to Use the MongoDB Shell](https://github.com/daily-bruin/flatpage_generator#how-to-use-the-mongodb-shell)
+5. [Current Features](https://github.com/daily-bruin/flatpage_generator#current-features)
+6. [Future Features](https://github.com/daily-bruin/flatpage_generator#future-features)
+
 ### Steps to install dev environment:
 1. [*Mac OSX only*] Install Homebrew at https://brew.sh/
 2. Install NPM and node.js 
@@ -39,7 +47,7 @@
 * `/all` shows all stored pages
 * updating previously saved pages
 
-#### Future Features
+### Future Features
 * color picker to allow user selected colors + extra user-defined styling customization
 	* suggested to use:
 		1. [Sassport](https://github.com/davidkpiano/sassport)
@@ -49,3 +57,11 @@
 * more component options:
 	* photo gallery
 	* left/right text-aligned images
+
+### Contributors
+* [Shannon Phu](https://github.com/shannonphu) [PM]
+* Yvonne Chen
+* Stella Chung
+* Jason Jiang
+* Catherine Lin
+* Jerry Liu
