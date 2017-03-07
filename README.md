@@ -3,18 +3,17 @@
 ### Steps to install dev environment:
 1. [*Mac OSX only*] Install Homebrew at https://brew.sh/
 2. Install NPM and node.js 
-	Options: 
-	a. `curl -L https://www.npmjs.com/install.sh | sh`
-	b. With Homebrew
-	`brew install npm`
-		`brew install node`
-	c. https://docs.npmjs.com/getting-started/installing-node
+	* Options
+		1. `curl -L https://www.npmjs.com/install.sh | sh`
+		2. With Homebrew:
+			* `brew install npm`
+			* `brew install node`
+		3. https://docs.npmjs.com/getting-started/installing-node
 3. Install MongoDB
-	Options:
-	a. With Homebrew: `brew install mongodb`
-	b. https://docs.mongodb.com/manual/administration/install-community/
-4. Install nodemon
-	`npm install -g nodemon`
+	* Options:
+		1. With Homebrew: `brew install mongodb`
+		2. https://docs.mongodb.com/manual/administration/install-community/
+4. Install nodemon: `npm install -g nodemon`
 	
 ### Starting the dev environment
 1. `npm run mongo`
