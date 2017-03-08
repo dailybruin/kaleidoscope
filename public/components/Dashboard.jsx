@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
                             payload: {},
                         },
                         edit_component_id: "",
-                        download_file: false
+                        download_file: true
                      };
         this.handleDropdownChange = this.handleDropdownChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
