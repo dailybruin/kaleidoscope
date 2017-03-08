@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Inconsolata|Martel|PT+Sans|Roboto');
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Inconsolata|Martel|PT+Sans|Raleway|Roboto');
 
 $header_font_family: 'Droid Sans', sans-serif;
 $header_gradient_opacity: 0.8;
@@ -17,3 +17,21 @@ $image_caption_font_size: 14px;
 
 $quote_text_font_family: 'Martel', serif;
 $quote_source_font_family: 'PT Sans', sans-serif;
+
+$transition_duration: 0.5s;
+@mixin fade_transition() {
+	-webkit-transition: all $transition_duration ease;
+			transition: all $transition_duration ease;
+}
+
+$nav_background-image: 'assets/images/kaleidoscope.png';
+@mixin nav_background() {
+	background-image: url($nav_background_image);
+	background-size: cover;
+	background-position: center center; 
+}
+
+@mixin logo_font() {
+	font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: black;
+}

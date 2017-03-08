@@ -17,8 +17,7 @@
 	position: relative;
     float: right;
     width: 100%;
-    -webkit-transition: all 0.5s ease;
-    		transition: all 0.5s ease;
+    @include fade_transition();
 
     .sortable-element {
     	margin-bottom: 20px;

@@ -1,0 +1,21 @@
+.navbar-default {
+	height: 60px;
+	@include nav_background();
+}
+.navbar-default .navbar-brand {
+	font-size: 30px;
+	line-height: 30px;
+	@include logo_font();
+}
+.navbar-default .navbar-nav > li > a {
+	color: black;
+	border-right: solid 1px grey;
+	line-height: 30px;
+	font-size: 16px;
+	background-color: rgba(255,255,255,0.2);
+	@include fade_transition();
+	&:hover {
+		background-color: rgba(255,255,255,0.4);
+		@include fade_transition();
+	}
+}

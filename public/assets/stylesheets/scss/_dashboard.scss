@@ -4,13 +4,22 @@ $dashboard_width: 300px;
 .dashboard-container {
 	position: relative;
 
-	-webkit-transition: all 0.5s ease;
-			transition: all 0.5s ease;
+	@include fade_transition();
 
 	.dashboard-header {
+		position: relative;
 		width: $dashboard_width;
-		background-color: lightblue;
-		padding: 5px 10px;
+		padding: 20px 10px;
+		@include nav_background();
+		.logo {
+			@include logo_font();
+			display: inline;
+		}
+		.dropdown {
+			position: absolute;
+			right: 25px;
+			display: inline;
+		}
 	}
 
     .dashboard-main {
@@ -25,8 +34,7 @@ $dashboard_width: 300px;
 	    -webkit-transform: translateX(-100%);
 				transform: translateX(-100%);
 
-	    -webkit-transition: all 0.5s ease;
-	    		transition: all 0.5s ease;
+	    @include fade_transition();
 
 	    .dashboard-input-group {
 	    	padding: 20px;
@@ -57,8 +65,7 @@ $dashboard_width: 300px;
 	    z-index: 99;
 		height: 100%; 
 
-	    -webkit-transition: all 0.5s ease;
-				transition: all 0.5s ease;
+	    @include fade_transition();
 
 		button {
 			font-size: 24px;

@@ -1,6 +1,7 @@
+@import 'properties';
 @import 'dashboard';
 @import 'usage';
-@import 'properties';
+@import 'navbar';
 
 /* ==================GLOBAL STYLES================*/
 
@@ -16,17 +17,4 @@
 	.row {
 		padding-top: 10px;
 	}
-}
-
-// Navbar
-.navbar-default {
-	height: 60px;
-}
-.navbar-brand {
-	font-size: 30px;
-	line-height: 30px;
-}
-.navbar-nav > li > a {
-	line-height: 30px;
-	font-size: 16px;
 }

@@ -1,13 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Droid+Sans|Inconsolata|Martel|PT+Sans|Raleway|Roboto");
 /* Fixed dashboard styles */
-@import url("https://fonts.googleapis.com/css?family=Droid+Sans|Inconsolata|Martel|PT+Sans|Roboto");
 .dashboard-container {
   position: relative;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease; }
   .dashboard-container .dashboard-header {
+    position: relative;
     width: 300px;
-    background-color: lightblue;
-    padding: 5px 10px; }
+    padding: 20px 10px;
+    background-image: url("assets/images/kaleidoscope.png");
+    background-size: cover;
+    background-position: center center; }
+    .dashboard-container .dashboard-header .logo {
+      font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: black;
+      display: inline; }
+    .dashboard-container .dashboard-header .dropdown {
+      position: absolute;
+      right: 25px;
+      display: inline; }
   .dashboard-container .dashboard-main {
     position: fixed;
     z-index: 100;
@@ -99,6 +110,31 @@
   .usage-container .howtouse li {
     font-size: 18px; }
 
+.navbar-default {
+  height: 60px;
+  background-image: url("assets/images/kaleidoscope.png");
+  background-size: cover;
+  background-position: center center; }
+
+.navbar-default .navbar-brand {
+  font-size: 30px;
+  line-height: 30px;
+  font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: black; }
+
+.navbar-default .navbar-nav > li > a {
+  color: black;
+  border-right: solid 1px grey;
+  line-height: 30px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+  .navbar-default .navbar-nav > li > a:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease; }
+
 /* ==================GLOBAL STYLES================*/
 /* /all STYLES */
 .all_pages {
@@ -110,14 +146,3 @@
     height: 100px; }
   .all_pages .row {
     padding-top: 10px; }
-
-.navbar-default {
-  height: 60px; }
-
-.navbar-brand {
-  font-size: 30px;
-  line-height: 30px; }
-
-.navbar-nav > li > a {
-  line-height: 30px;
-  font-size: 16px; }

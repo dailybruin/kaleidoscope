@@ -57,20 +57,8 @@ class Dashboard extends React.Component {
             <div className="dashboard-container">
                 {/* BEGIN dashboard form */}
                 <div className="dashboard-main">
-                    {/* BEGIN dashboard nav */}
-                    <div className="dashboard-header">
-                        <h2>Kaleidoscope</h2>
-                        <div className="dropdown">
-                          <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                          <span className="caret"></span></button>
-                          <ul className="dropdown-menu">
-                            <li><a href="">Edit Page</a></li>
-                            <li><a href="/all">All Pages</a></li>
-                            <li><a href="/usage">How To</a></li>
-                          </ul>
-                        </div>
-                    </div>
-                    {/* END dashboard nav */}
+                    {/* Dashboard nav */}
+                    {this.buildNavbar()}
 
                     <div className="dashboard-input-group">
                         <div className="dropdown">
@@ -94,6 +82,24 @@ class Dashboard extends React.Component {
                 {/* END dashboard form */}
                 <div className="dashboard-sub" onClick={this.toggleDashboard}>
                     <button><span className="glyphicon glyphicon-pencil"></span></button>
+                </div>
+            </div>
+        );
+    }
+
+    buildNavbar() {
+        return(
+            <div className="dashboard-header">
+                <h2 className="logo">Kaleidoscope</h2>
+                <div className="dropdown">
+                  <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                      <span className="caret"></span>
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li><a href="">Edit Page</a></li>
+                    <li><a href="/all">All Pages</a></li>
+                    <li><a href="/usage">How To</a></li>
+                  </ul>
                 </div>
             </div>
         );
