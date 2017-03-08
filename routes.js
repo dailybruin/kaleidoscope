@@ -24,8 +24,13 @@ module.exports = function (app) {
         var pages;
         Page.find(function (err, pages) {
           if (err) return console.error(err);
-          res.render('all', { pages: pages } );
+          res.render('all', { pages: pages, title: 'Past Pages' } );
         });
+    });
+
+    // Show how-to page
+    app.get('/usage', function(req, res) {
+        res.render('usage', {title: 'Usage'});
     });
 
     // Save a new or update a currently existing page

@@ -1,0 +1,42 @@
+extends template
+
+block content
+	div.container.usage-container
+		h1 Kaleidoscope
+		h2 Overview
+		p.description Kaleidoscope is an application that lets authors build their own online flatpage. An article is composed of different components such as:
+		ul.component-list
+			div.component-description
+				li headers
+				ul
+					li title
+					li author
+					li cover photo
+				img(src='assets/images/header.png')
+			div.component-description
+				li subheads
+				img(src='assets/images/subhead.png')
+			div.component-description
+				li images
+				ul
+					li image
+					li caption
+					li photo credit
+				img(src='assets/images/image.png')
+			div.component-description
+				li quotes
+				ul
+					li quote
+					li source
+				img(src='assets/images/quote.png')
+			div.component-description
+				li text sections
+				img(src='assets/images/text_section.png')
+		h2 How to use Kaleidoscope
+		ol.howtouse
+			li Select the component you want to create and add to the flatpage
+			li Input all the content in that individual component
+			li Hit 'Submit' for it to be added to the end of the preview page.
+			li Preview the entire flatpage by clicking on the pencil icon to hide the dashboard.
+			li After your flatpage is complete, hit Save and a HTML file containing the contents of your page will automatically download in your browser.
+			li To edit a saved page, navigate to the 'All' page, find the flatpage from your input title, and hit 'Update'.
