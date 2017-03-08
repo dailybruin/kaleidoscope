@@ -11,14 +11,34 @@ $dashboard_width: 300px;
 		width: $dashboard_width;
 		padding: 20px 10px;
 		@include nav_background();
-		.logo {
-			@include logo_font();
-			display: inline;
+		.logo { 
+			text-decoration: none; 
+			.logo-text {
+				@include logo_font();
+				display: inline;
+			}
 		}
-		.dropdown {
+
+		.navigation {
 			position: absolute;
-			right: 25px;
-			display: inline;
+			top: 0;
+			right: 0;
+			height: 100%;
+			width: 15%;
+			.link {
+				height: 50%;
+				text-align: center;
+				border-top: solid 1px grey;
+				background-color: rgba(255,255,255,0.4);
+				@include fade_transition();
+				.glyphicon {
+					vertical-align: -webkit-baseline-middle;
+					color: maroon;
+				}
+				&:hover {
+					background-color: rgba(255,255,255,0.6);
+				}
+			}
 		}
 	}
 
@@ -70,8 +90,6 @@ $dashboard_width: 300px;
 		button {
 			font-size: 24px;
 			color: #fff;
-	    	margin: 0;
-	    	letter-spacing: 3px;
 	    	background: #000;
 	    	border: none;
 	    	padding: 10px;

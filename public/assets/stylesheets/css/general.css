@@ -12,13 +12,29 @@
     background-size: cover;
     background-position: center center; }
     .dashboard-container .dashboard-header .logo {
-      font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: black;
-      display: inline; }
-    .dashboard-container .dashboard-header .dropdown {
+      text-decoration: none; }
+      .dashboard-container .dashboard-header .logo .logo-text {
+        font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: darkslategray;
+        display: inline; }
+    .dashboard-container .dashboard-header .navigation {
       position: absolute;
-      right: 25px;
-      display: inline; }
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 15%; }
+      .dashboard-container .dashboard-header .navigation .link {
+        height: 50%;
+        text-align: center;
+        border-top: solid 1px grey;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease; }
+        .dashboard-container .dashboard-header .navigation .link .glyphicon {
+          vertical-align: -webkit-baseline-middle;
+          color: maroon; }
+        .dashboard-container .dashboard-header .navigation .link:hover {
+          background-color: rgba(255, 255, 255, 0.6); }
   .dashboard-container .dashboard-main {
     position: fixed;
     z-index: 100;
@@ -50,8 +66,6 @@
     .dashboard-container .dashboard-sub button {
       font-size: 24px;
       color: #fff;
-      margin: 0;
-      letter-spacing: 3px;
       background: #000;
       border: none;
       padding: 10px;
@@ -120,7 +134,7 @@
   font-size: 30px;
   line-height: 30px;
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: black; }
+  color: darkslategray; }
 
 .navbar-default .navbar-nav > li > a {
   color: black;

@@ -90,17 +90,19 @@ class Dashboard extends React.Component {
     buildNavbar() {
         return(
             <div className="dashboard-header">
-                <h2 className="logo">Kaleidoscope</h2>
-                <div className="dropdown">
-                  <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                      <span className="caret"></span>
-                  </button>
-                  <ul className="dropdown-menu">
-                    <li><a href="">Edit Page</a></li>
-                    <li><a href="/all">All Pages</a></li>
-                    <li><a href="/usage">How To</a></li>
-                  </ul>
-                </div>
+                <a className="logo" href="/"><h2 className="logo-text">Kaleidoscope</h2></a>
+                <aside className="navigation">
+                    <a href="/all">
+                        <div className="link">
+                            <span className="glyphicon glyphicon glyphicon-list"></span>
+                        </div>
+                    </a>
+                    <a href="/usage">
+                        <div className="link">
+                            <span className="glyphicon glyphicon-question-sign"></span>
+                        </div>
+                    </a>
+                </aside>
             </div>
         );
     }
