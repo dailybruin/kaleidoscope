@@ -59,8 +59,9 @@ class Dashboard extends React.Component {
                 <div className="dashboard-main">
                     {/* BEGIN dashboard nav */}
                     <div className="dashboard-header">
+                        <h2>Kaleidoscope</h2>
                         <div className="dropdown">
-                          <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Edit
+                          <button className="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
                           <span className="caret"></span></button>
                           <ul className="dropdown-menu">
                             <li><a href="">Edit Page</a></li>

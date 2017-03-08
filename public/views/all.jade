@@ -1,18 +1,6 @@
-extends template
+extends navbar
 
-
-block content
-	div.navbar.navbar-default
-		div.container-fluid
-			div.navabar-header
-				a(class='navbar-brand' href='../') FlatpageGenerator
-			ul.nav.navbar-nav
-				li
-					a(href='../') Edit page
-				li.active
-					a(href='/all') All Pages
-				li
-					a(href='../usage') How To
+block static_content
 	div.grid.all_pages
 		each page in pages
 			//- Extract data

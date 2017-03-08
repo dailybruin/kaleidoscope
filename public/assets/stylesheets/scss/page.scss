@@ -1,22 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Inconsolata|Martel|PT+Sans|Roboto');
+@import 'properties';
 
-$header_font_family: 'Droid Sans', sans-serif;
-$header_gradient_opacity: 0.8;
-$header_title_color: #fff;
+.center-block {
+	padding: 0 $container_margin 0 $container_margin;
+	margin: 10px 0;
+}
 
-$subhead_font_family: 'PT Sans', sans-serif;
-$subhead_font_size: 2em;
-
-$body_text_font_family: 'Roboto', sans-serif; 
-$body_text_font_size: 16px;
-
-$container_margin: 10%;
-
-$image_credit_font_family: 'Inconsolata', sans-serif;
-$image_caption_font_size: 14px;
-
-$quote_text_font_family: 'Martel', serif;
-$quote_source_font_family: 'PT Sans', sans-serif;
+@media only screen and (max-device-width: 480px) {
+	$container_margin: 10%;
+	.center-block {
+		padding: 0 $container_margin 0 $container_margin;
+		margin: 10px 0;
+	}
+}
 
 .page-container {
 	position: relative;

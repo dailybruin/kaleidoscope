@@ -13,10 +13,10 @@ app.set('views', './public/views');
 // Sass middleware for compiling to css
 app.use(
    sassMiddleware({
-       src: __dirname + '/public/assets/stylesheets', 
-       dest: __dirname + '/public/assets/stylesheets',
+       src: __dirname + '/public/assets/stylesheets/scss', 
+       dest: __dirname + '/public/assets/stylesheets/css',
        force: true,
-       debug: true       
+       debug: true   
    })
 ), 
 // [this line must come after sassMiddleware]

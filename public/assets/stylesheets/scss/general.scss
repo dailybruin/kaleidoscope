@@ -1,16 +1,13 @@
-@import 'page';
 @import 'dashboard';
 @import 'usage';
+@import 'properties';
+
 /* ==================GLOBAL STYLES================*/
-.center-block {
-	padding: 0 $container_margin 0 $container_margin;
-	margin: 10px 0;
-}
 
 /* /all STYLES */
 .all_pages {
 	font-family: Verdana;
-	margin: 20px 20px;
+	margin: 100px 0;
 	.coverImage {
 		margin: 15px 0 0 15px;
 		width: 85%;
@@ -19,4 +16,17 @@
 	.row {
 		padding-top: 10px;
 	}
+}
+
+// Navbar
+.navbar-default {
+	height: 60px;
+}
+.navbar-brand {
+	font-size: 30px;
+	line-height: 30px;
+}
+.navbar-nav > li > a {
+	line-height: 30px;
+	font-size: 16px;
 }
