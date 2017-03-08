@@ -76,7 +76,7 @@ class Dashboard extends React.Component {
                     {/* Generate button */}
                     <div className="btn-generate-group">
                         <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">Save</button>
-                        <Checkbox label={"Download index file"} handleCheckboxChange={this.toggleCheckbox}/>
+                        <Checkbox label={"Download HTML file"} handleCheckboxChange={this.toggleCheckbox}/>
                     </div>
                 </div>
                 {/* END dashboard form */}
@@ -123,7 +123,6 @@ class Dashboard extends React.Component {
 
         event.preventDefault();
         if (this.state.edit_component_id !== "") {
-            console.log('Match Found')
             this.appendPagePreview(this.state.edit_component_id, this.state.data);
             this.setState({
                 edit_component_id: "",
@@ -154,8 +153,8 @@ class Dashboard extends React.Component {
     }
     appendPagePreview(store_id, data) {
         const component_params = data.payload;
-        const edit_button = <button className="btn btn-success" onClick={()=>this.handleEdit(store_id)}><span className="glyphicon glyphicon-edit"></span></button>;
-        const delete_button = <button className="btn btn-success" onClick={()=> this.handleDelete(store_id)}><span className="glyphicon glyphicon-trash"></span></button>;
+        const edit_button = <button className="btn btn-primary" onClick={()=>this.handleEdit(store_id)}><span className="glyphicon glyphicon-edit"></span></button>;
+        const delete_button = <button className="btn btn-primary" onClick={()=> this.handleDelete(store_id)}><span className="glyphicon glyphicon-trash"></span></button>;
         const button_group = (
             <div className="btn-group btn-group-md component-action-btn-group" role="group">
                 {edit_button}
