@@ -6,9 +6,12 @@
 	font-size: 30px;
 	line-height: 30px;
 	@include logo_font();
+	&:hover {
+		color: $nav_text_color;
+	}
 }
 .navbar-default .navbar-nav > li > a {
-	color: black;
+	color: $nav_text_color;
 	border-right: solid 1px grey;
 	line-height: 30px;
 	font-size: 16px;

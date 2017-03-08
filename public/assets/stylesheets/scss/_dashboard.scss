@@ -33,7 +33,7 @@ $dashboard_width: 300px;
 				@include fade_transition();
 				.glyphicon {
 					vertical-align: -webkit-baseline-middle;
-					color: maroon;
+					color: $nav_text_color;
 				}
 				&:hover {
 					background-color: rgba(255,255,255,0.6);

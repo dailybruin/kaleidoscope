@@ -15,7 +15,7 @@
       text-decoration: none; }
       .dashboard-container .dashboard-header .logo .logo-text {
         font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        color: darkslategray;
+        color: floralwhite;
         display: inline; }
     .dashboard-container .dashboard-header .navigation {
       position: absolute;
@@ -32,7 +32,7 @@
         transition: all 0.5s ease; }
         .dashboard-container .dashboard-header .navigation .link .glyphicon {
           vertical-align: -webkit-baseline-middle;
-          color: maroon; }
+          color: floralwhite; }
         .dashboard-container .dashboard-header .navigation .link:hover {
           background-color: rgba(255, 255, 255, 0.6); }
   .dashboard-container .dashboard-main {
@@ -134,10 +134,12 @@
   font-size: 30px;
   line-height: 30px;
   font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: darkslategray; }
+  color: floralwhite; }
+  .navbar-default .navbar-brand:hover {
+    color: floralwhite; }
 
 .navbar-default .navbar-nav > li > a {
-  color: black;
+  color: floralwhite;
   border-right: solid 1px grey;
   line-height: 30px;
   font-size: 16px;

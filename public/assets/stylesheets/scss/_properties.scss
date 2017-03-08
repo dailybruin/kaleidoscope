@@ -18,6 +18,8 @@ $image_caption_font_size: 14px;
 $quote_text_font_family: 'Martel', serif;
 $quote_source_font_family: 'PT Sans', sans-serif;
 
+$nav_text_color: floralwhite;
+
 $transition_duration: 0.5s;
 @mixin fade_transition() {
 	-webkit-transition: all $transition_duration ease;
@@ -33,5 +35,5 @@ $nav_background-image: 'assets/images/kaleidoscope.png';
 
 @mixin logo_font() {
 	font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: darkslategray;
+	color: $nav_text_color;
 }
