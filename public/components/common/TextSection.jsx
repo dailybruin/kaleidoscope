@@ -12,13 +12,13 @@ class TextSection extends React.Component {
 
 	render() {
 		var text = this.props.text;
-		// TODO Check for inline quote markup
+		// TODO: deal with case if url does not begin with 'http://www.'
 		text = text.replace(/\[(.*?)\] \((.*?)\)/g, '<a href="$2">$1</a>');
 
 		return (
 			<div className="center-block text">
 				{text.split("\n").map(paragraph => {
-					return <p>{paragraph}</p>;
+					return <p dangerouslySetInnerHTML={{__html: paragraph}} />;
 				})}
 			</div>
 		);
