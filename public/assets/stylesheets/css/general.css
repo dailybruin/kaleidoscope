@@ -7,6 +7,7 @@
   .dashboard-container .dashboard-header {
     position: relative;
     width: 300px;
+    height: 80px;
     padding: 20px 10px;
     background-image: url("assets/images/kaleidoscope.png");
     background-size: cover;
@@ -52,10 +53,38 @@
         margin: 30px 0px; }
         .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input {
           margin: 10px 0px; }
+          .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input label {
+            font-size: 14px;
+            opacity: 0.5;
+            color: grey; }
+          .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input input, .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input textarea {
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 0;
+            font-size: 20px; }
+            .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input input:focus, .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input textarea:focus {
+              outline: 0;
+              box-shadow: 0; }
+            .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input input:placeholder-shown, .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input textarea:placeholder-shown {
+              opacity: 0.5; }
+          .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input input:focus {
+            border-bottom: 1px solid black; }
+          .dashboard-container .dashboard-main .dashboard-input-group .component-inputs .component-input textarea {
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            padding: 10px; }
       .dashboard-container .dashboard-main .dashboard-input-group .text textarea {
         height: 100px; }
     .dashboard-container .dashboard-main .submit-component-btn {
-      float: right; }
+      float: right;
+      padding: 8px 0;
+      border-radius: 50px;
+      width: 50%; }
+    .dashboard-container .dashboard-main .btn.btn-primary {
+      background: #000; }
+      .dashboard-container .dashboard-main .btn.btn-primary:hover {
+        background: rgba(0, 0, 0, 0.8); }
   .dashboard-container .dashboard-sub {
     position: fixed;
     top: 0%;
@@ -64,16 +93,22 @@
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
     .dashboard-container .dashboard-sub button {
-      font-size: 24px;
+      font-size: 18px;
       color: #fff;
       background: #000;
       border: none;
-      padding: 10px;
-      padding-left: 20px;
+      padding: 20px;
+      padding-left: 30px;
+      box-sizing: border-box;
+      height: 80px;
       -webkit-transition: translateX(-10px);
       transform: translateX(-10px);
       -webkit-transition: transform 0.5s ease;
       transition: transform 0.5s ease; }
+      .dashboard-container .dashboard-sub button .glyphicon-new-window {
+        display: none; }
+    .dashboard-container .dashboard-sub button:focus {
+      outline: 0; }
   .dashboard-container .dashboard-sub:hover {
     cursor: pointer; }
     .dashboard-container .dashboard-sub:hover button {
@@ -83,6 +118,9 @@
     position: absolute;
     bottom: 15px;
     left: 15px; }
+    .dashboard-container .btn-generate-group > * {
+      float: left;
+      margin-right: 15px; }
 
 /*==========DASHBOARD / PAGE WHEN EDITING=========*/
 .app-container.editing .dashboard-container {
@@ -92,6 +130,10 @@
     transform: translateX(0); }
   .app-container.editing .dashboard-container .dashboard-sub {
     margin-left: 300px; }
+    .app-container.editing .dashboard-container .dashboard-sub .glyphicon-pencil {
+      display: none; }
+    .app-container.editing .dashboard-container .dashboard-sub .glyphicon-new-window {
+      display: inline; }
 
 .app-container.editing .page-container {
   width: -webkit-calc(100% - 300px);

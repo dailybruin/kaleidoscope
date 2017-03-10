@@ -1,4 +1,5 @@
 $dashboard_width: 300px;
+$header_height: 80px;
 
 /* Fixed dashboard styles */
 .dashboard-container {
@@ -9,6 +10,7 @@ $dashboard_width: 300px;
 	.dashboard-header {
 		position: relative;
 		width: $dashboard_width;
+		height: $header_height;
 		padding: 20px 10px;
 		@include nav_background();
 		.logo { 
@@ -40,6 +42,7 @@ $dashboard_width: 300px;
 				}
 			}
 		}
+
 	}
 
     .dashboard-main {
@@ -64,6 +67,40 @@ $dashboard_width: 300px;
 
 				.component-input {
 					margin: 10px 0px;
+
+					label{
+						font-size: 14px;
+						opacity: 0.5;
+						color: grey;
+					}
+
+					input, textarea{
+						border: none;
+					    border-radius: 0;
+					    box-shadow: none;
+					    border-bottom: 1px solid rgba(0,0,0,0.2);
+					    padding: 0;
+					    font-size: 20px;
+
+					    &:focus{
+					    	outline: 0;
+							box-shadow: 0;
+					    }
+
+					    &:placeholder-shown{
+					    	opacity: 0.5;
+					    }
+					}
+
+					input:focus{
+						border-bottom: 1px solid rgba(0,0,0,1);
+					}
+
+					textarea{
+						border: 1px solid rgba(0,0,0,0.2);
+						padding: 10px;
+					}
+
 				}
 			}
 
@@ -76,6 +113,17 @@ $dashboard_width: 300px;
 
 		.submit-component-btn {
 			float: right;
+			padding: 8px 0;
+			border-radius: 50px;
+    		width: 50%;
+		}
+
+		.btn.btn-primary {
+		    background: #000;
+
+		    &:hover{
+		    	background: rgba(0,0,0,0.8);
+		    }
 		}
     }
 
@@ -88,18 +136,28 @@ $dashboard_width: 300px;
 	    @include fade_transition();
 
 		button {
-			font-size: 24px;
+			font-size: 18px;
 			color: #fff;
 	    	background: #000;
 	    	border: none;
-	    	padding: 10px;
-	    	padding-left: 20px;
+	    	padding: 20px;
+	    	padding-left: 30px;
+	    	box-sizing: border-box;
+	    	height: $header_height;
 
 	    	-webkit-transition: translateX(-10px);
 	    			transform: translateX(-10px);
 
 	    	-webkit-transition: transform 0.5s ease;
 					transition: transform 0.5s ease;
+
+			.glyphicon-new-window{
+				display: none;
+			}
+		}
+
+		button:focus{
+			outline: 0;
 		}
     }
 
@@ -116,6 +174,11 @@ $dashboard_width: 300px;
 		position: absolute;
 		bottom: 15px;
 		left: 15px;
+
+		> *{
+			float: left;
+			margin-right: 15px;
+		}
 	}
 }
 
@@ -130,13 +193,21 @@ $dashboard_width: 300px;
 		}
 		.dashboard-sub {
 			margin-left: $dashboard_width;
+
+			.glyphicon-pencil{
+				display: none;
+			}
+
+			.glyphicon-new-window{
+				display: inline;
+			}
 		}
 	}
 	
 	.page-container {
-		width: -webkit-calc(100% - 300px);
-	    width:    -moz-calc(100% - 300px);
-	    width: 	   	   calc(100% - 300px);
+		width: -webkit-calc(100% - #{$dashboard_width});
+	    width:    -moz-calc(100% - #{$dashboard_width});
+	    width: 	   	   calc(100% - #{$dashboard_width});
 
 		.sortable-element {
 			position: relative;

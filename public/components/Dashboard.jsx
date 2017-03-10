@@ -71,17 +71,20 @@ class Dashboard extends React.Component {
                         </div>
 
                         {/* Submit component button */}
-                        <div className="btn btn-primary submit-component-btn" onClick={this.handleSubmit}>Submit</div>
+                        <div className="btn btn-primary submit-component-btn" onClick={this.handleSubmit}>SUBMIT</div>
                     </div>
                     {/* Generate button */}
                     <div className="btn-generate-group">
-                        <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">Save</button>
+                        <button onClick={this.handleGenPage} className="btn btn-primary btn-generate">{/*<span className="glyphicon glyphicon-download"></span>*/}SAVE</button>
                         <Checkbox label={"Download HTML file"} handleCheckboxChange={this.toggleCheckbox}/>
                     </div>
                 </div>
                 {/* END dashboard form */}
                 <div className="dashboard-sub" onClick={this.toggleDashboard}>
-                    <button><span className="glyphicon glyphicon-pencil"></span></button>
+                    <button>
+                        <span className="glyphicon glyphicon-pencil"></span>
+                        <span className="glyphicon glyphicon-new-window"></span>
+                    </button>
                 </div>
             </div>
         );
@@ -302,7 +305,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="component-input">
-                            <label htmlFor="title">Title:</label>
+                            <label htmlFor="title">Title</label>
                             <input
                                 placeholder="Title" 
                                 type="text" name="title" 
@@ -312,7 +315,7 @@ class Dashboard extends React.Component {
                                 value={payload.title === undefined ? "" : payload.title}/>
                         </div>
                         <div className="component-input">    
-                            <label htmlFor="author">Author:</label>                   
+                            <label htmlFor="author">Author</label>                   
                             <input
                                 placeholder="Author"
                                 type="text" name="author"
@@ -321,7 +324,7 @@ class Dashboard extends React.Component {
                                 value={payload.author === undefined ? "" : payload.author}/>
                         </div>
                         <div className="component-input">
-                            <label htmlFor="url">Cover Image URL:</label>
+                            <label htmlFor="url">Cover Image URL</label>
                             <input
                                 placeholder="Cover image URL"
                                 type="text" name="url"
@@ -335,7 +338,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="component-input">
-                            <label htmlFor="subhead">Subhead:</label>
+                            <label htmlFor="subhead">Subhead</label>
                             <input 
                                 placeholder="Subhead" 
                                 type="text" 
@@ -350,7 +353,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="component-input">
-                            <label htmlFor="url">URL:</label>
+                            <label htmlFor="url">URL</label>
                             <input 
                                 placeholder="URL" type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'url')}
@@ -358,7 +361,7 @@ class Dashboard extends React.Component {
                                 value={payload.url === undefined ? "" : payload.url}/>
                         </div>
                         <div className="component-input">
-                            <label htmlFor="credit">Credit:</label>
+                            <label htmlFor="credit">Credit</label>
                             <input
                                 placeholder="Credit" type="text" name="credit" 
                                 onChange={this.updateInput.bind(this, 'credit')}
@@ -366,7 +369,7 @@ class Dashboard extends React.Component {
                                 value={payload.credit === undefined ? "" : payload.credit}/>
                         </div>
                         <div className="component-input">
-                            <label htmlFor="caption">Caption:</label>
+                            <label htmlFor="caption">Caption</label>
                             <input
                                 placeholder="Caption" type="text" name="caption"
                                 onChange={this.updateInput.bind(this, 'caption')}
@@ -379,7 +382,7 @@ class Dashboard extends React.Component {
                 return(
                     <div>
                         <div className="component-input">
-                            <label htmlFor="quote">Quote:</label>
+                            <label htmlFor="quote">Quote</label>
                             <input 
                                 placeholder="Quote" 
                                 type="text" 
@@ -389,7 +392,7 @@ class Dashboard extends React.Component {
                                 value={payload.quoteText === undefined ? "" : payload.quoteText} />
                         </div>
                         <div className="component-input">
-                            <label htmlFor="quoteMaker">Quote Source:</label>
+                            <label htmlFor="quoteMaker">Quote Source</label>
                             <input 
                                 placeholder="Quote Maker" 
                                 type="text" 
@@ -403,7 +406,7 @@ class Dashboard extends React.Component {
             case 'text_section':
                 return(
                     <div className="component-input text">
-                        <label htmlFor="text">Text:</label>
+                        <label htmlFor="text">Text</label>
                         <textarea 
                             name="text" 
                             rows="3"
