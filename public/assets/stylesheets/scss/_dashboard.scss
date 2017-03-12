@@ -206,6 +206,8 @@ $header_height: 80px;
 	}
 	
 	.page-container {
+		background: #fff;
+
 		width: -webkit-calc(100% - #{$dashboard_width});
 	    width:    -moz-calc(100% - #{$dashboard_width});
 	    width: 	   	   calc(100% - #{$dashboard_width});
@@ -215,6 +217,8 @@ $header_height: 80px;
 	    	max-height: 350px;
 	    	overflow: hidden;
 	    	border-bottom: 1px solid #ddd;
+	    	padding-bottom: 10px;
+	    	margin-bottom: 0px;
 
 	    	.component-action-btn-group {
 	    		display: block;

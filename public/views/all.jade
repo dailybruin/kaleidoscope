@@ -17,19 +17,17 @@ block static_content
 					break
 
 			//- Display data
-			div.col-sm-6.col-md-3.page
-				div.panel.panel-default
-					div.cover-image-container
-						img(src=coverImageUrl, class="coverImage card-img-top")
-					div.panel-body
-						p.title.card-text Title: #{title}
-						p.author.card-text Author: #{author}
-						span.datetime.card-text.text-muted Created #{datetime}
-					
-					div.panel-footer.clearfix
-						div.col-sm-6
-							a(class='btn btn-primary' href='/update?pageID=' + page._id) Update
-						div.col-sm-6
-							form(method='POST', action='/page/#{page._id}?_method=DELETE')
-								button(class='btn btn-default' type='submit') Delete
+			a(href='/update?pageID=' + page._id)
+				div.col-sm-6.col-md-3.page
+					div.panel.panel-default
+						div.cover-image-container
+							div.coverImage.card-img-top(style='background-image: url(#{coverImageUrl})')
+						div.panel-body
+							p.title.card-text #{title}
+							p.author.card-text By #{author}
+							span.datetime.card-text.text-muted Created #{datetime}
+						div.panel-icons
+							form.btn-wrapper(method='POST', action='/page/#{page._id}?_method=DELETE')
+								button.btn(type='submit')
+									span.glyphicon.glyphicon-trash
 						

@@ -137,6 +137,7 @@
       display: inline; }
 
 .app-container.editing .page-container {
+  background: #fff;
   width: -webkit-calc(100% - 300px);
   width: -moz-calc(100% - 300px);
   width: calc(100% - 300px); }
@@ -144,7 +145,9 @@
     position: relative;
     max-height: 350px;
     overflow: hidden;
-    border-bottom: 1px solid #ddd; }
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 0px; }
     .app-container.editing .page-container .sortable-element .component-action-btn-group {
       display: block;
       position: absolute;
@@ -196,12 +199,52 @@
 
 /* ==================GLOBAL STYLES================*/
 /* /all STYLES */
+body {
+  background-color: #eee; }
+
 .all_pages {
   font-family: Verdana;
   margin: 100px 0; }
-  .all_pages .coverImage {
-    margin: 15px 0 0 15px;
-    width: 85%;
-    height: 100px; }
-  .all_pages .row {
-    padding-top: 10px; }
+  .all_pages.grid {
+    overflow: auto;
+    margin-top: 90px; }
+    .all_pages.grid .col-md-3 {
+      margin-bottom: 20px; }
+    .all_pages.grid .panel {
+      position: relative;
+      border-radius: 5px;
+      overflow: hidden;
+      -webkit-transition: border 0.1s ease;
+      transition: border 0.1s ease; }
+      .all_pages.grid .panel:hover {
+        border: 1px solid rgba(0, 0, 0, 0.2); }
+      .all_pages.grid .panel .coverImage {
+        height: 200px;
+        background-size: cover;
+        background-position: 50%; }
+      .all_pages.grid .panel .panel-body {
+        height: 200px; }
+        .all_pages.grid .panel .panel-body p {
+          color: #000;
+          font-size: 12px; }
+        .all_pages.grid .panel .panel-body .title {
+          font-size: 20px; }
+        .all_pages.grid .panel .panel-body .datetime {
+          position: absolute;
+          bottom: 10px;
+          font-size: 10px; }
+      .all_pages.grid .panel .panel-icons {
+        position: absolute;
+        bottom: 0;
+        right: 0; }
+        .all_pages.grid .panel .panel-icons .btn-wrapper {
+          display: inline-block; }
+          .all_pages.grid .panel .panel-icons .btn-wrapper button {
+            background: none;
+            color: #000; }
+          .all_pages.grid .panel .panel-icons .btn-wrapper button:hover {
+            color: rgba(0, 0, 0, 0.5); }
+          .all_pages.grid .panel .panel-icons .btn-wrapper button:focus {
+            outline: 0; }
+    .all_pages.grid .row {
+      padding-top: 10px; }
