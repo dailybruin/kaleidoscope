@@ -1,5 +1,6 @@
 .navbar-default {
 	height: 60px;
+	overflow: hidden;
 	@include nav_background();
 }
 .navbar-default .navbar-brand {
@@ -11,6 +12,8 @@
 	}
 }
 .navbar-default .navbar-nav > li > a {
+	display: flex;
+    align-items: center;
 	color: $nav_text_color;
 	border-right: solid 1px grey;
 	line-height: 30px;
@@ -20,5 +23,9 @@
 	&:hover {
 		background-color: rgba(255,255,255,0.4);
 		@include fade_transition();
+	}
+
+	.glyphicon{
+		margin-right: 5px;    	
 	}
 }

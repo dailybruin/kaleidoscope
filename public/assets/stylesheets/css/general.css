@@ -172,6 +172,7 @@
 
 .navbar-default {
   height: 60px;
+  overflow: hidden;
   background-image: url("assets/images/kaleidoscope.png");
   background-size: cover;
   background-position: center center; }
@@ -185,6 +186,8 @@
     color: floralwhite; }
 
 .navbar-default .navbar-nav > li > a {
+  display: flex;
+  align-items: center;
   color: floralwhite;
   border-right: solid 1px grey;
   line-height: 30px;
@@ -196,6 +199,8 @@
     background-color: rgba(255, 255, 255, 0.4);
     -webkit-transition: all 0.5s ease;
     transition: all 0.5s ease; }
+  .navbar-default .navbar-nav > li > a .glyphicon {
+    margin-right: 5px; }
 
 /* ==================GLOBAL STYLES================*/
 /* /all STYLES */
