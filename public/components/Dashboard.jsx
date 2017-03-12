@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
                 <div className="dashboard-sub" onClick={this.toggleDashboard}>
                     <button>
                         <span className="glyphicon glyphicon-pencil"></span>
-                        <span className="glyphicon glyphicon-new-window"></span>
+                        <span className="glyphicon glyphicon-eye-open"></span>
                     </button>
                 </div>
             </div>
@@ -312,7 +312,7 @@ class Dashboard extends React.Component {
                                 onChange={this.updateInput.bind(this,'title')} 
                                 ref={(input) => this.input}
                                 className="form-control"
-                                value={payload.title === undefined ? "" : payload.title}/>
+                                value={payload.title === undefined ? "" : payload.title} required/>
                         </div>
                         <div className="component-input">    
                             <label htmlFor="author">Author</label>                   
@@ -321,7 +321,7 @@ class Dashboard extends React.Component {
                                 type="text" name="author"
                                 onChange={this.updateInput.bind(this, 'author')}
                                 className="form-control"
-                                value={payload.author === undefined ? "" : payload.author}/>
+                                value={payload.author === undefined ? "" : payload.author} required/>
                         </div>
                         <div className="component-input">
                             <label htmlFor="url">Cover Image URL</label>
@@ -330,7 +330,7 @@ class Dashboard extends React.Component {
                                 type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'image')}
                                 className="form-control"
-                                value={payload.image === undefined ? "" : payload.image}/>
+                                value={payload.image === undefined ? "" : payload.image} required/>
                         </div>
                     </div>
                 );
@@ -345,7 +345,7 @@ class Dashboard extends React.Component {
                                 name="subhead" 
                                 onChange={this.updateInput.bind(this, 'text')} 
                                 className="form-control"
-                                value={payload.text === undefined ? "" : payload.text} />
+                                value={payload.text === undefined ? "" : payload.text} required/>
                         </div>
                     </div>
                 );
@@ -358,7 +358,7 @@ class Dashboard extends React.Component {
                                 placeholder="URL" type="text" name="url"
                                 onChange={this.updateInput.bind(this, 'url')}
                                 className="form-control"
-                                value={payload.url === undefined ? "" : payload.url}/>
+                                value={payload.url === undefined ? "" : payload.url} required/>
                         </div>
                         <div className="component-input">
                             <label htmlFor="credit">Credit</label>
@@ -366,7 +366,7 @@ class Dashboard extends React.Component {
                                 placeholder="Credit" type="text" name="credit" 
                                 onChange={this.updateInput.bind(this, 'credit')}
                                 className="form-control"
-                                value={payload.credit === undefined ? "" : payload.credit}/>
+                                value={payload.credit === undefined ? "" : payload.credit} required/>
                         </div>
                         <div className="component-input">
                             <label htmlFor="caption">Caption</label>
@@ -374,7 +374,7 @@ class Dashboard extends React.Component {
                                 placeholder="Caption" type="text" name="caption"
                                 onChange={this.updateInput.bind(this, 'caption')}
                                 className="form-control"
-                                value={payload.caption === undefined ? "" : payload.caption}/>
+                                value={payload.caption === undefined ? "" : payload.caption} required/>
                         </div>
                     </div>
                 );
@@ -389,7 +389,7 @@ class Dashboard extends React.Component {
                                 name="quote" 
                                 onChange={this.updateInput.bind(this, 'quoteText')} 
                                 className="form-control"
-                                value={payload.quoteText === undefined ? "" : payload.quoteText} />
+                                value={payload.quoteText === undefined ? "" : payload.quoteText} required/>
                         </div>
                         <div className="component-input">
                             <label htmlFor="quoteMaker">Quote Source</label>
@@ -399,7 +399,7 @@ class Dashboard extends React.Component {
                                 name="quoteMaker" 
                                 onChange={this.updateInput.bind(this, 'quoteSource')} 
                                 className="form-control"
-                                value={payload.quoteSource === undefined ? "" : payload.quoteSource} />
+                                value={payload.quoteSource === undefined ? "" : payload.quoteSource} required/>
                         </div>
                     </div>
                 );

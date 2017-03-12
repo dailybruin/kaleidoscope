@@ -92,7 +92,7 @@ $header_height: 80px;
 					    }
 					}
 
-					input:focus{
+					input:focus, input:valid{
 						border-bottom: 1px solid rgba(0,0,0,1);
 					}
 
@@ -120,6 +120,7 @@ $header_height: 80px;
 
 		.btn.btn-primary {
 		    background: #000;
+		    border-radius: 30px;
 
 		    &:hover{
 		    	background: rgba(0,0,0,0.8);
@@ -151,7 +152,7 @@ $header_height: 80px;
 	    	-webkit-transition: transform 0.5s ease;
 					transition: transform 0.5s ease;
 
-			.glyphicon-new-window{
+			.glyphicon-eye-open{
 				display: none;
 			}
 		}
@@ -198,7 +199,7 @@ $header_height: 80px;
 				display: none;
 			}
 
-			.glyphicon-new-window{
+			.glyphicon-eye-open{
 				display: inline;
 			}
 		}

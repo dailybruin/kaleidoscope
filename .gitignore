@@ -4,3 +4,4 @@ npm-debug.log
 public/dist/*
 public/assets/stylesheets/*.css
 node_modules/
+site/
