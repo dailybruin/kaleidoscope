@@ -11,7 +11,7 @@ block static_content
 			- datetime = (datetime.getMonth() + 1) + '/' + datetime.getDate() + '/' + datetime.getFullYear()
 			each o in page.components
 				if o.component_type == "header"
-					- title = o.component_data["title"]
+					- title = o.component_data["title"].substr(0,117)
 					- author = o.component_data["author"]
 					- coverImageUrl = o.component_data["image"]
 					break
