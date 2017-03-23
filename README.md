@@ -1,4 +1,7 @@
-# flatpage generator
+# Kaleidoscope
+
+## Overview:
+Kaleidoscope is an application that lets authors build their own online flatpage through reuseable pieces such as headers, subheads, images, quotes, and text sections.
 
 ## Contents:
 1. [Steps to install dev environment](https://github.com/daily-bruin/flatpage_generator#steps-to-install-dev-environment)
@@ -23,7 +26,7 @@
 		2. https://docs.mongodb.com/manual/administration/install-community/
 4. Install nodemon: `npm install -g nodemon`
 	
-### Starting the dev environment
+### Starting the dev environment (need 3 command prompt windows, each for #2-4)
 1. `npm install`
 2. `npm run mongo`
 3. `nodemon` [note: if nodemon not installed, run `npm start`]
