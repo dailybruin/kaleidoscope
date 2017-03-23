@@ -1,21 +1,21 @@
 # Kaleidoscope
 
 ## Overview:
-Kaleidoscope is an application that lets authors build their own online flatpage through reuseable pieces such as headers, subheads, images, quotes, and text sections.
+Kaleidoscope is an application that lets authors build and generate their own online flatpage through reuseable pieces such as headers, subheads, images, quotes, and text sections.
 
 ## Contents:
-1. [Steps to install dev environment](https://github.com/daily-bruin/flatpage_generator#steps-to-install-dev-environment)
-2. [Starting the dev environment](https://github.com/daily-bruin/flatpage_generator#starting-the-dev-environment)
-3. :octocat: [IMPLEMENTATION OVERVIEW](https://github.com/daily-bruin/flatpage_generator/#implementation-overview) :octocat:
-4. :octocat: [REDUX IMPLEMENTATION OVERVIEW](https://github.com/daily-bruin/flatpage_generator/#redux-implementation-overview) :octocat:
-	1. [Redux Introduction](https://github.com/daily-bruin/flatpage_generator#redux-introduction)
-	2. [Actions](https://github.com/daily-bruin/flatpage_generator#actions)
-	3. [Reducers](https://github.com/daily-bruin/flatpage_generator#reducers)
-	4. [Store](https://github.com/daily-bruin/flatpage_generator/store)
-	5. [Creating a New Component](https://github.com/daily-bruin/flatpage_generator#creating-a-new-component)
-5. [How to Use the MongoDB Shell](https://github.com/daily-bruin/flatpage_generator#how-to-use-the-mongodb-shell)
-6. [Current Features](https://github.com/daily-bruin/flatpage_generator#current-features)
-7. [Future Features](https://github.com/daily-bruin/flatpage_generator#future-features)
+1. [Steps to install dev environment](https://github.com/daily-bruin/kaleidoscope#steps-to-install-dev-environment)
+2. [Starting the dev environment](https://github.com/daily-bruin/kaleidoscope#starting-the-dev-environment)
+3. :octocat: [IMPLEMENTATION OVERVIEW](https://github.com/daily-bruin/kaleidoscope/#implementation-overview) :octocat:
+4. :octocat: [REDUX IMPLEMENTATION OVERVIEW](https://github.com/daily-bruin/kaleidoscope/#redux-implementation-overview) :octocat:
+	1. [Redux Introduction](https://github.com/daily-bruin/kaleidoscope#redux-introduction)
+	2. [Actions](https://github.com/daily-bruin/kaleidoscope#actions)
+	3. [Reducers](https://github.com/daily-bruin/kaleidoscope#reducers)
+	4. [Store](https://github.com/daily-bruin/kaleidoscope/store)
+	5. [Creating a New Component](https://github.com/daily-bruin/kaleidoscope#creating-a-new-component)
+5. [How to Use the MongoDB Shell](https://github.com/daily-bruin/kaleidoscope#how-to-use-the-mongodb-shell)
+6. [Current Features](https://github.com/daily-bruin/kaleidoscope#current-features)
+7. [Future Features](https://github.com/daily-bruin/kaleidoscope#future-features)
 
 ### Steps to install dev environment:
 1. [*Mac OSX only*] Install Homebrew at https://brew.sh/
@@ -39,8 +39,8 @@ Kaleidoscope is an application that lets authors build their own online flatpage
 4. `npm run webpack`
 
 ### Implementation Overview
-The entire application starts at `views/template.jade` and `views/index.jade` where the element `#app` is our root React component. [`root.jsx`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/root.jsx) in `components/root.jsx` is the component binded to `#app`.
-Inside the root is the component [`<App/>`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/App.jsx) that contain a [`<Dashboard/>`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/Dashboard.jsx) and [`<Page/>`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/Page.jsx) component.
+The entire application starts at `views/template.jade` and `views/index.jade` where the element `#app` is our root React component. [`root.jsx`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/root.jsx) in `components/root.jsx` is the component binded to `#app`.
+Inside the root is the component [`<App/>`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/App.jsx) that contain a [`<Dashboard/>`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/Dashboard.jsx) and [`<Page/>`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/Page.jsx) component.
 
 ##### The `<Dashboard/>` handles user input, form submission, and storing of data into the database. 
 * To access MongoDB, AJAX requests are sent to the endpoints at `/routes.js`.
@@ -48,17 +48,17 @@ Inside the root is the component [`<App/>`](https://github.com/daily-bruin/flatp
   * [Redux tutorial](https://github.com/happypoulp/redux-tutorial)
 
 ##### A `Page` is composed of an array of React.js components with the following heirarchy:
-  * [`Page`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/Page.jsx)
-    * The array in a page is [`SortableList`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/common/SortableComponent.jsx) which has `SortableItem` wrapped around our actual component.
-        * Nested inside a `SortedItem` is a [`DashboardItem`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/common/DashboardItem.jsx) which contains a component from the following:
-          1. [`Header`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/common/Header.jsx)
-          2. [`Subhead`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/common/Subhead.jsx)
-          3. [`Image`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/common/Image.jsx)
-          4. [`Quote`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/common/Quote.jsx)
-          5. [`TextSection`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/common/TextSection.jsx)
+  * [`Page`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/Page.jsx)
+    * The array in a page is [`SortableList`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/common/SortableComponent.jsx) which has `SortableItem` wrapped around our actual component.
+        * Nested inside a `SortedItem` is a [`DashboardItem`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/common/DashboardItem.jsx) which contains a component from the following:
+          1. [`Header`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/common/Header.jsx)
+          2. [`Subhead`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/common/Subhead.jsx)
+          3. [`Image`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/common/Image.jsx)
+          4. [`Quote`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/common/Quote.jsx)
+          5. [`TextSection`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/components/common/TextSection.jsx)
           
 ##### Database Models:
-1. [`Page`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/model/page.js): contains an array of dictionaries representing the raw data of all components in the page
+1. [`Page`](https://github.com/daily-bruin/kaleidoscope/blob/master/public/model/page.js): contains an array of dictionaries representing the raw data of all components in the page
 
 ### Redux Implementation Overview
 
