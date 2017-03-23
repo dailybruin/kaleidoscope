@@ -74,7 +74,7 @@ $header_height: 80px;
 						color: grey;
 					}
 
-					input, textarea{
+					input, textarea {
 						border: none;
 					    border-radius: 0;
 					    box-shadow: none;
@@ -99,6 +99,7 @@ $header_height: 80px;
 					textarea{
 						border: 1px solid rgba(0,0,0,0.2);
 						padding: 10px;
+						font-size: 14px;
 					}
 
 				}
@@ -107,6 +108,7 @@ $header_height: 80px;
 			.text {
 				textarea {
 					height: 100px;
+
 				}
 			}
 	    }

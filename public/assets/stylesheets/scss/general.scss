@@ -1,3 +1,7 @@
+body {
+	background-color: #eee;
+}
+
 @import 'properties';
 @import 'dashboard';
 @import 'usage';
@@ -6,10 +10,6 @@
 /* ==================GLOBAL STYLES================*/
 
 /* /all STYLES */
-
-body{
-	background-color: #eee;
-}
 
 .all_pages {
 	font-family: Verdana;

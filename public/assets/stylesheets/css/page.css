@@ -9,6 +9,7 @@
     margin: 10px 0; } }
 
 .page-container {
+  background-color: white;
   position: relative;
   float: right;
   width: 100%;

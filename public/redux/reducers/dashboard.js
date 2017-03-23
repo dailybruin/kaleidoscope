@@ -110,7 +110,7 @@ export function _header(state=[], action) {
             const og_description = '<meta property="og:description" content="' + action.og_description + '"/>';
             const favicon = '<link rel = "icon" type="image/png" href="http://dailybruin.com/img/favicons/favicon-32x32.png" sizes="32x32">';
             const bootstrap_css = '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">'
-            const css = '<link rel="stylesheet" type="text/css" href="style.css">';
+            const css = '<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/daily-bruin/flatpage_generator/master/public/assets/stylesheets/css/page.css">';
             const ie = '<meta http-equiv="x-ua-compatible" content="ie=edge">';
             const viewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
             const meta_tags = title + og_title + og_image + og_description + favicon + bootstrap_css + css + ie + viewport;
