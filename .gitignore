@@ -1,6 +1,6 @@
 **/.DS_Store
-/junk
+junk/
 npm-debug.log
 public/dist/*
-public/assets/stylesheets/*.css
+public/assets/stylesheets/css/general.css
 node_modules/
