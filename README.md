@@ -25,7 +25,13 @@ Kaleidoscope is an application that lets authors build their own online flatpage
 		1. With Homebrew: `brew install mongodb`
 		2. https://docs.mongodb.com/manual/administration/install-community/
 4. Install nodemon: `npm install -g nodemon`
-	
+
+### Starting the dev environment (need 3 command prompt windows, each for #2-4)
+1. `npm install`
+2. `npm run mongo`
+3. `nodemon` [note: if nodemon not installed, run `npm start`]
+4. `npm run webpack`
+
 ### Implementation Overview
 The entire application starts at `views/template.jade` and `views/index.jade` where the element `#app` is our root React component. [`root.jsx`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/root.jsx) in `components/root.jsx` is the component binded to `#app`.
 Inside the root is the component [`<App/>`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/App.jsx) that contain a [`<Dashboard/>`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/Dashboard.jsx) and [`<Page/>`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/components/Page.jsx) component.
@@ -47,13 +53,6 @@ Inside the root is the component [`<App/>`](https://github.com/daily-bruin/flatp
           
 ##### Database Models:
 1. [`Page`](https://github.com/daily-bruin/flatpage_generator/blob/master/public/model/page.js): contains an array of dictionaries representing the raw data of all components in the page
-
-
-### Starting the dev environment (need 3 command prompt windows, each for #2-4)
-1. `npm install`
-2. `npm run mongo`
-3. `nodemon` [note: if nodemon not installed, run `npm start`]
-4. `npm run webpack`
 
 ### How to Use the MongoDB Shell
 * To start database command shell: `mongo`
