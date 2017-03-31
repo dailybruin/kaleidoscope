@@ -1,15 +1,13 @@
 FROM node:boron
 
-# Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Clone the repo from github
+RUN git clone https://github.com/daily-bruin/kaleidoscope
 
-# Install app dependencies
-COPY package.json /usr/src/app/
+# Change workind directory to the cloned repo
+WORKDIR /kaleidoscope
+
+# Install all the dependencies
 RUN npm install
-
-# Bundle app source
-COPY . /usr/src/app
 
 EXPOSE 3000
 CMD [ "npm", "start" ]
