@@ -24,15 +24,7 @@ app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 // DB Setup
 var mongoose = require('mongoose');
-var MONGO_DB;
-var DOCKER_DB = process.env.DB_PORT;
-if (DOCKER_DB) {
-  MONGO_DB = DOCKER_DB.replace( 'tcp', 'mongodb' ) + '/flatpage';
-} else {
-  MONGO_DB = process.env.MONGODB;
-}
-console.log("Mongo endpoint: " + MONGO_DB)
-mongoose.connect(MONGO_DB);
+mongoose.connect('mongodb://database/flatpage');
 // mongoose.connect('mongodb://localhost:27017/flatpage');
 
 // POST request form data parser used in routes.js
