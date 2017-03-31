@@ -76,12 +76,10 @@ module.exports = function (app) {
 
     // Deleting a page from the database selected in /all
     app.post('/page/:id', function (req, res, next) {
-        console.log('deleting ' + req.params.id);
         Page.remove({_id: new mongodb.ObjectID(req.params.id)}, function(err, results) {
             if (err){
-                console.log("failed");
+                console.log("failed to delete a page");
             } else {
-                console.log("success");
                 var pages;
                 Page.find(function (err, pages) {
                     if (err) {
