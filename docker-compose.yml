@@ -4,6 +4,8 @@ version: '2'
 services:
   express:
     build: .
+    environment:
+      - DATABASE_URL=mongodb://mongo:27017
     ports:
       - "3000:3000" 
     links: ['mongo']
