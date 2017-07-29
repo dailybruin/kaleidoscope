@@ -4,6 +4,7 @@ version: '2'
 services:
   express:
     build: .
+    image: kaleidoscope
     environment:
       - DATABASE_URL=mongodb://mongo:27017
     ports:
