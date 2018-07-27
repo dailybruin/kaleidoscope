@@ -24,7 +24,9 @@ app.use(express.static( path.join( __dirname, 'public' ) ) );
 
 // DB Setup
 var mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE_URL);
+console.log("process env database url is ");
+console.log(process.env.DATABASE_URL);
+mongoose.connect('mongodb://localhost:27017');
 // mongoose.connect('mongodb://localhost:27017/flatpage');
 
 // POST request form data parser used in routes.js

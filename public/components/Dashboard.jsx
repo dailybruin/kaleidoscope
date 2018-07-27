@@ -167,6 +167,7 @@ class Dashboard extends React.Component {
         // add delete button here
         switch (data.type) {
             case "header":
+                console.log("dispatching add header");
                 this.props.dispatch(addHeader(
                     component_params.title, 
                     component_params.author, 
